@@ -2,7 +2,6 @@
 
 clear
 
-echo
 echo -e "\e[1;34mSetting up aliases.\e[0m"
 touch /root/.bash_aliases
 cp /opt/scripts/alias /root/.bash_aliases
