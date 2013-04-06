@@ -64,7 +64,9 @@ for a in z*; do grep -vE '^[\/\#\(\_\[\|\<\.\,\`\%\@]' "$a" > "$a.tmp"; mv "$a.t
 sed '/[[:blank:]]/!d'                               # Remove lines that contain a single word
 sed '/@.*@/d'                                       # Remove lines that contain two @ symbols
 sed '/^[0-9]/d'                                     # Remove lines that start with a number
+sed '/[0-9]$/d'                                     # Remove lines that end with a number
 sed '/^FOO/d'                                       # Remove lines that start with FOO
+sed '/FOO$/d'                                       # Remove lines that end with FOO
 printf '%s\n' 'g/FOO/d\' '-d' w | ed -s             # Remove lines that contain FOO and the previous line
 
 sed 's/FOO/BAR/g'                                   # Replace FOO with BAR
@@ -241,4 +243,3 @@ Select IPv4 Address from the Entities palette on the left and drag the icon to t
 Edit the IP address to your target.
 Right click > Run Transform > ...
 DNS from IP > All in this set
-
