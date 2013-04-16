@@ -2882,8 +2882,6 @@ read -p "Press <return> to continue."
 while :
 do
 
-clear
-f_Banner
 f_Main
 
 f_Main(){
