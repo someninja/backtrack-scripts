@@ -1,7 +1,5 @@
 Notes
 
-nmap2csv:  https://github.com/maaaaz/nmaptocsv
-
 Discover
      Scan delay (default=0), --scan-delay 3
      Randomize IPs (y/N), sort -R
