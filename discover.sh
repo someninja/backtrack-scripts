@@ -123,27 +123,59 @@ case $choice in
           mkdir /$user/$domain
      fi
 
-     wget -q https://www.deepmagic.com/ptrs/ptrs?search=$domain -O tmp
-     sleep 15
-     grep '<td>' tmp | cut -d '>' -f2 | cut -d '<' -f1 > tmp2
-     # Break list into 2 columns
-     paste -d ' ' - - < tmp2 > tmp3
-     # Align second column
-     column -t tmp3 > tmp4
-     # Clean up and sort IPs
-     grep "$domain$" tmp4 | sort -g > /$user/$domain/ptr-records.txt
+#     wget -q https://www.deepmagic.com/ptrs/ptrs?search=$domain -O tmp
+#     sleep 15
+#     grep '<td>' tmp | cut -d '>' -f2 | cut -d '<' -f1 > tmp2
+#     # Break list into 2 columns
+#     paste -d ' ' - - < tmp2 > tmp3
+#     # Align second column
+#     column -t tmp3 > tmp4
+#     # Clean up and sort IPs
+#     grep "$domain$" tmp4 | sort -g > /$user/$domain/ptr-records.txt
 
-     wget -q http://www.intodns.com/$domain
-     sleep 5
-     sed '/div id="master"/I,+12 d' $domain > tmp
-     sed 's/ <a href="feedback\/?KeepThis=true&amp;TB_iframe=true&amp;height=300&amp;width=240" title="intoDNS feedback\" class=\"thickbox feedback\">send feedback<\/a>//' tmp > tmp2
-     sed '/Processed in/I,+12 d' tmp2 > /$user/$domain/dns-health.htm
+     wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|RRSIG)' > tmp2
+     sed 's/;; //g' tmp2 | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed "s/$domain./$domain/g" > /$user/$domain/mydnstools.txt
+     echo >> /$user/$domain/mydnstools.txt
 
-     # thanks to Jon Villanti for bug fix
-     wget -q http://dns.robtex.com/$domain -O tmp
-     sed '/<div id="xtail">/I,+16 d' tmp > /$user/$domain/dns.htm
+     wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp3
+     grep 'spamcop' tmp3 | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > tmp4
 
-     rm $domain tmp*
+     echo 'Black Listed' >> /$user/$domain/mydnstools.txt
+     cat tmp4 >> /$user/$domain/mydnstools.txt
+     echo >> /$user/$domain/mydnstools.txt
+ 
+     wget -q http://www.mydnstools.info/webserverinfo/$domain -O tmp5
+     sed -n '/Getting A record for/,/RTechRef:/p' tmp5 | grep -v '#' | grep -v ']' | sed 's/<b>//g' | sed 's/<\/b>//g' | sed 's/\.\.\.//g' | cat -s >> /$user/$domain/mydnstools.txt
+
+     wget -q http://www.intodns.com/$domain -O tmp
+     egrep -v '(Follow IntoDNS|Work in progress)' tmp > tmp2
+     sed 's/<a href="feedback\/?KeepThis=true&amp;TB_iframe=true&amp;height=300&amp;width=240" title="intoDNS feedback" class="thickbox feedback">send feedback<\/a>//' tmp2 > tmp3
+     sed '/Processed in/I,+14 d' tmp3 | sed '/div id="master"/I,+11 d' > /$user/$domain/intodns.htm
+
+     wget -q http://www.emailstuff.org/spf/check/$domain -O tmp
+     sed -n '/approximate/,/Response/p' tmp | sed 's/<p>//g' | sed 's/<\/p>//g' | sed 's/<i>//g' | sed 's/<\/i>//g' > tmp2
+     grep -v '<' tmp2 | grep -v '#' | sed 's/\/32//g' > /$user/$domain/emailstuff-spf.txt
+
+     wget -q http://top.robtex.com/$domain.html#summary -O /$user/$domain/robtex.htm
+
+     wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
+     sed -n '/Results for/,/\/table/p' tmp > tmp2
+     echo "<html>" > /$user/$domain/dnssy.htm
+     cat tmp2 >> /$user/$domain/dnssy.htm
+     echo "</html>" >> /$user/$domain/dnssy.htm
+
+     curl http://dnsw.info/$domain > tmp
+     sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g' | sed 's/<\/h3>//g' | sed 's/<code>/<b>/g' | sed 's/<\/code>/<\/b>/g' > tmp2
+     echo "<html>" > /$user/$domain/dnsw.info.htm
+     cat tmp2 >> /$user/$domain/dnsw.info.htm
+     echo "</html>" >> /$user/$domain/dnsw.info.htm
+
+     wget -q http://safeweb.norton.com/report/show?url=$domain -O tmp
+     sed -n '/Threat Report/,/review of this site/p' tmp | sed "s/(what's this?)//g" | sed 's/<strong class="detailHeading">//g' | sed 's/<\/strong>//g' > tmp2
+     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/safeweb.norton.htm
+
+     rm tmp*
 
      echo
      printf 'The supporting data folder is located at \e[1;33m%s\e[0m\n' /$user/$domain/
@@ -2622,29 +2654,24 @@ while read -r line; do
 
                ISSUER=$(cat ssltmp_$line | grep 'Issuer:')
                if [[ $ISSUER ]]; then
-                    echo [INFO] Certificate Issuer >> ssl_$line.txt
                     cat ssltmp_$line | grep 'Issuer:' >> ssl_$line.txt
                     echo >> ssl_$line.txt
                else
-                    echo [INFO] Certificate Issuer >> ssl_$line.txt
                     echo "Issuer information not available for this certificate. Look into this!" >> ssl_$line.txt
                     echo >> ssl_$line.txt
                fi
 
                SUBJECT=$(cat ssltmp_$line | grep 'Subject:')
                if [[ $SUBJECT ]]; then
-                    echo [INFO] Certificate Subject >> ssl_$line.txt
                     cat ssltmp_$line | grep 'Subject:' >> ssl_$line.txt
                     echo >> ssl_$line.txt
                else
-                    echo [INFO] Certificate Subject >> ssl_$line.txt
                     echo "Certificate subject information not available. Look into this!" >> ssl_$line.txt
                     echo >> ssl_$line.txt
                fi
 
                DNS=$(cat ssltmp_$line | grep 'DNS:')
                if [[ $DNS ]]; then
-                    echo [INFO] Certificate DNS Names >> ssl_$line.txt
                     cat ssltmp_$line | grep 'DNS:' >> ssl_$line.txt
                     echo >> ssl_$line.txt
                fi
@@ -2707,7 +2734,7 @@ while read -r line; do
 
                E=$(cat ssltmp_$line | grep 'Authority Information Access:')
                if [[ ! $E ]]; then
-                    echo [*] Self-signed TLS/SSL certificate >> ssl_$line.txt
+                    echo [*] Self-signed TLS/SSL Certificate >> ssl_$line.txt
                     echo >> ssl_$line.txt
                fi
 
