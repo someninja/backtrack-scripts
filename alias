@@ -233,6 +233,13 @@ apt-get -y install libcurl4-gnutls-dev libopenssl-ruby libxml2 libxml2-dev libxs
 git clone https://github.com/wpscanteam/wpscan.git /pentest/web/wpscan/ ;
 cd /pentest/web/wpscan ; gem install bundler && bundle install --without test development ; echo ; fi ;
 
+if [ -d /pentest/sniffers/wifitap/.git ]; then echo -e "\e[1;34mUpdating Wifitap\e[0m" ;
+cd /pentest/sniffers/wifitap ;
+git pull ; echo ;
+else echo -e "\e[1;34mInstalling Wifitap\e[0m" ;
+rm -rf /pentest/sniffers/wifitap ;
+git clone https://github.com/GDSSecurity/wifitap.git /pentest/sniffers/wifitap/ ; echo ; fi ;
+
 echo -e "\e[1;34mRefreshing aliases.\e[0m" ; cp /opt/scripts/alias /root/.bash_aliases ; source /root/.bash_aliases ;
 
 echo ; echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/ '
