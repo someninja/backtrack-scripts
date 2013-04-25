@@ -227,8 +227,8 @@ if [ -d /pentest/wireless/wifite/.svn ]; then echo -e "\e[1;34mUpdating WiFite.\
 else echo -e "\e[1;33mInstalling WiFite.\e[0m" ; rm -rf /pentest/wireless/wifite/ ;
 svn co http://wifite.googlecode.com/svn/trunk/ /pentest/wireless/wifite/ ; echo ; fi ;
 
-if [ -d /pentest/sniffers/wifitap.git ]; then echo -e "\e[1;34mUpdating Wifitap.\e[0m" ; cd /pentest/sniffers/wifitap ; git pull ; echo ;
-else echo -e "\e[1;33mInstalling Wifitap.\e[0m" ; rm -rf /pentest/sniffers/wifitap/ ;
+if [ -d /pentest/sniffers/wifitap.git ]; then echo -e "\e[1;34mUpdating wifitap.\e[0m" ; cd /pentest/sniffers/wifitap ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling wifitap.\e[0m" ; rm -rf /pentest/sniffers/wifitap/ ;
 git clone git@github.com:GDSSecurity/wifitap.git /pentest/sniffers/wifitap/ ; echo ; fi ;
 
 if [ -d /pentest/web/wpscan/.git ]; then echo -e "\e[1;34mUpdating WPScan.\e[0m" ; cd /pentest/web/wpscan ; ./wpscan.rb --update ; echo ;
