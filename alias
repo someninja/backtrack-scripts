@@ -223,6 +223,10 @@ if [ -d /pentest/enumeration/web/whatweb/.git ]; then echo -e "\e[1;34mUpdating 
 else echo -e "\e[1;33mInstalling WhatWeb.\e[0m" ; rm -rf /pentest/enumeration/web/whatweb/ ;
 git clone git://github.com/urbanadventurer/WhatWeb.git /pentest/enumeration/web/whatweb/ ; echo ; fi ;
 
+if [ -d /pentest/sniffers/wifitap.git ]; then echo -e "\e[1;34mUpdating wifitap.\e[0m" ; cd /pentest/sniffers/wifitap ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling wifitap.\e[0m" ; rm -rf /pentest/sniffers/wifitap/ ;
+git clone git@github.com/GDSSecurity/wifitap.git /pentest/sniffers/wifitap/ ; echo ; fi ;
+
 if [ -d /pentest/wireless/wifite/.svn ]; then echo -e "\e[1;34mUpdating WiFite.\e[0m" ; cd /pentest/wireless/wifite ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling WiFite.\e[0m" ; rm -rf /pentest/wireless/wifite/ ;
 svn co http://wifite.googlecode.com/svn/trunk/ /pentest/wireless/wifite/ ; echo ; fi ;
