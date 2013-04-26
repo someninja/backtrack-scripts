@@ -22,7 +22,7 @@ echo -e "\e[1;34mUpdating BackTrack.\e[0m" ; apt-get update ; apt-get -y upgrade
 
 echo -e "\e[1;34mUpdating aircrack-ng.\e[0m" ; cd /pentest/wireless/aircrack-ng ; svn up ; echo ;
 
-if [ -d /pentest/web/beef/.git ]; then echo -e "\e[1;34mUpdating BeEF.\e[0m" ; cd /pentest/web/beef ; ./update-beef ; echo ;
+if [ -d /pentest/web/beef/.git ]; then echo -e "\e[1;34mUpdating BeEF.\e[0m" ; cd /pentest/web/beef/ ; ./update-beef ; echo ;
 else echo -e "\e[1;33mInstalling BeEF.\e[0m" ; rm -rf /pentest/web/beef/ ;
 git clone git://github.com/beefproject/beef.git /pentest/web/beef/ ; echo ; fi ;
 
@@ -40,7 +40,7 @@ git clone git://github.com/wireghoul/bed.git /pentest/fuzzers/bed/ ; echo ; fi ;
 
 echo -e "\e[1;34mUpdating deadicated.\e[0m" ; cd /pentest/telephony/dedected ; svn up ; echo ;
 
-if [ -d /pentest/enumeration/dns/dnsenum/.svn ]; then echo -e "\e[1;34mUpdating dnsenum.\e[0m" ; cd /pentest/enumeration/dns/dnsenum ; svn up ; echo ;
+if [ -d /pentest/enumeration/dns/dnsenum/.svn ]; then echo -e "\e[1;34mUpdating dnsenum.\e[0m" ; cd /pentest/enumeration/dns/dnsenum/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling dnsenum.\e[0m" ; rm -rf /pentest/enumeration/dns/dnsenum/ ;
 svn co http://dnsenum.googlecode.com/svn/trunk/ /pentest/enumeration/dns/dnsenum/ ; echo ; fi ;
 
@@ -48,7 +48,7 @@ if [ -d /pentest/enumeration/dns/dnsmap/.git ]; then echo -e "\e[1;34mUpdating d
 else echo -e "\e[1;33mInstalling dnsmap.\e[0m" ; rm -rf /pentest/enumeration/dns/dnsmap/ ;
 git clone git://github.com/makefu/dnsmap.git /pentest/enumeration/dns/dnsmap/ ; echo ; fi ;
 
-if [ -d /pentest/enumeration/dns/dnsrecon/.git ]; then echo -e "\e[1;34mUpdating dnsrecon.\e[0m" ; cd /pentest/enumeration/dns/dnsrecon ; git pull ; echo ;
+if [ -d /pentest/enumeration/dns/dnsrecon/.git ]; then echo -e "\e[1;34mUpdating dnsrecon.\e[0m" ; cd /pentest/enumeration/dns/dnsrecon/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling dnsrecon.\e[0m" ; rm -rf /pentest/enumeration/dns/dnsrecon/ ;
 git clone git://github.com/darkoperator/dnsrecon.git /pentest/enumeration/dns/dnsrecon/ ; echo ; fi ;
 
@@ -62,7 +62,7 @@ if [ -d /pentest/sniffers/easy-creds/.git ]; then echo -e "\e[1;34mUpdating easy
 else echo -e "\e[1;33mInstalling easy-creds.\e[0m" ; rm -rf /pentest/sniffers/easy-creds/ ;
 git clone https://github.com/brav0hax/easy-creds.git /pentest/sniffers/easy-creds/ ; echo ; fi ;
 
-if [ -d /pentest/exploits/isr-evilgrade/.svn ]; then echo -e "\e[1;34mUpdating isr-evilgrade.\e[0m" ; cd /pentest/exploits/isr-evilgrade ; svn up ; echo ;
+if [ -d /pentest/exploits/isr-evilgrade/.svn ]; then echo -e "\e[1;34mUpdating isr-evilgrade.\e[0m" ; cd /pentest/exploits/isr-evilgrade/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling isr-evilgrade.\e[0m" ; rm -rf /pentest/exploits/isr-evilgrade/ ;
 svn checkout http://isr-evilgrade.googlecode.com/svn/trunk/ /pentest/exploits/isr-evilgrade/ ; echo ; fi ;
 
@@ -76,23 +76,23 @@ if [ -d /pentest/wireless/freeradius-wpe/.git ]; then echo -e "\e[1;34mUpdating 
 else echo -e "\e[1;33mInstalling FreeRADIUS.\e[0m" ; rm -rf /pentest/wireless/freeradius-wpe/ ;
 git clone git://git.freeradius.org/freeradius-server.git /pentest/wireless/freeradius-wpe/ ; echo ; fi ;
 
-if [ -d /pentest/sniffers/ghost-phisher/.svn ]; then echo -e "\e[1;34mUpdating Ghost Phisher.\e[0m" ; cd /pentest/sniffers/ghost-phisher ; svn up ; echo ;
+if [ -d /pentest/sniffers/ghost-phisher/.svn ]; then echo -e "\e[1;34mUpdating Ghost Phisher.\e[0m" ; cd /pentest/sniffers/ghost-phisher/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling Ghost Phisher.\e[0m" ;
 svn co http://ghost-phisher.googlecode.com/svn/Ghost-Phisher/ /pentest/sniffers/ghost-phisher/ ; echo ; fi ;
 
-echo -e "\e[1;34mUpdating GISKismet.\e[0m" ; cd /pentest/wireless/giskismet ; svn up ; echo ;
+echo -e "\e[1;34mUpdating GISKismet.\e[0m" ; cd /pentest/wireless/giskismet/ ; svn up ; echo ;
 
-if [ -d /pentest/enumeration/google/goofile/.svn ]; then echo -e "\e[1;34mUpdating goofile.\e[0m" ; cd /pentest/enumeration/google/goofile ; svn up ; echo ;
+if [ -d /pentest/enumeration/google/goofile/.svn ]; then echo -e "\e[1;34mUpdating goofile.\e[0m" ; cd /pentest/enumeration/google/goofile/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling goofile.\e[0m" ; rm -rf /pentest/enumeration/google/goofile/ ;
 svn co http://goofile.googlecode.com/svn/trunk/ /pentest/enumeration/google/goofile/ ; echo ; fi ;
 
-if [ -d /pentest/enumeration/theharvester/.svn ]; then echo -e "\e[1;34mUpdating theHarvester.\e[0m" ; cd /pentest/enumeration/theharvester ; svn up ; echo ;
+if [ -d /pentest/enumeration/theharvester/.svn ]; then echo -e "\e[1;34mUpdating theHarvester.\e[0m" ; cd /pentest/enumeration/theharvester/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling theHarvester.\e[0m" ; rm -rf /pentest/enumeration/theharvester/ ;
 svn co http://theharvester.googlecode.com/svn/trunk/ /pentest/enumeration/theharvester/ ; echo ; fi ;
 
 if [ -d /pentest/enumeration/hexorbase/ ]; then rm -rf /pentest/enumeration/hexorbase/ ; fi ;
 
-if [ -d /pentest/database/hexorbase/.svn ]; then echo -e "\e[1;34mUpdating HexorBase.\e[0m" ; cd /pentest/database/hexorbase ; svn up ; echo ;
+if [ -d /pentest/database/hexorbase/.svn ]; then echo -e "\e[1;34mUpdating HexorBase.\e[0m" ; cd /pentest/database/hexorbase/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling HexorBase.\e[0m" ;
 svn co http://hexorbase.googlecode.com/svn/HexorBase/ /pentest/database/hexorbase/ ; echo ; fi ;
 
@@ -104,7 +104,7 @@ if [ -d /pentest/enumeration/dns/dnsmap/.git ]; then echo -e "\e[1;34mUpdating d
 else echo -e "\e[1;33mInstalling dnsmap.\e[0m" ; rm -rf /pentest/enumeration/dns/dnsmap/ ;
 git clone git://github.com/makefu/dnsmap.git /pentest/enumeration/dns/dnsmap/ ; echo ; fi ;
 
-if [ -d /pentest/exploits/jboss-autopwn/.git ]; then echo -e "\e[1;34mUpdating JBoss Autopwn.\e[0m" ; cd /pentest/exploits/jboss-autopwn ; git pull ; echo ;
+if [ -d /pentest/exploits/jboss-autopwn/.git ]; then echo -e "\e[1;34mUpdating JBoss Autopwn.\e[0m" ; cd /pentest/exploits/jboss-autopwn/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling JBoss Autopwn.\e[0m" ; rm -rf /pentest/exploits/jboss-autopwn/ ;
 git clone git://github.com/SpiderLabs/jboss-autopwn.git /pentest/exploits/jboss-autopwn/ ; echo ; fi ;
 
@@ -122,7 +122,7 @@ if [ -d /pentest/libs/libhijack/.git ]; then echo -e "\e[1;34mUpdating Libhijack
 else echo -e "\e[1;33mInstalling Libhijack.\e[0m" ; rm -rf /pentest/libs/libhijack/ ;
 git clone git://github.com/lattera/libhijack.git /pentest/libs/libhijack/ ; echo ; fi ;
 
-if [ -d /pentest/enumeration/google/metagoofil/.svn ]; then echo -e "\e[1;34mUpdating MetaGoofil.\e[0m" ; cd /pentest/enumeration/google/metagoofil ; svn up ; echo ;
+if [ -d /pentest/enumeration/google/metagoofil/.svn ]; then echo -e "\e[1;34mUpdating MetaGoofil.\e[0m" ; cd /pentest/enumeration/google/metagoofil/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling MetaGoofil.\e[0m" ; rm -rf /pentest/enumeration/google/metagoofil/ ;
 svn co http://metagoofil.googlecode.com/svn/trunk/ /pentest/enumeration/google/metagoofil/ ; echo ; fi ;
 
@@ -133,15 +133,15 @@ git clone git://github.com/rapid7/metasploit-framework.git /opt/metasploit/msf3/
 if [ -f /opt/nessus/sbin/nessus-update-plugins ]; then echo -e "\e[1;34mUpdating Nessus.\e[0m" ; 
 /opt/nessus/sbin/nessus-update-plugins ; echo ; fi ;
 
-if [ -d /pentest/exploits/netgear-telnetenable/.svn ]; then echo -e "\e[1;34mUpdating netgear-telnetenable.\e[0m" ; cd /pentest/exploits/netgear-telnetenable ; svn up ; echo ;
+if [ -d /pentest/exploits/netgear-telnetenable/.svn ]; then echo -e "\e[1;34mUpdating netgear-telnetenable.\e[0m" ; cd /pentest/exploits/netgear-telnetenable/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling netgear-telnetenable.\e[0m" ; rm -rf /pentest/exploits/netgear-telnetenable/ ;
 svn co http://netgear-telnetenable.googlecode.com/svn/trunk/ /pentest/exploits/netgear-telnetenable/ ; echo ; fi ;
 
-if [ -d /pentest/web/nikto/.git ]; then echo -e "\e[1;34mUpdating nikto.\e[0m" ; cd /pentest/web/nikto ; git pull ; echo ;
+if [ -d /pentest/web/nikto/.git ]; then echo -e "\e[1;34mUpdating nikto.\e[0m" ; cd /pentest/web/nikto/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling nikto.\e[0m" ; rm -rf /pentest/web/nikto/ ;
 git clone git://github.com/sullo/nikto.git /pentest/web/nikto/ ; echo ; fi ;
 
-echo -e "\e[1;34mUpdating Nmap.\e[0m" ; cd /root/nmap-svn ; svn up ; echo ;
+echo -e "\e[1;34mUpdating Nmap.\e[0m" ; cd /root/nmap-svn/ ; svn up ; echo ;
 
 cp /root/nmap-svn/nmap /usr/local/bin/
 cp /root/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/ ;
@@ -157,20 +157,20 @@ cp -r /root/nmap-svn/scripts/ /usr/local/share/nmap/ ;
 
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo ;
 
-if [ -d /pentest/forensics/peepdf/.svn ]; then echo -e "\e[1;34mUpdating peepdf.\e[0m" ; cd /pentest/forensics/peepdf ; svn up ; echo ;
+if [ -d /pentest/forensics/peepdf/.svn ]; then echo -e "\e[1;34mUpdating peepdf.\e[0m" ; cd /pentest/forensics/peepdf/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling peepdf.\e[0m" ; rm -rf /pentest/forensics/peepdf/ ;
 svn co http://peepdf.googlecode.com/svn/trunk/ /pentest/forensics/peepdf/ ; echo ; fi ;
 
-if [ -d /pentest/wireless/reaver/.svn ]; then echo -e "\e[1;34mUpdating Reaver.\e[0m" ; cd /pentest/wireless/reaver ; svn up ; echo ;
+if [ -d /pentest/wireless/reaver/.svn ]; then echo -e "\e[1;34mUpdating Reaver.\e[0m" ; cd /pentest/wireless/reaver/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling Reaver.\e[0m" ;
 svn co http://reaver-wps.googlecode.com/svn/trunk/ /pentest/wireless/reaver/ ;
 cd /pentest/wireless/reaver/src/ ; ./configure ; make ; make install ; echo ; fi ;
 
-if [ -d /pentest/exploits/rebind/.svn ]; then echo -e "\e[1;34mUpdating Rebind.\e[0m" ; cd /pentest/exploits/rebind ; svn up ; echo ;
+if [ -d /pentest/exploits/rebind/.svn ]; then echo -e "\e[1;34mUpdating Rebind.\e[0m" ; cd /pentest/exploits/rebind/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling Rebind.\e[0m" ; rm -rf /pentest/exploits/rebind/ ;
 svn co http://rebind.googlecode.com/svn/trunk/ /pentest/exploits/rebind/ ; echo ; fi ;
 
-if [ -d /pentest/enumeration/recon-ng/.git ]; then echo -e "\e[1;34mUpdating recon-ng.\e[0m" ; cd /pentest/enumeration/recon-ng ; git pull ; echo ;
+if [ -d /pentest/enumeration/recon-ng/.git ]; then echo -e "\e[1;34mUpdating recon-ng.\e[0m" ; cd /pentest/enumeration/recon-ng/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling recon-ng.\e[0m" ;
 git clone https://bitbucket.org/LaNMaSteR53/recon-ng.git /pentest/enumeration/recon-ng/ ; echo ; fi ;
 
@@ -178,14 +178,14 @@ if [ -d /pentest/forensics/samdump/.git ]; then echo -e "\e[1;34mUpdating samdum
 else echo -e "\e[1;33mInstalling samdump.\e[0m" ; rm -rf /pentest/forensics/samdump/ ;
 git clone git://github.com/geocar/samdump.git /pentest/forensics/samdump/ ; echo ; fi ;
 
-echo -e "\e[1;34mUpdating scripts.\e[0m" ; cd /opt/scripts ; svn up ;
+echo -e "\e[1;34mUpdating scripts.\e[0m" ; cd /opt/scripts/ ; svn up ;
 cd /opt/scripts; chmod 755 *.sh ; echo ;
 
-if [ -d /pentest/exploits/set/.git ]; then echo -e "\e[1;34mUpdating SET.\e[0m" ; cd /pentest/exploits/set ; git pull ; echo ;
+if [ -d /pentest/exploits/set/.git ]; then echo -e "\e[1;34mUpdating SET.\e[0m" ; cd /pentest/exploits/set/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling SET.\e[0m" ; rm -rf /pentest/exploits/set/ ;
 git clone https://github.com/trustedsec/social-engineer-toolkit/ /pentest/exploits/set/ ; echo ; fi ;
 
-if [ -d /pentest/fuzzers/sickfuzz/.svn ]; then echo -e "\e[1;34mUpdating sickfuzz.\e[0m" ; cd /pentest/fuzzers/sickfuzz ; svn up ; echo ;
+if [ -d /pentest/fuzzers/sickfuzz/.svn ]; then echo -e "\e[1;34mUpdating sickfuzz.\e[0m" ; cd /pentest/fuzzers/sickfuzz/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling sickfuzz.\e[0m" ; rm -rf /pentest/fuzzers/sickfuzz/ ;
 svn co http://sickfuzz.googlecode.com/svn/trunk/ /pentest/fuzzers/sickfuzz ; echo ; fi ;
 
@@ -197,11 +197,11 @@ if [ -d /pentest/database/sqlbrute/.git ]; then echo -e "\e[1;34mUpdating SQLBru
 else echo -e "\e[1;33mInstalling SQLBrute.\e[0m" ; rm -rf /pentest/database/sqlbrute/ ;
 git clone git://github.com/GDSSecurity/SQLBrute.git /pentest/database/sqlbrute/ ; echo ; fi ;
 
-if [ -d /pentest/database/sqlmap/.git ]; then echo -e "\e[1;34mUpdating sqlmap.\e[0m" ; cd /pentest/database/sqlmap ; git pull ; echo ;
+if [ -d /pentest/database/sqlmap/.git ]; then echo -e "\e[1;34mUpdating sqlmap.\e[0m" ; cd /pentest/database/sqlmap/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling sqlmap.\e[0m" ; rm -rf /pentest/database/sqlmap/ ;
 git clone git://github.com/sqlmapproject/sqlmap.git /pentest/database/sqlmap/ ; echo ; fi ;
 
-if [ -d /pentest/database/sqlninja/.svn ]; then echo -e "\e[1;34mUpdating Sqlninja.\e[0m" ; cd /pentest/database/sqlninja ; svn up ; echo ;
+if [ -d /pentest/database/sqlninja/.svn ]; then echo -e "\e[1;34mUpdating Sqlninja.\e[0m" ; cd /pentest/database/sqlninja/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling Sqlninja.\e[0m" ; rm -rf /pentest/database/sqlninja/ ;
 svn co https://sqlninja.svn.sourceforge.net/svnroot/sqlninja /pentest/database/sqlninja/ ; echo ; fi ;
 
@@ -215,7 +215,7 @@ git clone git://github.com/gremwell/voiper.git /pentest/fuzzers/voip/voiper/ ; e
 
 echo -e "\e[1;34mUpdating w3af.\e[0m" ; cd /pentest/web/w3af/ ; svn up ; echo ;
 
-if [ -d /pentest/telephony/warvox/.git ]; then echo -e "\e[1;34mUpdating WarVox.\e[0m" ; cd /pentest/telephony/warvox ; git pull ; echo ;
+if [ -d /pentest/telephony/warvox/.git ]; then echo -e "\e[1;34mUpdating WarVox.\e[0m" ; cd /pentest/telephony/warvox/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling WarVox.\e[0m" ; rm -rf /pentest/telephony/warvox/ ;
 git clone https://github.com/rapid7/warvox.git /pentest/telephony/warvox ; echo ; fi ;
 
@@ -223,15 +223,15 @@ if [ -d /pentest/enumeration/web/whatweb/.git ]; then echo -e "\e[1;34mUpdating 
 else echo -e "\e[1;33mInstalling WhatWeb.\e[0m" ; rm -rf /pentest/enumeration/web/whatweb/ ;
 git clone git://github.com/urbanadventurer/WhatWeb.git /pentest/enumeration/web/whatweb/ ; echo ; fi ;
 
-if [ -d /pentest/sniffers/wifitap.git ]; then echo -e "\e[1;34mUpdating wifitap.\e[0m" ; cd /pentest/sniffers/wifitap ; git pull ; echo ;
+if [ -d /pentest/sniffers/wifitap.git ]; then echo -e "\e[1;34mUpdating wifitap.\e[0m" ; cd /pentest/sniffers/wifitap/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling wifitap.\e[0m" ; rm -rf /pentest/sniffers/wifitap/ ;
-git clone git@github.com/GDSSecurity/wifitap.git /pentest/sniffers/wifitap/ ; echo ; fi ;
+git clone git://github.com/GDSSecurity/wifitap.git /pentest/sniffers/wifitap/ ; echo ; fi ;
 
-if [ -d /pentest/wireless/wifite/.svn ]; then echo -e "\e[1;34mUpdating WiFite.\e[0m" ; cd /pentest/wireless/wifite ; svn up ; echo ;
+if [ -d /pentest/wireless/wifite/.svn ]; then echo -e "\e[1;34mUpdating WiFite.\e[0m" ; cd /pentest/wireless/wifite/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling WiFite.\e[0m" ; rm -rf /pentest/wireless/wifite/ ;
 svn co http://wifite.googlecode.com/svn/trunk/ /pentest/wireless/wifite/ ; echo ; fi ;
 
-if [ -d /pentest/web/wpscan/.git ]; then echo -e "\e[1;34mUpdating WPScan.\e[0m" ; cd /pentest/web/wpscan ; ./wpscan.rb --update ; echo ;
+if [ -d /pentest/web/wpscan/.git ]; then echo -e "\e[1;34mUpdating WPScan.\e[0m" ; cd /pentest/web/wpscan/ ; ./wpscan.rb --update ; echo ;
 else echo -e "\e[1;33mInstalling WPScan.\e[0m" ; rm -rf /pentest/web/wpscan/ ;
 apt-get -y install libcurl4-gnutls-dev libopenssl-ruby libxml2 libxml2-dev libxslt1-dev ruby-dev ;
 git clone https://github.com/wpscanteam/wpscan.git /pentest/web/wpscan/ ;
