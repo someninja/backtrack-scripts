@@ -34,15 +34,15 @@ if [ -d /pentest/bluetooth/bluelog/.git ]; then echo -e "\e[1;34mUpdating Bluelo
 else echo -e "\e[1;33mInstalling Bluelog.\e[0m" ; rm -rf /pentest/bluetooth/bluelog/ ;
 git clone git://github.com/MS3FGX/Bluelog.git /pentest/bluetooth/bluelog/ ; echo ; fi ;
 
-if [ -d /pentest/fuzzers/bed/.git ]; then echo -e "\e[1;34mUpdating Bruteforce Exploit Detector.\e[0m" ; cd /pentest/fuzzers/bed/ ; git pull ; echo ;
-else echo -e "\e[1;33mInstalling Bruteforce Exploit Detector.\e[0m" ; rm -rf /pentest/fuzzers/bed/ ;
+if [ -d /pentest/fuzzers/bed/.git ]; then echo -e "\e[1;34mUpdating Bed.\e[0m" ; cd /pentest/fuzzers/bed/ ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling Bed.\e[0m" ; rm -rf /pentest/fuzzers/bed/ ;
 git clone git://github.com/wireghoul/bed.git /pentest/fuzzers/bed/ ; echo ; fi ;
 
 echo -e "\e[1;34mUpdating deadicated.\e[0m" ; cd /pentest/telephony/dedected ; svn up ; echo ;
 
 if [ -d /pentest/web/dotdotpwn/.git ]; then echo -e "\e[1;34mUpdating dotdotpwn.\e[0m" ; cd /pentest/web/dotdotpwn/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling dotdotpwn.\e[0m" ; rm -rf /pentest/web/dotdotpwn/ ;
-git clone git://github.com/wireghoul/dotdotpwn.git /pentest/fuzzers/bed/ ; echo ; fi ;
+git clone git://github.com/wireghoul/dotdotpwn.git /pentest/web/dotdotpwn/ ; echo ; fi ;
 
 if [ -d /pentest/enumeration/dns/dnsenum/.svn ]; then echo -e "\e[1;34mUpdating dnsenum.\e[0m" ; cd /pentest/enumeration/dns/dnsenum/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling dnsenum.\e[0m" ; rm -rf /pentest/enumeration/dns/dnsenum/ ;
