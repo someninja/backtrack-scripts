@@ -11,15 +11,15 @@
 # Matt Banick - original development.
 # Eric Milam - total re-write using functions.
 # Martin Bos - IDS evasion techniques.
-# Ben Wood - Perl and sed kung foo
+# Ben Wood - regex kung foo
 # Numerous people on freenode IRC - #bash and #sed (e36freak)
 
 ##############################################################################################################
 
 # Variables
-break="=================================================="
 interface=$(ifconfig | grep -B10 'Loopback'| grep 'Ethernet' | cut -d ' ' -f1)
 ip=$(ifconfig | grep -B10 'Loopback' | grep 'Bcast' | cut -d ':' -f2 | cut -d ' ' -f1)
+line="=================================================="
 user=$(whoami)
 
 # Catch ctrl+c from user
@@ -42,11 +42,11 @@ echo
 
 f_Error(){
 echo
-echo -e "\e[1;31m$break\e[0m"
+echo -e "\e[1;31m$line\e[0m"
 echo
 echo -e "\e[1;31m   *** Invalid choice or entry. ***\e[0m"
 echo
-echo -e "\e[1;31m$break\e[0m"
+echo -e "\e[1;31m$line\e[0m"
 sleep 2
 f_Main
 }
@@ -58,9 +58,9 @@ if [ -z $DISPLAY ]; then
      clear
      f_Banner
      echo
-     echo $break
+     echo $line
      echo
-     echo "This option must be run locally, that is, in an X-Windows environment."
+     echo "This option must be run locally, in an X-Windows environment."
      echo
      read -p "Press <return> to continue."
 
@@ -102,7 +102,7 @@ case $choice in
 
      2) f_RunLocally
      echo
-     echo $break
+     echo $line
      echo
      echo -n "First name: "
      read firstName
@@ -162,7 +162,7 @@ read choice
 case $choice in
      1)
      echo
-     echo $break
+     echo $line
      echo
      echo "Usage: target.com"
      echo
@@ -175,7 +175,7 @@ case $choice in
      fi
 
      echo
-     echo $break
+     echo $line
      echo
 
      # If folder doesn't exist, create it
@@ -439,7 +439,7 @@ case $choice in
      echo >> zreport
 
      echo "Summary" >> zreport
-     echo $break >> zreport
+     echo $line >> zreport
 
      echo > tmp
 
@@ -447,7 +447,7 @@ case $choice in
           namecount=$(wc -l names.txt | cut -d ' ' -f1)
           echo "Names       $namecount" >> zreport
           echo "Names ($namecount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat names.txt >> tmp
           echo >> tmp
      fi
@@ -456,7 +456,7 @@ case $choice in
           emailcount=$(wc -l emails.txt | cut -d ' ' -f1)
           echo "Emails      $emailcount" >> zreport
           echo "Emails ($emailcount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat emails.txt >> tmp
           echo >> tmp
      fi
@@ -465,7 +465,7 @@ case $choice in
           urlcount=$(wc -l subdomains.txt | cut -d ' ' -f1)
           echo "Subdomains  $urlcount" >> zreport
           echo "Subdomains ($urlcount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat subdomains.txt >> tmp
           echo >> tmp
      fi
@@ -474,7 +474,7 @@ case $choice in
           urlcount2=$(wc -l squatting.txt | cut -d ' ' -f1)
           echo "Squatting   $urlcount2" >> zreport
           echo "Squatting ($urlcount2)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat squatting.txt >> tmp
           echo >> tmp
      fi
@@ -483,7 +483,7 @@ case $choice in
           xlscount=$(wc -l xls.txt | cut -d ' ' -f1)
           echo "Excel       $xlscount" >> zreport
           echo "Excel Files ($xlscount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat xls.txt >> tmp
           echo >> tmp
      fi
@@ -492,7 +492,7 @@ case $choice in
           pptcount=$(wc -l ppt.txt | cut -d ' ' -f1)
           echo "PowerPoint  $pptcount" >> zreport
           echo "PowerPoint Files ($pptcount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat ppt.txt >> tmp
           echo >> tmp
      fi
@@ -501,7 +501,7 @@ case $choice in
           doccount=$(wc -l doc.txt | cut -d ' ' -f1)
           echo "Word        $doccount" >> zreport
           echo "Word Files ($doccount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat doc.txt >> tmp
           echo >> tmp
      fi
@@ -510,7 +510,7 @@ case $choice in
           pdfcount=$(wc -l pdf.txt | cut -d ' ' -f1)
           echo "PDF         $pdfcount" >> zreport
           echo "PDF Files ($pdfcount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat pdf.txt >> tmp
           echo >> tmp
      fi
@@ -519,23 +519,24 @@ case $choice in
           txtcount=$(wc -l txt.txt | cut -d ' ' -f1)
           echo "Text        $txtcount" >> zreport
           echo "Text Files ($txtcount)" >> tmp
-          echo $break >> tmp
+          echo $line >> tmp
           cat txt.txt >> tmp
           echo >> tmp
      fi
 
      cat tmp >> zreport
      echo "Whois Domain" >> zreport
-     echo $break >> zreport
+     echo $line >> zreport
      cat whois-domain.txt >> zreport
 
      echo >> zreport
      echo "Whois IP" >> zreport
-     echo $break >> zreport
+     echo $line >> zreport
      cat whois-ip.txt >> zreport
 
      mv zreport /$user/$domain/passive-recon.txt
-     mv doc.txt emails.txt names.txt pdf.txt ppt.txt squatting.txt subdomains.txt txt.txt whois* xls.txt /$user/$domain/
+     mv doc.txt emails.txt names.txt pdf.txt ppt.txt squatting.txt subdomains.txt txt.txt whois* xls.txt /$user/$domain/ 2>/dev/null
+
      rm subdomains* tmp* z*
 
      echo
@@ -581,7 +582,7 @@ case $choice in
 
      2)
      echo
-     echo $break
+     echo $line
      echo
      echo "Usage: target.com"
      echo
@@ -594,7 +595,7 @@ case $choice in
      fi
 
      echo
-     echo $break
+     echo $line
      echo
 
      # Number of tests
@@ -603,7 +604,7 @@ case $choice in
      echo "Nmap"
      echo "     Email                (1/$total)"
      nmap -Pn -n -T4 -p80 --script http-email-harvest --script-args http-email-harvest.maxpagecount=100,http-email-harvest.maxdepth=10 $domain > tmp
-     grep '@' tmp | grep -v '%20' | grep -v 'jpg' | awk '{print $2}' | sort -u > zemail
+     grep @$domain tmp | grep -v '%20' | grep -v 'jpg' | awk '{print $2}' | sort -u > zemail
 
      # Check if file is empty
      if [ ! -s zemail ]; then 
@@ -625,7 +626,7 @@ case $choice in
 
      echo "     Zone Transfer        (4/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t axfr > tmp
-     egrep -v '(Checking for|Removing any|TCP Open|Testing NS)' tmp | sed 's/Zone Transfer Failed!//g' |  sed 's/^....//' | sed /^$/d > zdnsrecon-zonetransfer
+     egrep -v '(Checking for|filtered|Removing any|TCP Open|Testing NS)' tmp | sed 's/Zone Transfer Failed!//g' |  sed 's/^....//' | sed /^$/d > zdnsrecon-zonetransfer
 
      echo "     Sub-domains (~5 min) (5/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
@@ -704,10 +705,20 @@ case $choice in
 
      mv zreport /$user/$domain/active-recon.txt
 
+     if [ -f /$user/$domain/emails.txt ]; then
+          cat /$user/$domain/emails.txt zemail | sort -u > zemails-combined
+          mv zemails-combined /$user/$domain/emails.txt
+     fi
+
+     if [ -f /$user/$domain/subdomains.txt ]; then
+          cat /$user/$domain/subdomains.txt zdnsrecon-sub | sort -u > zsubdomains-combined
+          mv zsubdomains-combined /$user/$domain/subdomains.txt
+     fi
+
      rm tmp* z*
 
      echo
-     echo $break
+     echo $line
      echo
      echo "***Scan complete.***"
      echo
@@ -740,7 +751,7 @@ case $choice in
      echo -e "\e[1;33m[*] Setting source port to 53.\e[0m"
      sourceport=53
      echo
-     echo $break
+     echo $line
      echo
      ;;
 
@@ -749,7 +760,7 @@ case $choice in
      echo -e "\e[1;33m[*] Setting source port to 88.\e[0m"
      sourceport=88
      echo
-     echo $break
+     echo $line
      echo
      ;;
 
@@ -846,7 +857,7 @@ rm tmp
 mv tmp2 /$user/hosts.txt
 
 echo
-echo $break
+echo $line
 echo
 echo "***Scan complete.***"
 echo
@@ -921,7 +932,7 @@ sed '/^$/d' tmp > $name/hosts.txt
 if [ ! -s $name/hosts.txt ]; then
      rm -rf "$name" tmp*
      echo
-     echo $break
+     echo $line
      echo
      echo "***Scan complete.***"
      echo
@@ -936,12 +947,12 @@ number=$(wc -l $name/hosts.txt | cut -d ' ' -f1)
 
 if [ $number -eq 1 ]; then
      echo
-     echo $break
+     echo $line
      echo
      echo -e "\e[1;33mHost discovered.\e[0m"
 else
      echo
-     echo $break
+     echo $line
      echo
      echo -e "\e[1;33m$number hosts discovered with open ports.\e[0m"
 fi
@@ -1071,7 +1082,7 @@ f_Report
 
 f_Discovery(){
 echo
-echo $break
+echo $line
 echo
 echo -e "\e[1;34mHost discovery.\e[0m"
 
@@ -1082,7 +1093,7 @@ nmap -iL $location -PP -PE -PM -PI -PA20,53,80,113,443,5060,10043 -PS1,7,9,13,21
 
 f_DiscoveryExclude(){
 echo
-echo $break
+echo $line
 echo
 echo -e "\e[1;34mHost discovery.\e[0m"
 
@@ -1102,7 +1113,7 @@ sed '/^$/d' tmp3 > $name/hosts.txt
 if [ ! -s $name/hosts.txt ] ; then
      rm -rf "$name" tmp*
      echo
-     echo $break
+     echo $line
      echo
      echo "***Scan complete.***"
      echo
@@ -1117,12 +1128,12 @@ number=$(wc -l $name/hosts.txt | cut -d ' ' -f1)
 
 if [ $number -eq 1 ]; then
      echo
-     echo $break
+     echo $line
      echo
      echo -e "\e[1;33mHost discovered.\e[0m"
 else
      echo
-     echo $break
+     echo $line
      echo
      echo -e "\e[1;33m$number hosts discovered with open ports.\e[0m"
 fi
@@ -1132,7 +1143,7 @@ fi
 
 f_Scan(){
 echo
-echo $break
+echo $line
 echo
 echo -e "\e[1;34mRunning default nmap scan.\e[0m"
 
@@ -1165,7 +1176,7 @@ find $name/ -type f -empty -exec rm {} +
 
 f_Ports(){
 echo
-echo $break
+echo $line
 echo
 echo -e "\e[1;34mLocating high-value ports.\e[0m"
 echo "     TCP"
@@ -1249,7 +1260,7 @@ grep -v "Can't" tmp3 > tmp4
 
 f_Scripts(){
 echo
-echo $break
+echo $line
 echo
 echo -e "\e[1;34mRunning nmap scripts.\e[0m"
 
@@ -1837,7 +1848,7 @@ done
 
 f_Metasploit(){
 echo
-echo $break
+echo $line
 echo
 echo -ne "\e[1;33mRun matching Metasploit auxilaries? (y/N) \e[0m"
 read msf
@@ -2103,7 +2114,7 @@ echo "Finish time - $END" >> $filename
 echo "Scanner IP - $ip" >> $filename
 nmap -V | grep 'version' | cut -d ' ' -f1-3 >> $filename
 echo >> $filename
-echo $break >> $filename
+echo $line >> $filename
 echo >> $filename
 
 if [ -f $name/script-ms08-067.txt ]; then
@@ -2111,18 +2122,18 @@ if [ -f $name/script-ms08-067.txt ]; then
      echo >> $filename
      cat $name/script-ms08-067.txt >> $filename
      echo >> $filename
-     echo $break >> $filename
+     echo $line >> $filename
      echo >> $filename
 fi
 
 if [ $host -eq 1 ]; then
      echo "1 host discovered." >> $filename
      echo >> $filename
-     echo $break >> $filename
+     echo $line >> $filename
      echo >> $filename
      cat $name/nmap.txt >> $filename
-     echo $break >> $filename
-     echo $break >> $filename
+     echo $line >> $filename
+     echo $line >> $filename
      echo >> $filename
      echo "Nmap Scripts" >> $filename
 
@@ -2131,7 +2142,7 @@ if [ $host -eq 1 ]; then
      for i in $SCRIPTS; do
           if [ -f $name/"$i.txt" ]; then
                cat $name/"$i.txt" >> $filename
-               echo $break >> $filename
+               echo $line >> $filename
           fi
      done
 
@@ -2141,7 +2152,7 @@ if [ $host -eq 1 ]; then
      END=0
 
      echo
-	echo $break
+	echo $line
 	echo
      echo "***Scan complete.***"
      echo
@@ -2158,7 +2169,7 @@ echo >> $filename
 
 if [ ! -s $name/ports.txt ]; then
      echo
-     echo $break
+     echo $line
      echo
      echo "***Scan complete.***"
      echo
@@ -2170,7 +2181,7 @@ else
      ports=$(wc -l $name/ports.txt | cut -d ' ' -f1)
 fi
 
-echo $break >> $filename
+echo $line >> $filename
 echo >> $filename
 echo "Open Ports ($ports)" >> $filename
 echo >> $filename
@@ -2187,7 +2198,7 @@ if [ -s $name/ports-udp.txt ]; then
      echo >> $filename
 fi
 
-echo $break >> $filename
+echo $line >> $filename
 
 if [ -f $name/banners.txt ]; then
      banners=$(wc -l $name/banners.txt | cut -d ' ' -f1)
@@ -2196,7 +2207,7 @@ if [ -f $name/banners.txt ]; then
      echo >> $filename
      cat $name/banners.txt >> $filename
      echo >> $filename
-     echo $break >> $filename
+     echo $line >> $filename
 fi
 
 echo >> $filename
@@ -2213,11 +2224,11 @@ for i in $HVPORTS; do
      fi
 done
 
-echo $break >> $filename
+echo $line >> $filename
 echo >> $filename
 cat $name/nmap.txt >> $filename
-echo $break >> $filename
-echo $break >> $filename
+echo $line >> $filename
+echo $line >> $filename
 echo >> $filename
 echo "Nmap Scripts" >> $filename
 
@@ -2226,7 +2237,7 @@ SCRIPTS="script-13 script-21 script-22 script-23 script-25 script-53 script-67 s
 for i in $SCRIPTS; do
      if [ -f $name/"$i.txt" ]; then
           cat $name/"$i.txt" >> $filename
-          echo $break >> $filename
+          echo $line >> $filename
      fi
 done
 
@@ -2238,7 +2249,7 @@ START=0
 END=0
 
 echo
-echo $break
+echo $line
 echo
 echo "***Scan complete.***"
 echo
@@ -2327,7 +2338,7 @@ case $choice in
 
      2)
      echo
-     echo $break
+     echo $line
      echo
      echo "Usage: target.com or target-IP"
      echo
@@ -2353,7 +2364,7 @@ case $choice in
      done
 
      echo
-     echo $break
+     echo $line
      echo
      echo "***Scan complete.***"
      echo
@@ -2462,7 +2473,7 @@ case $choice in
 esac
 
 echo
-echo $break
+echo $line
 echo
 echo "***Scan complete.***"
 echo
@@ -2556,7 +2567,7 @@ reportdate=$(date +%A" - "%B" "%d", "%Y)
 echo $reportdate >> tmp-report
 echo sslscan $(sslscan | grep 'Version' | awk '{print $2}') >> tmp-report
 echo >> tmp-report
-echo $break >> tmp-report
+echo $line >> tmp-report
 echo >> tmp-report
 
 while read -r line; do
@@ -2660,7 +2671,7 @@ while read -r line; do
                     echo >> ssl_$line.txt
                fi
 
-               echo $break >> ssl_$line.txt
+               echo $line >> ssl_$line.txt
                echo >> ssl_$line.txt
                echo
                # echo "kill $pid process test"
@@ -2672,14 +2683,14 @@ while read -r line; do
                echo -e "\e[1;31mCould not open a connection.\e[0m"
                echo $ERRORCHECK >> ssl_$line.txt
                echo >> ssl_$line.txt
-               echo $break >> ssl_$line.txt
+               echo $line >> ssl_$line.txt
                cat ssl_$line.txt >> tmp-report
           fi
      else
           echo -e "\e[1;31mNo response.\e[0m"
           echo "[*] No response." >> ssl_$line.txt
           echo >> ssl_$line.txt
-          echo $break >> ssl_$line.txt
+          echo $line >> ssl_$line.txt
 
           # Add current data to tmp-report
           cat ssl_$line.txt >> tmp-report
@@ -2690,7 +2701,7 @@ mv tmp-report /$user/ssl-report.txt
 rm ssltmp_* ssl_*.txt 2>/dev/null
 
 echo
-echo $break
+echo $line
 echo
 echo "***Scan complete.***"
 echo
@@ -2751,7 +2762,7 @@ mv tmp-updates /$user/updates
 rm tmp*
 
 echo
-echo $break
+echo $line
 echo
 printf 'The new report is located at \e[1;33m%s\e[0m\n' /$user/updates
 echo
