@@ -34,11 +34,15 @@ if [ -d /pentest/bluetooth/bluelog/.git ]; then echo -e "\e[1;34mUpdating Bluelo
 else echo -e "\e[1;33mInstalling Bluelog.\e[0m" ; rm -rf /pentest/bluetooth/bluelog/ ;
 git clone git://github.com/MS3FGX/Bluelog.git /pentest/bluetooth/bluelog/ ; echo ; fi ;
 
-if [ -d /pentest/fuzzers/bed/.git ]; then echo -e "\e[1;34mUpdating Bruteforce Exploit Detector.\e[0m" ; cd /pentest/fuzzers/bed/ ; git pull ; echo ;
-else echo -e "\e[1;33mInstalling Bruteforce Exploit Detector.\e[0m" ; rm -rf /pentest/fuzzers/bed/ ;
+if [ -d /pentest/fuzzers/bed/.git ]; then echo -e "\e[1;34mUpdating Bed.\e[0m" ; cd /pentest/fuzzers/bed/ ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling Bed.\e[0m" ; rm -rf /pentest/fuzzers/bed/ ;
 git clone git://github.com/wireghoul/bed.git /pentest/fuzzers/bed/ ; echo ; fi ;
 
 echo -e "\e[1;34mUpdating deadicated.\e[0m" ; cd /pentest/telephony/dedected ; svn up ; echo ;
+
+if [ -d /pentest/web/dotdotpwn/.git ]; then echo -e "\e[1;34mUpdating dotdotpwn.\e[0m" ; cd /pentest/web/dotdotpwn/ ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling dotdotpwn.\e[0m" ; rm -rf /pentest/web/dotdotpwn/ ;
+git clone git://github.com/wireghoul/dotdotpwn.git /pentest/web/dotdotpwn/ ; echo ; fi ;
 
 if [ -d /pentest/enumeration/dns/dnsenum/.svn ]; then echo -e "\e[1;34mUpdating dnsenum.\e[0m" ; cd /pentest/enumeration/dns/dnsenum/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling dnsenum.\e[0m" ; rm -rf /pentest/enumeration/dns/dnsenum/ ;
@@ -68,12 +72,16 @@ echo -e "\e[1;34mUpdating Fast-Track.\e[0m" ; cd /pentest/exploits/fasttrack ; s
 
 echo -e "\e[1;34mUpdating Fern WiFi Cracker.\e[0m" ; cd /pentest/wireless/fern-wifi-cracker ; svn up ; echo ;
 
+if [ -d /pentest/web/fimap/.svn ]; then echo -e "\e[1;34mUpdating Fimap.\e[0m" ; cd /pentest/web/fimap/ ; svn up ; echo ;
+else echo -e "\e[1;33mInstalling Fimap.\e[0m" ; rm -rf /pentest/web/fimap/
+svn co http://fimap.googlecode.com/svn/trunk/ /pentest/web/fimap/ ; echo ; fi ;
+
 if [ -d /pentest/wireless/freeradius-wpe/.git ]; then echo -e "\e[1;34mUpdating FreeRADIUS.\e[0m" ; cd /pentest/wireless/freeradius-wpe/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling FreeRADIUS.\e[0m" ; rm -rf /pentest/wireless/freeradius-wpe/ ;
 git clone git://git.freeradius.org/freeradius-server.git /pentest/wireless/freeradius-wpe/ ; echo ; fi ;
 
 if [ -d /pentest/sniffers/ghost-phisher/.svn ]; then echo -e "\e[1;34mUpdating Ghost Phisher.\e[0m" ; cd /pentest/sniffers/ghost-phisher/ ; svn up ; echo ;
-else echo -e "\e[1;33mInstalling Ghost Phisher.\e[0m" ;
+else echo -e "\e[1;33mInstalling Ghost Phisher.\e[0m" ; rm -rf /pentest/sniffers/ghost-phisher/
 svn co http://ghost-phisher.googlecode.com/svn/Ghost-Phisher/ /pentest/sniffers/ghost-phisher/ ; echo ; fi ;
 
 echo -e "\e[1;34mUpdating GISKismet.\e[0m" ; cd /pentest/wireless/giskismet/ ; svn up ; echo ;
