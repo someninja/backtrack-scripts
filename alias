@@ -231,6 +231,10 @@ if [ -d /pentest/forensics/testdisk/.git ]; then echo -e "\e[1;34mUpdating testd
 else echo -e "\e[1;33mInstalling testdisk.\e[0m" ; rm -rf /pentest/forensics/testdisk/ ;
 git clone git://github.com/mqudsi/testdisk.git /pentest/forensics/testdisk/ ; echo ; fi ;
 
+if [ -d /pentest/web/uniscan/.git ]; then echo -e "\e[1;34mUpdating Uniscan.\e[0m" ; cd /pentest/web/uniscan/ ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling Uniscan.\e[0m" ; rm -rf /pentest/web/uniscan/ ;
+git clone http://git.code.sf.net/p/uniscan/code /pentest/web/uniscan/ ; echo ; fi ;
+
 if [ -d /pentest/fuzzers/voip/voiper/.git ]; then echo -e "\e[1;34mUpdating voiper.\e[0m" ; cd /pentest/fuzzers/voip/voiper/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling voiper.\e[0m" ; rm -rf /pentest/fuzzers/voip/voiper/ ;
 git clone git://github.com/gremwell/voiper.git /pentest/fuzzers/voip/voiper/ ; echo ; fi ;
@@ -262,7 +266,3 @@ cd /pentest/web/wpscan ; gem install bundler && bundle install --without test de
 echo -e "\e[1;34mRefreshing aliases.\e[0m" ; cp /opt/scripts/alias /root/.bash_aliases ; source /root/.bash_aliases ;
 
 echo ; echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/ '
-
-if [ -d /pentest/web/uniscan/.git ]; then echo -e "\e[1;34mUpdating Uniscan.\e[0m" ; cd /pentest/web/uniscan/ ; git pull ; echo ;
-else echo -e "\e[1;33mInstalling Uniscan.\e[0m" ; rm -rf /pentest/web/uniscan/ ;
-git clone http://git.code.sf.net/p/uniscan/code /pentest/web/uniscan/ ; echo ; fi ;
