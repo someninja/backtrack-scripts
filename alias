@@ -133,6 +133,10 @@ git clone git://github.com/rapid7/metasploit-framework.git /opt/metasploit/msf3/
 if [ -f /opt/nessus/sbin/nessus-update-plugins ]; then echo -e "\e[1;34mUpdating Nessus.\e[0m" ; 
 /opt/nessus/sbin/nessus-update-plugins ; echo ; fi ;
 
+if [ -d /pentest/web/uniscan/.git ]; then echo -e "\e[1;34mUpdating Uniscan.\e[0m" ; cd /pentest/web/uniscan/ ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling Uniscan.\e[0m" ; rm -rf /pentest/web/uniscan/ ;
+git clone http://git.code.sf.net/p/uniscan/code /pentest/web/uniscan/ ; echo ; fi ;
+
 if [ -d /pentest/exploits/netgear-telnetenable/.svn ]; then echo -e "\e[1;34mUpdating netgear-telnetenable.\e[0m" ; cd /pentest/exploits/netgear-telnetenable/ ; svn up ; echo ;
 else echo -e "\e[1;33mInstalling netgear-telnetenable.\e[0m" ; rm -rf /pentest/exploits/netgear-telnetenable/ ;
 svn co http://netgear-telnetenable.googlecode.com/svn/trunk/ /pentest/exploits/netgear-telnetenable/ ; echo ; fi ;
