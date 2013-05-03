@@ -104,10 +104,6 @@ if [ -d /pentest/wireless/horst/.git ]; then echo -e "\e[1;34mUpdating HORST.\e[
 else echo -e "\e[1;33mInstalling HORST.\e[0m" ; rm -rf /pentest/wireless/horst/ ;
 git clone git://github.com/br101/horst.git /pentest/wireless/horst/ ; echo ; fi ;
 
-if [ -d /pentest/enumeration/dns/dnsmap/.git ]; then echo -e "\e[1;34mUpdating dnsmap.\e[0m" ; cd /pentest/enumeration/dns/dnsmap/ ; git pull ; echo ;
-else echo -e "\e[1;33mInstalling dnsmap.\e[0m" ; rm -rf /pentest/enumeration/dns/dnsmap/ ;
-git clone git://github.com/makefu/dnsmap.git /pentest/enumeration/dns/dnsmap/ ; echo ; fi ;
-
 if [ -d /pentest/exploits/jboss-autopwn/.git ]; then echo -e "\e[1;34mUpdating JBoss Autopwn.\e[0m" ; cd /pentest/exploits/jboss-autopwn/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling JBoss Autopwn.\e[0m" ; rm -rf /pentest/exploits/jboss-autopwn/ ;
 git clone git://github.com/SpiderLabs/jboss-autopwn.git /pentest/exploits/jboss-autopwn/ ; echo ; fi ;
@@ -145,9 +141,11 @@ if [ -d /pentest/web/nikto/.git ]; then echo -e "\e[1;34mUpdating nikto.\e[0m" ;
 else echo -e "\e[1;33mInstalling nikto.\e[0m" ; rm -rf /pentest/web/nikto/ ;
 git clone git://github.com/sullo/nikto.git /pentest/web/nikto/ ; echo ; fi ;
 
-echo -e "\e[1;34mUpdating Nmap.\e[0m" ; cd /root/nmap-svn/ ; svn up ; echo ;
+echo -e "\e[1;34mUpdating Nmap.\e[0m" ; if [ -d /root/nmap-svn/.svn ]; then cd /root/nmap-svn/ ; svn up ; echo ;
+else mkdir /root/nmap-svn ; cd /root/nmap-svn ; svn co https://svn.nmap.org/nmap /root/nmap-svn ; echo ; fi ;
 
-cp /root/nmap-svn/nmap /usr/local/bin/
+if [ -f /root/nmap-svn/nmap ]; then
+cp /root/nmap-svn/nmap /usr/local/bin/ ;
 cp /root/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/ ;
 cp /root/nmap-svn/nmap-os-db /usr/local/share/nmap/ ;
 cp /root/nmap-svn/nmap-payloads /usr/local/share/nmap/ ;
@@ -158,6 +156,22 @@ cp /root/nmap-svn/nmap-services /usr/local/share/nmap/ ;
 cp /root/nmap-svn/nse_main.lua /usr/local/share/nmap/ ;
 cp -r /root/nmap-svn/nselib/ /usr/local/share/nmap/ ;
 cp -r /root/nmap-svn/scripts/ /usr/local/share/nmap/ ;
+
+else cd /root/nmap-svn ; ./configure ; make ;
+
+cp /root/nmap-svn/nmap /usr/local/bin/ ;
+cp /root/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/ ;
+cp /root/nmap-svn/nmap-os-db /usr/local/share/nmap/ ;
+cp /root/nmap-svn/nmap-payloads /usr/local/share/nmap/ ;
+cp /root/nmap-svn/nmap-protocols /usr/local/share/nmap/ ;
+cp /root/nmap-svn/nmap-rpc /usr/local/share/nmap/ ;
+cp /root/nmap-svn/nmap-service-probes /usr/local/share/nmap/ ;
+cp /root/nmap-svn/nmap-services /usr/local/share/nmap/ ;
+cp /root/nmap-svn/nse_main.lua /usr/local/share/nmap/ ;
+cp -r /root/nmap-svn/nselib/ /usr/local/share/nmap/ ;
+cp -r /root/nmap-svn/scripts/ /usr/local/share/nmap/ ;
+
+fi ;
 
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo ;
 
@@ -239,7 +253,7 @@ if [ -d /pentest/wireless/wifite/.svn ]; then echo -e "\e[1;34mUpdating WiFite.\
 else echo -e "\e[1;33mInstalling WiFite.\e[0m" ; rm -rf /pentest/wireless/wifite/ ;
 svn co http://wifite.googlecode.com/svn/trunk/ /pentest/wireless/wifite/ ; echo ; fi ;
 
-if [ -d /pentest/web/wpscan/.git ]; then echo -e "\e[1;34mUpdating WPScan.\e[0m" ; cd /pentest/web/wpscan/ ; ./wpscan.rb --update ; echo ;
+if [ -d /pentest/web/wpscan/.git ]; then echo -e "\e[1;34mUpdating WPScan.\e[0m" ; cd /pentest/web/wpscan/ ; bundle install ; ./wpscan.rb --update ; echo ;
 else echo -e "\e[1;33mInstalling WPScan.\e[0m" ; rm -rf /pentest/web/wpscan/ ;
 apt-get -y install libcurl4-gnutls-dev libopenssl-ruby libxml2 libxml2-dev libxslt1-dev ruby-dev ;
 git clone https://github.com/wpscanteam/wpscan.git /pentest/web/wpscan/ ;
