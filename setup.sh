@@ -43,7 +43,7 @@ echo
 echo -e "\e[1;34mInstalling nmap.\e[0m"
 svn co https://svn.nmap.org/nmap/ /root/nmap-svn/
 cd /root/nmap-svn/
-./configure && make && make install
+./configure && make && make install && make clean
 
 echo
 echo -e "\e[1;34mUpdating .bashrc.\e[0m"
