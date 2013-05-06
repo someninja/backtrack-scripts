@@ -239,8 +239,8 @@ if [ -d /pentest/fuzzers/voip/voiper/.git ]; then echo -e "\e[1;34mUpdating voip
 else echo -e "\e[1;33mInstalling voiper.\e[0m" ; rm -rf /pentest/fuzzers/voip/voiper/ ;
 git clone git://github.com/gremwell/voiper.git /pentest/fuzzers/voip/voiper/ ; echo ; fi ;
 
-if [ -d /pentest/web/w3af/.git ]; then echo -e "\e[1;34mUpdating W3af.\e[0m" ; cd /pentest/web/w3af/ ; git pull ; echo ;
-else echo -e "\e[1;33mInstalling W3af.\e[0m" ; rm -rf /pentest/web/w3af/ ;
+if [ -d /pentest/web/w3af/.git ]; then echo -e "\e[1;34mUpdating w3af.\e[0m" ; cd /pentest/web/w3af/ ; git pull ; echo ;
+else echo -e "\e[1;33mInstalling w3af.\e[0m" ; rm -rf /pentest/web/w3af/ ;
 git clone git://github.com/andresriancho/w3af.git /pentest/web/w3af/ ; cd /pentest/web/w3af/ ; apt-get install python-pip ; pip install PyGithub GitPython esmre chardet pdfminer futures guess-language cluster msgpack-python python-ntlm ; sudo pip install -e git+git://github.com/ramen/phply.git#egg=phply ; sudo pip install xdot ; echo ; fi ;
 
 if [ -d /pentest/telephony/warvox/.git ]; then echo -e "\e[1;34mUpdating WarVox.\e[0m" ; cd /pentest/telephony/warvox/ ; git pull ; echo ;
