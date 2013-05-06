@@ -1,5 +1,40 @@
 Notes
 
+3 May 2013 by jason@ihackstuff.com - How to fix msfconsole after updating BackTrack
+
+Note: Follow the below steps, copying and pasting one line at a time to ensure no errors at each step. The steps
+do not work in a script, they must be run manually (at this time). I am not responsible for anything that happens
+to your BT5 install if you follow these steps, YMMV. If you run BT in a VM, suggest taking a snapshot before running
+the fix so you can back out in the event of issues.
+
+Launch a terminal, then issue the below commands (root user assumed given it's BT5):
+
+/bin/bash --login
+
+echo 'APT::Cache-Limit "100000000";' >> /etc/apt/apt.conf.d/70debconf
+apt-get install libpq-dev
+
+# Note the following command has a starting \ character - ensure you include it!
+\curl -L https://get.rvm.io | bash -s -- --version latest
+
+source /etc/profile.d/rvm.sh
+
+rvm autolibs enable
+rvm requirements
+rvm install ruby-1.9.2-p320
+
+cd /opt/metasploit/msf3
+bundle install
+
+# Check your Ruby version - should be: ruby 1.9.2p320 (2012-04-20 revision 35421) [i686-linux]
+# (as of this writing)
+ruby -v
+
+# Now run msfconsole - it should work. :]
+./msfconsole
+
+---------------------------------------
+
 nmap2csv:  https://github.com/maaaaz/nmaptocsv
 
 Discover
