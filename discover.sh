@@ -253,13 +253,13 @@ case $choice in
      /pentest/enumeration/theharvester/theHarvester.py -d $domain -b all > zall
 
      echo
-     echo "Metasploit (disabled)     (16/$total)"
-#     /opt/metasploit/msf3/msfcli gather/search_email_collector DOMAIN=$domain E > tmp 2>/dev/null
-#     grep @$domain tmp | awk '{print $2}' | grep -v '%' | grep -Fv '...@' | sort -u > tmp2
-#     # Change to lower case
-#     cat tmp2 | tr '[A-Z]' '[a-z]' > tmp3
-#     # Remove blank lines
-#     sed '/^$/d' tmp3 > zmsf
+     echo "Metasploit                (16/$total)"
+     /opt/metasploit/msf3/msfcli gather/search_email_collector DOMAIN=$domain E > tmp 2>/dev/null
+     grep @$domain tmp | awk '{print $2}' | grep -v '%' | grep -Fv '...@' | sort -u > tmp2
+     # Change to lower case
+     cat tmp2 | tr '[A-Z]' '[a-z]' > tmp3
+     # Remove blank lines
+     sed '/^$/d' tmp3 > zmsf
 
      echo
      echo "dnsrecon                  (17/$total)"
