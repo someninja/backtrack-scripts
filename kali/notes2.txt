@@ -9,9 +9,10 @@ that everyone will be making the transition right now until more issues are iron
 
 Python notes.
 
-http://www.tutorialspoint.com/python/index.htm
-http://thenewboston.org/list.php?cat=36
-http://learnpythonthehardway.org/book/
+www.tutorialspoint.com/python/index.htm
+thenewboston.org/list.php?cat=36
+learnpythonthehardway.org/book/
+pythonforbeginners.com
 
 ##############################
 
@@ -27,9 +28,16 @@ print colorblue.format("Test")
 
 ##############################
 
-os.system('clear')                           # clear the screen
+import os
 
-os.makedirs(/root/test)                      # create a new directory
+os.system('clear')                           # clear the screen
+os.chdir("newdir")                           # change directory
+os.mkdir("/root/test/")                      # create a directory
+os.rmdir('tmp')                              # delete a directory
+os.remove("tmp")                             # delete a file
+os.rename("tmp" "tmp2")                      # rename a file
+
+##############################
 
 if firstname == "":                          # check for no input
      error()
@@ -37,7 +45,7 @@ if firstname == "":                          # check for no input
 firstname = raw_input("First name: ")        # get input from user
 
 if not os.path.exists(/root/test):           # if folder doesn't exist, create it
-     os.makedirs(/root/test)
+     os.mkdir(/root/test)
 
 webbrowser.open('http://www.apple.com/')     # open a URL
 

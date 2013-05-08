@@ -23,8 +23,8 @@ if choice == "1":
      location = raw_input("Enter the location of your list: ")
 
      if os.path.exists(location):
-          f = open(location,"r")                                 # Setup a read connection
-          filedata = f.read()                                    # Read in the file
+          f = open(location,"r")                                 # Setup a read connection directory
+          filedata = f.read()                                    # Read the file
           f.close()                                              # Close the connection
           filedata = filedata.split('\n')                        # Turn into a list
           filedata = [x for x in filedata if not x == ""]        # Ignore blank lines

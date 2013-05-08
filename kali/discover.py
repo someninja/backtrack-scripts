@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # By Lee Baird
 # Feel free to contact me via chat or email with any feedback or suggestions that you may have:
