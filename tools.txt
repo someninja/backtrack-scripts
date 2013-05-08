@@ -1,0 +1,122 @@
+Because the main repos are no longer being updated, I'm in the process of slowly going through each folder in the pentest directory and adding the corresponding Google Code or Github repos for each tool that I can find.
+
+update - updates the following:
+
+date & time
+BackTrack distro
+backtrack-scripts 
+
+Backdoors
+
+Bluetooth
+     Bluediving
+     Bluelog
+
+Cisco
+
+Database
+     HexorBase
+     SQLBrute
+     sqlmap
+     Sqlninja 
+
+Enumeration
+     dnsenum
+     dnsmap
+     dnsrecon
+     dnswalk
+     goofile
+     Jigsaw
+     lanmap2
+     MetaGoofil
+     recon-ng
+     theHarvester
+     WhatWeb 
+
+Exploits
+     exploit-db
+     Fast-Track
+     JBoss Autopwn
+     Metasploit
+     netgear-telnetenable
+     Rebind
+     SET
+     Smartphone-Pentest-Framework 
+
+Forensics
+     peepdf
+     samdump
+     testdisk 
+
+Fuzzers
+     Bruteforce Exploit Detector
+     sickfuzz
+     voiper 
+
+Libs
+     LibHijack 
+
+Misc
+     OpenVAS 
+
+Passwords
+
+Reporting
+
+Reverse Engineering
+
+RFID
+
+Scanners
+
+Sniffers
+     easy-creads
+     Ghost Phisher
+     wifitap 
+
+Stressing
+
+Telephony (OK)
+     detected
+     WarVox 
+
+Tunneling
+
+VoIP
+
+Web
+     BeEF
+     dotdotpwn
+     Fimap
+     JoomScan
+     Nikto
+     sslstrip
+     w3af
+     WPScan 
+
+Windows Binaries
+
+Wireless
+     aircrack-ng
+     Fern WiFi Cracker
+     FreeRADIUS
+     GISKismet
+     HORST
+     killerbee
+     Reaver
+     WiFite 
+
+Other
+     Nessus
+     Nmap 
+
+Shortcuts
+     c 	  clear
+     cl   clear & ls -l
+     d 	  cd /root/Desktop/ ; clear
+     e 	  exit
+     i 	  ifconfig && ping -c3 google.com
+     l 	  ls -l
+     n 	  netstat -antup
+     r 	  cd /root/ ; clear
+     s 	  cd /opt/scripts/ ; clear
