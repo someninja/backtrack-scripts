@@ -198,7 +198,7 @@ git clone git://github.com/geocar/samdump.git /pentest/forensics/samdump/ ; echo
 
 if [ -d /opt/scripts/.git ]; then echo -e "\e[1;34mUpdating scripts from github.\e[0m" ; cd /opt/scripts/ ; git pull ; echo ;
 else echo -e "\e[1;33mInstalling scripts from new github repo.\e[0m" ; mv /opt/scripts/ /opt/scripts-old/ ;
-git clone git://github.com/leebaird/backtrack-scripts.git /opt/scripts/ ; echo ; fi ;
+git clone git://github.com/leebaird/backtrack-scripts.git /opt/scripts/ ; fi ;
 cd /opt/scripts/; chmod 755 *.sh ; cd kali/; chmod 755 *.py ; echo 
 
 if [ -d /pentest/exploits/set/.git ]; then echo -e "\e[1;34mUpdating SET.\e[0m" ; cd /pentest/exploits/set/ ; git pull ; echo ;
@@ -267,8 +267,8 @@ echo -e "\e[1;34mRefreshing aliases.\e[0m" ; cp /opt/scripts/alias /root/.bash_a
 
 echo ; echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/ ;
 
-echo -e "\e[1;31m[*] IMPORTANT NOTE about Metasploit.:\e[0m" ; echo ;
+echo -e "\e[1;31m[*] IMPORTANT NOTE about Metasploit:\e[0m" ; echo ;
 echo "  If you discover you cannot run msfconsole after updating, please see notes.txt for the fix." ; echo ; 
 
-echo -e "\e[1;31m[*] IMPORTANT NOTE about github.:\e[0m" ; echo ;
-echo "The new repo for BackTrack Scripts is now located at https://github.com/leebaird/backtrack-scripts." ; echo ; echo'
+echo -e "\e[1;31m[*] IMPORTANT NOTE about github:\e[0m" ; echo ;
+echo "  The new repo for BackTrack Scripts is now located at https://github.com/leebaird/backtrack-scripts." ; echo ; echo'
