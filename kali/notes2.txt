@@ -1,6 +1,6 @@
 Python notes.
 
-www.tutorialspoint.com/python/index.htm
+tutorialspoint.com/python/index.htm
 thenewboston.org/list.php?cat=36
 learnpythonthehardway.org/book/
 pythonforbeginners.com
