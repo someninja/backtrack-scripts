@@ -32,9 +32,7 @@ if choice == "1":
           port = raw_input("Port: ")
 
           if port.isdigit():
-
                if int(port) in range(1,65535):
-
                     if port == "21":
                          for i in filedata:
                               webbrowser.open('ftp://'+i)
@@ -73,6 +71,7 @@ if choice == "2":
      response = urllib2.urlopen('http://'+domain+'/robots.txt')
      robots = response.read()
      robots = robots.split('\n')
+     
      for i in robots:
           if "Disallow" in i:
                j = i.split(' ')
