@@ -24,12 +24,10 @@ import urllib2
 import webbrowser
 
 # variables
-colorblue = "\033[01;34m{0}\033[00m"
-colorgreen = "\033[01;32m{0}\033[00m"
-colorpurple = "\033[01;35m{0}\033[00m"
-colorred = "\033[01;31m{0}\033[00m"
-coloryellow = "\033[01;33m{0}\033[00m"
-line = "======================================"
+colorblue = '\033[01;34m{0}\033[00m'
+colorred = '\033[01;31m{0}\033[00m'
+coloryellow = '\033[01;33m{0}\033[00m'
+line = '======================================'
 user = getpass.getuser()
 
 ##############################################################################################################
@@ -97,7 +95,7 @@ def main():
      while True:
           choice = menu()
           if choice == "1":
-               execfile("recon.py")
+               execfile('recon.py')
           elif choice == "2":
                pingsweep()
           elif choice == "3":
@@ -109,13 +107,13 @@ def main():
           elif choice == "6":
                cidr()
           elif choice == "7":
-               execfile("multitabs.py")
+               execfile('multitabs.py')
           elif choice == "8":
                nikto()
           elif choice == "9":
                sslcheck()
           elif choice == "10":
-               subprocess.call("/opt/scripts/crack-wifi.sh")
+               subprocess.call('/opt/scripts/crack-wifi.sh')
           elif choice == "11":
                reinstall_nmap()
           elif choice == "12":

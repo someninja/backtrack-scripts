@@ -44,21 +44,21 @@ if choice == "1":
           print
 
           # If folder doesn't exist, create it
-          if not os.path.exists("/"+user+"/"+domain):
-               os.makedirs("/"+user+"/"+domain)
+          if not os.path.exists('/'+user+'/'+domain):
+               os.makedirs('/'+user+'/'+domain)
 
           # Number of tests
           total = 28
 
           print "goofile                   (1/"+str(total)+")"
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f xls > tmp")
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f xlsx >> tmp")
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f ppt >> tmp")
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f pptx >> tmp")
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f doc >> tmp")
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f docx >> tmp")
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f pdf >> tmp")
-          os.system("python /pentest/enumeration/google/goofile/goofile.py -d "+domain+" -f txt >> tmp")
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xls > tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xlsx >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f ppt >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f pptx >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f doc >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f docx >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f pdf >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f txt >> tmp')
 
 #          grep domain tmp | grep -v 'Searching in' | sort > tmp2
 

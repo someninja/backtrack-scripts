@@ -23,7 +23,7 @@ if choice == "1":
      location = raw_input("Enter the location of your list: ")
 
      if os.path.exists(location):
-          f = open(location,"r")                                 # Setup a read connection directory
+          f = open(location,'r')                                 # Setup a read connection directory
           filedata = f.read()                                    # Read the file
           f.close()                                              # Close the connection
           filedata = filedata.split('\n')                        # Turn into a list
@@ -47,7 +47,7 @@ if choice == "1":
                               time.sleep(1)
                     else:
                          for i in filedata:
-                              webbrowser.open('http://'+i+":"+port)
+                              webbrowser.open('http://'+i+':'+port)
                               time.sleep(1)
                else:
                     error()
