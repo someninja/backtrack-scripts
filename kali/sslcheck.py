@@ -14,12 +14,8 @@ print
 location = raw_input('Enter the location of your list: ')
 
 if os.path.exists(location):
-     f = open(location,'r')                       # Setup a read connection directory
-     filedata = f.read()                          # Read the file
-     f.close()                                    # Close the connection
-     filedata = filedata.split('\n')              # Turn into a list
-     print filedata
-     sys.exit(0)                                  # Exit program OK
+     print location
+     goodbye()
 else:
      error()
 
@@ -221,4 +217,3 @@ else:
 #printf 'The new report is located at \e[1;33m%s\e[0m\n' /$user/ssl-report.txt
 #print
 #print
-
