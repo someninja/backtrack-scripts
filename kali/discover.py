@@ -34,18 +34,18 @@ user = getpass.getuser()
 
 def banner():
      print
-     print "______  ___ ______ ______  _____  _    _ ______  _____"
-     print "|     \  |  |____  |      |     |  \  /  |_____ |____/"
-     print "|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_ Kali"
+     print '______  ___ ______ ______  _____  _    _ ______  _____'
+     print '|     \  |  |____  |      |     |  \  /  |_____ |____/'
+     print '|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_ Kali'
      print
-     print "By Lee Baird"
+     print 'By Lee Baird'
      print
      print
 
 ##############################################################################################################
 
 def cidr():
-     print "CIDR"
+     print 'CIDR'
      goodbye()
 
 ##############################################################################################################
@@ -55,7 +55,7 @@ def error():
      print
      print colorred.format(line)
      print
-     print colorred.format("   *** Invalid choice or entry. ***   ")
+     print colorred.format('   *** Invalid choice or entry. ***   ')
      print
      print colorred.format(line)
      time.sleep(2)
@@ -66,7 +66,7 @@ def error():
 def goodbye():
      print
      print
-     print "Coming soon..."
+     print 'Coming soon...'
      print
      print
      sys.exit(0)
@@ -74,19 +74,19 @@ def goodbye():
 ##############################################################################################################
 
 def lan():
-     print "LAN"
+     print 'LAN'
      goodbye()
 
 ##############################################################################################################
 
 def listener():
-     print "Metasploit Listener"
+     print 'Metasploit Listener'
      goodbye()
 
 ##############################################################################################################
 
 def lists():
-     print "List"
+     print 'List'
      goodbye()
 
 ##############################################################################################################
@@ -111,7 +111,7 @@ def main():
           elif choice == "8":
                nikto()
           elif choice == "9":
-               sslcheck()
+               execfile('sslcheck.py')
           elif choice == "10":
                subprocess.call('/opt/scripts/crack-wifi.sh')
           elif choice == "11":
@@ -130,46 +130,46 @@ def main():
 def menu():
      os.system('clear')
      banner()
-     print colorblue.format("RECON")
-     print "1.  Scrape"
+     print colorblue.format('RECON')
+     print '1.  Scrape'
      print
-     print colorblue.format("DISCOVER")+" - Host discovery, port scanning, service enumeration and OS"
-     print "identification using Nmap, Nmap scripts and Metasploit scanners."
-     print "2.  Ping Sweep"
-     print "3.  Single IP, URL or Range"
-     print "4.  Local Area Network"
-     print "5.  List"
-     print "6.  CIDR Notation"
+     print colorblue.format('DISCOVER')+' - Host discovery, port scanning, service enumeration and OS'
+     print 'identification using Nmap, Nmap scripts and Metasploit scanners.'
+     print '2.  Ping Sweep'
+     print '3.  Single IP, URL or Range'
+     print '4.  Local Area Network'
+     print '5.  List'
+     print '6.  CIDR Notation'
      print
-     print colorblue.format("WEB")
-     print "7.  Open multiple tabs in Firefox"
-     print "8.  Nikto"
-     print "9.  SSL Check"
+     print colorblue.format('WEB')
+     print '7.  Open multiple tabs in Firefox'
+     print '8.  Nikto'
+     print '9.  SSL Check'
      print
-     print colorblue.format("MISC")
-     print "10. Crack WiFi"
-     print "11. Reinstall nmap"
-     print "12. Start a Metasploit listener"
-     print "13. Exit"
+     print colorblue.format('MISC')
+     print '10. Crack WiFi'
+     print '11. Reinstall nmap'
+     print '12. Start a Metasploit listener'
+     print '13. Exit'
      print
-     return raw_input("Choice: ")
+     return raw_input('Choice: ')
 
 ##############################################################################################################
 
 def nikto():
-     print "Nikto"
+     print 'Nikto'
      goodbye()
 
 ##############################################################################################################
 
 def pingsweep():
-     print "Pingsweep"
+     print 'Pingsweep'
      goodbye()
 
 ##############################################################################################################
 
 def reinstall_nmap():
-     print "Reinstall nmap."
+     print 'Reinstall nmap.'
      goodbye()
 
 ##############################################################################################################
@@ -179,7 +179,7 @@ def runlocally():
           print
           print line
           print
-          print "This option must be run locally, in an X-Windows environment."
+          print 'This option must be run locally, in an X-Windows environment.'
           time.sleep(2)
           main()
 
@@ -188,40 +188,40 @@ def runlocally():
 def scanname():
      typeofscan()
 
-     name = raw_input("Name of scan: ")
+     name = raw_input('Name of scan: ')
 
      # Check for no answer
      if name == "":
           error()
 
-     os.makedirs("/"+user+"/"+name)
+     os.makedirs('/'+user+'/'+name)
 
 ##############################################################################################################
 
 def single():
-     print "Single"
+     print 'Single'
      goodbye()
 
 ##############################################################################################################
 
 def sslcheck():
-     print "SSLcheck"
+     print 'SSLcheck'
      goodbye()
 
 ##############################################################################################################
 
 def typeofscan():
-     colorblue.format("Type of scan:")
+     colorblue.format('Type of scan:')
      print
-     print "1.  External"
-     print "2.  Internal"
-     print "3.  Previous menu"
+     print '1.  External'
+     print '2.  Internal'
+     print '3.  Previous menu'
      print
-     choice = raw_input("Choice: ")
+     choice = raw_input('Choice: ')
 
      if choice == "1":
           print
-          coloryellow.format("[*] Setting source port to 53.")
+          coloryellow.format('[*] Setting source port to 53.')
           sourceport = 53
           print
           print line
@@ -229,7 +229,7 @@ def typeofscan():
 
      if choice == "2":
           print
-          coloryellow.format("[*] Setting source port to 88.")
+          coloryellow.format('[*] Setting source port to 88.')
           sourceport = 88
           print
           print line
@@ -243,7 +243,7 @@ def typeofscan():
 ##############################################################################################################
 
 def updates():
-     print "Updates"
+     print 'Updates'
      goodbye()
 
 ##############################################################################################################

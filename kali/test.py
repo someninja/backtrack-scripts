@@ -22,7 +22,7 @@ filedata = filedata.split('\n')                    # Turn into a list
 
 #####################################################################################################
 
-domain = "target.com"
+domain = 'target.com'
 f_xls = open('xls.txt','a')
 f_ppt = open('ppt.txt','a')
 f_pdf = open('pdf.txt','a')

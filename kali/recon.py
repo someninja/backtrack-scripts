@@ -8,32 +8,33 @@
 
 os.system('clear')
 banner()
-print colorblue.format("RECON")
+
+print colorblue.format('RECON')
 print
-print "1.  Company"
-print "2.  Person"
-print "3.  Previous menu"
+print '1.  Company'
+print '2.  Person'
+print '3.  Previous menu'
 print
-choice = raw_input("Choice: ")
+choice = raw_input('Choice: ')
 
 if choice == "1":
      os.system('clear')
      banner()
-     print colorblue.format("RECON")
+     print colorblue.format('RECON')
      print
-     print "1.  Passive"
-     print "2.  Active"
-     print "3.  Previous menu"
+     print '1.  Passive'
+     print '2.  Active'
+     print '3.  Previous menu'
      print
-     choice = raw_input("Choice: ")
+     choice = raw_input('Choice: ')
 
      if choice == "1":
           print
           print line
           print
-          print "Usage: target.com"
+          print 'Usage: target.com'
           print
-          domain = raw_input("Domain: ")
+          domain = raw_input('Domain: ')
 
           # Check for no answer
           if domain == "":
@@ -50,7 +51,7 @@ if choice == "1":
           # Number of tests
           total = 28
 
-          print "goofile                   (1/"+str(total)+")"
+          print 'goofile                   (1/'+str(total)+')'
           os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xls > tmp')
           os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xlsx >> tmp')
           os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f ppt >> tmp')
@@ -100,11 +101,11 @@ if choice == "1":
           goodbye()
 
      if choice == "2": 
-          print "Active - Coming soon..."
+          print 'Active - Coming soon...'
           goodbye()
 
      if choice == "3":
-          main()
+          execfile('recon.py')
      else: 
           error()
 
@@ -114,11 +115,11 @@ if choice == "2":
      print line
      print
 
-     firstname = raw_input("First name: ")
+     firstname = raw_input('First name: ')
      if firstname == "":
           error()
      print
-     lastname = raw_input("Last name: ")
+     lastname = raw_input('Last name: ')
      if lastname == "":
           error()
 

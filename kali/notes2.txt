@@ -15,7 +15,7 @@ coloryellow = '\033[01;33m{0}\033[00m'
 colorblue = '\033[01;34m{0}\033[00m'
 colorpurple = '\033[01;35m{0}\033[00m'
 
-print colorblue.format("Test")
+print colorblue.format('Test')
 
 ##############################
 
@@ -30,10 +30,17 @@ os.rename('tmp' 'tmp2')                      # Rename a file
 
 ##############################
 
+import sys
+
+sys.exit(0)                                  # Exit program OK
+sys.exit(1)                                  # Exit program with error
+
+##############################
+
 if firstname == "":                          # Check for no input
      error()
 
-firstname = raw_input("First name: ")        # Get input from user
+firstname = raw_input('First name: ')        # Get input from user
 
 if not os.path.exists('/root/test'):         # If folder doesn't exist, create it
      os.mkdir('/root/test')

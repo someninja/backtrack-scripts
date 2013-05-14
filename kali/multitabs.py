@@ -6,21 +6,22 @@
 #
 ##############################################################################################################
 
-runlocally()
 os.system('clear')
 banner()
 
-print colorblue.format("Open multiple tabs in Firefox with:")
+runlocally()
+
+print colorblue.format('Open multiple tabs in Firefox with:')
 print
-print "1.  List containing IPs and/or URLs."
-print "2.  Directories from a domain's robot.txt."
-print "3.  Previous menu"
+print '1.  List containing IPs and/or URLs.'
+print '2.  Directories from a domain\'s robot.txt.'
+print '3.  Previous menu'
 print
-choice = raw_input("Choice: ")
+choice = raw_input('Choice: ')
 
 if choice == "1":
      print
-     location = raw_input("Enter the location of your list: ")
+     location = raw_input('Enter the location of your list: ')
 
      if os.path.exists(location):
           f = open(location,'r')                                 # Setup a read connection directory
@@ -29,7 +30,7 @@ if choice == "1":
           filedata = filedata.split('\n')                        # Turn into a list
           filedata = [x for x in filedata if not x == ""]        # Ignore blank lines
 
-          port = raw_input("Port: ")
+          port = raw_input('Port: ')
 
           if port.isdigit():
                if int(port) in range(1,65535):
@@ -60,9 +61,9 @@ if choice == "2":
      print
      print line
      print
-     print "Usage: target.com or target-IP"
+     print 'Usage: target.com or target-IP'
      print
-     domain = raw_input("Domain: ")
+     domain = raw_input('Domain: ')
 
      # Check for no answer
      if domain == "":
@@ -73,9 +74,9 @@ if choice == "2":
      robots = robots.split('\n')
      
      for i in robots:
-          if "Disallow" in i:
+          if 'Disallow' in i:
                j = i.split(' ')
-               f = open(os.path.expanduser("~")+'/'+domain+'-robots.txt','a')
+               f = open(os.path.expanduser('~')+'/'+domain+'-robots.txt','a')
                f.write(j[1]+'\n')
                f.close()
                webbrowser.open('http://'+domain+j[1])
@@ -84,9 +85,9 @@ if choice == "2":
      print
      print line
      print
-     print "***Scan complete.***"
+     print '***Scan complete.***'
      print
-     print "The new report is located at /"+user+"/"+domain+"-robots.txt"
+     print 'The new report is located at /'+user+'/'+domain+'-robots.txt'
      print
      print
      sys.exit(0)
@@ -95,3 +96,4 @@ if choice == "3":
      main()
 else: 
      error()
+     
