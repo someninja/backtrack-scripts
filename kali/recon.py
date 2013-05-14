@@ -52,23 +52,49 @@ if choice == "1":
           total = 28
 
           print 'goofile                   (1/'+str(total)+')'
-          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xls > tmp')
-          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xlsx >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f doc > tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f docx >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f pdf >> tmp')          
           os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f ppt >> tmp')
           os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f pptx >> tmp')
-          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f doc >> tmp')
-          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f docx >> tmp')
-          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f pdf >> tmp')
-          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f txt >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f txt >> tmp')          
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xls >> tmp')
+          os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f xlsx >> tmp')
 
-#          grep domain tmp | grep -v 'Searching in' | sort > tmp2
+          f_doc = open('doc.txt','a')
+          f_pdf = open('pdf.txt','a')
+          f_ppt = open('ppt.txt','a')          
+          f_txt = open('txt.txt','a')
+          f_xls = open('xls.txt','a')          
+          
+          f = open('tmp','r')                                # Setup a read connection to file
+          filedata = f.read()                                # Read the file
+          f.close()                                          # Close the connection
+          filedata = filedata.split('\n')                    # Turn into a list
 
-#          grep '.xls' tmp2 > xls.txt
-#          grep '.ppt' tmp2 > ppt.txt
-#          grep '.doc' tmp2 | egrep -v '(.pdf|.ppt|.xls)' > doc.txt
-#          grep '.pdf' tmp2 > pdf.txt
-#          grep '.txt' tmp2 > txt.txt
+          for i in filedata:
+               if domain in i:
+                    if not 'Searching in' in i:
+                         if '.doc' in i:
+                              if not '.pdf, .ppt, .xls' in i:
+                                   f_doc.write(i.lower()+'\n')
+                         elif '.pdf' in i:
+                              f_pdf.write(i.lower()+'\n')
+                         elif '.ppt' in i:
+                              f_ppt.write(i.lower()+'\n')                              
+                         elif '.txt' in i:
+                              f_txt.write(i.lower()+'\n')                              
+                         elif '.xls' in i:
+                              f_xls.write(i.lower()+'\n')                              
 
+          # Files need sorted.
+          
+          f_doc.close()
+          f_pdf.close()
+          f_ppt.close()
+          f_txt.close()                    
+          f_xls.close()
+          
           ##############################################################
 
 #          runlocally()

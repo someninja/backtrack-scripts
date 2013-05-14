@@ -39,27 +39,26 @@ else:
 #dte2=$(date2stamp $2)
 #diffSec=$((dte2-dte1))
 
-#if ((diffSec < 0)); then
+#if ((diffSec < 0)):
 #     abs=-1
-#else
+#else:
 #     abs=1
-#fi
 
 #print $((diffSec/sec*abs))
 
 #monthconv()
-     #if [ "$1" == "Jan" ]; then monthnum="01"; fi
-     #if [ "$1" == "Feb" ]; then monthnum="02"; fi
-     #if [ "$1" == "Mar" ]; then monthnum="03"; fi
-     #if [ "$1" == "Apr" ]; then monthnum="04"; fi
-     #if [ "$1" == "May" ]; then monthnum="05"; fi
-     #if [ "$1" == "Jun" ]; then monthnum="06"; fi
-     #if [ "$1" == "Jul" ]; then monthnum="07"; fi
-     #if [ "$1" == "Aug" ]; then monthnum="08"; fi
-     #if [ "$1" == "Sep" ]; then monthnum="09"; fi
-     #if [ "$1" == "Oct" ]; then monthnum="10"; fi
-     #if [ "$1" == "Nov" ]; then monthnum="11"; fi
-     #if [ "$1" == "Dec" ]; then monthnum="12"; fi
+     #if [ "$1" == "Jan" ]; then monthnum="01"
+     #if [ "$1" == "Feb" ]; then monthnum="02"
+     #if [ "$1" == "Mar" ]; then monthnum="03"
+     #if [ "$1" == "Apr" ]; then monthnum="04"
+     #if [ "$1" == "May" ]; then monthnum="05"
+     #if [ "$1" == "Jun" ]; then monthnum="06"
+     #if [ "$1" == "Jul" ]; then monthnum="07"
+     #if [ "$1" == "Aug" ]; then monthnum="08"
+     #if [ "$1" == "Sep" ]; then monthnum="09"
+     #if [ "$1" == "Oct" ]; then monthnum="10"
+     #if [ "$1" == "Nov" ]; then monthnum="11"
+     #if [ "$1" == "Dec" ]; then monthnum="12"
 
 ## Number of hosts
 #number=$(wc -l $location | cut -d ' ' -f1)
@@ -71,7 +70,7 @@ else:
 
 #print > tmp-report
 #print >> tmp-report
-#print "SSL Report" >> tmp-report
+#print 'SSL Report' >> tmp-report
 #reportdate=$(date +%A" - "%B" "%d", "%Y)
 #print $reportdate >> tmp-report
 #print sslscan $(sslscan | grep 'Version' | awk '{print $2}') >> tmp-report
@@ -90,66 +89,59 @@ else:
 #     print -n "$line  [$N/$number]  "; sleep 40
 #     print >> ssl_$line.txt
 
-#     if [ -s ssltmp_$line ]; then
+#     if [ -s ssltmp_$line ]:
 #          ERRORCHECK=$(cat ssltmp_$line | grep 'ERROR:')
-#          if [[ ! $ERRORCHECK ]]; then
+#          if [[ ! $ERRORCHECK ]]:
 
 #               ISSUER=$(cat ssltmp_$line | grep 'Issuer:')
-#               if [[ $ISSUER ]]; then
+#               if [[ $ISSUER ]]:
 #                    cat ssltmp_$line | grep 'Issuer:' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               else
-#                    print "Issuer information not available for this certificate. Look into this!" >> ssl_$line.txt
+#               else:
+#                    print 'Issuer information not available for this certificate. Look into this!' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               SUBJECT=$(cat ssltmp_$line | grep 'Subject:')
-#               if [[ $SUBJECT ]]; then
+#               if [[ $SUBJECT ]]:
 #                    cat ssltmp_$line | grep 'Subject:' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               else
-#                    print "Certificate subject information not available. Look into this!" >> ssl_$line.txt
+#               else:
+#                    print 'Certificate subject information not available. Look into this!' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               DNS=$(cat ssltmp_$line | grep 'DNS:')
-#               if [[ $DNS ]]; then
+#               if [[ $DNS ]]:
 #                    cat ssltmp_$line | grep 'DNS:' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               A=$(cat ssltmp_$line | grep -i 'MD5WithRSAEncryption')
-#               if [[ $A ]]; then
-#                    print [*] MD5-based Signature in TLS/SSL Server X.509 Certificate >> ssl_$line.txt
+#               if [[ $A ]]:
+#                    print '[*] MD5-based Signature in TLS/SSL Server X.509 Certificate' >> ssl_$line.txt
 #                    cat ssltmp_$line | grep -i 'MD5WithRSAEncryption' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               B=$(cat ssltmp_$line | grep 'NULL')
-#               if [[ $B ]]; then
-#                    print [*] NULL Ciphers >> ssl_$line.txt
+#               if [[ $B ]]:
+#                    print '[*] NULL Ciphers' >> ssl_$line.txt
 #                    cat ssltmp_$line | grep 'NULL' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               C=$(cat ssltmp_$line | grep 'SSLv2')
-#               if [[ $C ]]; then
-#                    print [*] TLS/SSL Server Supports SSLv2 >> ssl_$line.txt
+#               if [[ $C ]]"
+#                    print '[*] TLS/SSL Server Supports SSLv2' >> ssl_$line.txt
 #                    cat ssltmp_$line | grep 'SSLv2' > ssltmp2_$line
 #                    sed '/^    SSL/d' ssltmp2_$line >> ssl_$line.txt
 #                    print >> ssl_$line.txt
 #                    rm ssltmp2_$line
-#               fi
 
 #               D=$(cat ssltmp_$line | grep ' 40 bits')
 #               D2=$(cat ssltmp_$line | grep ' 56 bits')
 
-#               if [[ $D || $D2 ]]; then
-#                    print [*] TLS/SSL Server Supports Weak Cipher Algorithms >> ssl_$line.txt
+#               if [[ $D || $D2 ]]:
+#                    print '[*] TLS/SSL Server Supports Weak Cipher Algorithms' >> ssl_$line.txt
 #                    cat ssltmp_$line | grep ' 40 bits' >> ssl_$line.txt
 #                    cat ssltmp_$line | grep ' 56 bits' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               datenow=$(date +%F)
 #               # print datenow=$datenow
@@ -168,17 +160,15 @@ else:
 #               numdaysdiff=$(datediff $datenow $expdate)
 #               # print numdaysdiff=$numdaysdiff
 
-#               if (($expdatestamp < $datenowstamp)); then
+#               if (($expdatestamp < $datenowstamp)):
 #                    print [*] X.509 Server Certificate is Invalid/Expired >> ssl_$line.txt
 #                    print "    Cert Expire Date: $expdate" >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               E=$(cat ssltmp_$line | grep 'Authority Information Access:')
-#               if [[ ! $E ]]; then
-#                    print [*] Self-signed TLS/SSL Certificate >> ssl_$line.txt
+#               if [[ ! $E ]]:
+#                    print '[*] Self-signed TLS/SSL Certificate' >> ssl_$line.txt
 #                    print >> ssl_$line.txt
-#               fi
 
 #               print $line >> ssl_$line.txt
 #               print >> ssl_$line.txt
@@ -188,22 +178,21 @@ else:
 
 #               # Add current data to tmp-report
 #               cat ssl_$line.txt >> tmp-report
-#          else
+#          else:
 #               print -e "\e[1;31mCould not open a connection.\e[0m"
 #               print $ERRORCHECK >> ssl_$line.txt
 #               print >> ssl_$line.txt
 #               print $line >> ssl_$line.txt
 #               cat ssl_$line.txt >> tmp-report
-#          fi
-#     else
+#     else:
 #          print -e "\e[1;31mNo response.\e[0m"
-#          print "[*] No response." >> ssl_$line.txt
+#          print '[*] No response.' >> ssl_$line.txt
 #          print >> ssl_$line.txt
 #          print $line >> ssl_$line.txt
 
 #          # Add current data to tmp-report
 #          cat ssl_$line.txt >> tmp-report
-#     fi
+
 #done < "$location"
 
 #mv tmp-report /$user/ssl-report.txt
@@ -217,3 +206,4 @@ else:
 #printf 'The new report is located at \e[1;33m%s\e[0m\n' /$user/ssl-report.txt
 #print
 #print
+
