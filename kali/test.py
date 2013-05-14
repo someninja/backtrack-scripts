@@ -49,4 +49,3 @@ f_ppt.close()
 f_pdf.close()
 f_txt.close()
 f_doc.close()
-
