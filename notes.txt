@@ -259,3 +259,50 @@ fi
 
 ##############################
 
+Put this in viewer.html
+
+<!DOCTYPE html>
+<!-- Discover Results Viewer by Rob Dixon @304geek  -->
+<html>
+
+<frameset cols="200,70%">
+<frame src="menu.html">
+<frame name="main" src="main.html">
+
+<!-- replace the next "src" with your target URL -->
+</frameset>
+
+</html>
+--------------------------------------------------------------
+
+don't need <!DOCTYPE html>
+<!-- Discover Results Viewer by Rob Dixon @304geek  -->
+<html>
+
+<frameset cols="200,70%">
+<frame src="menu.html">
+<frame name="main" src="main.html">
+
+<!-- replace the next "src" with your target URL -->
+</frameset>
+
+</html>
+--------------------------------------------------------------
+
+<html>
+<!-- Discover Results Viewer by Rob Dixon @304geek  -->
+<frameset cols="200,70%">
+<frame src="menu.html">
+<frame name="main" src="main.html">
+</frameset>
+</html>
+--------------------------------------------------------------
+
+Rename index.html to menu.html
+
+For each <a href=" "> in menu.html, put this <a href="file.txt" target="main"></a>
+target="main"
+
+Then create a blank file and name it main.html
+
+
