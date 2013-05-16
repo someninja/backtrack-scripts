@@ -184,7 +184,7 @@ case $choice in
      fi
 
      # Number of tests
-     total=28
+     total=27
 
      echo "goofile                   (1/$total)"
      python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xls > tmp
@@ -383,7 +383,7 @@ case $choice in
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
      sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' > tmp2
-     sed 's/;; //g' tmp2 | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed "s/$domain./$domain/g" > /$user/$domain/mydnstools.txt
+     sed 's/;; //g' tmp2 | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed "s/$domain./$domain/g" > /$user/$domain/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp3
      grep 'spamcop' tmp3 | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > tmp4 > /$user/$domain/black-listed.txt
@@ -397,7 +397,7 @@ case $choice in
      echo "emailstuff.org            (23/$total)"
      wget -q http://www.emailstuff.org/spf/check/$domain -O tmp
      sed -n '/approximate/,/Response/p' tmp | sed 's/<p>//g' | sed 's/<\/p>//g' | sed 's/<i>//g' | sed 's/<\/i>//g' > tmp2
-     grep -v '<' tmp2 | grep -v '#' | sed 's/\/32//g' > /$user/$domain/emailstuff-spf.txt
+     grep -v '<' tmp2 | grep -v '#' | sed 's/\/32//g' > /$user/$domain/spf.txt
 
      echo "dnssy.com                 (24/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
@@ -416,19 +416,10 @@ case $choice in
      echo "safeweb.norton.com        (26/$total)"
      wget -q http://safeweb.norton.com/report/show?url=$domain -O tmp
      sed -n '/Threat Report/,/review of this site/p' tmp | sed "s/(what's this?)//g" | sed 's/<strong class="detailHeading">//g' | sed 's/<\/strong>//g' > tmp2
-     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/safeweb.norton.htm
+     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/threats.htm
 
      echo "robtex.com                (27/$total)"
-     wget -q http://top.robtex.com/$domain.html#records -O /$user/$domain/robtex-records.htm
-     wget -q http://top.robtex.com/$domain.html#graph -O /$user/$domain/robtex-graph.htm
-     wget -q http://top.robtex.com/$domain.html#shared -O /$user/$domain/robtex-shared.htm
-
-     echo "senderbase.org            (28/$total)"
-     wget -q http://www.senderbase.org/senderbase_queries/detaildomain?search_string=$domain -O tmp
-     sed -n '/used to send email/,/Copyright/p' tmp | grep -v 'Copyright' > tmp2
-     echo "<html>" > /$user/$domain/senderbase.org.htm
-     cat tmp2 >> /$user/$domain/senderbase.org.htm
-     echo "</html>" >> /$user/$domain/senderbase.org.htm     
+     wget -q http://top.robtex.com/$domain.html#all -O /$user/$domain/robtex-all.htm 
 
      ##############################################################
 

@@ -49,7 +49,7 @@ if choice == "1":
                os.makedirs('/'+user+'/'+domain)
 
           # Number of tests
-          total = 28
+          total = 27
 
           print 'goofile                   (1/'+str(total)+')'
           os.system('python /pentest/enumeration/google/goofile/goofile.py -d '+domain+' -f doc > tmp')
