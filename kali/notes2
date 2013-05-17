@@ -67,3 +67,11 @@ filedata = filedata.split('\n')              # Turn into a list
 execfile('recon.py')                         # Run python script
 subprocess.call('crack-wifi.sh')             # Run bash script
 
+##############################
+
+output = ""
+output = str(args.output)
+o = open(output, "w")
+sys.stdout = o
+
+

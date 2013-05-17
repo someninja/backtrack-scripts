@@ -531,6 +531,11 @@ case $choice in
      rm subdomains* tmp* z*
 
      echo
+     echo $line
+     echo
+     echo "***Scan complete.***"
+     echo
+     echo
      printf 'The supporting data folder is located at \e[1;33m%s\e[0m\n' /$user/$domain/
      echo
      read -p "Press <return> to continue."
@@ -621,7 +626,7 @@ case $choice in
 
      echo "     Sub-domains (~5 min) (5/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
-     egrep -v '(Performing|Records Found)' tmp | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
+     grep $domain tmp | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
 
      echo
      echo "Load Balancing Detector   (6/$total)"
@@ -702,7 +707,7 @@ case $choice in
      fi
 
      if [ -f /$user/$domain/subdomains.txt ]; then
-          cat /$user/$domain/subdomains.txt zdnsrecon-sub | sort -u > zsubdomains-combined
+          cat /$user/$domain/subdomains.txt zdnsrecon-sub | column -t | sort -u > zsubdomains-combined
           mv zsubdomains-combined /$user/$domain/subdomains.txt
      fi
 
@@ -713,10 +718,17 @@ case $choice in
      echo
      echo "***Scan complete.***"
      echo
-     printf 'The new report is located at \e[1;33m%s\e[0m\n' /$user/$domain/active-recon.txt
      echo
+     printf 'The supporting data folder is located at \e[1;33m%s\e[0m\n' /$user/$domain/
      echo
-     exit
+     read -p "Press <return> to continue."
+     
+     cp /opt/scripts/report/image.jpg /$user/$domain/
+     cp /opt/scripts/report/index.htm /$user/$domain/
+     cp /opt/scripts/report/main.htm /$user/$domain/
+     cp /opt/scripts/report/style.css /$user/$domain/
+     
+     firefox /$user/$domain/index.htm &
      ;;
 
      3) f_main;;
