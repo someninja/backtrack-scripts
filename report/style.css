@@ -2,8 +2,6 @@
 * {
 	margin: 0;
 	padding: 0;
-	-moz-box-sizing:    border-box;   /* Firefox 1, probably can drop this */
-	-webkit-box-sizing: border-box;   /* Safari 3-4, also probably droppable */
 	box-sizing:         border-box;   /* Everything else */
 }
 
@@ -39,8 +37,8 @@ h1 img, h2 img, h3 img, h4 img, h5 img, h6 img { margin:0; }
 /* Paragraps */
 
 p { 
-	margin: 0 0 15px 0;
-	text-align: left;
+	margin: 0 0 15px;
+	text-align: center;
 	line-height: 1.4em;
 }
 
@@ -51,7 +49,7 @@ ul, ol	{
 
 li	{
 	line-height: 1.3em;
-	margin: 0 0 15px 0;
+	margin: 0 0 15px;
 	list-style: disc;
 }
 
@@ -88,15 +86,15 @@ a:focus {
 }
 
 .navbar	{
-  padding: 0;
-	margin: 0;
+  padding: 1;
+	margin: 1;
 	position: absolute;  /* Ensures that the menu doesn’t affect other elements */
 	border-right: 1px solid #fff; 
 }
 
 .navbar li 	{
 	height: auto;
-	width: 140px;        /* Each menu item is 150px wide */
+	width: 140px;        /* Each menu item is 140px wide */
 	float: left;         /* This lines up the menu items horizontally */
 	text-align: center;  /* All text is placed in the center of the box */
 	list-style: none;    /* Removes the default styling (bullets) for the list */
@@ -130,7 +128,7 @@ li.current {
 }
 .navbar li ul li {
 	background-color: #fff;
-	width: 165px;
+	width: 142px;      /* Width of the drop-down box when the menu item is hovered over */ 
 }
 
 .navbar li ul li a 	{
