@@ -13,6 +13,8 @@
 # Martin Bos - IDS evasion techniques.
 # Ben Wood - regex kung foo
 # Numerous people on freenode IRC - #bash and #sed (e36freak)
+# Steve Copland - designed report template
+# Rob Dixon - iframe for report template
 
 ##############################################################################################################
 
@@ -2892,4 +2894,3 @@ esac
 }
 
 done
-
