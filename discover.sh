@@ -13,8 +13,8 @@
 # Martin Bos - IDS evasion techniques.
 # Ben Wood - regex kung foo
 # Numerous people on freenode IRC - #bash and #sed (e36freak)
-# Steve Copland - designed report template
-# Rob Dixon - iframe for report template
+# Steve Copland - report template design
+# Rob Dixon - report template iframe
 
 ##############################################################################################################
 
@@ -418,7 +418,7 @@ case $choice in
      echo "safeweb.norton.com        (26/$total)"
      wget -q http://safeweb.norton.com/report/show?url=$domain -O tmp
      sed -n '/Threat Report/,/review of this site/p' tmp | sed "s/(what's this?)//g" | sed 's/<strong class="detailHeading">//g' | sed 's/<\/strong>//g' > tmp2
-     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/threats.htm
+     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/threat.htm
 
      echo "robtex.com                (27/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O tmp-records.htm
@@ -615,7 +615,7 @@ case $choice in
 
      echo
      echo "dnsrecon"
-     echo "     Standard             (2/$total)"
+     echo "     DNS Records          (2/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t std > tmp
      egrep -v '(Could not|Enumerating SRV|not configured|Performing|Records Found|Resolving|TXT)' tmp > tmp2
      # Remove first 6 characters from each line
@@ -676,7 +676,7 @@ case $choice in
      fi
 
      echo >> zreport
-     echo "Standard" >> zreport
+     echo "DNS Records" >> zreport
      echo "==============================" >> zreport
      cat zdnsrecon >> zreport
      echo >> zreport
