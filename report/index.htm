@@ -3,10 +3,9 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title></title>
+<title>Reporting Framework</title>
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -40,8 +39,10 @@
 
 				<li><a href="#">Domain</a>
 				<ul>
+				   <li><a href="domain/loadbalancing.txt" target="main">Loadbalancing</a></li>
 				   <li><a href="domain/squatting.txt" target="main">Squatting</a></li>
 				   <li><a href="domain/subdomains.txt" target="main">Subdomains</a></li>
+				   <li><a href="domain/traceroute.txt" target="main">Traceroute</a></li>
 				   <li><a href="domain/whois-domain.txt" target="main">Whois Domain</a></li>
 				   <li><a href="domain/whois-ip.txt" target="main">Whois IP</a></li>
 				</ul>         
@@ -61,9 +62,6 @@
 				<ul>
 				   <li><a href="reports/passive-recon.txt" target="main">Passive Recon</a></li>
 				   <li><a href="reports/active-recon.txt" target="main">Active Recon</a></li>
-				   <li><a href="reports/executive-summary.pdf" target="main">Executive Summary</a></li>
-				   <li><a href="reports/tenichal.pdf" target="main">Technical</a></li>
-				   <li><a href="reports/worksheet.xlsx" target="main">WorkSheet</a></li>
 				</ul>         
 				</li>
 
@@ -86,19 +84,11 @@
 	</div>
 </div>
 
-<script>
+<center><h2>Discover Reporting Framework</h2></center>
+<p></p>
+<p><center>Easily browse results for <i>passive</i> and <i>active</i> recon against a target domain. </center></p>
 
-var defaulttext = "<h2>Discover Reporting Framework</h2><p></p><p>Easily browse to your supporting data. </p><p>Here you will find results from running both <i>passive</i> and <i>active</i> scripts against a target domain. </p>";
-
-function populateDefault(){
-	$('#content').html(defaulttext);
-}
-
-$(document).ready(populateDefault());
-
-</script>
-
-<center><img src="image.jpg" width=1000 height=600></center>
+<center><img src="image.jpg" width=980 height=600></center>
 
 </body>
 </html>

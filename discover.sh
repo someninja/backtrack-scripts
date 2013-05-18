@@ -176,17 +176,17 @@ case $choice in
           f_error
      fi
 
-     echo
-     echo $line
-     echo
-
      # If folder doesn't exist, create it
      if [ ! -d /$user/$domain ]; then
-          mkdir /$user/$domain
+          cp -R /opt/scripts/report/ /$user/$domain
      fi
 
      # Number of tests
      total=27
+
+     echo
+     echo $line
+     echo
 
      echo "goofile                   (1/$total)"
      python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xls > tmp
@@ -385,47 +385,47 @@ case $choice in
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
      sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' > tmp2
-     sed 's/;; //g' tmp2 | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed "s/$domain./$domain/g" > /$user/$domain/records.txt
+     sed 's/;; //g' tmp2 | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed "s/$domain./$domain/g" > /$user/$domain/dns/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp3
-     grep 'spamcop' tmp3 | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > tmp4 > /$user/$domain/black-listed.txt
+     grep 'spamcop' tmp3 | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > tmp4 > /$user/$domain/dns/black-listed.txt
 
      echo "intodns.com               (22/$total)"
      wget -q http://www.intodns.com/$domain -O tmp
      egrep -v '(Follow IntoDNS|Work in progress)' tmp > tmp2
      sed 's/<a href="feedback\/?KeepThis=true&amp;TB_iframe=true&amp;height=300&amp;width=240" title="intoDNS feedback" class="thickbox feedback">send feedback<\/a>//' tmp2 | sed 's/Test name/Test/g' | sed 's/Information/Results/g' > tmp3
-     sed '/Processed in/I,+14 d' tmp3 | sed '/div id="master"/I,+11 d' > /$user/$domain/checks2.htm
+     sed '/Processed in/I,+14 d' tmp3 | sed '/div id="master"/I,+11 d' > /$user/$domain/web/checks2.htm
 
      echo "emailstuff.org            (23/$total)"
      wget -q http://www.emailstuff.org/spf/check/$domain -O tmp
      sed -n '/approximate/,/Response/p' tmp | sed 's/<p>//g' | sed 's/<\/p>//g' | sed 's/<i>//g' | sed 's/<\/i>//g' > tmp2
-     grep -v '<' tmp2 | grep -v '#' | sed 's/\/32//g' > /$user/$domain/spf.txt
+     grep -v '<' tmp2 | grep -v '#' | sed 's/\/32//g' > /$user/$domain/dns/spf.txt
 
      echo "dnssy.com                 (24/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
      sed -n '/Results for/,/\/table/p' tmp > tmp2
      echo "<html>" > /$user/$domain/checks.htm
      cat tmp2 >> /$user/$domain/checks.htm
-     echo "</html>" >> /$user/$domain/checks.htm
+     echo "</html>" >> /$user/$domain/web/checks.htm
 
      echo "dnsw.info                 (25/$total)"
      curl http://dnsw.info/$domain > tmp 2>/dev/null
      sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g' | sed 's/<\/h3>//g' | sed 's/<code>/<b>/g' | sed 's/<\/code>/<\/b>/g' > tmp2
      echo "<html>" > /$user/$domain/background.htm
      cat tmp2 >> /$user/$domain/background.htm
-     echo "</html>" >> /$user/$domain/background.htm
+     echo "</html>" >> /$user/$domain/web/background.htm
 
      echo "safeweb.norton.com        (26/$total)"
      wget -q http://safeweb.norton.com/report/show?url=$domain -O tmp
      sed -n '/Threat Report/,/review of this site/p' tmp | sed "s/(what's this?)//g" | sed 's/<strong class="detailHeading">//g' | sed 's/<\/strong>//g' > tmp2
-     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/threat.htm
+     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/web/threat.htm
 
      echo "robtex.com                (27/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O tmp-records.htm
      wget -q http://top.robtex.com/$domain.html#shared -O tmp-shared.htm
 
      x=$(ls -l | grep 'tmp-' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
-     mv $x /$user/$domain/robtex.htm
+     mv $x /$user/$domain/web/robtex.htm
 
      ##############################################################
 
@@ -531,9 +531,11 @@ case $choice in
      echo $line >> zreport
      cat whois-ip.txt >> zreport
 
-     mv zreport /$user/$domain/passive-recon.txt
-     mv doc.txt emails.txt names.txt pdf.txt ppt.txt squatting.txt subdomains.txt txt.txt whois* xls.txt /$user/$domain/ 2>/dev/null
-
+     mv doc.txt emails.txt names.txt /$user/$domain/contacts/ 2>/dev/null
+     mv squatting.txt subdomains.txt whois* /$user/$domain/domain/ 2>/dev/null
+     mv doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/files/ 2>/dev/null
+     mv zreport /$user/$domain/reports/passive-recon.txt
+     
      rm subdomains* tmp* z*
 
      echo
@@ -596,12 +598,17 @@ case $choice in
           f_error
      fi
 
-     echo
-     echo $line
-     echo
+     # If folder doesn't exist, create it
+     if [ ! -d /$user/$domain ]; then
+          cp -R /opt/scripts/report/ /$user/$domain
+     fi
 
      # Number of tests
      total=9
+
+     echo
+     echo $line
+     echo
 
      echo "Nmap"
      echo "     Email                (1/$total)"
@@ -643,7 +650,9 @@ case $choice in
      # Remove leading whitespace from each line
      sed 's/^[ \t]*//' tmp3 > tmp4
      # Remove blank lines from end of file
-     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > zlbd
+     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > tmp5
+     # Clean up
+     cat -s tmp5 > zlbd
 
      echo
      echo "Traceroute"
@@ -700,24 +709,21 @@ case $choice in
      echo "==============================" >> zreport
      cat ztraceroute >> zreport
 
-     # If folder doesn't exist, create it
-     if [ ! -d /$user/$domain ]; then
-          mkdir /$user/$domain
+     mv zlbd /$user/$domain/domain/loadbalancing.txt
+     mv zreport /$user/$domain/reports/active-recon.txt
+     mv ztraceroute /$user/$domain/domain/traceroute.txt
+
+     if [ -f /$user/$domain/contacts/emails.txt ]; then
+          cat /$user/$domain/contacts/emails.txt zemail | sort -u > zemails-combined
+          mv zemails-combined /$user/$domain/contacts/emails.txt
      fi
 
-     mv zreport /$user/$domain/active-recon.txt
-
-     if [ -f /$user/$domain/emails.txt ]; then
-          cat /$user/$domain/emails.txt zemail | sort -u > zemails-combined
-          mv zemails-combined /$user/$domain/emails.txt
+     if [ -f /$user/$domain/domain/subdomains.txt ]; then
+          cat /$user/$domain/domain/subdomains.txt zdnsrecon-sub | column -t | sort -u > zsubdomains-combined
+          mv zsubdomains-combined /$user/$domain/domain/subdomains.txt
      fi
 
-     if [ -f /$user/$domain/subdomains.txt ]; then
-          cat /$user/$domain/subdomains.txt zdnsrecon-sub | column -t | sort -u > zsubdomains-combined
-          mv zsubdomains-combined /$user/$domain/subdomains.txt
-     fi
-
-     rm tmp* z*
+     rm tmp* rm z*
 
      echo
      echo $line
@@ -728,11 +734,6 @@ case $choice in
      printf 'The supporting data folder is located at \e[1;33m%s\e[0m\n' /$user/$domain/
      echo
      read -p "Press <return> to continue."
-     
-     cp /opt/scripts/report/image.jpg /$user/$domain/
-     cp /opt/scripts/report/index.htm /$user/$domain/
-     cp /opt/scripts/report/main.htm /$user/$domain/
-     cp /opt/scripts/report/style.css /$user/$domain/
      
      firefox /$user/$domain/index.htm &
      ;;
