@@ -419,10 +419,10 @@ case $choice in
      egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/web/threat.htm
 
      echo "robtex.com                (27/$total)"
-     wget -q http://top.robtex.com/$domain.html#records -O tmp-records.htm
-     wget -q http://top.robtex.com/$domain.html#shared -O tmp-shared.htm
+     wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
+     wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 
-     x=$(ls -l | grep 'tmp-' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
+     x=$(ls -l | grep 'robtex' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
      mv $x /$user/$domain/web/robtex.htm
 
      ##############################################################
