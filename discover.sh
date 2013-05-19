@@ -297,7 +297,7 @@ case $choice in
      # Change to lower case
      cat tmp6 | tr '[A-Z]' '[a-z]' > tmp7
      # Clean up
-     egrep -v '(account|administrator|administrative|advanced|advertising|american|analyst|antivirus|apple seems|application|applications|article|asian|attorney|australia|automation|automotive|banking|bbc|berlin|beta theta|between|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|department|description|designer|developer|developing|development|devine|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|hurricane|idc|in the news|index of|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|negative|network|networking|new user|newspaper|next page|nitrogen|nyc|obtaining|occupied|office|online|outbreak|owners|partner|pathology|people|philippines|photo|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|sales|satellite|save the date|school|scheduling|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|website|welcome|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
+     egrep -v '(account|administrator|administrative|advanced|advertising|american|analyst|antivirus|apple seems|application|applications|article|asian|attorney|australia|automation|automotive|banking|bbc|berlin|beta theta|between|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|department|description|designer|developer|developing|development|devine|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|hurricane|idc|in the news|index of|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|negative|network|networking|new user|newspaper|next page|nitrogen|nyc|obtaining|occupied|office|online|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|sales|satellite|save the date|school|scheduling|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|website|welcome|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
      # Remove leading and trailing whitespace from each line
      sed 's/^[ \t]*//;s/[ \t]*$//' tmp8 > tmp9
      # Remove lines that contain a single word
@@ -384,11 +384,10 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' > tmp2
-     sed 's/;; //g' tmp2 | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed "s/$domain./$domain/g" > /$user/$domain/dns/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sort -k4 > /$user/$domain/dns/records.txt
 
-     wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp3
-     grep 'spamcop' tmp3 | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > tmp4 > /$user/$domain/dns/black-listed.txt
+     wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
+     grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/dns/black-listed.txt
 
      echo "intodns.com               (22/$total)"
      wget -q http://www.intodns.com/$domain -O tmp
@@ -398,21 +397,20 @@ case $choice in
 
      echo "emailstuff.org            (23/$total)"
      wget -q http://www.emailstuff.org/spf/check/$domain -O tmp
-     sed -n '/approximate/,/Response/p' tmp | sed 's/<p>//g' | sed 's/<\/p>//g' | sed 's/<i>//g' | sed 's/<\/i>//g' > tmp2
-     grep -v '<' tmp2 | grep -v '#' | sed 's/\/32//g' > /$user/$domain/dns/spf.txt
+     sed -n '/approximate/,/Response/p' tmp | sed 's/<p>//g' | sed 's/<\/p>//g' | sed 's/<i>//g' | sed 's/<\/i>//g' | grep -v '<' | grep -v '#' | sed 's/\/32//g' > /$user/$domain/dns/spf.txt
 
      echo "dnssy.com                 (24/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
      sed -n '/Results for/,/\/table/p' tmp > tmp2
-     echo "<html>" > /$user/$domain/checks.htm
-     cat tmp2 >> /$user/$domain/checks.htm
+     echo "<html>" > /$user/$domain/web/checks.htm
+     cat tmp2 >> /$user/$domain/web/checks.htm
      echo "</html>" >> /$user/$domain/web/checks.htm
 
      echo "dnsw.info                 (25/$total)"
      curl http://dnsw.info/$domain > tmp 2>/dev/null
      sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g' | sed 's/<\/h3>//g' | sed 's/<code>/<b>/g' | sed 's/<\/code>/<\/b>/g' > tmp2
-     echo "<html>" > /$user/$domain/background.htm
-     cat tmp2 >> /$user/$domain/background.htm
+     echo "<html>" > /$user/$domain/web/background.htm
+     cat tmp2 >> /$user/$domain/web/background.htm
      echo "</html>" >> /$user/$domain/web/background.htm
 
      echo "safeweb.norton.com        (26/$total)"
@@ -440,15 +438,6 @@ case $choice in
 
      echo > tmp
 
-     if [ -f names.txt ]; then
-          namecount=$(wc -l names.txt | cut -d ' ' -f1)
-          echo "Names       $namecount" >> zreport
-          echo "Names ($namecount)" >> tmp
-          echo $line >> tmp
-          cat names.txt >> tmp
-          echo >> tmp
-     fi
-
      if [ -f emails.txt ]; then
           emailcount=$(wc -l emails.txt | cut -d ' ' -f1)
           echo "Emails      $emailcount" >> zreport
@@ -458,12 +447,12 @@ case $choice in
           echo >> tmp
      fi
 
-     if [ -f subdomains.txt ]; then
-          urlcount=$(wc -l subdomains.txt | cut -d ' ' -f1)
-          echo "Subdomains  $urlcount" >> zreport
-          echo "Subdomains ($urlcount)" >> tmp
+     if [ -f names.txt ]; then
+          namecount=$(wc -l names.txt | cut -d ' ' -f1)
+          echo "Names       $namecount" >> zreport
+          echo "Names ($namecount)" >> tmp
           echo $line >> tmp
-          cat subdomains.txt >> tmp
+          cat names.txt >> tmp
           echo >> tmp
      fi
 
@@ -476,30 +465,21 @@ case $choice in
           echo >> tmp
      fi
 
+     if [ -f subdomains.txt ]; then
+          urlcount=$(wc -l subdomains.txt | cut -d ' ' -f1)
+          echo "Subdomains  $urlcount" >> zreport
+          echo "Subdomains ($urlcount)" >> tmp
+          echo $line >> tmp
+          cat subdomains.txt >> tmp
+          echo >> tmp
+     fi
+
      if [ -f xls.txt ]; then
           xlscount=$(wc -l xls.txt | cut -d ' ' -f1)
           echo "Excel       $xlscount" >> zreport
           echo "Excel Files ($xlscount)" >> tmp
           echo $line >> tmp
           cat xls.txt >> tmp
-          echo >> tmp
-     fi
-
-     if [ -f ppt.txt ]; then
-          pptcount=$(wc -l ppt.txt | cut -d ' ' -f1)
-          echo "PowerPoint  $pptcount" >> zreport
-          echo "PowerPoint Files ($pptcount)" >> tmp
-          echo $line >> tmp
-          cat ppt.txt >> tmp
-          echo >> tmp
-     fi
-
-     if [ -f doc.txt ]; then
-          doccount=$(wc -l doc.txt | cut -d ' ' -f1)
-          echo "Word        $doccount" >> zreport
-          echo "Word Files ($doccount)" >> tmp
-          echo $line >> tmp
-          cat doc.txt >> tmp
           echo >> tmp
      fi
 
@@ -512,12 +492,30 @@ case $choice in
           echo >> tmp
      fi
 
+     if [ -f ppt.txt ]; then
+          pptcount=$(wc -l ppt.txt | cut -d ' ' -f1)
+          echo "PowerPoint  $pptcount" >> zreport
+          echo "PowerPoint Files ($pptcount)" >> tmp
+          echo $line >> tmp
+          cat ppt.txt >> tmp
+          echo >> tmp
+     fi
+
      if [ -f txt.txt ]; then
           txtcount=$(wc -l txt.txt | cut -d ' ' -f1)
           echo "Text        $txtcount" >> zreport
           echo "Text Files ($txtcount)" >> tmp
           echo $line >> tmp
           cat txt.txt >> tmp
+          echo >> tmp
+     fi
+
+     if [ -f doc.txt ]; then
+          doccount=$(wc -l doc.txt | cut -d ' ' -f1)
+          echo "Word        $doccount" >> zreport
+          echo "Word Files ($doccount)" >> tmp
+          echo $line >> tmp
+          cat doc.txt >> tmp
           echo >> tmp
      fi
 
@@ -531,7 +529,7 @@ case $choice in
      echo $line >> zreport
      cat whois-ip.txt >> zreport
 
-     mv doc.txt emails.txt names.txt /$user/$domain/contacts/ 2>/dev/null
+     mv emails.txt names.txt /$user/$domain/contacts/ 2>/dev/null
      mv squatting.txt subdomains.txt whois* /$user/$domain/domain/ 2>/dev/null
      mv doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/files/ 2>/dev/null
      mv zreport /$user/$domain/reports/passive-recon.txt
@@ -629,20 +627,20 @@ case $choice in
      sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > zdnsrecon
      grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13}' >> zdnsrecon
 
-     echo "     DNSSEC Zone Walk     (3/$total)"
+     echo "     DNSSEC               (3/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t zonewalk > tmp
-     egrep -v '(Performing|Getting SOA|records found)' tmp | sed 's/will be used//g' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' > zdnsrecon-walk
+     egrep -v '(Performing|Getting SOA|records found)' tmp | sed 's/will be used//g' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' > zdnssec
 
      echo "     Zone Transfer        (4/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t axfr > tmp
-     egrep -v '(Checking for|filtered|Removing any|TCP Open|Testing NS)' tmp | sed 's/Zone Transfer Failed!//g' |  sed 's/^....//' | sed /^$/d > zdnsrecon-zonetransfer
+     egrep -v '(Checking for|filtered|Removing any|TCP Open|Testing NS)' tmp | sed 's/Zone Transfer Failed!//g' |  sed 's/^....//' | sed /^$/d > zonetransfer
 
      echo "     Sub-domains (~5 min) (5/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
      grep $domain tmp | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
 
      echo
-     echo "Load Balancing Detector   (6/$total)"
+     echo "Loadbalancing             (6/$total)"
      /pentest/enumeration/web/lbd/lbd.sh $domain > tmp 2>/dev/null
      egrep -v '(5.0_Pub|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
      # Remove leading whitespace from file
@@ -652,7 +650,7 @@ case $choice in
      # Remove blank lines from end of file
      awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > tmp5
      # Clean up
-     cat -s tmp5 > zlbd
+     cat -s tmp5 > zloadbalancing
 
      echo
      echo "Traceroute"
@@ -689,29 +687,31 @@ case $choice in
      echo "==============================" >> zreport
      cat zdnsrecon >> zreport
      echo >> zreport
-     echo "DNSSEC Zone Walk" >> zreport
+     echo "DNSSEC" >> zreport
      echo "==============================" >> zreport
-     cat zdnsrecon-walk >> zreport
+     cat zdnssec >> zreport
      echo >> zreport
      echo "Zone Transfer" >> zreport
      echo "==============================" >> zreport
-     cat zdnsrecon-zonetransfer >> zreport
+     cat zonetransfer >> zreport
      echo >> zreport
      echo "Sub Domains" >> zreport
      echo "==============================" >> zreport
      cat zdnsrecon-sub >> zreport
      echo >> zreport
-     echo "Load Balancing" >> zreport
+     echo "Loadbalancing" >> zreport
      echo "==============================" >> zreport
-     cat zlbd >> zreport
+     cat zloadbalancing >> zreport
      echo >> zreport
      echo "Traceroute" >> zreport
      echo "==============================" >> zreport
      cat ztraceroute >> zreport
 
-     mv zlbd /$user/$domain/domain/loadbalancing.txt
+     mv zdnssec /$user/$domain/dns/dnssec.txt
+     mv zloadbalancing /$user/$domain/domain/loadbalancing.txt
      mv zreport /$user/$domain/reports/active-recon.txt
      mv ztraceroute /$user/$domain/domain/traceroute.txt
+     mv zonetransfer /$user/$domain/dns/zonetransfer.txt
 
      if [ -f /$user/$domain/contacts/emails.txt ]; then
           cat /$user/$domain/contacts/emails.txt zemail | sort -u > zemails-combined
@@ -723,7 +723,7 @@ case $choice in
           mv zsubdomains-combined /$user/$domain/domain/subdomains.txt
      fi
 
-     rm tmp* rm z*
+     rm tmp* z*
 
      echo
      echo $line

@@ -70,8 +70,6 @@ git clone https://github.com/brav0hax/easy-creds.git /pentest/sniffers/easy-cred
 
 echo -e "\e[1;34mUpdating exploit-db.\e[0m" ; cd /pentest/exploits/exploitdb ; svn up ; echo ;
 
-echo -e "\e[1;34mUpdating Fast-Track.\e[0m" ; cd /pentest/exploits/fasttrack ; svn up ; echo ;
-
 echo -e "\e[1;34mUpdating Fern WiFi Cracker.\e[0m" ; cd /pentest/wireless/fern-wifi-cracker ; svn up ; echo ;
 
 if [ -d /pentest/web/fimap/.svn ]; then echo -e "\e[1;34mUpdating Fimap.\e[0m" ; cd /pentest/web/fimap/ ; svn up ; echo ;

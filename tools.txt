@@ -35,7 +35,6 @@ Enumeration
 
 Exploits
      exploit-db
-     Fast-Track
      JBoss Autopwn
      Metasploit
      netgear-telnetenable
