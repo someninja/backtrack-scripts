@@ -641,6 +641,12 @@ case $choice in
 
      echo "fierce                    (6/$total)"
      /pentest/enumeration/dns/fierce/fierce.pl -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp
+     echo "Subnets Hosts" > tmp2
+     sed -n '/Subnets found/,$p' tmp | egrep -v '(Fierce|Found|nice day|Subnets)' > tmp3
+
+     # Remove leading whitespace from each line, remove blank lines, clean up
+     sed 's/^[ \t]*//' tmp3 | sed '/^$/d' | sed 's/-255/\/24/g' | sed 's/://g' | sed 's/hostnames found.//g' >> tmp2
+     cat tmp2 | column -t > zsubnets
 
      echo
      echo "Loadbalancing             (7/$total)"
@@ -702,6 +708,10 @@ case $choice in
      echo "==============================" >> zreport
      cat zdnsrecon-sub >> zreport
      echo >> zreport
+     echo "Subnets" >> zreport
+     echo "==============================" >> zreport
+     cat zsubnets >> zreport
+     echo >> zreport
      echo "Loadbalancing" >> zreport
      echo "==============================" >> zreport
      cat zloadbalancing >> zreport
@@ -713,6 +723,7 @@ case $choice in
      mv zdnssec /$user/$domain/dns/dnssec.txt
      mv zloadbalancing /$user/$domain/domain/loadbalancing.txt
      mv zreport /$user/$domain/reports/active-recon.txt
+     mv zsubnets /$user/$domain/dns/subnets.txt
      mv ztraceroute /$user/$domain/domain/traceroute.txt
      mv zonetransfer /$user/$domain/dns/zonetransfer.txt
 
