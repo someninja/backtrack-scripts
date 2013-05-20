@@ -593,6 +593,8 @@ else
      echo
 fi
 
+cp /opt/scripts/alias /root/.bash_aliases ; source /root/.bash_aliases
+
 echo
 echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/
 echo -e "\e[1;31m[*] IMPORTANT NOTE about Metasploit:\e[0m"

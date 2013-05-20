@@ -2885,7 +2885,8 @@ echo -e "\e[1;34mMISC\e[0m"
 echo "10. Crack WiFi"
 echo "11. Reinstall nmap"
 echo "12. Start a Metasploit listener"
-echo "13. Exit"
+echo "13. Update BackTrack"
+echo "14. Exit"
 echo
 echo -n "Choice: "
 read choice
@@ -2903,7 +2904,8 @@ case $choice in
      10) ./crack-wifi.sh;;
      11) f_reinstall_nmap;;
      12) f_listener;;
-     13) clear && exit;;
+     13) ./update.sh && exit;;
+     14) clear && exit;;
      99) f_updates;;
      *) f_error;;
 esac
