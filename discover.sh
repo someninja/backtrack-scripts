@@ -602,7 +602,7 @@ case $choice in
      fi
 
      # Number of tests
-     total=9
+     total=10
 
      echo
      echo $line
@@ -639,8 +639,11 @@ case $choice in
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
      grep $domain tmp | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
 
+     echo "fierce                    (6/$total)"
+     /pentest/enumeration/dns/fierce/fierce.pl -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp
+
      echo
-     echo "Loadbalancing             (6/$total)"
+     echo "Loadbalancing             (7/$total)"
      /pentest/enumeration/web/lbd/lbd.sh $domain > tmp 2>/dev/null
      egrep -v '(5.0_Pub|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
      # Remove leading whitespace from file
@@ -654,16 +657,16 @@ case $choice in
 
      echo
      echo "Traceroute"
-     echo "     UDP                  (7/$total)"
+     echo "     UDP                  (8/$total)"
      echo "UDP" > tmp
      traceroute $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      echo >> tmp
      echo "ICMP ECHO" >> tmp
-     echo "     ICMP ECHO            (8/$total)"
+     echo "     ICMP ECHO            (9/$total)"
      traceroute -I $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      echo >> tmp
      echo "TCP SYN" >> tmp
-     echo "     TCP SYN              (9/$total)"
+     echo "     TCP SYN              (10/$total)"
      traceroute -T $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      grep -v 'traceroute' tmp > tmp2
      # Remove blank lines from end of file
@@ -723,7 +726,7 @@ case $choice in
           mv zsubdomains-combined /$user/$domain/domain/subdomains.txt
      fi
 
-     rm tmp* z*
+     rm robtex* tmp* z*
 
      echo
      echo $line
@@ -736,6 +739,7 @@ case $choice in
      read -p "Press <return> to continue."
      
      firefox /$user/$domain/index.htm &
+     exit
      ;;
 
      3) f_main;;
