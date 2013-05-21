@@ -18,7 +18,6 @@ apt-get install xdotool
 echo
 echo -e "\e[1;34mUpdating .bashrc.\e[0m"
 grep -v "export PATH=\$PATH:/etc/alternatives/gem-bin" /root/.bashrc > /root/tmp
-echo "export PATH=\$PATH:/etc/alternatives/gem-bin:root/nmap-svn/" >> /root/tmp
 mv /root/tmp /root/.bashrc
 
 echo
