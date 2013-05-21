@@ -92,7 +92,7 @@ Web
      sslstrip
      w3af
      WPScan
-	 Uniscan 
+     Uniscan 
 
 Windows Binaries
 
