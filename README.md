@@ -2,15 +2,15 @@ Backtrack Scripts
 ===================
 Automates various tools in BackTrack to make your life easier as a pentester.
 
-If you want to update the scripts and the tools you can either run the update.sh file or update backtrack from the discover.sh tool in the misc section
-
-Download & Install
+Install & update
 ===================
 git clone git://github.com/leebaird/backtrack-scripts.git /opt/scripts/
 
 All scripts must be ran from this location.
 
 Run setup.sh
+
+Update BackTrack by using update.sh or the main menu from discover.sh.
 
 Contributing
 ===================
