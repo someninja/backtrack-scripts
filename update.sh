@@ -512,8 +512,8 @@ else
      echo
 fi
 
-echo -e "\e[1;34mUpdating Subterfuge\e[0m"
-	cd /usr/share/subterfuge; svn cleanup; svn update; echo 
+echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
+cd /usr/share/subterfuge ; svn cleanup ; svn up ; echo 
 
 if [ -d /pentest/forensics/testdisk/.git ]; then
      echo -e "\e[1;34mUpdating testdisk.\e[0m"
@@ -527,12 +527,12 @@ else
 fi
 
 if [ -d /pentest/web/uniscan/.git ]; then 
-	echo -e "\e[1;32mUpdating Uniscan\e[0m"
+	echo -e "\e[1;32mUpdating Uniscan.\e[0m"
 	cd /pentest/web/uniscan 
 	git pull
 	echo
 else 
-	echo -e "\e[1;33mInstalling Uniscan\e[0m"
+	echo -e "\e[1;33mInstalling Uniscan.\e[0m"
 	rm -rf /pentest/web/uniscan
 	git clone http://git.code.sf.net/p/uniscan/code  /pentest/web/uniscan
 	echo 
