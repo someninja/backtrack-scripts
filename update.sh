@@ -321,10 +321,9 @@ else
 fi
 
 if [ -d /opt/nmap-svn/.svn ]; then
-	echo -e "\e[1;34mUpdating Nmap\e[0m"
+	echo -e "\e[1;34mUpdating Nmap.\e[0m"
 	cd /opt/nmap-svn/
-	svn cleanup
-	svn update
+	svn cleanup ; svn upd
 	cp /opt/nmap-svn/nmap /usr/local/bin/
 	cp /opt/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/
 	cp /opt/nmap-svn/nmap-os-db /usr/local/share/nmap/
@@ -337,7 +336,6 @@ if [ -d /opt/nmap-svn/.svn ]; then
 	cp -r /opt/nmap-svn/nselib/ /usr/local/share/nmap/
 	cp -r /opt/nmap-svn/scripts/ /usr/local/share/nmap/ 
 else
-	echo -e "\e[1;33mRemoving nmap files and folders\e[0m"
 	rm -rf /root/.zenmap/
 	rm -rf /root/nmap-svn/
 	rm -rf /opt/nmap-svn/
@@ -358,13 +356,11 @@ else
 
 	apt-get remove -y nmap
 	echo
-	echo -e "\e[1;33mInstalling nmap from svn\e[0m"
+	echo -e "\e[1;33mInstalling nmap from svn.\e[0m"
 	svn co https://svn.nmap.org/nmap/ /opt/nmap-svn/
 	cd /opt/nmap-svn/
 	./configure && make && make install && make clean
 	echo
-	echo -e "\e[1;32mUpdating locate db\e[0m"
-	updatedb
 fi
 
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo
@@ -626,10 +622,9 @@ fi
 cp /opt/scripts/alias /root/.bash_aliases ; source /root/.bash_aliases
 
 echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/
+echo
 echo -e "\e[1;31mIMPORTANT NOTES\e[0m"
-echo
 echo "[*] If you discover you cannot run msfconsole after updating, please see notes.txt for the fix."
-echo
 echo "[*] The new repo for BackTrack Scripts is now located at https://github.com/leebaird/backtrack-scripts."
 echo
 echo
