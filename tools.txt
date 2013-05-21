@@ -91,7 +91,8 @@ Web
      Nikto
      sslstrip
      w3af
-     WPScan 
+     WPScan
+     Uniscan 
 
 Windows Binaries
 
