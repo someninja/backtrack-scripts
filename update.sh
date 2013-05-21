@@ -320,42 +320,51 @@ else
      echo
 fi
 
-echo -e "\e[1;34mUpdating Nmap.\e[0m"
-if [ -d /root/nmap-svn/.svn ]; then
-     cd /root/nmap-svn/ ; svn up
-     echo
-else 
-     mkdir /root/nmap-svn
-     cd /root/nmap-svn
-     svn co https://svn.nmap.org/nmap /root/nmap-svn
-     echo
-fi
+if [ -d /opt/nmap-svn/.svn ]; then
+	echo -e "\e[1;34mUpdating Nmap\e[0m"
+	cd /opt/nmap-svn/
+	svn cleanup
+	svn update
+	cp /opt/nmap-svn/nmap /usr/local/bin/
+	cp /opt/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/
+	cp /opt/nmap-svn/nmap-os-db /usr/local/share/nmap/
+	cp /opt/nmap-svn/nmap-payloads /usr/local/share/nmap/
+	cp /opt/nmap-svn/nmap-protocols /usr/local/share/nmap/
+	cp /opt/nmap-svn/nmap-rpc /usr/local/share/nmap/
+	cp /opt/nmap-svn/nmap-service-probes /usr/local/share/nmap/
+	cp /opt/nmap-svn/nmap-services /usr/local/share/nmap/
+	cp /opt/nmap-svn/nse_main.lua /usr/local/share/nmap/
+	cp -r /opt/nmap-svn/nselib/ /usr/local/share/nmap/
+	cp -r /opt/nmap-svn/scripts/ /usr/local/share/nmap/ 
+else
+	echo -e "\e[1;33mRemoving nmap files and folders\e[0m"
+	rm -rf /root/.zenmap/
+	rm -rf /root/nmap-svn/
+	rm -rf /opt/nmap-svn/
+	rm -rf /usr/local/share/ncat/
+	rm -rf /usr/local/share/nmap/
+	rm -rf /usr/local/share/zenmap/
+	rm /usr/local/bin/ncat
+	rm /usr/local/bin/ndiff
+	rm /usr/local/bin/nmap
+	rm /usr/local/bin/nmap-update
+	rm /usr/local/bin/nmapfe
+	rm /usr/local/bin/nping
+	rm /usr/local/bin/uninstall_zenmap
+	rm /usr/local/bin/xnmap
+	rm /usr/local/bin/zenmap
+	rm /usr/local/share/nmap
+	rm /usr/local/share/zenmap
 
-if [ -f /root/nmap-svn/nmap ]; then
-     cp /root/nmap-svn/nmap /usr/local/bin/
-     cp /root/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-os-db /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-payloads /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-protocols /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-rpc /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-service-probes /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-services /usr/local/share/nmap/
-     cp /root/nmap-svn/nse_main.lua /usr/local/share/nmap/
-     cp -r /root/nmap-svn/nselib/ /usr/local/share/nmap/
-     cp -r /root/nmap-svn/scripts/ /usr/local/share/nmap/
-else 
-     cd /root/nmap-svn ; ./configure ; make
-     cp /root/nmap-svn/nmap /usr/local/bin/
-     cp /root/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-os-db /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-payloads /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-protocols /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-rpc /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-service-probes /usr/local/share/nmap/
-     cp /root/nmap-svn/nmap-services /usr/local/share/nmap/
-     cp /root/nmap-svn/nse_main.lua /usr/local/share/nmap/
-     cp -r /root/nmap-svn/nselib/ /usr/local/share/nmap/
-     cp -r /root/nmap-svn/scripts/ /usr/local/share/nmap/
+	apt-get remove -y nmap
+	echo
+	echo -e "\e[1;33mInstalling nmap from svn\e[0m"
+	svn co https://svn.nmap.org/nmap/ /opt/nmap-svn/
+	cd /opt/nmap-svn/
+	./configure && make && make install && make clean
+	echo
+	echo -e "\e[1;32mUpdating locate db\e[0m"
+	updatedb
 fi
 
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo
@@ -460,9 +469,15 @@ else
 fi
 
 if [ -d /pentest/database/sqlbrute/.git ]; then
-     echo -e "\e[1;34mUpdating SQLBrute.\e[0m" ; cd /pentest/database/sqlbrute/ ; git pull ; echo
-else echo -e "\e[1;33mInstalling SQLBrute.\e[0m" ; rm -rf /pentest/database/sqlbrute/
-git clone git://github.com/GDSSecurity/SQLBrute.git /pentest/database/sqlbrute/ ; echo ; fi
+	echo -e "\e[1;34mUpdating SQLBrute.\e[0m"
+	cd /pentest/database/sqlbrute/
+	git pull ; echo
+else 
+	echo -e "\e[1;33mInstalling SQLBrute.\e[0m"
+	rm -rf /pentest/database/sqlbrute/
+	git clone git://github.com/GDSSecurity/SQLBrute.git /pentest/database/sqlbrute/
+	echo
+fi
 
 if [ -d /pentest/database/sqlmap/.git ]; then
      echo -e "\e[1;34mUpdating sqlmap.\e[0m"
@@ -506,6 +521,16 @@ else
      rm -rf /pentest/forensics/testdisk/
      git clone git://github.com/mqudsi/testdisk.git /pentest/forensics/testdisk/
      echo
+fi
+
+if [ -d /pentest/web/uniscan/.git ]; then 
+	echo -e "\e[1;32mUpdating Uniscan\e[0m"
+	cd /pentest/web/uniscan 
+	git pull
+else 
+	echo -e "\e[1;33mInstalling Uniscan\e[0m"
+	rm -rf /pentest/web/uniscan
+	git clone http://git.code.sf.net/p/uniscan/code  /pentest/web/uniscan 
 fi
 
 if [ -d /pentest/fuzzers/voip/voiper/.git ]; then

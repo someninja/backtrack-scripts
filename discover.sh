@@ -2811,50 +2811,6 @@ msfconsole -r /opt/scripts/resource/listener.rc
 
 ##############################################################################################################
 
-f_reinstall_nmap(){
-clear
-echo
-echo
-echo -e "\e[1;34mRemoving nmap files and folders.\e[0m"
-
-rm -rf /root/.zenmap/
-rm -rf /root/nmap-svn/
-rm -rf /usr/local/share/ncat/
-rm -rf /usr/local/share/nmap/
-rm -rf /usr/local/share/zenmap/
-
-rm /usr/local/bin/ncat
-rm /usr/local/bin/ndiff
-rm /usr/local/bin/nmap
-rm /usr/local/bin/nmap-update
-rm /usr/local/bin/nmapfe
-rm /usr/local/bin/nping
-rm /usr/local/bin/uninstall_zenmap
-rm /usr/local/bin/xnmap
-rm /usr/local/bin/zenmap
-
-rm /usr/local/share/nmap
-rm /usr/local/share/zenmap
-
-apt-get remove nmap
-
-echo
-echo -e "\e[1;34mInstalling nmap from svn.\e[0m"
-svn co https://svn.nmap.org/nmap/ /root/nmap-svn/
-cd /root/nmap-svn/
-./configure && make && make install
-
-echo
-echo -e "\e[1;34mUpdating locate db.\e[0m"
-updatedb
-
-echo
-echo
-read -p "Press <return> to continue."
-}
-
-##############################################################################################################
-
 # Loop forever
 while :
 do
@@ -2883,10 +2839,9 @@ echo "9.  SSL Check"
 echo
 echo -e "\e[1;34mMISC\e[0m"
 echo "10. Crack WiFi"
-echo "11. Reinstall nmap"
-echo "12. Start a Metasploit listener"
-echo "13. Update BackTrack"
-echo "14. Exit"
+echo "11. Start a Metasploit listener"
+echo "12. Update BackTrack"
+echo "13. Exit"
 echo
 echo -n "Choice: "
 read choice
@@ -2902,10 +2857,9 @@ case $choice in
      8) f_nikto;;
      9) f_sslcheck;;
      10) ./crack-wifi.sh;;
-     11) f_reinstall_nmap;;
-     12) f_listener;;
-     13) ./update.sh && exit;;
-     14) clear && exit;;
+     11) f_listener;;
+     12) ./update.sh && exit;;
+     13) clear && exit;;
      99) f_updates;;
      *) f_error;;
 esac

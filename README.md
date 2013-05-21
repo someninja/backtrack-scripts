@@ -1,6 +1,6 @@
 Backtrack Scripts
 ===================
-Automates various tools in BackTrack to make your life easier as a pentester.
+Automates various tools in BackTrack to make your life easier as a pentester. If you want to update the scripts and the tools you can either run the update.sh file or update backtrack from the discover.sh tool in the misc section
 
 Download & Install
 ===================
@@ -14,7 +14,9 @@ Contributing
 ===================
 If you find a tool repository that is in the pentest directory, please add it to the alias file and update the tools.txt file. 
 
-The alias file may change in the future to make it easier to maintain and add new tools.
+Also make sure that if it needs any new dependecies they get updated is well as installed.
+
+We want to get as many as possible tools updated in the pentest directory as possibble so we need the community's help 
 
 Support for Kali
 ===================
