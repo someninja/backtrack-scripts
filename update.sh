@@ -527,7 +527,7 @@ else
 fi
 
 if [ -d /pentest/web/uniscan/.git ]; then 
-	echo -e "\e[1;32mUpdating Uniscan.\e[0m"
+	echo -e "\e[1;34mUpdating Uniscan.\e[0m"
 	cd /pentest/web/uniscan 
 	git pull
 	echo
@@ -625,15 +625,11 @@ fi
 
 cp /opt/scripts/alias /root/.bash_aliases ; source /root/.bash_aliases
 
-echo
 echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/
-echo -e "\e[1;31m[*] IMPORTANT NOTE about Metasploit:\e[0m"
+echo -e "\e[1;31mIMPORTANT NOTES\e[0m"
 echo
-echo "  If you discover you cannot run msfconsole after updating, please see notes.txt for the fix."
+echo "[*] If you discover you cannot run msfconsole after updating, please see notes.txt for the fix."
 echo
-echo -e "\e[1;31m[*] IMPORTANT NOTE about github:\e[0m"
-echo
-echo "  The new repo for BackTrack Scripts is now located at https://github.com/leebaird/backtrack-scripts."
+echo "[*] The new repo for BackTrack Scripts is now located at https://github.com/leebaird/backtrack-scripts."
 echo
 echo
-
