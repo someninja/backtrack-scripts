@@ -322,8 +322,7 @@ fi
 
 if [ -d /opt/nmap-svn/.svn ]; then
 	echo -e "\e[1;34mUpdating Nmap.\e[0m"
-	cd /opt/nmap-svn/
-	svn cleanup ; svn upd
+	cd /opt/nmap-svn/ ; svn cleanup ; svn up
 	cp /opt/nmap-svn/nmap /usr/local/bin/
 	cp /opt/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/
 	cp /opt/nmap-svn/nmap-os-db /usr/local/share/nmap/
