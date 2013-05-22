@@ -148,9 +148,9 @@ li.current {
 
 
 .wrap {
-	padding: 0 5%;
-	margin: 0 auto;
-}
+	width:1050px;	
+	margin-left: auto ;
+  margin-right: auto ;}
 
 .col-1 {
 	width: 100%;

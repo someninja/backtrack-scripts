@@ -82,7 +82,7 @@ printf '%s\n' 'g/^FOO/-1d' w | ed -s                # Find lines that start with
 sed '/^FOO/i\ '                                     # Find lines that start with FOO, and insert a line before
 sed '/^FOO/a\ '                                     # Find lines that start with FOO, and insert a line after
 
-awk '{ print $2 " " $1 }'                           # Move the second column to the first position
+awk '{print $2 " " $1}'                             # Move the second column to the first position
 
 sed -n '/FOO/,$p'                                   # Print from FOO to the end of the file
 sed -n '5,/^$/p'                                    # Print from the 5th line to the first blank line

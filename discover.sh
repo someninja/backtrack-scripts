@@ -269,7 +269,7 @@ case $choice in
      egrep -v '(Performing Google|Records Found)' tmp > tmp2
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 > tmp3
-     sed 's/A //g' tmp3 | sed 's/CNAME //g' | sort -u | column -t > subdomains1.txt
+     sed 's/A //g' tmp3 | sed 's/CNAME //g' | column -t | sort -u > subdomains1.txt
 
      echo
      echo "URLCrazy                  (18/$total)"
@@ -530,11 +530,12 @@ case $choice in
      cat whois-ip.txt >> zreport
 
      mv emails.txt names.txt /$user/$domain/contacts/ 2>/dev/null
-     mv squatting.txt subdomains.txt whois* /$user/$domain/domain/ 2>/dev/null
+     mv subdomains.txt /$user/$domain/dns/ 2>/dev/null
+     mv squatting.txt whois* /$user/$domain/domain/ 2>/dev/null
      mv doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/files/ 2>/dev/null
      mv zreport /$user/$domain/reports/passive-recon.txt
      
-     rm subdomains* tmp* z*
+     rm robtex* subdomains* tmp* z*
 
      echo
      echo $line
@@ -639,14 +640,18 @@ case $choice in
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
      grep $domain tmp | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
 
-     echo "fierce                    (6/$total)"
-     /pentest/enumeration/dns/fierce/fierce.pl -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp
-     echo "Subnets Hosts" > tmp2
-     sed -n '/Subnets found/,$p' tmp | egrep -v '(Fierce|Found|nice day|Subnets)' > tmp3
+     echo "Fierce                    (6/$total)"
+     /pentest/enumeration/dns/fierce/fierce.pl -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp3
 
+     sed -n '/Now performing/,/Subnets found/p' tmp3 | egrep -v '(.nat.|Now performing|Subnets found)' | sed '/^$/d' | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
+
+     cat zdnsrecon-sub zsubdomains-fierce | column -t | sort -u > zsubdomains
+
+     echo "Subnets Hosts" > tmp
+     sed -n '/Subnets found/,$p' tmp3 | egrep -v '(Fierce|Found|nice day|Subnets)' > tmp4
      # Remove leading whitespace from each line, remove blank lines, clean up
-     sed 's/^[ \t]*//' tmp3 | sed '/^$/d' | sed 's/-255/\/24/g' | sed 's/://g' | sed 's/hostnames found.//g' >> tmp2
-     cat tmp2 | column -t > zsubnets
+     sed 's/^[ \t]*//' tmp4 | sed '/^$/d' | sed 's/-255/\/24/g' | sed 's/://g' | sed 's/hostnames found.//g' >> tmp
+     cat tmp | column -t > zsubnets
 
      echo
      echo "Loadbalancing             (7/$total)"
@@ -706,7 +711,7 @@ case $choice in
      echo >> zreport
      echo "Sub Domains" >> zreport
      echo "==============================" >> zreport
-     cat zdnsrecon-sub >> zreport
+     cat zsubdomains >> zreport
      echo >> zreport
      echo "Subnets" >> zreport
      echo "==============================" >> zreport
@@ -732,12 +737,12 @@ case $choice in
           mv zemails-combined /$user/$domain/contacts/emails.txt
      fi
 
-     if [ -f /$user/$domain/domain/subdomains.txt ]; then
-          cat /$user/$domain/domain/subdomains.txt zdnsrecon-sub | column -t | sort -u > zsubdomains-combined
-          mv zsubdomains-combined /$user/$domain/domain/subdomains.txt
+     if [ -f /$user/$domain/dns/subdomains.txt ]; then
+          cat /$user/$domain/dns/subdomains.txt zsubdomains | column -t | sort -u > zsubdomains-combined
+          mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
      fi
 
-     rm robtex* tmp* z*
+     rm tmp* z*
 
      echo
      echo $line
@@ -2866,3 +2871,4 @@ esac
 }
 
 done
+
