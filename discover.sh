@@ -179,6 +179,8 @@ case $choice in
      # If folder doesn't exist, create it
      if [ ! -d /$user/$domain ]; then
           cp -R /opt/scripts/report/ /$user/$domain
+          sed 's/REPLACEDOMAIN/'$domain'/' /$user/$domain/index.htm > tmp
+          mv tmp /$user/$domain/index.htm
      fi
 
      # Number of tests
@@ -384,7 +386,7 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sort -k4 > /$user/$domain/dns/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' tmp | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | sort -k4 > /$user/$domain/dns/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
      grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/dns/black-listed.txt
@@ -600,10 +602,12 @@ case $choice in
      # If folder doesn't exist, create it
      if [ ! -d /$user/$domain ]; then
           cp -R /opt/scripts/report/ /$user/$domain
+          sed 's/REPLACEDOMAIN/'$domain'/' /$user/$domain/index.htm > tmp
+          mv tmp /$user/$domain/index.htm
      fi
 
      # Number of tests
-     total=10
+     total=11
 
      echo
      echo $line
@@ -630,22 +634,28 @@ case $choice in
 
      echo "     DNSSEC               (3/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t zonewalk > tmp
-     egrep -v '(Performing|Getting SOA|records found)' tmp | sed 's/will be used//g' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' > zdnssec
+     grep -v 'records found' tmp | sed 's/will be used//g' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' > zdnssec
 
      echo "     Zone Transfer        (4/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t axfr > tmp
-     egrep -v '(Checking for|filtered|Removing any|TCP Open|Testing NS)' tmp | sed 's/Zone Transfer Failed!//g' |  sed 's/^....//' | sed /^$/d > zonetransfer
+     egrep -v '(Checking for|Failed|filtered|NS Servers|Removing|TCP Open|Testing NS)' tmp | sed 's/^....//' | sed /^$/d > zonetransfer
 
      echo "     Sub-domains (~5 min) (5/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
      grep $domain tmp | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
 
-     echo "Fierce                    (6/$total)"
+     echo
+     echo "Fierce (~5 min)           (6/$total)"
      /pentest/enumeration/dns/fierce/fierce.pl -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp3
 
-     sed -n '/Now performing/,/Subnets found/p' tmp3 | egrep -v '(.nat.|Now performing|Subnets found)' | sed '/^$/d' | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
+     sed -n '/Now performing/,/Subnets found/p' tmp3 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
 
      cat zdnsrecon-sub zsubdomains-fierce | column -t | sort -u > zsubdomains
+
+     if [ -f /$user/$domain/dns/subdomains.txt ]; then
+          cat /$user/$domain/dns/subdomains.txt zsubdomains | column -t | sort -u > zsubdomains-combined
+          mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
+     fi
 
      echo "Subnets Hosts" > tmp
      sed -n '/Subnets found/,$p' tmp3 | egrep -v '(Fierce|Found|nice day|Subnets)' > tmp4
@@ -667,17 +677,23 @@ case $choice in
      cat -s tmp5 > zloadbalancing
 
      echo
+     echo "Whatweb                   (8/$total)"
+     /pentest/enumeration/web/whatweb/whatweb -i /$user/$domain/dns/subdomains.txt --color=never --no-errors -t 255 > tmp
+     # Find lines that start with http, and insert a line after
+     sed '/^http/a\ ' tmp | sort > zwhatweb
+     
+     echo
      echo "Traceroute"
-     echo "     UDP                  (8/$total)"
+     echo "     UDP                  (9/$total)"
      echo "UDP" > tmp
      traceroute $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      echo >> tmp
      echo "ICMP ECHO" >> tmp
-     echo "     ICMP ECHO            (9/$total)"
+     echo "     ICMP ECHO            (10/$total)"
      traceroute -I $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      echo >> tmp
      echo "TCP SYN" >> tmp
-     echo "     TCP SYN              (10/$total)"
+     echo "     TCP SYN              (11/$total)"
      traceroute -T $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      grep -v 'traceroute' tmp > tmp2
      # Remove blank lines from end of file
@@ -721,6 +737,10 @@ case $choice in
      echo "==============================" >> zreport
      cat zloadbalancing >> zreport
      echo >> zreport
+     echo "Whatweb" >> zreport
+     echo "==============================" >> zreport
+     cat zwhatweb >> zreport
+     echo >> zreport
      echo "Traceroute" >> zreport
      echo "==============================" >> zreport
      cat ztraceroute >> zreport
@@ -730,16 +750,12 @@ case $choice in
      mv zreport /$user/$domain/reports/active-recon.txt
      mv zsubnets /$user/$domain/dns/subnets.txt
      mv ztraceroute /$user/$domain/domain/traceroute.txt
+     mv zwhatweb $user/$domain/domain/whatweb.txt
      mv zonetransfer /$user/$domain/dns/zonetransfer.txt
 
      if [ -f /$user/$domain/contacts/emails.txt ]; then
           cat /$user/$domain/contacts/emails.txt zemail | sort -u > zemails-combined
           mv zemails-combined /$user/$domain/contacts/emails.txt
-     fi
-
-     if [ -f /$user/$domain/dns/subdomains.txt ]; then
-          cat /$user/$domain/dns/subdomains.txt zsubdomains | column -t | sort -u > zsubdomains-combined
-          mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
      fi
 
      rm tmp* z*
