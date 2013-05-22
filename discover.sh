@@ -743,6 +743,8 @@ case $choice in
      fi
 
      rm tmp* z*
+     cd /$user/$domain/
+     rm */tmp
 
      echo
      echo $line
