@@ -333,7 +333,8 @@ if [ -d /opt/nmap-svn/.svn ]; then
 	cp /opt/nmap-svn/nmap-services /usr/local/share/nmap/
 	cp /opt/nmap-svn/nse_main.lua /usr/local/share/nmap/
 	cp -r /opt/nmap-svn/nselib/ /usr/local/share/nmap/
-	cp -r /opt/nmap-svn/scripts/ /usr/local/share/nmap/ 
+	cp -r /opt/nmap-svn/scripts/ /usr/local/share/nmap/
+     echo
 else
 	rm -rf /root/.zenmap/
 	rm -rf /root/nmap-svn/
@@ -557,6 +558,17 @@ else
      pip install PyGithub GitPython esmre chardet pdfminer futures guess-language cluster msgpack-python python-ntlm
      pip install -e git+git://github.com/ramen/phply.git#egg=phply
      pip install xdot
+     echo
+fi
+
+if [ -d /pentest/web/waffit/.svn ]; then
+     echo -e "\e[1;34mUpdating waffit.\e[0m"
+     cd /pentest/web/waffit/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling waffit.\e[0m"
+     rm -rf /pentest/web/waffit/
+     svn co http://waffit.googlecode.com/svn/trunk/ /pentest/web/waffit/
      echo
 fi
 

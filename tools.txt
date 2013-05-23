@@ -92,6 +92,7 @@ Web
      Nikto
      sslstrip
      w3af
+     waffit
      WPScan
      Uniscan 
 

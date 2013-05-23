@@ -33,7 +33,7 @@ ruby -v
 # Now run msfconsole - it should work. :]
 ./msfconsole
 
----------------------------------------
+##############################
 
 nmap2csv:  https://github.com/maaaaz/nmaptocsv
 
@@ -45,29 +45,20 @@ Add color to certain findings in the report.
      Anonymous access: READ
      VULNERABLE
 
-Add items to Firefox (setup.sh)
-     Extensions:
-          Firebug - https://addons.mozilla.org/en-US/firefox/addon/firebug/?src=search
-          Tamper Data - https://addons.mozilla.org/en-US/firefox/addon/tamper-data/?src=search
-          Web Developer - https://addons.mozilla.org/en-US/firefox/addon/web-developer/?src=search
-     Bookmarks:
-          Metasploit - https://localhost:3790/
-          Nessus - https://localhost:8834/
-          NeXpose - https://localhost:3780/
-          NSEDoc - nmap.org/nsedoc/
-
 Text
      Find lines that start with FOO, if the line before it is blank, delete it           # Service Info:, | smb-mbenum:
      Find lines that start with FOO, if the line after it is blank, delete original line
 
 ##############################
 
+sed -e 's/^/FOO/'                                   # Add FOO to the beginning of each line
+sed -e 's/$/FOO/'                                   # Add FOO to the end of each line
 column -t                                           # Align columns
-sort -k2                                            # Sort by second column
 
 sed 's/\b\(.\)/\u\1/g'                              # Capitalize the first letter of every word
 tr '[A-Z]' '[a-z]'                                  # Change to lower case
 sed /^$/d                                           # Compress blank lines
+paste -s -d" "                                      # Convert a list into a single line
 
 sed '/FOO/I,+12 d'                                  # Find lines that contain FOO, and delete that and the next 12 lines
 sed -i '/FOO/,${D}' file                            # Find lines that contain FOO, and delete to the end of file
@@ -113,7 +104,9 @@ sed '/TEST/!s/FOO/BAR/g'                            # Replace FOO with BAR, exce
 sed 's/FOO//g'                                      # Replace FOO with nothing
 sed 's/\.\.\.//g'                                   # Replace 3 periods with nothing                
 cat tmp | tr ';' '\n'                               # Replace semicolon with a new line
-sed "s/$domain./$domain/g"                          # Use double quotes when using variables
+
+sort -k2                                            # Sort by the second column
+sed "s/$FOO./$FOO/g"                                # Variables - use double quotes
 
 ##############################
 

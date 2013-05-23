@@ -206,7 +206,7 @@ case $choice in
      grep '.ppt' tmp2 > ppt.txt
      grep '.doc' tmp2 | egrep -v '(.pdf|.ppt|.xls)' > doc.txt
      grep '.pdf' tmp2 > pdf.txt
-     grep '.txt' tmp2 > txt.txt
+     grep '.txt' tmp2 | grep -v 'robots.txt' > txt.txt
 
      echo
      echo "goog-mail                 (2/$total)"
@@ -268,7 +268,7 @@ case $choice in
      echo
      echo "dnsrecon                  (17/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t goo > tmp
-     egrep -v '(Performing Google|Records Found)' tmp > tmp2
+     grep $domain tmp | egrep -v '(Performing Google|Records Found)' > tmp2
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 > tmp3
      sed 's/A //g' tmp3 | sed 's/CNAME //g' | column -t | sort -u > subdomains1.txt
@@ -299,7 +299,7 @@ case $choice in
      # Change to lower case
      cat tmp6 | tr '[A-Z]' '[a-z]' > tmp7
      # Clean up
-     egrep -v '(account|administrator|administrative|advanced|advertising|american|analyst|antivirus|apple seems|application|applications|article|asian|attorney|australia|automation|automotive|banking|bbc|berlin|beta theta|between|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|department|description|designer|developer|developing|development|devine|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|hurricane|idc|in the news|index of|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|negative|network|networking|new user|newspaper|next page|nitrogen|nyc|obtaining|occupied|office|online|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|sales|satellite|save the date|school|scheduling|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|website|welcome|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
+     egrep -v '(account|administrator|administrative|advanced|advertising|american|analyst|antivirus|apple seems|application|applications|article|asian|attorney|australia|automation|automotive|banking|bbc|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|department|description|designer|developer|developing|development|devine|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|hurricane|idc|in the news|index of|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|negative|network|networking|new user|newspaper|next page|nitrogen|nyc|obtaining|occupied|office|online|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
      # Remove leading and trailing whitespace from each line
      sed 's/^[ \t]*//;s/[ \t]*$//' tmp8 > tmp9
      # Remove lines that contain a single word
@@ -326,7 +326,7 @@ case $choice in
      # Change to lower case
      cat tmp4 | tr '[A-Z]' '[a-z]' > tmp5
      grep $domain tmp5 | sort -u > subdomains2.txt
-     cat subdomain* | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
+     cat subdomain* | grep -v '.nat.' | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
 
      ##############################################################
 
@@ -386,7 +386,7 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' tmp | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | sort -k4 > /$user/$domain/dns/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' | sed 's/.edu./.edu/g' | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | sort -k3 > /$user/$domain/dns/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
      grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/dns/black-listed.txt
@@ -650,18 +650,16 @@ case $choice in
 
      sed -n '/Now performing/,/Subnets found/p' tmp3 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
 
-     cat zdnsrecon-sub zsubdomains-fierce | column -t | sort -u > zsubdomains
+     cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
 
      if [ -f /$user/$domain/dns/subdomains.txt ]; then
           cat /$user/$domain/dns/subdomains.txt zsubdomains | column -t | sort -u > zsubdomains-combined
           mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
      fi
 
-     echo "Subnets Hosts" > tmp
      sed -n '/Subnets found/,$p' tmp3 | egrep -v '(Fierce|Found|nice day|Subnets)' > tmp4
      # Remove leading whitespace from each line, remove blank lines, clean up
-     sed 's/^[ \t]*//' tmp4 | sed '/^$/d' | sed 's/-255/\/24/g' | sed 's/://g' | sed 's/hostnames found.//g' >> tmp
-     cat tmp | column -t > zsubnets
+     sed 's/^[ \t]*//' tmp4 | sed '/^$/d' | sed 's/-255/\/24/g' | sed 's/://g' | sed 's/hostnames found.//g' | awk '{print $1}' | sort -n > zsubnets
 
      echo
      echo "Loadbalancing             (7/$total)"
@@ -675,29 +673,31 @@ case $choice in
      awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > tmp5
      # Clean up
      cat -s tmp5 > zloadbalancing
-
-     echo
-     echo "Whatweb                   (8/$total)"
-     /pentest/enumeration/web/whatweb/whatweb -i /$user/$domain/dns/subdomains.txt --color=never --no-errors -t 255 > tmp
-     # Find lines that start with http, and insert a line after
-     sed '/^http/a\ ' tmp | sort > zwhatweb
      
      echo
      echo "Traceroute"
-     echo "     UDP                  (9/$total)"
+     echo "     UDP                  (8/$total)"
      echo "UDP" > tmp
      traceroute $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      echo >> tmp
      echo "ICMP ECHO" >> tmp
-     echo "     ICMP ECHO            (10/$total)"
+     echo "     ICMP ECHO            (9/$total)"
      traceroute -I $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      echo >> tmp
      echo "TCP SYN" >> tmp
-     echo "     TCP SYN              (11/$total)"
+     echo "     TCP SYN              (10/$total)"
      traceroute -T $domain | awk -F" " '{print $1,$2,$3}' >> tmp
      grep -v 'traceroute' tmp > tmp2
      # Remove blank lines from end of file
      awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp2 > ztraceroute
+
+     echo
+     echo "Whatweb                   (11/$total)"
+     cp /$user/$domain/dns/subdomains.txt tmp
+     awk '{print $1}' tmp > tmp2
+     /pentest/enumeration/web/whatweb/whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
+     # Find lines that start with http, and insert a line after
+     sort tmp3 | sed '/^http/a\ ' > zwhatweb
 
      ##############################################################
 
@@ -737,20 +737,20 @@ case $choice in
      echo "==============================" >> zreport
      cat zloadbalancing >> zreport
      echo >> zreport
-     echo "Whatweb" >> zreport
-     echo "==============================" >> zreport
-     cat zwhatweb >> zreport
-     echo >> zreport
      echo "Traceroute" >> zreport
      echo "==============================" >> zreport
      cat ztraceroute >> zreport
+     echo >> zreport
+     echo "Whatweb" >> zreport
+     echo "==============================" >> zreport
+     cat zwhatweb >> zreport
 
      mv zdnssec /$user/$domain/dns/dnssec.txt
      mv zloadbalancing /$user/$domain/domain/loadbalancing.txt
      mv zreport /$user/$domain/reports/active-recon.txt
      mv zsubnets /$user/$domain/dns/subnets.txt
      mv ztraceroute /$user/$domain/domain/traceroute.txt
-     mv zwhatweb $user/$domain/domain/whatweb.txt
+     mv zwhatweb /$user/$domain/domain/whatweb.txt
      mv zonetransfer /$user/$domain/dns/zonetransfer.txt
 
      if [ -f /$user/$domain/contacts/emails.txt ]; then
