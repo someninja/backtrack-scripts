@@ -88,6 +88,7 @@ Web
      BeEF
      dotdotpwn
      Fimap
+     golismero
      JoomScan
      Nikto
      sslstrip

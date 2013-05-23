@@ -177,6 +177,17 @@ fi
 
 echo -e "\e[1;34mUpdating GISKismet.\e[0m" ; cd /pentest/wireless/giskismet/ ; svn up ; echo
 
+if [ -d /pentest/web/golismero/.git ]; then 
+     echo -e "\e[1;34mUpdating golismero.\e[0m"
+     cd /pentest/web/golismero/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling golismero.\e[0m"
+     rm -rf /pentest/web/golismero/
+     git clone git://github.com/cr0hn/golismero.git /pentest/web/golismero/
+     echo
+fi
+
 if [ -d /pentest/enumeration/google/goofile/.svn ]; then 
      echo -e "\e[1;34mUpdating goofile.\e[0m"
      cd /pentest/enumeration/google/goofile/ ; svn up
