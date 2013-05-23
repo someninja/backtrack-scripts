@@ -616,7 +616,9 @@ case $choice in
      echo "Nmap"
      echo "     Email                (1/$total)"
      nmap -Pn -n -T4 -p80 --script http-email-harvest --script-args http-email-harvest.maxpagecount=100,http-email-harvest.maxdepth=10 $domain > tmp
-     grep @$domain tmp | grep -v '%20' | grep -v 'jpg' | awk '{print $2}' | sort -u > zemail
+     grep @$domain tmp | grep -v '%20' | grep -v 'jpg' | awk '{print $2}' > tmp2
+     # Change to lower case
+     cat tmp2 | tr '[A-Z]' '[a-z]' | sort -u > zemail
 
      # Check if file is empty
      if [ ! -s zemail ]; then 
@@ -2889,4 +2891,3 @@ esac
 }
 
 done
-
