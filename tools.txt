@@ -114,7 +114,7 @@ Other
      Nmap 
 
 Shortcuts
-     c 	  clear
+     c        clear
      cl   clear & ls -l
      d 	  cd /root/Desktop/ ; clear
      e 	  exit
