@@ -14,10 +14,10 @@ Update BackTrack by using update.sh or the main menu from discover.sh.
 
 Contributing
 ===================
-We want to get as many tools updated from the original developer repos (Google Code or Github) as possibble. If you 
-find a repo that we are currently not using, please add it to update.sh. You will need to update tools.txt so that 
-everyone can track what has been completed. Make sure that any new dependecies get installed or updated as well. This 
-is an easy project to complete, it just takes time. We need the community's help to knock this out in a timely manner.
+I want to get as many tools updated from the original developer repos (Google Code or Github) as possibble. If you 
+find a repo that I'm currently not using, please add it to update.sh. You will need to update tools.txt so that 
+everyone can track what has been completed. Make sure that any new dependecies get installed and updated as well. This 
+is an easy project to complete, it just takes time. I need the community's help to knock this out in a timely manner.
 
 Support for Kali
 ===================
