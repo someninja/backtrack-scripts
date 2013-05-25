@@ -533,7 +533,7 @@ case $choice in
 
      mv emails.txt names.txt /$user/$domain/contacts/ 2>/dev/null
      mv subdomains.txt /$user/$domain/dns/ 2>/dev/null
-     mv squatting.txt whois* /$user/$domain/domain/ 2>/dev/null
+     mv squatting.txt whois* /$user/$domain/domain/
      mv doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/files/ 2>/dev/null
      mv zreport /$user/$domain/reports/passive-recon.txt
      
