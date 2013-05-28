@@ -66,6 +66,17 @@ else
      echo
 fi
 
+if [ -d /pentest/misc/creepy/.git ]; then
+     echo -e "\e[1;34mUpdating creepy.\e[0m"
+     cd /pentest/misc/creepy/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling creepy.\e[0m"
+     rm -rf /pentest/misc/creepy/
+     git clone git://github.com/ilektrojohn/creepy.git /pentest/misc/creepy/
+     echo
+fi
+
 if [ -d /pentest/backdoors/dbd/.git ]; then 
      echo -e "\e[1;34mUpdating dbd.\e[0m"
      cd /pentest/backdoors/dbd/ ; git pull
@@ -150,6 +161,10 @@ else
 fi
 
 echo -e "\e[1;34mUpdating exploit-db.\e[0m" ; cd /pentest/exploits/exploitdb ; svn up ; echo
+
+if [ -d /pentest/exploits/fasttrack/ ]; then 
+     rm -rf /pentest/exploits/fasttrack/
+fi
 
 echo -e "\e[1;34mUpdating Fern WiFi Cracker.\e[0m" ; cd /pentest/wireless/fern-wifi-cracker ; svn up ; echo
 
@@ -585,6 +600,17 @@ else
      echo -e "\e[1;33mInstalling swaks.\e[0m"
      rm -rf /pentest/enumeration/smtp/swaks/
      git clone git://github.com/pld-linux/swaks.git /pentest/enumeration/smtp/swaks/
+     echo
+fi
+
+if [ -d /pentest/exploits/termineter/.git ]; then
+     echo -e "\e[1;34mUpdating Termineter.\e[0m"
+     cd /pentest/exploits/termineter/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling Termineter.\e[0m"
+     rm -rf /pentest/exploits/termineter/
+     git clone git://github.com/zeroSteiner/termineter.git /pentest/exploits/termineter/
      echo
 fi
 
