@@ -6,20 +6,20 @@ date & time
 BackTrack distro
 backtrack-scripts 
 
-Backdoors
+Backdoors (git done)
      dbd
      Intersect
      iodine
      PowerSploit
      Weevely
      
-Bluetooth
+Bluetooth (git done)
      Bluediving
      Bluelog
 
-Cisco
+Cisco (git done)
 
-Database
+Database (git done)
      HexorBase
      SQLBrute
      sqlmap
