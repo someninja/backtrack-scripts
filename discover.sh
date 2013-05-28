@@ -659,9 +659,10 @@ case $choice in
           mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
      fi
 
-     sed -n '/Subnets found/,$p' tmp3 | egrep -v '(Fierce|Found|nice day|Subnets)' > tmp4
-     # Remove leading whitespace from each line, remove blank lines, clean up
-     sed 's/^[ \t]*//' tmp4 | sed '/^$/d' | sed 's/-255/\/24/g' | sed 's/://g' | sed 's/hostnames found.//g' | awk '{print $1}' | sort -n > zsubnets
+     awk '{print $2}' /$user/$domain/dns/subdomains.txt > tmp
+     grep $domain /$user/$domain/dns/records.txt | awk '{print $4}' >> tmp
+     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' -o tmp | sort -u > tmp2
+     sort -n tmp2 > zhosts
 
      echo
      echo "Loadbalancing             (7/$total)"
@@ -731,9 +732,9 @@ case $choice in
      echo "==============================" >> zreport
      cat zsubdomains >> zreport
      echo >> zreport
-     echo "Subnets" >> zreport
+     echo "Hosts" >> zreport
      echo "==============================" >> zreport
-     cat zsubnets >> zreport
+     cat zhosts >> zreport
      echo >> zreport
      echo "Loadbalancing" >> zreport
      echo "==============================" >> zreport
@@ -748,9 +749,9 @@ case $choice in
      cat zwhatweb >> zreport
 
      mv zdnssec /$user/$domain/dns/dnssec.txt
+     mv zhosts /$user/$domain/domain/hosts.txt
      mv zloadbalancing /$user/$domain/domain/loadbalancing.txt
      mv zreport /$user/$domain/reports/active-recon.txt
-     mv zsubnets /$user/$domain/dns/subnets.txt
      mv ztraceroute /$user/$domain/domain/traceroute.txt
      mv zwhatweb /$user/$domain/domain/whatweb.txt
      mv zonetransfer /$user/$domain/dns/zonetransfer.txt
