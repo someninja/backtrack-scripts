@@ -40,7 +40,7 @@ Enumeration (git done)
      theHarvester
      WhatWeb 
 
-Exploits
+Exploits (git done)
      exploit-db
      JBoss Autopwn
      Metasploit
@@ -48,21 +48,23 @@ Exploits
      Rebind
      SET
      Smartphone-Pentest-Framework 
-
-Forensics
+     Termineter
+     
+Forensics (git done)
      peepdf
      samdump
      testdisk 
 
-Fuzzers
+Fuzzers (git done)
      Bruteforce Exploit Detector
      sickfuzz
      voiper 
 
-Libs
+Libs (git done)
      LibHijack 
 
 Misc
+     creepy
      OpenVAS 
 
 Passwords
