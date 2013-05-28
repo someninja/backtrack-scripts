@@ -63,7 +63,7 @@ Fuzzers (git done)
 Libs (git done)
      LibHijack 
 
-Misc
+Misc (git done)
      creepy
      OpenVAS 
 
