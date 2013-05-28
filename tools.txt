@@ -125,12 +125,12 @@ Other
      Nmap 
 
 Shortcuts
-     c        clear
-     cl   clear & ls -l
-     d 	  cd /root/Desktop/ ; clear
-     e 	  exit
-     i 	  ifconfig && ping -c3 google.com
-     l 	  ls -l
-     n 	  netstat -antup
-     r 	  cd /root/ ; clear
-     s 	  cd /opt/scripts/ ; clear
+     c     clear
+     cl    clear & ls -l
+     d     cd /root/Desktop/ ; clear
+     e     exit
+     i     ifconfig && ping -c3 google.com
+     l     ls -l
+     n     netstat -antup
+     r     cd /root/ ; clear
+     s     cd /opt/scripts/ ; clear
