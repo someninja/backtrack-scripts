@@ -1,4 +1,6 @@
-Because the main repos are no longer being updated, I'm in the process of slowly going through each folder in the pentest directory and adding the corresponding Google Code or Github repos for each tool that I can find.
+Because the main repos are no longer being updated, I'm in the process of slowly going through each folder in 
+the pentest directory and adding the corresponding Google Code or Github repos for each tool that I can find.
+(git done) lets you know that I have searched for all of the tools in that folder on Github.
 
 update - updates the following:
 
