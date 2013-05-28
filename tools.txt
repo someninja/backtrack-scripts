@@ -7,7 +7,12 @@ BackTrack distro
 backtrack-scripts 
 
 Backdoors
-
+     dbd
+     Intersect
+     iodine
+     PowerSploit
+     Weevely
+     
 Bluetooth
      Bluediving
      Bluelog
