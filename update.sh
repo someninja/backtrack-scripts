@@ -66,6 +66,17 @@ else
      echo
 fi
 
+if [ -d /pentest/backdoors/dbd/.git ]; then 
+     echo -e "\e[1;34mUpdating dbd.\e[0m"
+     cd /pentest/backdoors/dbd/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling dbd.\e[0m"
+     rm -rf /pentest/backdoors/dbd/
+     git clone git://github.com/gitdurandal/dbd.git /pentest/backdoors/dbd/
+     echo
+fi
+
 echo -e "\e[1;34mUpdating deadicated.\e[0m" ; cd /pentest/telephony/dedected ; svn up ; echo
 
 if [ -d /pentest/web/dotdotpwn/.git ]; then 
@@ -235,6 +246,28 @@ else
      echo
 fi
 
+if [ -d /pentest/backdoors/iodine/.git ]; then 
+     echo -e "\e[1;34mUpdating iodine.\e[0m"
+     cd /pentest/backdoors/iodine/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling iodine.\e[0m"
+     rm -rf /pentest/backdoors/iodine/
+     git clone git://github.com/yarrick/iodine.git /pentest/backdoors/iodine/
+     echo
+fi
+
+if [ -d /pentest/backdoors/intersect/.git ]; then 
+     echo -e "\e[1;34mUpdating Intersect.\e[0m"
+     cd /pentest/backdoors/intersect/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling Intersect.\e[0m"
+     rm -rf /pentest/backdoors/intersect/
+     git clone git://github.com/ohdae/Intersect-2.5.git /pentest/backdoors/intersect/
+     echo
+fi
+
 if [ -d /pentest/exploits/jboss-autopwn/.git ]; then
      echo -e "\e[1;34mUpdating JBoss Autopwn.\e[0m"
      cd /pentest/exploits/jboss-autopwn/ ; git pull
@@ -384,6 +417,17 @@ else
      echo -e "\e[1;33mInstalling peepdf.\e[0m"
      rm -rf /pentest/forensics/peepdf/
      svn co http://peepdf.googlecode.com/svn/trunk/ /pentest/forensics/peepdf/
+     echo
+fi
+
+if [ -d /pentest/backdoors/powersploit/.git ]; then 
+     echo -e "\e[1;34mUpdating PowerSploit.\e[0m"
+     cd /pentest/backdoors/powersploit/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling PowerSploit.\e[0m"
+     rm -rf /pentest/backdoors/powersploit/
+     git clone git://github.com/mattifestation/PowerSploit.git /pentest/backdoors/powersploit/
      echo
 fi
 
@@ -591,6 +635,17 @@ else
      echo -e "\e[1;33mInstalling WarVox.\e[0m"
      rm -rf /pentest/telephony/warvox/
      git clone https://github.com/rapid7/warvox.git /pentest/telephony/warvox
+     echo
+fi
+
+if [ -d /pentest/backdoors/web/weevely/.git ]; then 
+     echo -e "\e[1;34mUpdating Weevely.\e[0m"
+     cd /pentest/backdoors/web/weevely/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling Weevely.\e[0m"
+     rm -rf /pentest/backdoors/web/weevely/
+     git clone git://github.com/epinna/Weevely.git /pentest/backdoors/web/weevely/
      echo
 fi
 
