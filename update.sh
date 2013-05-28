@@ -336,6 +336,17 @@ else
      echo
 fi
 
+if [ -d /pentest/enumeration/miranda/.git ]; then 
+     echo -e "\e[1;34mUpdating miranda.\e[0m"
+     cd /pentest/enumeration/miranda/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling miranda.\e[0m"
+     rm -rf /pentest/enumeration/miranda/
+     git clone git://github.com/billwood09/miranda.git /pentest/enumeration/miranda/
+     echo
+fi
+
 if [ -f /opt/nessus/sbin/nessus-update-plugins ]; then 
      echo -e "\e[1;34mUpdating Nessus.\e[0m"
      /opt/nessus/sbin/nessus-update-plugins
@@ -565,6 +576,17 @@ fi
 
 echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
 cd /usr/share/subterfuge ; svn cleanup ; svn up ; echo 
+
+if [ -d /pentest/enumeration/smtp/swaks/.git ]; then 
+     echo -e "\e[1;34mUpdating swaks.\e[0m"
+     cd /pentest/enumeration/smtp/swaks/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling swaks.\e[0m"
+     rm -rf /pentest/enumeration/smtp/swaks/
+     git clone git://github.com/pld-linux/swaks.git /pentest/enumeration/smtp/swaks/
+     echo
+fi
 
 if [ -d /pentest/forensics/testdisk/.git ]; then
      echo -e "\e[1;34mUpdating testdisk.\e[0m"
