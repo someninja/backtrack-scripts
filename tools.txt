@@ -8,26 +8,26 @@ date & time
 BackTrack distro
 backtrack-scripts 
 
-Backdoors (git done)
+Backdoors
      dbd
      Intersect
      iodine
      PowerSploit
      Weevely
      
-Bluetooth (git done)
+Bluetooth
      Bluediving
      Bluelog
 
-Cisco (git done)
+Cisco
 
-Database (git done)
+Database
      HexorBase
      SQLBrute
      sqlmap
      Sqlninja 
 
-Enumeration (git done)
+Enumeration
      dnsenum
      dnsmap
      dnsrecon
@@ -42,7 +42,7 @@ Enumeration (git done)
      theHarvester
      WhatWeb 
 
-Exploits (git done)
+Exploits
      exploit-db
      JBoss Autopwn
      Metasploit
@@ -52,24 +52,24 @@ Exploits (git done)
      Smartphone-Pentest-Framework 
      Termineter
      
-Forensics (git done)
+Forensics
      peepdf
      samdump
      testdisk 
 
-Fuzzers (git done)
+Fuzzers
      Bruteforce Exploit Detector
      sickfuzz
      voiper 
 
-Libs (git done)
+Libs
      LibHijack 
 
-Misc (git done)
+Misc
      creepy
      OpenVAS 
 
-Passwords (git done)
+Passwords
      chntpw
      creddump
      cupp
@@ -79,37 +79,37 @@ Passwords (git done)
      Pipal
      smbexe
 
-Reporting (git done)
+Reporting
 
-Reverse Engineering (git done)
+Reverse Engineering
 
-RFID (git done)
+RFID
      RFIDIOt
 
-Scanners (git done)
+Scanners
      deblaze
 
-Sniffers (git done)
+Sniffers
      easy-creads
      Ghost Phisher
      mitmproxy
      Subterfuge
      wifitap
 
-Stressing (git done)
+Stressing
      DHCPig
 
 Telephony (OK)
      detected
      WarVox 
 
-Tunneling (git done)
+Tunneling
      pwnat
 
-VoIP (git done)
+VoIP
      ohrwurm
 
-Web (git done)
+Web
      BeEF
      dotdotpwn
      Fimap
@@ -126,7 +126,7 @@ Web (git done)
      WPScan
      Uniscan 
 
-Wireless (git done)
+Wireless
      aircrack-ng
      Fern WiFi Cracker
      FreeRADIUS
