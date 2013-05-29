@@ -66,6 +66,17 @@ else
      echo
 fi
 
+if [ -d /pentest/passwords/creddump/.svn ]; then
+     echo -e "\e[1;34mUpdating Creddump.\e[0m"
+     cd /pentest/passwords/creddump/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling Creddump.\e[0m"
+     rm -rf /pentest/passwords/creddump/
+     svn co http://creddump.googlecode.com/svn/trunk/ /pentest/passwords/creddump/
+     echo
+fi
+
 if [ -d /pentest/misc/creepy/.git ]; then
      echo -e "\e[1;34mUpdating creepy.\e[0m"
      cd /pentest/misc/creepy/ ; git pull
@@ -190,6 +201,17 @@ else
      echo
 fi
 
+if [ -d /pentest/passwords/findmyhash/.svn ]; then
+     echo -e "\e[1;34mUpdating FindMyHash.\e[0m"
+     cd /pentest/passwords/findmyhash/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling FindMyHash.\e[0m"
+     rm -rf /pentest/passwords/findmyhash/
+     svn co http://findmyhash.googlecode.com/svn/trunk/ /pentest/passwords/findmyhash/
+     echo
+fi
+
 if [ -d /pentest/wireless/freeradius-wpe/.git ]; then 
      echo -e "\e[1;34mUpdating FreeRADIUS.\e[0m"
      cd /pentest/wireless/freeradius-wpe/ ; git pull
@@ -306,6 +328,17 @@ else
 fi
 
 echo -e "\e[1;34mUpdating JoomScan.\e[0m" ; cd /pentest/web/joomscan/ ; ./joomscan.pl update ; echo
+
+if [ -d /pentest/passwords/keimpx/.git ]; then 
+     echo -e "\e[1;34mUpdating Keimpx.\e[0m"
+     cd /pentest/passwords/keimpx/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling Keimpx.\e[0m"
+     rm -rf /pentest/passwords/keimpx/
+     git clone git://github.com/inquisb/keimpx.git /pentest/passwords/keimpx/
+     echo
+fi
 
 if [ -d /pentest/wireless/killerbee/.git ]; then 
      echo -e "\e[1;34mUpdating killerbee.\e[0m"
