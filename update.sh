@@ -468,6 +468,17 @@ else
      echo
 fi
 
+if [ -d /pentest/tunneling/pwnat/.git ]; then
+     echo -e "\e[1;34mUpdating pwnat.\e[0m"
+     cd /pentest/tunneling/pwnat/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling pwnat.\e[0m"
+     rm -rf /pentest/tunneling/pwnat/
+     git clone git://github.com/samyk/pwnat.git /pentest/tunneling/pwnat/
+     echo
+fi
+
 if [ -d /pentest/wireless/reaver/.svn ]; then
      echo -e "\e[1;34mUpdating Reaver.\e[0m"
      cd /pentest/wireless/reaver/ ; svn up

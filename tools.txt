@@ -92,7 +92,8 @@ Telephony (OK)
      detected
      WarVox 
 
-Tunneling
+Tunneling (git done)
+     pwnat
 
 VoIP
 
@@ -111,7 +112,7 @@ Web
 
 Windows Binaries
 
-Wireless
+Wireless (git done)
      aircrack-ng
      Fern WiFi Cracker
      FreeRADIUS
@@ -135,3 +136,4 @@ Shortcuts
      n     netstat -antup
      r     cd /root/ ; clear
      s     cd /opt/scripts/ ; clear
+
