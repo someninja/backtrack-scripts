@@ -116,9 +116,13 @@ Web
      golismero
      JoomScan
      Nikto
+!     PadBuster
+!     skipfish
      sslstrip
+!     SSLyze
      w3af
      waffit
+!     WebSlayer
      WPScan
      Uniscan 
 

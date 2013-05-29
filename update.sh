@@ -545,6 +545,17 @@ fi
 
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo
 
+if [ -d /pentest/web/padbuster/.git ]; then 
+     echo -e "\e[1;34mUpdating PadBuster.\e[0m"
+     cd /pentest/web/padbuster/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling PadBuster.\e[0m"
+     rm -rf /pentest/web/padbuster/
+     git clone git://github.com/GDSSecurity/PadBuster.git /pentest/web/padbuster/
+     echo
+fi
+
 if [ -d /pentest/forensics/peepdf/.svn ]; then 
      echo -e "\e[1;34mUpdating peepdf.\e[0m"
      cd /pentest/forensics/peepdf/ ; svn up
@@ -677,6 +688,17 @@ else
      echo
 fi
 
+if [ -d /pentest/web/skipfish/.git ]; then
+     echo -e "\e[1;34mUpdating skipfish.\e[0m"
+     cd /pentest/web/skipfish/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling skipfish.\e[0m"
+     rm -rf /pentest/web/skipfish/
+     git clone git://github.com/spinkham/skipfish.git /pentest/web/skipfish/
+     echo
+fi
+
 if [ -d /pentest/exploits/smartphone-pentest-framework/.git ]; then 
      echo -e "\e[1;34mUpdating Smartphone-Pentest-Framework.\e[0m"
      cd /pentest/exploits/smartphone-pentest-framework/ ; git pull
@@ -740,6 +762,17 @@ else
      echo -e "\e[1;33mInstalling sslstrip.\e[0m"
      rm -rf /pentest/web/sslstrip/
      git clone git://github.com/moxie0/sslstrip.git /pentest/web/sslstrip/
+     echo
+fi
+
+if [ -d /pentest/web/sslyze/.git ]; then
+     echo -e "\e[1;34mUpdating SSLyze.\e[0m"
+     cd /pentest/web/sslyze/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling SSLyze.\e[0m"
+     rm -rf /pentest/web/sslyze/
+     git clone git://github.com/iSECPartners/sslyze.git /pentest/web/sslyze/
      echo
 fi
 
@@ -837,6 +870,17 @@ else
      echo -e "\e[1;33mInstalling WarVox.\e[0m"
      rm -rf /pentest/telephony/warvox/
      git clone https://github.com/rapid7/warvox.git /pentest/telephony/warvox
+     echo
+fi
+
+if [ -d /pentest/web/webslayer/.git ]; then
+     echo -e "\e[1;34mUpdating WebSlayer.\e[0m"
+     cd /pentest/web/webslayer/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling WebSlayer.\e[0m"
+     rm -rf /pentest/web/webslayer/
+     git clone git://github.com/Malphaet/webslayer.git /pentest/web/webslayer/
      echo
 fi
 
