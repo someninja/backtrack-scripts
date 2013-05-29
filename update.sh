@@ -66,6 +66,17 @@ else
      echo
 fi
 
+if [ -d /pentest/passwords/chntpw/.git ]; then
+     echo -e "\e[1;34mUpdating chntpw.\e[0m"
+     cd /pentest/passwords/chntpw/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling chntpw.\e[0m"
+     rm -rf /pentest/passwords/chntpw/
+     git clone git://github.com/Tody-Guo/chntpw.git /pentest/passwords/chntpw/
+     echo
+fi
+
 if [ -d /pentest/passwords/creddump/.svn ]; then
      echo -e "\e[1;34mUpdating creddump.\e[0m"
      cd /pentest/passwords/creddump/ ; svn up
@@ -85,6 +96,17 @@ else
      echo -e "\e[1;33mInstalling creepy.\e[0m"
      rm -rf /pentest/misc/creepy/
      git clone git://github.com/ilektrojohn/creepy.git /pentest/misc/creepy/
+     echo
+fi
+
+if [ -d /pentest/passwords/cupp/.git ]; then
+     echo -e "\e[1;34mUpdating cupp.\e[0m"
+     cd /pentest/passwords/cupp/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling cupp.\e[0m"
+     rm -rf /pentest/passwords/cupp/
+     git clone git://github.com/Mebus/cupp.git /pentest/passwords/cupp/
      echo
 fi
 
@@ -277,6 +299,17 @@ else
      echo -e "\e[1;33mInstalling theHarvester.\e[0m"
      rm -rf /pentest/enumeration/theharvester/
      svn co http://theharvester.googlecode.com/svn/trunk/ /pentest/enumeration/theharvester/
+     echo
+fi
+
+if [ -d /pentest/passwords/hash-identifier/.svn ]; then 
+     echo -e "\e[1;34mUpdating Hash Identifier.\e[0m"
+     cd /pentest/passwords/hash-identifier/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling Hash Identifier.\e[0m"
+     rm -rf /pentest/passwords/hash-identifier/
+     svn co http://hash-identifier.googlecode.com/svn/trunk/ /pentest/passwords/hash-identifier/
      echo
 fi
 

@@ -70,8 +70,11 @@ Misc (git done)
      OpenVAS 
 
 Passwords
+     chntpw
 	creddump
+     cupp
 	findmyhash
+     Hash Identifier
 	keimpx
 
 Reporting (git done)
