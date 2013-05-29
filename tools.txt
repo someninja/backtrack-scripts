@@ -79,11 +79,12 @@ RFID
 
 Scanners
 
-Sniffers
+Sniffers (git done)
      easy-creads
      Ghost Phisher
-     wifitap
+     mitmproxy
      Subterfuge
+     wifitap
 
 Stressing
 
