@@ -69,13 +69,15 @@ Misc (git done)
      creepy
      OpenVAS 
 
-Passwords
+Passwords (git done)
      chntpw
 	creddump
      cupp
 	findmyhash
      Hash Identifier
 	keimpx
+     Pipal
+     smbexe
 
 Reporting (git done)
 

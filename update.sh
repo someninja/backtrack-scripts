@@ -556,6 +556,17 @@ else
      echo
 fi
 
+if [ -d /pentest/passwords/pipal/.git ]; then 
+     echo -e "\e[1;34mUpdating Pipal.\e[0m"
+     cd /pentest/passwords/pipal/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling Pipal.\e[0m"
+     rm -rf /pentest/passwords/pipal/
+     git clone git://github.com/digininja/pipal.git /pentest/passwords/pipal/
+     echo
+fi
+
 if [ -d /pentest/backdoors/powersploit/.git ]; then 
      echo -e "\e[1;34mUpdating PowerSploit.\e[0m"
      cd /pentest/backdoors/powersploit/ ; git pull
@@ -674,6 +685,17 @@ else
      echo -e "\e[1;33mInstalling Smartphone-Pentest-Framework.\e[0m"
      rm -rf /pentest/exploits/smartphone-pentest-framework/
      git clone git://github.com/georgiaw/Smartphone-Pentest-Framework.git /pentest/exploits/smartphone-pentest-framework/
+     echo
+fi
+
+if [ -d /pentest/passwords/smbexec/.git ]; then 
+     echo -e "\e[1;34mUpdating smbexe.\e[0m"
+     cd /pentest/passwords/smbexec/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling smbexe.\e[0m"
+     rm -rf /pentest/passwords/smbexec/
+     git clone git://github.com/brav0hax/smbexec.git /pentest/passwords/smbexec/
      echo
 fi
 
