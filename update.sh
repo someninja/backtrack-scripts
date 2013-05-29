@@ -67,11 +67,11 @@ else
 fi
 
 if [ -d /pentest/passwords/creddump/.svn ]; then
-     echo -e "\e[1;34mUpdating Creddump.\e[0m"
+     echo -e "\e[1;34mUpdating creddump.\e[0m"
      cd /pentest/passwords/creddump/ ; svn up
      echo
 else 
-     echo -e "\e[1;33mInstalling Creddump.\e[0m"
+     echo -e "\e[1;33mInstalling creddump.\e[0m"
      rm -rf /pentest/passwords/creddump/
      svn co http://creddump.googlecode.com/svn/trunk/ /pentest/passwords/creddump/
      echo
@@ -213,11 +213,11 @@ else
 fi
 
 if [ -d /pentest/passwords/findmyhash/.svn ]; then
-     echo -e "\e[1;34mUpdating FindMyHash.\e[0m"
+     echo -e "\e[1;34mUpdating findmyhash.\e[0m"
      cd /pentest/passwords/findmyhash/ ; svn up
      echo
 else 
-     echo -e "\e[1;33mInstalling FindMyHash.\e[0m"
+     echo -e "\e[1;33mInstalling findmyhash.\e[0m"
      rm -rf /pentest/passwords/findmyhash/
      svn co http://findmyhash.googlecode.com/svn/trunk/ /pentest/passwords/findmyhash/
      echo
@@ -341,11 +341,11 @@ fi
 echo -e "\e[1;34mUpdating JoomScan.\e[0m" ; cd /pentest/web/joomscan/ ; ./joomscan.pl update ; echo
 
 if [ -d /pentest/passwords/keimpx/.git ]; then 
-     echo -e "\e[1;34mUpdating Keimpx.\e[0m"
+     echo -e "\e[1;34mUpdating keimpx.\e[0m"
      cd /pentest/passwords/keimpx/ ; git pull
      echo
 else 
-     echo -e "\e[1;33mInstalling Keimpx.\e[0m"
+     echo -e "\e[1;33mInstalling keimpx.\e[0m"
      rm -rf /pentest/passwords/keimpx/
      git clone git://github.com/inquisb/keimpx.git /pentest/passwords/keimpx/
      echo

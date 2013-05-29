@@ -70,8 +70,8 @@ Misc (git done)
      OpenVAS 
 
 Passwords
-	findmyhash
 	creddump
+	findmyhash
 	keimpx
 
 Reporting (git done)
