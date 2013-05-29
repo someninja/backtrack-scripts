@@ -81,7 +81,8 @@ Reverse Engineering
 RFID (git done)
      RFIDIOt
 
-Scanners
+Scanners (git done)
+     deblaze
 
 Sniffers (git done)
      easy-creads

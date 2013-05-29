@@ -101,6 +101,17 @@ fi
 
 echo -e "\e[1;34mUpdating deadicated.\e[0m" ; cd /pentest/telephony/dedected ; svn up ; echo
 
+if [ -d /pentest/scanners/deblaze/.git ]; then
+     echo -e "\e[1;34mUpdating deblaze.\e[0m"
+     cd /pentest/scanners/deblaze/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling deblaze.\e[0m"
+     rm -rf /pentest/scanners/deblaze/
+     git clone git://github.com/SpiderLabs/deblaze.git /pentest/scanners/deblaze/
+     echo
+fi
+
 if [ -d /pentest/stressing/dhcpig/.git ]; then
      echo -e "\e[1;34mUpdating DHCPig.\e[0m"
      cd /pentest/stressing/dhcpig/ ; git pull
