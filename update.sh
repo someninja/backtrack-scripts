@@ -466,6 +466,17 @@ else
 	echo
 fi
 
+if [ -d /pentest/voip/ohrwurm/.git ]; then 
+     echo -e "\e[1;34mUpdating ohrwurm.\e[0m"
+     cd /pentest/voip/ohrwurm/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling ohrwurm.\e[0m"
+     rm -rf /pentest/voip/ohrwurm/
+     git clone git://github.com/mazzoo/ohrwurm.git /pentest/voip/ohrwurm/
+     echo
+fi
+
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo
 
 if [ -d /pentest/forensics/peepdf/.svn ]; then 

@@ -73,7 +73,7 @@ Passwords
 
 Reporting (git done)
 
-Reverse Engineering
+Reverse Engineering (git done)
 
 RFID (git done)
      RFIDIOt
@@ -98,7 +98,8 @@ Telephony (OK)
 Tunneling (git done)
      pwnat
 
-VoIP
+VoIP (git done)
+     ohrwurm
 
 Web
      BeEF
