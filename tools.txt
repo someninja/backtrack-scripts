@@ -87,7 +87,8 @@ Sniffers (git done)
      Subterfuge
      wifitap
 
-Stressing
+Stressing (git done)
+     DHCPig
 
 Telephony (OK)
      detected

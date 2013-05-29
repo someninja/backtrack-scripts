@@ -90,6 +90,17 @@ fi
 
 echo -e "\e[1;34mUpdating deadicated.\e[0m" ; cd /pentest/telephony/dedected ; svn up ; echo
 
+if [ -d /pentest/stressing/dhcpig/.git ]; then
+     echo -e "\e[1;34mUpdating DHCPig.\e[0m"
+     cd /pentest/stressing/dhcpig/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling DHCPig.\e[0m"
+     rm -rf /pentest/stressing/dhcpig/
+     git clone git://github.com/kamorin/DHCPig.git /pentest/stressing/dhcpig/
+     echo
+fi
+
 if [ -d /pentest/web/dotdotpwn/.git ]; then 
      echo -e "\e[1;34mUpdating dotdotpwn.\e[0m"
      cd /pentest/web/dotdotpwn/ ; git pull
