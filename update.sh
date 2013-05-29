@@ -512,6 +512,17 @@ else
      echo
 fi
 
+if [ -d /pentest/rfid/RFIDIOt/.git ]; then
+     echo -e "\e[1;34mUpdating RFIDIOt.\e[0m"
+     cd /pentest/rfid/RFIDIOt/ ; git pull
+     echo
+else
+     echo -e "\e[1;33mInstalling RFIDIOt.\e[0m"
+     rm -rf /pentest/rfid/RFIDIOt/
+     git clone git://github.com/AdamLaurie/RFIDIOt.git /pentest/rfid/RFIDIOt/
+     echo
+fi
+
 if [ -d /pentest/forensics/samdump/.git ]; then
      echo -e "\e[1;34mUpdating samdump.\e[0m"
      cd /pentest/forensics/samdump/ ; git pull

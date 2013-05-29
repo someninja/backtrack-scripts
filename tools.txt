@@ -71,11 +71,12 @@ Misc (git done)
 
 Passwords
 
-Reporting
+Reporting (git done)
 
 Reverse Engineering
 
-RFID
+RFID (git done)
+     RFIDIOt
 
 Scanners
 
@@ -109,8 +110,6 @@ Web
      waffit
      WPScan
      Uniscan 
-
-Windows Binaries
 
 Wireless (git done)
      aircrack-ng
