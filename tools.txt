@@ -1,6 +1,6 @@
 Because the main repos are no longer being updated, I'm in the process of slowly going through each folder in 
-the pentest directory and adding the corresponding Google Code or Github repos for each tool that I can find.
-(git done) lets you know that I have searched for all of the tools in that folder on Github.
+the pentest directory and adding the corresponding Google Code or GitHub repos for each tool that I can find.
+A GitHub lookup have been completed for all folders.
 
 update - updates the following:
 
@@ -109,20 +109,20 @@ Tunneling (git done)
 VoIP (git done)
      ohrwurm
 
-Web
+Web (git done)
      BeEF
      dotdotpwn
      Fimap
      golismero
      JoomScan
      Nikto
-!     PadBuster
-!     skipfish
+     PadBuster
+     skipfish
      sslstrip
-!     SSLyze
+     SSLyze
      w3af
      waffit
-!     WebSlayer
+     WebSlayer
      WPScan
      Uniscan 
 
