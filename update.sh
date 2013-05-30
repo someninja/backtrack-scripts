@@ -55,6 +55,17 @@ else
      echo
 fi
 
+if [ -d /pentest/bluetooth/bluepot/.svn ]; then 
+     echo -e "\e[1;34mUpdating Bluepot.\e[0m"
+     cd /pentest/bluetooth/bluepot/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling Bluepot.\e[0m"
+     rm -rf /pentest/bluetooth/bluepot/
+     svn co http://bluepot.googlecode.com/svn/BluePot/BluePot/ /pentest/bluetooth/bluepot/
+     echo
+fi
+
 if [ -d /pentest/fuzzers/bed/.git ]; then 
      echo -e "\e[1;34mUpdating Bed.\e[0m"
      cd /pentest/fuzzers/bed/ ; git pull

@@ -16,9 +16,10 @@ Backdoors (GC)
      unix-privesc-check
      Weevely
      
-Bluetooth
+Bluetooth (GC)
      Bluediving
      Bluelog
+     Bluepot
 
 Cisco
 
