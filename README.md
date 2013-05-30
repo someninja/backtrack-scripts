@@ -16,7 +16,7 @@ Contributing
 ===================
 Because the main repos are no longer being updated, I'm in the process of slowly going through each folder in 
 the pentest directory and adding the corresponding Google Code or GitHub repos for each tool that I can find.
-A GitHub lookups have been completed for all folders.
+GitHub lookups have been completed for all folders.
 
 Support for Kali
 ===================
