@@ -824,6 +824,17 @@ else
 	echo 
 fi
 
+if [ -d /pentest/backdoors/unix-privesc-check/.svn ]; then
+     echo -e "\e[1;34mUpdating unix-privesc-check.\e[0m"
+     cd /pentest/backdoors/unix-privesc-check/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling unix-privesc-check.\e[0m"
+     rm -rf /pentest/backdoors/unix-privesc-check/
+     svn co http://unix-privesc-check.googlecode.com/svn/trunk/ /pentest/backdoors/unix-privesc-check/
+     echo
+fi
+
 if [ -d /pentest/fuzzers/voip/voiper/.git ]; then
      echo -e "\e[1;34mUpdating voiper.\e[0m"
      cd /pentest/fuzzers/voip/voiper/ ; git pull
