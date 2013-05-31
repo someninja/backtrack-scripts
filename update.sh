@@ -88,6 +88,17 @@ else
      echo
 fi
 
+if [ -d /pentest/enumeration/web/cms-explorer/.svn ]; then
+     echo -e "\e[1;34mUpdating CMS Explorer.\e[0m"
+     cd /pentest/enumeration/web/cms-explorer/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling CMS Explorer.\e[0m"
+     rm -rf /pentest/enumeration/web/cms-explorer/
+     svn co http://cms-explorer.googlecode.com/svn/trunk/ /pentest/enumeration/web/cms-explorer/
+     echo
+fi
+
 if [ -d /pentest/passwords/creddump/.svn ]; then
      echo -e "\e[1;34mUpdating creddump.\e[0m"
      cd /pentest/passwords/creddump/ ; svn up

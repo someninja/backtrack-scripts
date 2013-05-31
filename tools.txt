@@ -21,15 +21,16 @@ Bluetooth (GC)
      Bluelog
      Bluepot
 
-Cisco
+Cisco (GC)
 
-Database
+Database (GC)
      HexorBase
      SQLBrute
      sqlmap
      Sqlninja 
 
 Enumeration
+     CMS Explorer
      dnsenum
      dnsmap
      dnsrecon
@@ -44,7 +45,7 @@ Enumeration
      theHarvester
      WhatWeb 
 
-Exploits
+Exploits (GC)
      exploit-db
      JBoss Autopwn
      Metasploit
@@ -54,17 +55,17 @@ Exploits
      Smartphone-Pentest-Framework 
      Termineter
      
-Forensics
+Forensics (GC)
      peepdf
      samdump
      testdisk 
 
-Fuzzers
+Fuzzers (GC)
      Bruteforce Exploit Detector
      sickfuzz
      voiper 
 
-Libs
+Libs (GC)
      LibHijack 
 
 Misc
