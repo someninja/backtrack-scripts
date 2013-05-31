@@ -73,15 +73,17 @@ Misc (GC)
      Kautilya
      OpenVAS 
 
-Passwords
+Passwords (GC)
      chntpw
      creddump
      cupp
      findmyhash
      Hash Identifier
      keimpx
+     Patator
      Pipal
      smbexe
+     TrueCrack
 
 Reporting (GC)
 

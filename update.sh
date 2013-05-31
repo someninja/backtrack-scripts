@@ -600,6 +600,17 @@ fi
 
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo
 
+if [ -d /pentest/passwords/patator/.git ]; then
+     echo -e "\e[1;34mUpdating Patator.\e[0m"
+     cd /pentest/passwords/patator/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling Patator.\e[0m"
+     rm -rf /pentest/passwords/patator/
+     git clone https://code.google.com/p/patator/ /pentest/passwords/patator/
+     echo
+fi
+
 if [ -d /pentest/web/padbuster/.git ]; then 
      echo -e "\e[1;34mUpdating PadBuster.\e[0m"
      cd /pentest/web/padbuster/ ; git pull
@@ -864,6 +875,17 @@ else
      echo -e "\e[1;33mInstalling testdisk.\e[0m"
      rm -rf /pentest/forensics/testdisk/
      git clone git://github.com/mqudsi/testdisk.git /pentest/forensics/testdisk/
+     echo
+fi
+
+if [ -d /pentest/passwords/truecrack/.svn ]; then 
+     echo -e "\e[1;34mUpdating TrueCrack.\e[0m"
+     cd /pentest/passwords/truecrack/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling TrueCrack.\e[0m"
+     rm -rf /pentest/passwords/truecrack/
+     svn co http://truecrack.googlecode.com/svn/ /pentest/passwords/truecrack/
      echo
 fi
 
