@@ -842,7 +842,7 @@ if [ -d /pentest/web/uniscan/.git ]; then
 else 
 	echo -e "\e[1;33mInstalling Uniscan.\e[0m"
 	rm -rf /pentest/web/uniscan
-	git clone http://git.code.sf.net/p/uniscan/code  /pentest/web/uniscan
+	git clone http://git.code.sf.net/p/uniscan/code /pentest/web/uniscan
 	echo 
 fi
 
