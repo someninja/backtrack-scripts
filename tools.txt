@@ -29,7 +29,7 @@ Database (GC)
      sqlmap
      Sqlninja 
 
-Enumeration
+Enumeration (GC)
      CMS Explorer
      dnsenum
      dnsmap
