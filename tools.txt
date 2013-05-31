@@ -83,10 +83,12 @@ Passwords
      Pipal
      smbexe
 
-Reporting
+Reporting (GC)
 
-Reverse Engineering
-
+Reverse Engineering (GC)
+     Binwalk
+     JavaSnoop
+     
 RFID
      RFIDIOt
 
