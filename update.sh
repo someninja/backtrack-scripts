@@ -143,6 +143,17 @@ else
      echo
 fi
 
+if [ -d /pentest/scanners/davtest/.svn ]; then 
+     echo -e "\e[1;34mUpdating DAVTest.\e[0m"
+     cd /pentest/scanners/davtest/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling DAVTest.\e[0m"
+     rm -rf /pentest/scanners/davtest/
+     svn co http://davtest.googlecode.com/svn/trunk/ /pentest/scanners/davtest/
+     echo
+fi
+
 if [ -d /pentest/backdoors/dbd/.git ]; then 
      echo -e "\e[1;34mUpdating dbd.\e[0m"
      cd /pentest/backdoors/dbd/ ; git pull
