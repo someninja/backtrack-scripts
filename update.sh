@@ -33,6 +33,17 @@ else
      echo
 fi
 
+if [ -d /pentest/reverse-engineering/binwalk/.svn ]; then 
+     echo -e "\e[1;34mUpdating Binwalk.\e[0m"
+     cd /pentest/reverse-engineering/binwalk/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling Binwalk.\e[0m"
+     rm -rf /pentest/reverse-engineering/binwalk/
+     svn co http://binwalk.googlecode.com/svn/trunk/ /pentest/reverse-engineering/binwalk/
+     echo
+fi
+
 if [ -d /pentest/bluetooth/bluediving/.git ]; then 
      echo -e "\e[1;34mUpdating Bluediving.\e[0m"
      cd /pentest/bluetooth/bluediving/ ; git pull
@@ -379,6 +390,17 @@ else
      echo -e "\e[1;33mInstalling Intersect.\e[0m"
      rm -rf /pentest/backdoors/intersect/
      git clone git://github.com/ohdae/Intersect-2.5.git /pentest/backdoors/intersect/
+     echo
+fi
+
+if [ -d /pentest/reverse-engineering/javasnoop/.svn ]; then 
+     echo -e "\e[1;34mUpdating JavaSnoop.\e[0m"
+     cd /pentest/reverse-engineering/javasnoop/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling JavaSnoop.\e[0m"
+     rm -rf /pentest/reverse-engineering/javasnoop/
+     svn co http://javasnoop.googlecode.com/svn/trunk/ /pentest/reverse-engineering/javasnoop/
      echo
 fi
 
