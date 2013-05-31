@@ -395,6 +395,17 @@ fi
 
 echo -e "\e[1;34mUpdating JoomScan.\e[0m" ; cd /pentest/web/joomscan/ ; ./joomscan.pl update ; echo
 
+if [ -d /pentest/misc/kautilya/.svn ]; then
+     echo -e "\e[1;34mUpdating Kautilya.\e[0m"
+     cd /pentest/misc/kautilya/ ; svn up
+     echo
+else 
+     echo -e "\e[1;33mInstalling Kautilya.\e[0m"
+     rm -rf /pentest/misc/kautilya/
+     svn co http://kautilya.googlecode.com/svn/trunk/ /pentest/misc/kautilya/
+     echo
+fi
+
 if [ -d /pentest/passwords/keimpx/.git ]; then 
      echo -e "\e[1;34mUpdating keimpx.\e[0m"
      cd /pentest/passwords/keimpx/ ; git pull
