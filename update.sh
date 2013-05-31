@@ -900,6 +900,17 @@ else
      echo
 fi
 
+if [ -d /pentest/tunneling/udptunnel/.svn ]; then 
+     echo -e "\e[1;34mUpdating udptunnel.\e[0m"
+     cd /pentest/tunneling/udptunnel/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling udptunnel.\e[0m"
+     rm -rf /pentest/tunneling/udptunnel/
+     svn co http://udptunnel.googlecode.com/svn/trunk/ /pentest/tunneling/udptunnel/
+     echo
+fi
+
 if [ -d /pentest/web/uniscan/.git ]; then 
 	echo -e "\e[1;34mUpdating Uniscan.\e[0m"
 	cd /pentest/web/uniscan 
