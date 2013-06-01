@@ -116,7 +116,7 @@ VoIP
      ohrwurm
      SIPVicious
 
-Web - not finished
+Web
      BeEF
      dotdotpwn
      Fimap
@@ -127,13 +127,13 @@ Web - not finished
      skipfish
      sslstrip
      SSLyze
+     Uniscan
      w3af
      waffit
      WebSlayer
-     WPScan
-     Uniscan 
+     WPScan 
 
-Wireless - not finished
+Wireless
      aircrack-ng
      Fern WiFi Cracker
      FreeRADIUS
