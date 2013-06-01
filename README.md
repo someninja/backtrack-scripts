@@ -10,7 +10,7 @@ All scripts must be ran from this location.
 
 Run setup.sh
 
-Update BackTrack by using update.sh or the main menu from discover.sh.
+Update BackTrack by running update.sh or using the main menu from discover.sh.
 
 Support for Kali
 ===================
