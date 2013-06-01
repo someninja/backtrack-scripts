@@ -765,6 +765,17 @@ else
      echo
 fi
 
+if [ -d /pentest/voip/sipvicious/.svn ]; then 
+     echo -e "\e[1;34mUpdating SIPVicious.\e[0m"
+     cd /pentest/voip/sipvicious/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling SIPVicious.\e[0m"
+     rm -rf /pentest/voip/sipvicious/
+     svn co http://sipvicious.googlecode.com/svn/trunk/ /pentest/voip/sipvicious/
+     echo
+fi
+
 if [ -d /pentest/web/skipfish/.git ]; then
      echo -e "\e[1;34mUpdating skipfish.\e[0m"
      cd /pentest/web/skipfish/ ; git pull

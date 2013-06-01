@@ -1,14 +1,10 @@
-Because the main repos are no longer being updated, I'm in the process of slowly going through each folder in 
-the pentest directory and adding the corresponding Google Code or GitHub repos for each tool that I can find.
-A GitHub lookup have been completed for all folders.
+Updates the following:
 
-update - updates the following:
-
-date & time
+Date & time
 BackTrack distro
 backtrack-scripts 
 
-Backdoors (GC)
+Backdoors
      dbd
      Intersect
      iodine
@@ -16,20 +12,20 @@ Backdoors (GC)
      unix-privesc-check
      Weevely
      
-Bluetooth (GC)
+Bluetooth
      Bluediving
      Bluelog
      Bluepot
 
-Cisco (GC)
+Cisco
 
-Database (GC)
+Database
      HexorBase
      SQLBrute
      sqlmap
      Sqlninja 
 
-Enumeration (GC)
+Enumeration
      CMS Explorer
      dnsenum
      dnsmap
@@ -45,7 +41,7 @@ Enumeration (GC)
      theHarvester
      WhatWeb 
 
-Exploits (GC)
+Exploits
      exploit-db
      JBoss Autopwn
      Metasploit
@@ -55,25 +51,25 @@ Exploits (GC)
      Smartphone-Pentest-Framework 
      Termineter
      
-Forensics (GC)
+Forensics
      peepdf
      samdump
      testdisk 
 
-Fuzzers (GC)
+Fuzzers
      Bruteforce Exploit Detector
      sickfuzz
      voiper 
 
-Libs (GC)
+Libs
      LibHijack 
 
-Misc (GC)
+Misc
      creepy
      Kautilya
      OpenVAS 
 
-Passwords (GC)
+Passwords
      chntpw
      creddump
      cupp
@@ -85,41 +81,42 @@ Passwords (GC)
      smbexe
      TrueCrack
 
-Reporting (GC)
+Reporting
 
-Reverse Engineering (GC)
+Reverse Engineering
      Binwalk
      JavaSnoop
      
-RFID (GC)
+RFID
      RFIDIOt
 
-Scanners (GC)
+Scanners
      DAVTest
      deblaze
 
-Sniffers (GC)
+Sniffers
      easy-creads
      Ghost Phisher
      mitmproxy
      Subterfuge
      wifitap
 
-Stressing (GC)
+Stressing
      DHCPig
 
-Telephony (GC)
+Telephony
      detected
      WarVox 
 
-Tunneling (GC)
+Tunneling
      pwnat
      udptunnel
 
 VoIP
      ohrwurm
+     SIPVicious
 
-Web
+Web - not finished
      BeEF
      dotdotpwn
      Fimap
@@ -136,7 +133,7 @@ Web
      WPScan
      Uniscan 
 
-Wireless
+Wireless - not finished
      aircrack-ng
      Fern WiFi Cracker
      FreeRADIUS
