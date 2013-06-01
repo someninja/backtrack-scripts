@@ -133,6 +133,7 @@ Web - finishing up
      w3af
      waffit
      WebSlayer
+     Wfuzz
      WPScan 
 
 Wireless

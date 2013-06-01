@@ -1038,6 +1038,17 @@ else
      echo
 fi
 
+if [ -d /pentest/web/wfuzz/.svn ]; then
+     echo -e "\e[1;34mUpdating Wfuzz.\e[0m"
+     cd /pentest/web/wfuzz/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling Wfuzz.\e[0m"
+     rm -rf /pentest/web/wfuzz/
+     svn co http://wfuzz.googlecode.com/svn/trunk/ /pentest/web/wfuzz/
+     echo
+fi
+
 if [ -d /pentest/enumeration/web/whatweb/.git ]; then
      echo -e "\e[1;34mUpdating WhatWeb.\e[0m"
      cd /pentest/enumeration/web/whatweb/ ; git pull
