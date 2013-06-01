@@ -124,6 +124,7 @@ Web - finishing up
      JoomScan
      Nikto
      PadBuster
+     Plecost
      skipfish
      sslstrip
      SSLyze

@@ -655,6 +655,17 @@ else
      echo
 fi
 
+if [ -d /pentest/web/plecost/.git ]; then
+     echo -e "\e[1;34mUpdating Plecost.\e[0m"
+     cd /pentest/web/plecost/ ; git pull
+     echo
+else 
+     echo -e "\e[1;33mInstalling Plecost.\e[0m"
+     rm -rf /pentest/web/plecost/
+     git clone https://code.google.com/p/plecost/ /pentest/web/plecost/
+     echo
+fi
+
 if [ -d /pentest/backdoors/powersploit/.git ]; then 
      echo -e "\e[1;34mUpdating PowerSploit.\e[0m"
      cd /pentest/backdoors/powersploit/ ; git pull
