@@ -798,14 +798,14 @@ else
      echo
 fi
 
-if [ -d /pentest/web/skipfish/.git ]; then
+if [ -d /pentest/web/skipfish/.svn ]; then
      echo -e "\e[1;34mUpdating skipfish.\e[0m"
-     cd /pentest/web/skipfish/ ; git pull
+     cd /pentest/web/skipfish/ ; svn up
      echo
 else 
      echo -e "\e[1;33mInstalling skipfish.\e[0m"
      rm -rf /pentest/web/skipfish/
-     git clone git://github.com/spinkham/skipfish.git /pentest/web/skipfish/
+     svn co http://skipfish.googlecode.com/svn/trunk/ /pentest/web/skipfish/
      echo
 fi
 
