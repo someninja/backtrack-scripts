@@ -80,10 +80,11 @@ def lan():
 ##############################################################################################################
 
 def kali_bleeding_edge():
-	print colouryellow.format('[*] Adding Kali bleeding edge repository')
-	os.system('echo deb http://repo.kali.org/kali kali-bleeding-edge main >> /etc/apt/sources.list')
-	os.system('apt-get update')
-	os.system('apt-get upgrade -y')
+     print coloryellow.format('[*] Adding Kali bleeding edge repository')
+     time.sleep(1)
+     os.system('echo deb http://repo.kali.org/kali kali-bleeding-edge main >> /etc/apt/sources.list')
+     os.system('apt-get update')
+     os.system('apt-get upgrade -y')
 
 
 ##############################################################################################################
