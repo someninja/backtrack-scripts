@@ -125,6 +125,7 @@ Web - finishing up
      Nikto
      PadBuster
      Plecost
+     ProxyStrike
      skipfish
      sslstrip
      SSLyze

@@ -677,6 +677,17 @@ else
      echo
 fi
 
+if [ -d /pentest/web/proxystrike/.svn ]; then
+     echo -e "\e[1;34mUpdating ProxyStrike.\e[0m"
+     cd /pentest/web/proxystrike/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling ProxyStrike.\e[0m"
+     rm -rf /pentest/web/proxystrike/
+     svn co http://proxystrike.googlecode.com/svn/trunk/ /pentest/web/proxystrike/
+     echo
+fi
+
 if [ -d /pentest/tunneling/pwnat/.git ]; then
      echo -e "\e[1;34mUpdating pwnat.\e[0m"
      cd /pentest/tunneling/pwnat/ ; git pull
