@@ -536,7 +536,7 @@ case $choice in
      mv squatting.txt whois* /$user/$domain/domain/
      mv doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/files/ 2>/dev/null
      mv zreport /$user/$domain/reports/passive-recon.txt
-     
+
      rm robtex* subdomains* tmp* z*
 
      echo
@@ -552,7 +552,7 @@ case $choice in
      ##############################################################
 
      f_runlocally
-     
+
      firefox &
      sleep 2
      firefox -new-tab arin.net &
@@ -621,7 +621,7 @@ case $choice in
      cat tmp2 | tr '[A-Z]' '[a-z]' | sort -u > zemail
 
      # Check if file is empty
-     if [ ! -s zemail ]; then 
+     if [ ! -s zemail ]; then
           rm zemail
      fi
 
@@ -676,7 +676,7 @@ case $choice in
      awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > tmp5
      # Clean up
      cat -s tmp5 > zloadbalancing
-     
+
      echo
      echo "Traceroute"
      echo "     UDP                  (8/$total)"
@@ -774,7 +774,7 @@ case $choice in
      printf 'The supporting data folder is located at \e[1;33m%s\e[0m\n' /$user/$domain/
      echo
      read -p "Press <return> to continue."
-     
+
      firefox /$user/$domain/index.htm &
      exit
      ;;
@@ -891,9 +891,9 @@ while(<$handle>)
 	# Read report lines
 	while (/((?:[\x00-\xFF]*?(?=Nmap\s+scan\s+report)|[\x00-\xFF]*))/mixg) {
 		my $report = $1;
-		
+
 		# Print IP if host is REALLY up
-		if (($report =~ /MAC\s+Address/mix) 
+		if (($report =~ /MAC\s+Address/mix)
 		or ($report =~ /Nmap\s+scan\s+report\s+for\s+\S+?\s+\(\S+\)/mix)) {
 			my ($ip) = $report =~ /(\d+\.\d+\.\d+\.\d+)/mix;
 			print $output "$ip\n";

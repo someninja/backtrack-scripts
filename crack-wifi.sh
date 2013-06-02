@@ -27,7 +27,7 @@ if [ ! -s tmp ]; then
      exit
 fi
 
-echo -e "\e[1;33m[*] Setting variables.\e[0m" 
+echo -e "\e[1;33m[*] Setting variables.\e[0m"
 
 break="=================================================="
 datestamp=$(date +%F_%T)
@@ -102,7 +102,7 @@ if [ -f $workdir/keys ]; then
 		echo "1^WIFINET^8^passphrase1^WPA^n/a^First network passphrase guessed"
 		echo "2^WIFI NET^5^passphrase2^WPA^n/a^Note that this ESSID has a space in the name"
 		echo ""
-		echo "Make these changes, then re-launch the program."	
+		echo "Make these changes, then re-launch the program."
 		echo
           echo
           exit
@@ -158,7 +158,7 @@ case $choice in
      2) f_CrackWEP;;
      3) f_CrackWPA;;
      4) f_Keys;;
-     5) 
+     5)
      airmon-ng stop $monitor &>/dev/null
      killall -q wpa_supplicant
      killall -q dhclient
@@ -348,7 +348,7 @@ elif [[ $zz =  "Join a network" ]]; then
 		echo
 		echo "Now connected to the wireless network \"$x\"."
 		echo
-		echo -n "When ready to disconnect, type EXIT and press <return> to continue: "; read DISC
+		echo -n "When ready to disconnect, type EXIT and press <return> to continue: " ; read DISC
 
 		if [ $DISC = "EXIT" ]; then
 		     killall -q dhclient
@@ -542,7 +542,7 @@ sleep 60
 
 aircrack-ng -a 1 *.cap
 
-pkill -9 xterm 2>/dev/null			# BUG - this is not working.  Still seeing output on the screen 
+pkill -9 xterm 2>/dev/null			# BUG - this is not working.  Still seeing output on the screen
 
 echo "Your results will be saved to a file."
 echo
@@ -757,4 +757,3 @@ fi
 
 # Program
 f_Start
-

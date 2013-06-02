@@ -26,8 +26,8 @@ import os
 os.system('clear')                           # Clear the screen
 os.chdir('newdir')                           # Change directory
 os.mkdir('/root/test/')                      # Create a directory
-os.rmdir('tmp')                              # Delete a directory
-os.remove('tmp')                             # Delete a file
+os.rmdir('tmp')                              # Remove a directory
+os.remove('tmp')                             # Remove a file
 os.rename('tmp' 'tmp2')                      # Rename a file
 
 ##############################
@@ -55,25 +55,17 @@ if int(port) in range(1,65535):              # Validate port range
 
 ##############################
 
-f = open ('tmp','w')                         # Setup a write connection to file
+f = open ('tmp','w')                         # Setup a write connection to a file
 f.write('These are my notes.')               # Write data to file
 f.close()                                    # Close the connection
 
-f = open('tmp','r')                          # Setup a read connection to file
+f = open('tmp','r')                          # Setup a read connection to a file
 filedata = f.read()                          # Read the file
 f.close()                                    # Close the connection
 filedata = filedata.split('\n')              # Turn into a list
 
 ##############################
 
-execfile('recon.py')                         # Run python script
-subprocess.call('crack-wifi.sh')             # Run bash script
-
-##############################
-
-output = ""
-output = str(args.output)
-o = open(output, "w")
-sys.stdout = o
-
+execfile('recon.py')                         # Run a python script
+subprocess.call('crack-wifi.sh')             # Run a bash script
 

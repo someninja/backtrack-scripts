@@ -5,7 +5,7 @@ filedata = f.read()                                # Read the file
 f.close()                                          # Close the connection
 filedata = filedata.split('\n')                    # Turn into a list
 
-#####################################################################################################
+##############################
 
 out = []                                           # Create an empty array
 
@@ -19,4 +19,3 @@ out.sort()                                         # Sort
 
 for j in out:
      print j
-
