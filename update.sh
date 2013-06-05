@@ -155,7 +155,7 @@ else
      git clone git://github.com/ilektrojohn/creepy.git /pentest/misc/creepy/
      echo
 fi
-}
+}creepycreepy
 
 cupp(){
 if [ -d /pentest/passwords/cupp/.git ]; then
@@ -1225,7 +1225,7 @@ else
 fi
 }
 
-
+weevely(){
 if [ -d /pentest/backdoors/web/weevely/.git ]; then
      echo -e "\e[1;34mUpdating Weevely.\e[0m"
      cd /pentest/backdoors/web/weevely/ ; git pull
@@ -1236,7 +1236,9 @@ else
      git clone git://github.com/epinna/Weevely.git /pentest/backdoors/web/weevely/
      echo
 fi
+}
 
+wfuzz(){
 if [ -d /pentest/web/wfuzz/.svn ]; then
      echo -e "\e[1;34mUpdating Wfuzz.\e[0m"
      cd /pentest/web/wfuzz/ ; svn up
@@ -1247,7 +1249,9 @@ else
      svn co http://wfuzz.googlecode.com/svn/trunk/ /pentest/web/wfuzz/
      echo
 fi
+}
 
+whatweb(){
 if [ -d /pentest/enumeration/web/whatweb/.git ]; then
      echo -e "\e[1;34mUpdating WhatWeb.\e[0m"
      cd /pentest/enumeration/web/whatweb/ ; git pull
@@ -1258,7 +1262,9 @@ else
      git clone git://github.com/urbanadventurer/WhatWeb.git /pentest/enumeration/web/whatweb/
      echo
 fi
+}
 
+wifitap(){
 if [ -d /pentest/sniffers/wifitap/.git ]; then
      echo -e "\e[1;34mUpdating wifitap.\e[0m"
      cd /pentest/sniffers/wifitap/ ; git pull
@@ -1269,7 +1275,9 @@ else
      git clone git://github.com/GDSSecurity/wifitap.git /pentest/sniffers/wifitap/
      echo
 fi
+}
 
+wifite(){
 if [ -d /pentest/wireless/wifite/.svn ]; then
      echo -e "\e[1;34mUpdating WiFite.\e[0m"
      cd /pentest/wireless/wifite/ ; svn up
@@ -1280,7 +1288,9 @@ else
      svn co http://wifite.googlecode.com/svn/trunk/ /pentest/wireless/wifite/
      echo
 fi
+}
 
+wpscan(){
 if [ -d /pentest/web/wpscan/.git ]; then
      echo -e "\e[1;34mUpdating WPScan.\e[0m"
      cd /pentest/web/wpscan/ ; ./wpscan.rb --update
@@ -1294,7 +1304,9 @@ else
      gem install bundler && bundle install --without test development
      echo
 fi
+}
 
+misc(){
 cp /opt/scripts/alias /root/.bash_aliases ; source /root/.bash_aliases
 
 echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/
@@ -1303,4 +1315,30 @@ echo -e "\e[1;31mIMPORTANT NOTES\e[0m"
 echo "[*] If you discover you cannot run msfconsole after updating, please see notes.txt for the fix."
 echo "[*] The new repo for BackTrack Scripts is now located at https://github.com/leebaird/backtrack-scripts."
 echo
-echo
+}
+
+##
+# Call functions
+##
+
+time
+bt
+aircrack
+beef
+binwalk
+bluediving
+bluelog
+bluepot
+bed
+chntpw
+cms_explorer
+creddump
+creepy
+cupp
+davtest
+dbd
+deadicated
+deblaze
+dhcpig
+dotdotpwn
+dnsenum
