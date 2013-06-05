@@ -155,7 +155,7 @@ else
      git clone git://github.com/ilektrojohn/creepy.git /pentest/misc/creepy/
      echo
 fi
-}creepycreepy
+}
 
 cupp(){
 if [ -d /pentest/passwords/cupp/.git ]; then
