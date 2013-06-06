@@ -52,14 +52,14 @@ if choice == "1":
           total = 27
 
           print 'goofile                   (1/'+str(total)+')'
-          os.system('python goofile -d '+domain+' -f doc > tmp')
-          os.system('python goofile -d '+domain+' -f docx >> tmp')
-          os.system('python goofile -d '+domain+' -f pdf >> tmp')          
-          os.system('python goofile -d '+domain+' -f ppt >> tmp')
-          os.system('python goofile -d '+domain+' -f pptx >> tmp')
-          os.system('python goofile -d '+domain+' -f txt >> tmp')          
-          os.system('python goofile -d '+domain+' -f xls >> tmp')
-          os.system('python goofile -d '+domain+' -f xlsx >> tmp')
+          os.system('goofile -d '+domain+' -f doc > tmp')
+          os.system('goofile -d '+domain+' -f docx >> tmp')
+          os.system('goofile -d '+domain+' -f pdf >> tmp')          
+          os.system('goofile -d '+domain+' -f ppt >> tmp')
+          os.system('goofile -d '+domain+' -f pptx >> tmp')
+          os.system('goofile -d '+domain+' -f txt >> tmp')          
+          os.system('goofile -d '+domain+' -f xls >> tmp')
+          os.system('goofile -d '+domain+' -f xlsx >> tmp')
 
           f_doc = open('doc.txt','a')
           f_pdf = open('pdf.txt','a')
