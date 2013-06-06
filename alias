@@ -6,7 +6,7 @@ alias cl='clear ; ls -l'
 alias d='cd /root/Desktop/ ; clear'
 alias e='exit'
 alias i='ifconfig ; ping google.com -c3 ; echo'
-alias k='cd /opt/scripts/kali/'
+alias k='cd /opt/scripts/kali/ ; clear'
 alias l='ls -l'
 alias n='netstat -antup ; echo ;
 echo -n "Interface:    " ; ifconfig | grep -B10 'Loopback' | grep 'Ethernet' | cut -d " " -f1 ;
