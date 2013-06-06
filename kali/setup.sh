@@ -3,7 +3,7 @@
 clear
 
 echo -e "\e[1;34mSetting up aliases.\e[0m"
-cp /opt/scripts/alias /root/.bash_aliases
+cp /opt/scripts/kali/alias /root/.bash_aliases
 source /root/.bash_aliases
 
 echo
