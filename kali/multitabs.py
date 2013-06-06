@@ -13,9 +13,9 @@ runlocally()
 
 print colorblue.format('Open multiple tabs in Firefox with:')
 print
-print '1.  List containing IPs and/or URLs.'
-print '2.  Directories from a domain\'s robot.txt.'
-print '3.  Previous menu'
+print '1. List containing IPs and/or URLs.'
+print '2. Directories from a domain\'s robot.txt.'
+print '3. Previous menu'
 print
 choice = raw_input('Choice: ')
 
@@ -23,12 +23,12 @@ if choice == "1":
      print
      location = raw_input('Enter the location of your list: ')
 
-     if os.path.exists(location):
-          f = open(location,'r')                                 # Setup a read connection directory
-          filedata = f.read()                                    # Read the file
-          f.close()                                              # Close the connection
-          filedata = filedata.split('\n')                        # Turn into a list
-          filedata = [x for x in filedata if not x == ""]        # Ignore blank lines
+     if os.path.isfile(location):
+          f = open(location,'r') # Setup a read connection directory
+          filedata = f.read() # Read the file
+          f.close() # Close the connection
+          filedata = filedata.split('\n') # Turn into a list
+          filedata = [x for x in filedata if not x == ""] # Ignore blank lines
 
           port = raw_input('Port: ')
 
@@ -94,6 +94,5 @@ if choice == "2":
 
 if choice == "3":
      main()
-else: 
+else:
      error()
-

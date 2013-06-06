@@ -36,7 +36,7 @@ def banner():
      print
      print '______  ___ ______ ______  _____  _    _ ______  _____'
      print '|     \  |  |____  |      |     |  \  /  |_____ |____/'
-     print '|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_ Kali'
+     print '|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_Kali'
      print
      print 'By Lee Baird'
      print
@@ -55,7 +55,7 @@ def error():
      print
      print colorred.format(line)
      print
-     print colorred.format('   *** Invalid choice or entry. ***   ')
+     print colorred.format(' *** Invalid choice or entry. *** ')
      print
      print colorred.format(line)
      time.sleep(2)
@@ -128,8 +128,8 @@ def main():
                reinstall_nmap()
           elif choice == "12":
                listener()
-	  elif choice == "13":
-	       kali_bleeding_edge()
+          elif choice == "13":
+               kali_bleeding_edge()
           elif choice == "14":
                sys.exit(0)
           elif choice == "99":
@@ -143,20 +143,20 @@ def menu():
      os.system('clear')
      banner()
      print colorblue.format('RECON')
-     print '1.  Scrape'
+     print '1. Scrape'
      print
      print colorblue.format('DISCOVER')+' - Host discovery, port scanning, service enumeration and OS'
      print 'identification using Nmap, Nmap scripts and Metasploit scanners.'
-     print '2.  Ping Sweep'
-     print '3.  Single IP, URL or Range'
-     print '4.  Local Area Network'
-     print '5.  List'
-     print '6.  CIDR Notation'
+     print '2. Ping Sweep'
+     print '3. Single IP, URL or Range'
+     print '4. Local Area Network'
+     print '5. List'
+     print '6. CIDR Notation'
      print
      print colorblue.format('WEB')
-     print '7.  Open multiple tabs in Firefox'
-     print '8.  Nikto'
-     print '9.  SSL Check'
+     print '7. Open multiple tabs in Firefox'
+     print '8. Nikto'
+     print '9. SSL Check'
      print
      print colorblue.format('MISC')
      print '10. Crack WiFi'
@@ -226,9 +226,9 @@ def sslcheck():
 def typeofscan():
      colorblue.format('Type of scan:')
      print
-     print '1.  External'
-     print '2.  Internal'
-     print '3.  Previous menu'
+     print '1. External'
+     print '2. Internal'
+     print '3. Previous menu'
      print
      choice = raw_input('Choice: ')
 
@@ -250,7 +250,7 @@ def typeofscan():
 
      if choice == "3":
           main()
-     else: 
+     else:
           error()
 
 ##############################################################################################################
