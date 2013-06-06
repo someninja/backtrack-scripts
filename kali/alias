@@ -15,10 +15,22 @@ echo -n "Internal IP:  " ; ifconfig | grep -B10 'Loopback' | grep 'Bcast' | cut 
 echo -n "External IP:  " ; curl ifconfig.me ; echo'
 alias r='cd /root/ ; clear'
 alias s='cd /opt/scripts/ ; clear'
-alias update='clear ; echo ; echo ; 
-echo -e "\e[1;34mUpdating Kali.\e[0m" ;
-apt-get update ; apt-get -y upgrade ; apt-get -y dist-upgrade ; apt-get -y autoremove ; apt-get -y autoclean ; echo ;
-echo -e "\e[1;34mUpdating scripts.\e[0m" ; cd /opt/scripts/ ; git pull ;
-echo ;
+
+alias update='
+clear
+echo
+echo 
+echo -e "\e[1;34mUpdating Kali.\e[0m"
+apt-get update ; apt-get -y upgrade ; apt-get -y dist-upgrade ; apt-get -y autoremove ; apt-get -y autoclean
+echo
+echo -e "\e[1;34mUpdating scripts.\e[0m"
+cd /opt/scripts/ ; git pull
+echo
+cp /opt/scripts/kali/alias /root/.bash_aliases ; source /root/.bash_aliases
+
+echo -e "\e[1;34mUpdating locate database.\e[0m" ; updatedb
+
+cd /root/
+echo
 echo'
 
