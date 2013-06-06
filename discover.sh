@@ -386,7 +386,7 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' | sed 's/.edu./.edu/g' | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | sort -k3 > /$user/$domain/dns/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(ADDITIONAL SECTION|ANSWER SECTION|DNSKEY|NSEC3PARAM|Query time|RRSIG|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' | sed 's/.edu./.edu/g' | sed 's/.gov./.gov/g' | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | sort -k3 > /$user/$domain/dns/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
      grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/dns/black-listed.txt
