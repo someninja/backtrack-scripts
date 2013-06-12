@@ -326,7 +326,7 @@ case $choice in
      # Change to lower case
      cat tmp4 | tr '[A-Z]' '[a-z]' > tmp5
      grep $domain tmp5 | sort -u > subdomains2.txt
-     cat subdomain* | grep -v "$domain\." | grep -v '.nat.' | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
+     cat subdomain* | grep -v "$domain\." | egrep -v '(.nat.|252f)' | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
 
      ##############################################################
 
@@ -654,13 +654,13 @@ case $choice in
 
      sed -n '/Now performing/,/Subnets found/p' tmp3 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
 
-     cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
+     cat zdnsrecon-sub zsubdomains-fierce | grep -v "$domain\." | grep -v '.nat.' | column -t | sort -u > zsubdomains
 
      if [ -f /$user/$domain/dns/subdomains.txt ]; then
-          cat /$user/$domain/dns/subdomains.txt zsubdomains | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
+          cat /$user/$domain/dns/subdomains.txt zsubdomains | column -t | sort -u > zsubdomains-combined
           mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
      fi
-
+exit
      awk '{print $2}' /$user/$domain/dns/subdomains.txt > tmp
      grep $domain /$user/$domain/dns/records.txt | awk '{print $4}' >> tmp
      grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' -o tmp | sort -u > tmp2
