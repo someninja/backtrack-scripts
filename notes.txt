@@ -106,7 +106,7 @@ sed 's/\.\.\.//g'                                   # Replace 3 periods with not
 cat tmp | tr ';' '\n'                               # Replace semicolon with a new line
 
 sort -k2                                            # Sort by the second column
-sed "s/$FOO./$FOO/g"                                # Variables - use double quotes
+sed "s/$FOO./$FOO/g"                                # Variables - when using sed or grep, use double quotes
 
 ##############################
 

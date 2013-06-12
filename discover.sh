@@ -326,7 +326,7 @@ case $choice in
      # Change to lower case
      cat tmp4 | tr '[A-Z]' '[a-z]' > tmp5
      grep $domain tmp5 | sort -u > subdomains2.txt
-     cat subdomain* | grep -v '.nat.' | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
+     cat subdomain* | grep -v "$domain\." | grep -v '.nat.' | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
 
      ##############################################################
 
@@ -537,7 +537,7 @@ case $choice in
      mv doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/files/ 2>/dev/null
      mv zreport /$user/$domain/reports/passive-recon.txt
 
-     rm robtex* subdomains* tmp* z*
+     rm robtex* subdomains* tmp* z* /$user/$domain/worksheet.xlsx
 
      echo
      echo $line
@@ -579,7 +579,9 @@ case $choice in
      sleep 1
      firefox -new-tab sec.gov/edgar/searchedgar/companysearch.html &
      sleep 1
-     firefox -new-tab google.com/finance/
+     firefox -new-tab google.com/finance/ &
+     sleep 1
+     firefox -new-tab reuters.com/finance/stocks
      echo
      echo
      exit
@@ -655,7 +657,7 @@ case $choice in
      cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
 
      if [ -f /$user/$domain/dns/subdomains.txt ]; then
-          cat /$user/$domain/dns/subdomains.txt zsubdomains | column -t | sort -u > zsubdomains-combined
+          cat /$user/$domain/dns/subdomains.txt zsubdomains | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
           mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
      fi
 
