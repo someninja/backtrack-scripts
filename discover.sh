@@ -646,7 +646,7 @@ case $choice in
 
      echo "     Sub-domains (~5 min) (5/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
-     grep $domain tmp | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
+     grep $domain tmp | grep -v "$domain\." | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
 
      echo
      echo "Fierce (~5 min)           (6/$total)"
@@ -654,13 +654,13 @@ case $choice in
 
      sed -n '/Now performing/,/Subnets found/p' tmp3 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
 
-     cat zdnsrecon-sub zsubdomains-fierce | grep -v "$domain\." | grep -v '.nat.' | column -t | sort -u > zsubdomains
+     cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
 
      if [ -f /$user/$domain/dns/subdomains.txt ]; then
           cat /$user/$domain/dns/subdomains.txt zsubdomains | column -t | sort -u > zsubdomains-combined
           mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
      fi
-exit
+
      awk '{print $2}' /$user/$domain/dns/subdomains.txt > tmp
      grep $domain /$user/$domain/dns/records.txt | awk '{print $4}' >> tmp
      grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' -o tmp | sort -u > tmp2
