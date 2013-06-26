@@ -13,7 +13,7 @@ print colorblue.format('SSL Check')
 print
 location = raw_input('Enter the location of your list: ')
 
-if os.path.exists(location):
+if os.path.isfile(location):
      print location
      goodbye()
 else:
