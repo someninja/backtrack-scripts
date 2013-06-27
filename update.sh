@@ -886,8 +886,16 @@ else
      echo
 fi
 
-echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
-cd /usr/share/subterfuge ; svn cleanup ; svn up ; echo
+if [ -d /usr/share/subterfuge/.svn ]; then
+     echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
+     cd /usr/share/subterfuge/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling Subterfuge.\e[0m"
+     rm -rf /usr/share/subterfuge/
+     svn co http://subterfuge.googlecode.com/svn/trunk/ /usr/share/subterfuge/
+     echo
+fi
 
 if [ -d /pentest/enumeration/smtp/swaks/.git ]; then
      echo -e "\e[1;34mUpdating swaks.\e[0m"
