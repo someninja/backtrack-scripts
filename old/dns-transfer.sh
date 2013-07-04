@@ -15,12 +15,12 @@ echo
 read -p "Domain: " domain
 
 if [ -z $domain ]; then
-    echo
-    echo "#########################"
-    echo
-    echo "Invalid choice."
-    echo
-    exit
+     echo
+     echo "#########################"
+     echo
+     echo "Invalid choice."
+     echo
+     exit
 fi
 
 echo
