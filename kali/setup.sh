@@ -19,4 +19,8 @@ echo -e "\e[1;34mInstalling xdotool.\e[0m"
 apt-get install xdotool
 
 echo
+echo -e "\e[1;34mInstalling arp-scan.\e[0m"
+apt-get install arp-scan
+
+echo
 echo
