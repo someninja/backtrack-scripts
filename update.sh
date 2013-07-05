@@ -22,7 +22,7 @@ if [ -d /pentest/wireless/aircrack-ng/.git ]; then
 else
      echo -e "\e[1;33mInstalling aircrack-ng.\e[0m"
      rm -rf /pentest/wireless/aircrack-ng/
-     git clone git://github.com/aircrack-ng/aircrack-ng.git /pentest/wireless/aircrack-ng/
+     git clone http://github.com/aircrack-ng/aircrack-ng.git /pentest/wireless/aircrack-ng/
      echo
 fi
 }
@@ -35,7 +35,7 @@ if [ -d /pentest/web/beef/.git ]; then
 else
      echo -e "\e[1;33mInstalling BeEF.\e[0m"
      rm -rf /pentest/web/beef/
-     git clone git://github.com/beefproject/beef.git /pentest/web/beef/
+     git clone http://github.com/beefproject/beef.git /pentest/web/beef/
      echo
 fi
 }
@@ -61,7 +61,7 @@ if [ -d /pentest/bluetooth/bluediving/.git ]; then
 else
      echo -e "\e[1;33mInstalling Bluediving.\e[0m"
      rm -rf /pentest/bluetooth/bluediving/
-     git clone git://github.com/balle/bluediving.git /pentest/bluetooth/bluediving/
+     git clone http://github.com/balle/bluediving.git /pentest/bluetooth/bluediving/
      echo
 fi
 }
@@ -74,7 +74,7 @@ if [ -d /pentest/bluetooth/bluelog/.git ]; then
 else
      echo -e "\e[1;33mInstalling Bluelog.\e[0m"
      rm -rf /pentest/bluetooth/bluelog/
-     git clone git://github.com/MS3FGX/Bluelog.git /pentest/bluetooth/bluelog/
+     git clone http://github.com/MS3FGX/Bluelog.git /pentest/bluetooth/bluelog/
      echo
 fi
 }
@@ -100,7 +100,7 @@ if [ -d /pentest/fuzzers/bed/.git ]; then
 else
      echo -e "\e[1;33mInstalling Bed.\e[0m"
      rm -rf /pentest/fuzzers/bed/
-     git clone git://github.com/wireghoul/bed.git /pentest/fuzzers/bed/
+     git clone http://github.com/wireghoul/bed.git /pentest/fuzzers/bed/
      echo
 fi
 }
@@ -113,7 +113,7 @@ if [ -d /pentest/passwords/chntpw/.git ]; then
 else
      echo -e "\e[1;33mInstalling chntpw.\e[0m"
      rm -rf /pentest/passwords/chntpw/
-     git clone git://github.com/Tody-Guo/chntpw.git /pentest/passwords/chntpw/
+     git clone http://github.com/Tody-Guo/chntpw.git /pentest/passwords/chntpw/
      echo
 fi
 }
@@ -152,7 +152,7 @@ if [ -d /pentest/misc/creepy/.git ]; then
 else
      echo -e "\e[1;33mInstalling creepy.\e[0m"
      rm -rf /pentest/misc/creepy/
-     git clone git://github.com/ilektrojohn/creepy.git /pentest/misc/creepy/
+     git clone http://github.com/ilektrojohn/creepy.git /pentest/misc/creepy/
      echo
 fi
 }
@@ -165,7 +165,7 @@ if [ -d /pentest/passwords/cupp/.git ]; then
 else
      echo -e "\e[1;33mInstalling cupp.\e[0m"
      rm -rf /pentest/passwords/cupp/
-     git clone git://github.com/Mebus/cupp.git /pentest/passwords/cupp/
+     git clone http://github.com/Mebus/cupp.git /pentest/passwords/cupp/
      echo
 fi
 }
@@ -191,7 +191,7 @@ if [ -d /pentest/backdoors/dbd/.git ]; then
 else
      echo -e "\e[1;33mInstalling dbd.\e[0m"
      rm -rf /pentest/backdoors/dbd/
-     git clone git://github.com/gitdurandal/dbd.git /pentest/backdoors/dbd/
+     git clone http://github.com/gitdurandal/dbd.git /pentest/backdoors/dbd/
      echo
 fi
 }
@@ -209,7 +209,7 @@ if [ -d /pentest/scanners/deblaze/.git ]; then
 else
      echo -e "\e[1;33mInstalling deblaze.\e[0m"
      rm -rf /pentest/scanners/deblaze/
-     git clone git://github.com/SpiderLabs/deblaze.git /pentest/scanners/deblaze/
+     git clone http://github.com/SpiderLabs/deblaze.git /pentest/scanners/deblaze/
      echo
 fi
 }
@@ -222,7 +222,7 @@ if [ -d /pentest/stressing/dhcpig/.git ]; then
 else
      echo -e "\e[1;33mInstalling DHCPig.\e[0m"
      rm -rf /pentest/stressing/dhcpig/
-     git clone git://github.com/kamorin/DHCPig.git /pentest/stressing/dhcpig/
+     git clone http://github.com/kamorin/DHCPig.git /pentest/stressing/dhcpig/
      echo
 fi
 }
@@ -235,7 +235,7 @@ if [ -d /pentest/web/dotdotpwn/.git ]; then
 else
      echo -e "\e[1;33mInstalling dotdotpwn.\e[0m"
      rm -rf /pentest/web/dotdotpwn/
-     git clone git://github.com/wireghoul/dotdotpwn.git /pentest/web/dotdotpwn/
+     git clone http://github.com/wireghoul/dotdotpwn.git /pentest/web/dotdotpwn/
      echo
 fi
 }
@@ -261,7 +261,7 @@ if [ -d /pentest/enumeration/dns/dnsmap/.git ]; then
 else
      echo -e "\e[1;33mInstalling dnsmap.\e[0m"
      rm -rf /pentest/enumeration/dns/dnsmap/
-     git clone git://github.com/makefu/dnsmap.git /pentest/enumeration/dns/dnsmap/
+     git clone http://github.com/makefu/dnsmap.git /pentest/enumeration/dns/dnsmap/
      echo
 fi
 }
@@ -274,7 +274,7 @@ if [ -d /pentest/enumeration/dns/dnsrecon/.git ]; then
 else
      echo -e "\e[1;33mInstalling dnsrecon.\e[0m"
      rm -rf /pentest/enumeration/dns/dnsrecon/
-     git clone git://github.com/darkoperator/dnsrecon.git /pentest/enumeration/dns/dnsrecon/
+     git clone http://github.com/darkoperator/dnsrecon.git /pentest/enumeration/dns/dnsrecon/
      echo
 fi
 }
@@ -287,7 +287,7 @@ if [ -d /pentest/enumeration/dns/dnswalk/.git ]; then
 else
      echo -e "\e[1;33mInstalling dnswalk.\e[0m"
      rm -rf /pentest/enumeration/dns/dnswalk/
-     git clone git://github.com/davebarr/dnswalk.git /pentest/enumeration/dns/dnswalk/
+     git clone http://github.com/davebarr/dnswalk.git /pentest/enumeration/dns/dnswalk/
      echo
 fi
 }
@@ -359,7 +359,7 @@ if [ -d /pentest/wireless/freeradius-wpe/.git ]; then
 else
      echo -e "\e[1;33mInstalling FreeRADIUS.\e[0m"
      rm -rf /pentest/wireless/freeradius-wpe/
-     git clone git://git.freeradius.org/freeradius-server.git /pentest/wireless/freeradius-wpe/
+     git clone http://git.freeradius.org/freeradius-server.git /pentest/wireless/freeradius-wpe/
      echo
 fi
 }
@@ -390,7 +390,7 @@ if [ -d /pentest/web/golismero/.git ]; then
 else
      echo -e "\e[1;33mInstalling golismero.\e[0m"
      rm -rf /pentest/web/golismero/
-     git clone git://github.com/cr0hn/golismero.git /pentest/web/golismero/
+     git clone http://github.com/cr0hn/golismero.git /pentest/web/golismero/
      echo
 fi
 }
@@ -458,7 +458,7 @@ if [ -d /pentest/wireless/horst/.git ]; then
 else
      echo -e "\e[1;33mInstalling HORST.\e[0m"
      rm -rf /pentest/wireless/horst/
-     git clone git://github.com/br101/horst.git /pentest/wireless/horst/
+     git clone http://github.com/br101/horst.git /pentest/wireless/horst/
      echo
 fi
 }
@@ -471,7 +471,7 @@ if [ -d /pentest/backdoors/iodine/.git ]; then
 else
      echo -e "\e[1;33mInstalling iodine.\e[0m"
      rm -rf /pentest/backdoors/iodine/
-     git clone git://github.com/yarrick/iodine.git /pentest/backdoors/iodine/
+     git clone http://github.com/yarrick/iodine.git /pentest/backdoors/iodine/
      echo
 fi
 }
@@ -484,7 +484,7 @@ if [ -d /pentest/backdoors/intersect/.git ]; then
 else
      echo -e "\e[1;33mInstalling Intersect.\e[0m"
      rm -rf /pentest/backdoors/intersect/
-     git clone git://github.com/ohdae/Intersect-2.5.git /pentest/backdoors/intersect/
+     git clone http://github.com/ohdae/Intersect-2.5.git /pentest/backdoors/intersect/
      echo
 fi
 }
@@ -510,7 +510,7 @@ if [ -d /pentest/exploits/jboss-autopwn/.git ]; then
 else
      echo -e "\e[1;33mInstalling JBoss Autopwn.\e[0m"
      rm -rf /pentest/exploits/jboss-autopwn/
-     git clone git://github.com/SpiderLabs/jboss-autopwn.git /pentest/exploits/jboss-autopwn/
+     git clone http://github.com/SpiderLabs/jboss-autopwn.git /pentest/exploits/jboss-autopwn/
      echo
 fi
 }
@@ -541,7 +541,7 @@ if [ -d /pentest/passwords/keimpx/.git ]; then
 else
      echo -e "\e[1;33mInstalling keimpx.\e[0m"
      rm -rf /pentest/passwords/keimpx/
-     git clone git://github.com/inquisb/keimpx.git /pentest/passwords/keimpx/
+     git clone http://github.com/inquisb/keimpx.git /pentest/passwords/keimpx/
      echo
 fi
 }
@@ -554,7 +554,7 @@ if [ -d /pentest/wireless/killerbee/.git ]; then
 else
      echo -e "\e[1;33mInstalling killerbee.\e[0m"
      rm -rf /pentest/wireless/killerbee/
-     git clone git://github.com/rezeusor/killerbee.git /pentest/wireless/killerbee/
+     git clone http://github.com/rezeusor/killerbee.git /pentest/wireless/killerbee/
      echo
 fi
 }
@@ -567,7 +567,7 @@ if [ -d /pentest/enumeration/lanmap2/.git ]; then
 else
      echo -e "\e[1;33mInstalling lanmap2.\e[0m"
      rm -rf /pentest/enumeration/lanmap2/
-     git clone git://github.com/rflynn/lanmap2.git /pentest/enumeration/lanmap2/
+     git clone http://github.com/rflynn/lanmap2.git /pentest/enumeration/lanmap2/
      echo
 fi
 }
@@ -580,7 +580,7 @@ if [ -d /pentest/libs/libhijack/.git ]; then
 else
      echo -e "\e[1;33mInstalling Libhijack.\e[0m"
      rm -rf /pentest/libs/libhijack/
-     git clone git://github.com/lattera/libhijack.git /pentest/libs/libhijack/
+     git clone http://github.com/lattera/libhijack.git /pentest/libs/libhijack/
      echo
 fi
 }
@@ -606,7 +606,7 @@ if [ -d /opt/metasploit/msf3/.git ]; then
 else
      echo -e "\e[1;33mInstalling Metasploit.\e[0m"
      rm -rf /opt/metasploit/msf3/
-     git clone git://github.com/rapid7/metasploit-framework.git /opt/metasploit/msf3/
+     git clone http://github.com/rapid7/metasploit-framework.git /opt/metasploit/msf3/
      echo
 fi
 }
@@ -619,7 +619,7 @@ if [ -d /pentest/enumeration/miranda/.git ]; then
 else
      echo -e "\e[1;33mInstalling miranda.\e[0m"
      rm -rf /pentest/enumeration/miranda/
-     git clone git://github.com/billwood09/miranda.git /pentest/enumeration/miranda/
+     git clone http://github.com/billwood09/miranda.git /pentest/enumeration/miranda/
      echo
 fi
 }
@@ -632,7 +632,7 @@ if [ -d /pentest/sniffers/mitmproxy/.git ]; then
 else
      echo -e "\e[1;33mInstalling mitmproxy.\e[0m"
      rm -rf /pentest/sniffers/mitmproxy/
-     git clone git://github.com/cortesi/mitmproxy.git /pentest/sniffers/mitmproxy/
+     git clone http://github.com/cortesi/mitmproxy.git /pentest/sniffers/mitmproxy/
      echo
 fi
 }
@@ -666,7 +666,7 @@ if [ -d /pentest/web/nikto/.git ]; then
 else
      echo -e "\e[1;33mInstalling nikto.\e[0m"
      rm -rf /pentest/web/nikto/
-     git clone git://github.com/sullo/nikto.git /pentest/web/nikto/
+     git clone http://github.com/sullo/nikto.git /pentest/web/nikto/
      echo
 fi
 }
@@ -675,7 +675,7 @@ nmap(){
 if [ -d /opt/nmap-svn/.svn ]; then
 	echo -e "\e[1;34mUpdating Nmap.\e[0m"
 	cd /opt/nmap-svn/ ; svn cleanup ; svn up
-	cp /opt/nmap-svn/nmap /usr/local/bin/
+#	cp /opt/nmap-svn/nmap /usr/local/bin/
 	cp /opt/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/
 	cp /opt/nmap-svn/nmap-os-db /usr/local/share/nmap/
 	cp /opt/nmap-svn/nmap-payloads /usr/local/share/nmap/
@@ -724,7 +724,7 @@ if [ -d /pentest/voip/ohrwurm/.git ]; then
 else
      echo -e "\e[1;33mInstalling ohrwurm.\e[0m"
      rm -rf /pentest/voip/ohrwurm/
-     git clone git://github.com/mazzoo/ohrwurm.git /pentest/voip/ohrwurm/
+     git clone http://github.com/mazzoo/ohrwurm.git /pentest/voip/ohrwurm/
      echo
 fi
 }
@@ -754,7 +754,7 @@ if [ -d /pentest/web/padbuster/.git ]; then
 else
      echo -e "\e[1;33mInstalling PadBuster.\e[0m"
      rm -rf /pentest/web/padbuster/
-     git clone git://github.com/GDSSecurity/PadBuster.git /pentest/web/padbuster/
+     git clone http://github.com/GDSSecurity/PadBuster.git /pentest/web/padbuster/
      echo
 fi
 }
@@ -780,7 +780,7 @@ if [ -d /pentest/passwords/pipal/.git ]; then
 else
      echo -e "\e[1;33mInstalling Pipal.\e[0m"
      rm -rf /pentest/passwords/pipal/
-     git clone git://github.com/digininja/pipal.git /pentest/passwords/pipal/
+     git clone http://github.com/digininja/pipal.git /pentest/passwords/pipal/
      echo
 fi
 }
@@ -806,7 +806,7 @@ if [ -d /pentest/backdoors/powersploit/.git ]; then
 else
      echo -e "\e[1;33mInstalling PowerSploit.\e[0m"
      rm -rf /pentest/backdoors/powersploit/
-     git clone git://github.com/mattifestation/PowerSploit.git /pentest/backdoors/powersploit/
+     git clone http://github.com/mattifestation/PowerSploit.git /pentest/backdoors/powersploit/
      echo
 fi
 }
@@ -832,7 +832,7 @@ if [ -d /pentest/tunneling/pwnat/.git ]; then
 else
      echo -e "\e[1;33mInstalling pwnat.\e[0m"
      rm -rf /pentest/tunneling/pwnat/
-     git clone git://github.com/samyk/pwnat.git /pentest/tunneling/pwnat/
+     git clone http://github.com/samyk/pwnat.git /pentest/tunneling/pwnat/
      echo
 fi
 }
@@ -884,7 +884,7 @@ if [ -d /pentest/rfid/RFIDIOt/.git ]; then
 else
      echo -e "\e[1;33mInstalling RFIDIOt.\e[0m"
      rm -rf /pentest/rfid/RFIDIOt/
-     git clone git://github.com/AdamLaurie/RFIDIOt.git /pentest/rfid/RFIDIOt/
+     git clone http://github.com/AdamLaurie/RFIDIOt.git /pentest/rfid/RFIDIOt/
      echo
 fi
 }
@@ -897,7 +897,7 @@ if [ -d /pentest/forensics/samdump/.git ]; then
 else
      echo -e "\e[1;33mInstalling samdump.\e[0m"
      rm -rf /pentest/forensics/samdump/
-     git clone git://github.com/geocar/samdump.git /pentest/forensics/samdump/
+     git clone http://github.com/geocar/samdump.git /pentest/forensics/samdump/
      echo
 fi
 }
@@ -910,7 +910,7 @@ if [ -d /opt/scripts/.git ]; then
 else
      echo -e "\e[1;33mInstalling scripts from new github repo.\e[0m"
      mv /opt/scripts/ /opt/scripts-old/
-     git clone git://github.com/leebaird/backtrack-scripts.git /opt/scripts/
+     git clone http://github.com/leebaird/backtrack-scripts.git /opt/scripts/
      echo
 fi
 }
@@ -975,7 +975,7 @@ if [ -d /pentest/exploits/smartphone-pentest-framework/.git ]; then
 else
      echo -e "\e[1;33mInstalling Smartphone-Pentest-Framework.\e[0m"
      rm -rf /pentest/exploits/smartphone-pentest-framework/
-     git clone git://github.com/georgiaw/Smartphone-Pentest-Framework.git /pentest/exploits/smartphone-pentest-framework/
+     git clone http://github.com/georgiaw/Smartphone-Pentest-Framework.git /pentest/exploits/smartphone-pentest-framework/
      echo
 fi
 }
@@ -988,7 +988,7 @@ if [ -d /pentest/passwords/smbexec/.git ]; then
 else
      echo -e "\e[1;33mInstalling smbexe.\e[0m"
      rm -rf /pentest/passwords/smbexec/
-     git clone git://github.com/brav0hax/smbexec.git /pentest/passwords/smbexec/
+     git clone http://github.com/brav0hax/smbexec.git /pentest/passwords/smbexec/
      echo
 fi
 }
@@ -1001,7 +1001,7 @@ if [ -d /pentest/database/sqlbrute/.git ]; then
 else
 	echo -e "\e[1;33mInstalling SQLBrute.\e[0m"
 	rm -rf /pentest/database/sqlbrute/
-	git clone git://github.com/GDSSecurity/SQLBrute.git /pentest/database/sqlbrute/
+	git clone http://github.com/GDSSecurity/SQLBrute.git /pentest/database/sqlbrute/
 	echo
 fi
 }
@@ -1014,7 +1014,7 @@ if [ -d /pentest/database/sqlmap/.git ]; then
 else
      echo -e "\e[1;33mInstalling sqlmap.\e[0m"
      rm -rf /pentest/database/sqlmap/
-     git clone git://github.com/sqlmapproject/sqlmap.git /pentest/database/sqlmap/
+     git clone http://github.com/sqlmapproject/sqlmap.git /pentest/database/sqlmap/
      echo
 fi
 }
@@ -1040,7 +1040,7 @@ if [ -d /pentest/web/sslstrip/.git ]; then
 else
      echo -e "\e[1;33mInstalling sslstrip.\e[0m"
      rm -rf /pentest/web/sslstrip/
-     git clone git://github.com/moxie0/sslstrip.git /pentest/web/sslstrip/
+     git clone http://github.com/moxie0/sslstrip.git /pentest/web/sslstrip/
      echo
 fi
 }
@@ -1053,15 +1053,28 @@ if [ -d /pentest/web/sslyze/.git ]; then
 else
      echo -e "\e[1;33mInstalling SSLyze.\e[0m"
      rm -rf /pentest/web/sslyze/
-     git clone git://github.com/iSECPartners/sslyze.git /pentest/web/sslyze/
+     git clone http://github.com/iSECPartners/sslyze.git /pentest/web/sslyze/
      echo
 fi
 }
 
+<<<<<<< HEAD
 subterfuge(){
 echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
 cd /usr/share/subterfuge ; svn cleanup ; svn up ; echo
 }
+=======
+if [ -d /usr/share/subterfuge/.svn ]; then
+     echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
+     cd /usr/share/subterfuge/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling Subterfuge.\e[0m"
+     rm -rf /usr/share/subterfuge/
+     svn co http://subterfuge.googlecode.com/svn/trunk/ /usr/share/subterfuge/
+     echo
+fi
+>>>>>>> upstream/master
 
 swaks(){
 if [ -d /pentest/enumeration/smtp/swaks/.git ]; then
@@ -1071,7 +1084,7 @@ if [ -d /pentest/enumeration/smtp/swaks/.git ]; then
 else
      echo -e "\e[1;33mInstalling swaks.\e[0m"
      rm -rf /pentest/enumeration/smtp/swaks/
-     git clone git://github.com/pld-linux/swaks.git /pentest/enumeration/smtp/swaks/
+     git clone http://github.com/pld-linux/swaks.git /pentest/enumeration/smtp/swaks/
      echo
 fi
 }
@@ -1084,7 +1097,7 @@ if [ -d /pentest/exploits/termineter/.git ]; then
 else
      echo -e "\e[1;33mInstalling Termineter.\e[0m"
      rm -rf /pentest/exploits/termineter/
-     git clone git://github.com/zeroSteiner/termineter.git /pentest/exploits/termineter/
+     git clone http://github.com/zeroSteiner/termineter.git /pentest/exploits/termineter/
      echo
 fi
 }
@@ -1097,7 +1110,7 @@ if [ -d /pentest/forensics/testdisk/.git ]; then
 else
      echo -e "\e[1;33mInstalling testdisk.\e[0m"
      rm -rf /pentest/forensics/testdisk/
-     git clone git://github.com/mqudsi/testdisk.git /pentest/forensics/testdisk/
+     git clone http://github.com/mqudsi/testdisk.git /pentest/forensics/testdisk/
      echo
 fi
 }
@@ -1163,7 +1176,7 @@ if [ -d /pentest/fuzzers/voip/voiper/.git ]; then
 else
      echo -e "\e[1;33mInstalling voiper.\e[0m"
      rm -rf /pentest/fuzzers/voip/voiper/
-     git clone git://github.com/gremwell/voiper.git /pentest/fuzzers/voip/voiper/
+     git clone http://github.com/gremwell/voiper.git /pentest/fuzzers/voip/voiper/
      echo
 fi
 }
@@ -1176,7 +1189,7 @@ if [ -d /pentest/web/w3af/.git ]; then
 else
      echo -e "\e[1;33mInstalling w3af.\e[0m"
      rm -rf /pentest/web/w3af/
-     git clone git://github.com/andresriancho/w3af.git /pentest/web/w3af/
+     git clone http://github.com/andresriancho/w3af.git /pentest/web/w3af/
      cd /pentest/web/w3af/
      apt-get install python-pip
      pip install PyGithub GitPython esmre chardet pdfminer futures guess-language cluster msgpack-python python-ntlm
@@ -1220,7 +1233,7 @@ if [ -d /pentest/web/webslayer/.git ]; then
 else
      echo -e "\e[1;33mInstalling WebSlayer.\e[0m"
      rm -rf /pentest/web/webslayer/
-     git clone git://github.com/Malphaet/webslayer.git /pentest/web/webslayer/
+     git clone http://github.com/Malphaet/webslayer.git /pentest/web/webslayer/
      echo
 fi
 }
@@ -1233,7 +1246,7 @@ if [ -d /pentest/backdoors/web/weevely/.git ]; then
 else
      echo -e "\e[1;33mInstalling Weevely.\e[0m"
      rm -rf /pentest/backdoors/web/weevely/
-     git clone git://github.com/epinna/Weevely.git /pentest/backdoors/web/weevely/
+     git clone http://github.com/epinna/Weevely.git /pentest/backdoors/web/weevely/
      echo
 fi
 }
@@ -1259,7 +1272,7 @@ if [ -d /pentest/enumeration/web/whatweb/.git ]; then
 else
      echo -e "\e[1;33mInstalling WhatWeb.\e[0m"
      rm -rf /pentest/enumeration/web/whatweb/
-     git clone git://github.com/urbanadventurer/WhatWeb.git /pentest/enumeration/web/whatweb/
+     git clone http://github.com/urbanadventurer/WhatWeb.git /pentest/enumeration/web/whatweb/
      echo
 fi
 }
@@ -1272,7 +1285,7 @@ if [ -d /pentest/sniffers/wifitap/.git ]; then
 else
      echo -e "\e[1;33mInstalling wifitap.\e[0m"
      rm -rf /pentest/sniffers/wifitap/
-     git clone git://github.com/GDSSecurity/wifitap.git /pentest/sniffers/wifitap/
+     git clone http://github.com/GDSSecurity/wifitap.git /pentest/sniffers/wifitap/
      echo
 fi
 }
