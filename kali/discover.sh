@@ -2311,7 +2311,7 @@ f_runlocally
 clear
 f_banner
 
-echo -e "\e[1;34mOpen multiple tabs in Firefox with:\e[0m"
+echo -e "\e[1;34mOpen multiple tabs in Iceweasel with:\e[0m"
 echo
 echo "1.  List containing IPs and/or URLs."
 echo "2.  Directories from a domain's robot.txt."
