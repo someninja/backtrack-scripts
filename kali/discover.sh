@@ -33,7 +33,7 @@ f_banner(){
 echo
 echo "______  ___ ______ ______  _____  _    _ ______  _____"
 echo "|     \  |  |____  |      |     |  \  /  |_____ |____/"
-echo "|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_"
+echo "|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_kali"
 echo
 echo "By Lee Baird"
 echo
@@ -123,23 +123,23 @@ case $choice in
           f_error
      fi
 
-     firefox &
+     iceweasel &
      sleep 2
-     firefox -new-tab http://www.123people.com/s/$firstName+$lastName &
+     iceweasel -new-tab http://www.123people.com/s/$firstName+$lastName &
      sleep 1
-     firefox -new-tab http://www.411.com/name/$firstName-$lastName/ &
+     iceweasel -new-tab http://www.411.com/name/$firstName-$lastName/ &
      sleep 1
-     firefox -new-tab http://www.cvgadget.com/person/$firstName/$lastName &
+     iceweasel -new-tab http://www.cvgadget.com/person/$firstName/$lastName &
      sleep 1
-     firefox -new-tab http://www.peekyou.com/$fireName_$lastName &
+     iceweasel -new-tab http://www.peekyou.com/$fireName_$lastName &
      sleep 1
-     firefox -new-tab http://phonenumbers.addresses.com/people/$firstName+$lastName &
+     iceweasel -new-tab http://phonenumbers.addresses.com/people/$firstName+$lastName &
      sleep 1
-     firefox -new-tab http://search.nndb.com/search/nndb.cgi?nndb=1&omenu=unspecified&query=$firstName+$lastName &
+     iceweasel -new-tab http://search.nndb.com/search/nndb.cgi?nndb=1&omenu=unspecified&query=$firstName+$lastName &
      sleep 1
-     firefox -new-tab http://www.spokeo.com/search?q=$firstName+$lastName&s3=t24 &
+     iceweasel -new-tab http://www.spokeo.com/search?q=$firstName+$lastName&s3=t24 &
      sleep 1
-     firefox -new-tab http://www.zabasearch.com/query1_zaba.php?sname=$firstName%20$lastName&state=ALL&ref=$ref&se=$se&doby=&city=&name_style=1&tm=&tmr=
+     iceweasel -new-tab http://www.zabasearch.com/query1_zaba.php?sname=$firstName%20$lastName&state=ALL&ref=$ref&se=$se&doby=&city=&name_style=1&tm=&tmr=
      ;;
 
      3) f_main;;
@@ -191,14 +191,14 @@ case $choice in
      echo
 
      echo "goofile                   (1/$total)"
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xls > tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xlsx >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f ppt >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f pptx >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f doc >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f docx >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f pdf >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f txt >> tmp
+     /usr/bin/goofile -d $domain -f xls > tmp
+     /usr/bin/goofile -d $domain -f xlsx >> tmp
+     /usr/bin/goofile -d $domain -f ppt >> tmp
+     /usr/bin/goofile -d $domain -f pptx >> tmp
+     /usr/bin/goofile -d $domain -f doc >> tmp
+     /usr/bin/goofile -d $domain -f docx >> tmp
+     /usr/bin/goofile -d $domain -f pdf >> tmp
+     /usr/bin/goofile -d $domain -f txt >> tmp
 
      grep $domain tmp | grep -v 'Searching in' | sort > tmp2
 
@@ -234,27 +234,27 @@ case $choice in
      echo
      echo "theHarvester"
      echo "     123people            (5/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b people123 > z123people
+     /usr/bin/theharvester -d $domain -b people123 > z123people
      echo "     Ask-mod              (6/$total)"
      /opt/scripts/mods/theHarvester2.py -d $domain -b ask > zask-mod
      echo "     Bing                 (7/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b bing > zbing
+     /usr/bin/theharvester -d $domain -b bing > zbing
      echo "     Google               (8/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b google > zgoogle
+     /usr/bin/theharvester -d $domain -b google > zgoogle
      echo "     Google Profiles	  (9/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b google-profiles > zgoogle-profiles
+     /usr/bin/theharvester -d $domain -b google-profiles > zgoogle-profiles
      echo "     Jigsaw               (10/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b jigsaw > zjigsaw
+     /usr/bin/theharvester -d $domain -b jigsaw > zjigsaw
      echo "     LinkedIn             (11/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b linkedin > zlinkedin
+     /usr/bin/theharvester -d $domain -b linkedin > zlinkedin
      echo "     Login-mod            (12/$total)"
      /opt/scripts/mods/theHarvester2.py -d $domain -b login > zlogin-mod
      echo "     PGP                  (13/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b pgp > zpgp
+     /usr/bin/theharvester -d $domain -b pgp > zpgp
      echo "     Yahoo-mod            (14/$total)"
      /opt/scripts/mods/theHarvester2.py -d $domain -b yahoo > zyahoo-mod
      echo "     All                  (15/$total)"
-     /pentest/enumeration/theharvester/theHarvester.py -d $domain -b all > zall
+     /usr/bin/theharvester -d $domain -b all > zall
 
      echo
      echo "Metasploit                (16/$total)"
@@ -267,7 +267,7 @@ case $choice in
 
      echo
      echo "dnsrecon                  (17/$total)"
-     /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t goo > tmp
+     dnsrecon -d $domain -t goo > tmp
      grep $domain tmp | egrep -v '(Performing Google|Records Found)' > tmp2
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 > tmp3
@@ -275,7 +275,7 @@ case $choice in
 
      echo
      echo "URLCrazy                  (18/$total)"
-	/pentest/enumeration/web/urlcrazy/urlcrazy $domain -o tmp > /dev/null
+	urlcrazy $domain -o tmp > /dev/null
      # Clean up
      egrep -v '(#|:|\?|Typo Type|URLCrazy)' tmp | sed 's/[A-Z]\{2\},//g' > tmp2
      # Remove lines that start with -
@@ -553,35 +553,35 @@ case $choice in
 
      f_runlocally
 
-     firefox &
+     iceweasel &
      sleep 2
-     firefox -new-tab arin.net &
+     iceweasel -new-tab arin.net &
      sleep 1
-     firefox -new-tab toolbar.netcraft.com/site_report?url=http://www.$domain &
+     iceweasel -new-tab toolbar.netcraft.com/site_report?url=http://www.$domain &
      sleep 1
-     firefox -new-tab uptime.netcraft.com/up/graph?site=www.$domain &
+     iceweasel -new-tab uptime.netcraft.com/up/graph?site=www.$domain &
      sleep 1
-     firefox -new-tab shodanhq.com/search?q=$domain &
+     iceweasel -new-tab shodanhq.com/search?q=$domain &
      sleep 1
-     firefox -new-tab jigsaw.com/ &
+     iceweasel -new-tab jigsaw.com/ &
      sleep 1
-     firefox -new-tab pastebin.com/ &
+     iceweasel -new-tab pastebin.com/ &
      sleep 1
-     firefox -new-tab google.com/#q=filetype%3Axls+OR+filetype%3Axlsx+site%3A$domain &
+     iceweasel -new-tab google.com/#q=filetype%3Axls+OR+filetype%3Axlsx+site%3A$domain &
      sleep 1
-     firefox -new-tab google.com/#q=filetype%3Appt+OR+filetype%3Apptx+site%3A$domain &
+     iceweasel -new-tab google.com/#q=filetype%3Appt+OR+filetype%3Apptx+site%3A$domain &
      sleep 1
-     firefox -new-tab google.com/#q=filetype%3Adoc+OR+filetype%3Adocx+site%3A$domain &
+     iceweasel -new-tab google.com/#q=filetype%3Adoc+OR+filetype%3Adocx+site%3A$domain &
      sleep 1
-     firefox -new-tab google.com/#q=filetype%3Apdf+site%3A$domain &
+     iceweasel -new-tab google.com/#q=filetype%3Apdf+site%3A$domain &
      sleep 1
-     firefox -new-tab google.com/#q=filetype%3Atxt+site%3A$domain &
+     iceweasel -new-tab google.com/#q=filetype%3Atxt+site%3A$domain &
      sleep 1
-     firefox -new-tab sec.gov/edgar/searchedgar/companysearch.html &
+     iceweasel -new-tab sec.gov/edgar/searchedgar/companysearch.html &
      sleep 1
-     firefox -new-tab google.com/finance/ &
+     iceweasel -new-tab google.com/finance/ &
      sleep 1
-     firefox -new-tab reuters.com/finance/stocks
+     iceweasel -new-tab reuters.com/finance/stocks
      echo
      echo
      exit
@@ -630,7 +630,7 @@ case $choice in
      echo
      echo "dnsrecon"
      echo "     DNS Records          (2/$total)"
-     /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t std > tmp
+     dnsrecon -d $domain -t std > tmp
      egrep -v '(Bind Version for|Could not|Enumerating SRV|not configured|Performing|Records Found|Resolving|TXT)' tmp > tmp2
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > zdnsrecon
@@ -647,7 +647,7 @@ case $choice in
 
      echo
      echo "Fierce (~5 min)           (5/$total)"
-     /pentest/enumeration/dns/fierce/fierce.pl -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp3
+     fierce -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp3
 
      sed -n '/Now performing/,/Subnets found/p' tmp3 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
 
@@ -665,7 +665,7 @@ case $choice in
 
      echo
      echo "Loadbalancing             (6/$total)"
-     /pentest/enumeration/web/lbd/lbd.sh $domain > tmp 2>/dev/null
+      /usr/bin/lbd $domain > tmp 2>/dev/null
      egrep -v '(5.0_Pub|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
      # Remove leading whitespace from file
      awk '!d && NF {sub(/^[[:blank:]]*/,""); d=1} d' tmp2 > tmp3
@@ -697,7 +697,7 @@ case $choice in
      echo "Whatweb                   (10/$total)"
      cp /$user/$domain/dns/subdomains.txt tmp
      awk '{print $1}' tmp > tmp2
-     /pentest/enumeration/web/whatweb/whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
+     whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
      # Find lines that start with http, and insert a line after
      sort tmp3 | sed '/^http/a\ ' > zwhatweb
 
@@ -769,7 +769,7 @@ case $choice in
      echo
      read -p "Press <return> to continue."
 
-     firefox /$user/$domain/index.htm &
+     iceweasel /$user/$domain/index.htm &
      exit
      ;;
 
@@ -2355,27 +2355,27 @@ case $choice in
           f_error
      fi
 
-     firefox &
+     iceweasel &
      sleep 2
 
      if [ $port -eq 21 ]; then
           for i in $(cat $location); do
-               firefox -new-tab ftp://$i &
+               iceweasel -new-tab ftp://$i &
                sleep 1
           done
      elif [ $port -eq 80 ]; then
           for i in $(cat $location); do
-               firefox -new-tab $i &
+               iceweasel -new-tab $i &
                sleep 1
           done
      elif [ $port -eq 443 ]; then
           for i in $(cat $location); do
-               firefox -new-tab https://$i &
+               iceweasel -new-tab https://$i &
                sleep 1
           done
      else
           for i in $(cat $location); do
-               firefox -new-tab $i:$port &
+               iceweasel -new-tab $i:$port &
                sleep 1
           done
      fi
@@ -2400,11 +2400,11 @@ case $choice in
      grep 'Disallow' robots.txt | awk '{print $2}' > /$user/$domain-robots.txt
      rm robots.txt
 
-     firefox &
+     iceweasel &
      sleep 2
 
      for i in $(cat /$user/$domain-robots.txt); do
-          firefox -new-tab $domain$i &
+          iceweasel -new-tab $domain$i &
           sleep 1
      done
 
@@ -2483,7 +2483,7 @@ case $choice in
      while read -r line; do
           xdotool key ctrl+shift+t
           sleep 1
-          xdotool type "cd /pentest/web/nikto/program/ && ./nikto.pl -h $line -port $port -Format htm --output /$user/nikto/$line.htm ; exit"
+          xdotool type "nikto -h $line -port $port -Format htm --output /$user/nikto/$line.htm ; exit"
           xdotool key Return
      done < "$location"
      ;;
@@ -2508,7 +2508,7 @@ case $choice in
      while IFS=: read -r host port; do
           xdotool key ctrl+shift+t
           sleep 1
-          xdotool type "cd /pentest/web/nikto/program/ && ./nikto.pl -h $host -port $port -Format htm --output /root/nikto/$host-$port.htm ; exit"
+          xdotool type "nikto -h $host -port $port -Format htm --output /root/nikto/$host-$port.htm ; exit"
           xdotool key Return
      done < "$location"
      ;;
@@ -2831,10 +2831,17 @@ msfconsole -r /opt/scripts/resource/listener.rc
 
 ##############################################################################################################
 
+ kali_bleeding_edge(){
+     echo "[*] Adding Kali bleeding edge repositories."
+     echo deb http://repo.kali.org/kali kali-bleeding-edge main >> /etc/apt/sources.list
+     apt-get update
+     apt-get upgrade -y
+}
+##############################################################################################################
+
 # Loop forever
 while :
 do
-
 f_main
 
 f_main(){
@@ -2853,15 +2860,14 @@ echo "5.  List"
 echo "6.  CIDR Notation"
 echo
 echo -e "\e[1;34mWEB\e[0m"
-echo "7.  Open multiple tabs in Firefox"
+echo "7.  Open multiple tabs in Iceweasel"
 echo "8.  Nikto"
 echo "9.  SSL Check"
 echo
 echo -e "\e[1;34mMISC\e[0m"
-echo "10. Crack WiFi"
-echo "11. Start a Metasploit listener"
-echo "12. Update BackTrack"
-echo "13. Exit"
+echo "10. Start a Metasploit listener"
+echo "11. Add Kali bleeding edge repository"
+echo "12. Exit"
 echo
 echo -n "Choice: "
 read choice
@@ -2876,10 +2882,9 @@ case $choice in
      7) f_multitabs;;
      8) f_nikto;;
      9) f_sslcheck;;
-     10) ./crack-wifi.sh;;
-     11) f_listener;;
-     12) ./update.sh && exit;;
-     13) clear && exit;;
+     10) f_listener;;
+     11) kali_bleeding_edge;;
+     12) clear && exit;;
      99) f_updates;;
      *) f_error;;
 esac
