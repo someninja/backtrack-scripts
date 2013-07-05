@@ -222,9 +222,9 @@ case $choice in
      echo
      echo "goohost"
      echo "     IP                   (3/$total)"
-     /pentest/enumeration/google/goohost/goohost.sh -t $domain -m ip >/dev/null
+     /opt/scripts/mods/goohost.sh -t $domain -m ip >/dev/null
      echo "     Email                (4/$total)"
-     /pentest/enumeration/google/goohost/goohost.sh -t $domain -m mail >/dev/null
+     /opt/scripts/mods/goohost.sh -t $domain -m mail >/dev/null
      cat report-* > tmp
      # Move the second column to the first position
      grep $domain tmp | awk '{ print $2 " " $1 }' > tmp2
