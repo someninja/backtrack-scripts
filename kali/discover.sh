@@ -2868,7 +2868,7 @@ echo
 echo -e "\e[1;34mMISC\e[0m"
 echo "10. Start a Metasploit listener"
 echo "11. Add Kali bleeding edge repository"
-echo "12. Enable meatsploit services on boot"
+echo "12. Enable metasploit services on boot"
 echo "13. Exit"
 echo
 echo -n "Choice: "
