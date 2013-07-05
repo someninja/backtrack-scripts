@@ -267,7 +267,7 @@ case $choice in
 
      echo
      echo "dnsrecon                  (17/$total)"
-     dnsrecon -d $domain -t goo > tmp
+     /usr/bin/dnsrecon -d $domain -t goo > tmp
      grep $domain tmp | egrep -v '(Performing Google|Records Found)' > tmp2
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 > tmp3
@@ -275,7 +275,7 @@ case $choice in
 
      echo
      echo "URLCrazy                  (18/$total)"
-	urlcrazy $domain -o tmp > /dev/null
+	/usr/bin/urlcrazy $domain -o tmp > /dev/null
      # Clean up
      egrep -v '(#|:|\?|Typo Type|URLCrazy)' tmp | sed 's/[A-Z]\{2\},//g' > tmp2
      # Remove lines that start with -
@@ -581,7 +581,7 @@ case $choice in
      sleep 1
      iceweasel -new-tab google.com/finance/ &
      sleep 1
-     iceweasel -new-tab reuters.com/finance/stocks
+     iceweasel -new-tab reuters.com/finance/stocks &
      echo
      echo
      exit
@@ -638,16 +638,16 @@ case $choice in
      cp zdnsrecon /$user/$domain/dns/records.txt
 
      echo "     Zone Transfer        (3/$total)"
-     /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t axfr > tmp
+     /usr/bin/dnsrecon -d $domain -t axfr > tmp
      egrep -v '(Checking for|Failed|filtered|NS Servers|Removing|TCP Open|Testing NS)' tmp | sed 's/^....//' | sed /^$/d > zonetransfer
 
      echo "     Sub-domains (~5 min) (4/$total)"
-     /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt -f > tmp
+     /usr/bin/dnsrecon -d $domain -t brt -D /usr/share/dnsrecon/namelist.txt -f > tmp
      grep $domain tmp | grep -v "$domain\." | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
 
      echo
      echo "Fierce (~5 min)           (5/$total)"
-     fierce -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp3
+     /usr/bin/fierce -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp3
 
      sed -n '/Now performing/,/Subnets found/p' tmp3 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
 
@@ -697,7 +697,7 @@ case $choice in
      echo "Whatweb                   (10/$total)"
      cp /$user/$domain/dns/subdomains.txt tmp
      awk '{print $1}' tmp > tmp2
-     whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
+     /usr/bin/whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
      # Find lines that start with http, and insert a line after
      sort tmp3 | sed '/^http/a\ ' > zwhatweb
 
@@ -2839,15 +2839,10 @@ msfconsole -r /opt/scripts/resource/listener.rc
 }
 ##############################################################################################################
 
-# Loop forever
-while :
-do
-f_main
-
+# Main menu function
 f_main(){
 clear
 f_banner
-
 echo -e "\e[1;34mRECON\e[0m"
 echo "1.  Scrape"
 echo
@@ -2890,4 +2885,8 @@ case $choice in
 esac
 }
 
+# Loop forever
+while : 
+do
+f_main
 done
