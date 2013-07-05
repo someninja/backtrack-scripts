@@ -891,8 +891,6 @@ else
      echo
 fi
 
-echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
-
 if [ -d /usr/share/subterfuge/.svn ]; then
      echo -e "\e[1;34mUpdating Subterfuge.\e[0m"
      cd /usr/share/subterfuge/ ; svn up
