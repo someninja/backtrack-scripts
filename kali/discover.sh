@@ -222,9 +222,9 @@ case $choice in
      echo
      echo "goohost"
      echo "     IP                   (3/$total)"
-     /pentest/enumeration/google/goohost/goohost.sh -t $domain -m ip >/dev/null
+     /opt/scripts/mods/goohost.sh -t $domain -m ip >/dev/null
      echo "     Email                (4/$total)"
-     /pentest/enumeration/google/goohost/goohost.sh -t $domain -m mail >/dev/null
+     /opt/scripts/mods/goohost.sh -t $domain -m mail >/dev/null
      cat report-* > tmp
      # Move the second column to the first position
      grep $domain tmp | awk '{ print $2 " " $1 }' > tmp2
@@ -2837,6 +2837,12 @@ msfconsole -r /opt/scripts/resource/listener.rc
      apt-get update
      apt-get upgrade -y
 }
+
+metasploit(){
+     echo "[*] Enabling metasploit services on start-up"
+     update-rc.d postgresql enable && update-rc.d metasploit enable
+     echo "Done"
+}
 ##############################################################################################################
 
 # Main menu function
@@ -2862,7 +2868,8 @@ echo
 echo -e "\e[1;34mMISC\e[0m"
 echo "10. Start a Metasploit listener"
 echo "11. Add Kali bleeding edge repository"
-echo "12. Exit"
+echo "12. Enable metasploit services on boot"
+echo "13. Exit"
 echo
 echo -n "Choice: "
 read choice
@@ -2879,7 +2886,8 @@ case $choice in
      9) f_sslcheck;;
      10) f_listener;;
      11) kali_bleeding_edge;;
-     12) clear && exit;;
+     12) metasploit;;
+     13) clear && exit;;
      99) f_updates;;
      *) f_error;;
 esac
