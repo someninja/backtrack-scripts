@@ -24,3 +24,11 @@ apt-get install arp-scan
 
 echo
 echo
+
+echo
+echo -e "\e[1;34mInstalling recon-ng.\e[0m"
+apt-get install recon-ng
+
+echo
+echo
+
