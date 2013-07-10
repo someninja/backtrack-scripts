@@ -51,6 +51,16 @@ Text
 
 ##############################
 
+1.  On the Hosts tab, hide all columns except IP, Port and Service.
+2.  Copy the text.
+3.  Use nano to create a new tmp file, paste in the text and save.
+4.  grep 'HTTP' tmp | awk '{print $1,":",$2}' | sed 's/ //g' > web.txt
+5.  grep 'HTTPS' tmp | awk '{print $1,":",$2}' | sed 's/ //g' > ssl.txt
+6.  web.txt will feed options 7 Firefox and 8 Nikto.
+7.  ssl.txt will feed option 9 SSL Check.
+
+##############################
+
 sed -e 's/^/FOO/'                                   # Add FOO to the beginning of each line
 sed -e 's/$/FOO/'                                   # Add FOO to the end of each line
 column -t                                           # Align columns
