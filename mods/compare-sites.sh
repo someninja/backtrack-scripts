@@ -17,6 +17,7 @@ echo "Options:"
 echo "   -c   Compare versions."
 echo "   -o   Output directory. Default: /root/Desktop/compare-sites"
 echo
+echo
 }
 
 ts2date(){

