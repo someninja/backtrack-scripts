@@ -6,7 +6,7 @@
 #
 # Special thanks to the following people:
 #
-# Jay Townsend - conversion of discover to kali format.
+# Jay Townsend - conversion of discover to Kali format.
 # Jason Arnold - planning original concept, author of ssl-check and co-author of crack-wifi.
 # Dave Klug - planning, testing and bug reports.
 # Matt Banick - original development.
@@ -185,7 +185,7 @@ case $choice in
      fi
 
      # Number of tests
-     total=27
+     total=26
 
      echo
      echo $line
@@ -300,7 +300,7 @@ case $choice in
      # Change to lower case
      cat tmp6 | tr '[A-Z]' '[a-z]' > tmp7
      # Clean up
-     egrep -v '(account|administrator|administrative|advanced|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|attorney|australia|automation|automotive|banking|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|developing|development|devine|digital|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|harder|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|media|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|museums|negative|network|networking|new user|newspaper|new york|next page|nitrogen|nyc|obtaining|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
+     egrep -v '(account|administrator|administrative|advanced|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|attorney|australia|automation|automotive|banking|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|developing|development|devine|digital|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|harder|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|media|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|museums|negative|network|networking|new user|newspaper|new york|next page|nitrogen|nyc|obtaining|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|united states|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
      # Remove leading and trailing whitespace from each line
      sed 's/^[ \t]*//;s/[ \t]*$//' tmp8 > tmp9
      # Remove lines that contain a single word
@@ -416,12 +416,7 @@ case $choice in
      cat tmp2 >> /$user/$domain/web/background.htm
      echo "</html>" >> /$user/$domain/web/background.htm
 
-     echo "safeweb.norton.com        (26/$total)"
-     wget -q http://safeweb.norton.com/report/show?url=$domain -O tmp
-     sed -n '/Threat Report/,/review of this site/p' tmp | sed "s/(what's this?)//g" | sed 's/<strong class="detailHeading">//g' | sed 's/<\/strong>//g' > tmp2
-     egrep -v '(div id|div style|img alt|Threat Report|to delete your review)' tmp2 | sed 's/Threats found://g' > /$user/$domain/web/threat.htm
-
-     echo "robtex.com                (27/$total)"
+     echo "robtex.com                (26/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
      wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 

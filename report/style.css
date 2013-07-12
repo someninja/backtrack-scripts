@@ -5,15 +5,7 @@
 	box-sizing:         border-box;   /* Everything else */
 }
 
-
-body {
-	background: #fff;
-	color: #333333;
-	font-family: sans-serif;
-	font-size: 1em;
-}
-/* Headings */
-
+/* Headers */
 h1,h2,h3,h4,h5,h6 { 
 	font-weight: normal;
 	margin: 0;
@@ -21,21 +13,15 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1 { font-size: 40px; }
-
 h2 { font-size: 30px; }
-
 h3 { font-size: 20px; }
-
 h4 { font-size: 16px; }
-
 h5 { font-size: 14px; }
-
 h6 { font-size: 12px; }
 
 h1 img, h2 img, h3 img, h4 img, h5 img, h6 img { margin:0; }
 
 /* Paragraps */
-
 p { 
 	margin: 0 0 15px;
 	text-align: left;
@@ -66,14 +52,12 @@ a:focus {
     outline: none;
 }
 
-/* Header / Primary / Secondary Navigation
------------------------------------------------------------- */
-
+/* Header / Primary / Secondary Navigation */
 .nav	{
-	width: 100%;         /* Spans the width of the page */
+	width: 100%;             /* Spans the width of the page */
 	height: 53px;
-	margin: 0;           /* Ensures there is no space between sides of the screen and the menu */
-	z-index: 99;         /* Makes sure that your menu remains on top of other page elements */
+	margin: 0;               /* Ensures there is no space between sides of the screen and the menu */
+	z-index: 99;             /* Makes sure that your menu remains on top of other page elements */
 	position: relative; 
 	background-color: #ededed;
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f2), to(#ededed));
@@ -88,26 +72,26 @@ a:focus {
 .navbar	{
   padding: 1;
 	margin: 1;
-	position: absolute;  /* Ensures that the menu doesn’t affect other elements */
+	position: absolute;      /* Ensures that the menu doesn’t affect other elements */
 	border-right: 1px solid #fff; 
 }
 
 .navbar li 	{
 	height: auto;
-	width: 140px;        /* Each menu item is 140px wide */
-	float: left;         /* This lines up the menu items horizontally */
-	text-align: center;  /* All text is placed in the center of the box */
-	list-style: none;    /* Removes the default styling (bullets) for the list */
+	width: 140px;            /* Each menu item is 140px wide */
+	float: left;             /* This lines up the menu items horizontally */
+	text-align: center;      /* All text is placed in the center of the box */
+	list-style: none;        /* Removes the default styling (bullets) for the list */
 	font: normal bold 12px/1.2em sans-serif;  
 	padding: 0;
 	margin: 0;
 }
 .navbar a	{							
-	padding: 18px 0;     /* Adds a padding on the top and bottom so the text appears centered vertically */
+	padding: 18px 0;         /* Adds a padding on the top and bottom so the text appears centered vertically */
 	border-left: 1px solid #fff; /* Creates a border in a slightly lighter shade of blue than the background.  Combined with the right border, this creates a nice effect. */
 	border-right: 1px solid #ededed; /* Creates a border in a slightly darker shade of blue than the background.  Combined with the left border, this creates a nice effect. */
-	text-decoration: none;  /* Removes the default hyperlink styling. */
-	color: #3C3B3B;      /* Text color is white */
+	text-decoration: none;   /* Removes the default hyperlink styling. */
+	color: #3C3B3B;          /* Text color is white */
 	display: block;
 	text-shadow: 1px 1px 1px #C6C3C3;
 }
@@ -117,18 +101,18 @@ li.current {
 	background-color: #fff;
 } 
 .navbar li ul 	{
-	display: none;       /* Hides the drop-down menu */
+	display: none;           /* Hides the drop-down menu */
 	height: auto;								
-	margin: 0;           /* Aligns drop-down box underneath the menu item */
-	padding: 0;          /* Aligns drop-down box underneath the menu item */			
+	margin: 0;               /* Aligns drop-down box underneath the menu item */
+	padding: 0;              /* Aligns drop-down box underneath the menu item */			
 }				
 
 .navbar li:hover ul 	{
-	display: block;      /* Displays the drop-down box when the menu item is hovered over */
+	display: block;          /* Displays the drop-down box when the menu item is hovered over */
 }
 .navbar li ul li {
 	background-color: #fff;
-	width: 142px;      /* Width of the drop-down box when the menu item is hovered over */ 
+	width: 142px;            /* Width of the drop-down box when the menu item is hovered over */ 
 }
 
 .navbar li ul li a 	{
