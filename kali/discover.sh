@@ -185,7 +185,7 @@ case $choice in
      fi
 
      # Number of tests
-     total=26
+     total=25
 
      echo
      echo $line
@@ -398,25 +398,21 @@ case $choice in
      sed 's/<a href="feedback\/?KeepThis=true&amp;TB_iframe=true&amp;height=300&amp;width=240" title="intoDNS feedback" class="thickbox feedback">send feedback<\/a>//' tmp2 | sed 's/Test name/Test/g' | sed 's/Information/Results/g' > tmp3
      sed '/Processed in/I,+14 d' tmp3 | sed '/div id="master"/I,+11 d' > /$user/$domain/web/checks2.htm
 
-     echo "emailstuff.org            (23/$total)"
-     wget -q http://www.emailstuff.org/spf/check/$domain -O tmp
-     sed -n '/approximate/,/Response/p' tmp | sed 's/<p>//g' | sed 's/<\/p>//g' | sed 's/<i>//g' | sed 's/<\/i>//g' | egrep -v '(#|\+|\:|<)' | sed 's/\/32//g' | sort -n > /$user/$domain/dns/spf.txt
-
-     echo "dnssy.com                 (24/$total)"
+     echo "dnssy.com                 (23/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
      sed -n '/Results for/,/\/table/p' tmp > tmp2
      echo "<html>" > /$user/$domain/web/checks.htm
      cat tmp2 >> /$user/$domain/web/checks.htm
      echo "</html>" >> /$user/$domain/web/checks.htm
 
-     echo "dnsw.info                 (25/$total)"
+     echo "dnsw.info                 (24/$total)"
      curl http://dnsw.info/$domain > tmp 2>/dev/null
      sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g' | sed 's/<\/h3>//g' | sed 's/<code>/<b>/g' | sed 's/<\/code>/<\/b>/g' > tmp2
      echo "<html>" > /$user/$domain/web/background.htm
      cat tmp2 >> /$user/$domain/web/background.htm
      echo "</html>" >> /$user/$domain/web/background.htm
 
-     echo "robtex.com                (26/$total)"
+     echo "robtex.com                (25/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
      wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 
