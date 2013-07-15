@@ -91,7 +91,7 @@ sed -n '/FOO/,/BAR/p'                               # Print lines between FOO an
 
 sed 's/[A-Z]\{2\},//g'                              # Remove any 2 capital letters followed by a comma
 sed '/^$/d'                                         # Remove blank lines
-sed 'n;d'                                           # Remove double spacing
+cat -s                                              # Remove double spacing
 sed 's/^....//'                                     # Remove first 4 characters from each line
 sed '1,5d'                                          # Remove first 5 lines
 sed 's/^[ \t]*//;s/[ \t]*$//'                       # Remove leading and trailing whitespace from each line
