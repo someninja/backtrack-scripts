@@ -185,7 +185,7 @@ case $choice in
      fi
 
      # Number of tests
-     total=25
+     total=24
 
      echo
      echo $line
@@ -300,7 +300,7 @@ case $choice in
      # Change to lower case
      cat tmp6 | tr '[A-Z]' '[a-z]' > tmp7
      # Clean up
-     egrep -v '(account|administrator|administrative|advanced|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|attorney|australia|automation|automotive|banking|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|developing|development|devine|digital|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|harder|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|media|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|museums|negative|network|networking|new user|newspaper|new york|next page|nitrogen|nyc|obtaining|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|united states|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
+     egrep -v '(account|administrator|administrative|advanced|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|attorney|australia|automation|automotive|balance|banking|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|developing|development|devine|digital|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|harder|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|media|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|museums|negative|network|networking|new user|newspaper|new york|next page|nitrogen|nyc|obtaining|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|united states|university|untitled|view|Violent|virginia bar|voice|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
      # Remove leading and trailing whitespace from each line
      sed 's/^[ \t]*//;s/[ \t]*$//' tmp8 > tmp9
      # Remove lines that contain a single word
@@ -387,37 +387,32 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' | sed 's/.edu./.edu/g' | sed 's/.gov./.gov/g' | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > /$user/$domain/dns/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' | sed 's/.edu./.edu/g' | sed 's/.gov./.gov/g' | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > /$user/$domain/data/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
-     grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/dns/black-listed.txt
-
-     echo "intodns.com               (22/$total)"
-     wget -q http://www.intodns.com/$domain -O tmp
-     egrep -v '(Follow IntoDNS|Work in progress)' tmp > tmp2
-     sed 's/<a href="feedback\/?KeepThis=true&amp;TB_iframe=true&amp;height=300&amp;width=240" title="intoDNS feedback" class="thickbox feedback">send feedback<\/a>//' tmp2 | sed 's/Test name/Test/g' | sed 's/Information/Results/g' > tmp3
-     sed '/Processed in/I,+14 d' tmp3 | sed '/div id="master"/I,+11 d' > /$user/$domain/web/checks2.htm
+     grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/data/black-listed.txt
 
      echo "dnssy.com                 (23/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
      sed -n '/Results for/,/\/table/p' tmp > tmp2
-     echo "<html>" > /$user/$domain/web/checks.htm
-     cat tmp2 >> /$user/$domain/web/checks.htm
-     echo "</html>" >> /$user/$domain/web/checks.htm
+     echo "<html>" > tmp3
+     cat tmp2 | grep -v 'Results for' >> tmp3
+     echo "</html>" >> tmp3
+     mv tmp3 /$user/$domain/data/config.htm
 
      echo "dnsw.info                 (24/$total)"
      curl http://dnsw.info/$domain > tmp 2>/dev/null
      sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g' | sed 's/<\/h3>//g' | sed 's/<code>/<b>/g' | sed 's/<\/code>/<\/b>/g' > tmp2
-     echo "<html>" > /$user/$domain/web/background.htm
-     cat tmp2 >> /$user/$domain/web/background.htm
-     echo "</html>" >> /$user/$domain/web/background.htm
+     echo "<html>" > /$user/$domain/data/background.htm
+     cat tmp2 >> /$user/$domain/data/background.htm
+     echo "</html>" >> /$user/$domain/data/background.htm
 
      echo "robtex.com                (25/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
      wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 
      x=$(ls -l | grep 'robtex' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
-     mv $x /$user/$domain/web/robtex.htm
+     mv $x /$user/$domain/data/robtex.htm
 
      ##############################################################
 
@@ -523,13 +518,10 @@ case $choice in
      echo $line >> zreport
      cat whois-ip.txt >> zreport
 
-     mv emails.txt names.txt /$user/$domain/contacts/ 2>/dev/null
-     mv subdomains.txt /$user/$domain/dns/ 2>/dev/null
-     mv squatting.txt whois* /$user/$domain/domain/
-     mv doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/files/ 2>/dev/null
-     mv zreport /$user/$domain/reports/passive-recon.txt
+     mv emails.txt names.txt squatting.txt subdomains.txt whois* doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/data/ 2>/dev/null
+     mv zreport /$user/$domain/data/passive-recon.txt
 
-     rm robtex* subdomains* tmp* z* /$user/$domain/worksheet.xlsx
+     rm robtex* subdomains* tmp* z*
 
      echo
      echo $line
@@ -627,7 +619,7 @@ case $choice in
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > zdnsrecon
      grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> zdnsrecon
-     cp zdnsrecon /$user/$domain/dns/records.txt
+     cp zdnsrecon /$user/$domain/data/records.txt
 
      echo "     Zone Transfer        (3/$total)"
      /usr/bin/dnsrecon -d $domain -t axfr > tmp
@@ -645,13 +637,13 @@ case $choice in
 
      cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
 
-     if [ -f /$user/$domain/dns/subdomains.txt ]; then
-          cat /$user/$domain/dns/subdomains.txt zsubdomains | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
-          mv zsubdomains-combined /$user/$domain/dns/subdomains.txt
+     if [ -f /$user/$domain/data/subdomains.txt ]; then
+          cat /$user/$domain/data/subdomains.txt zsubdomains | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
+          mv zsubdomains-combined /$user/$domain/data/subdomains.txt
      fi
 
-     awk '{print $2}' /$user/$domain/dns/subdomains.txt > tmp
-     grep $domain /$user/$domain/dns/records.txt | awk '{print $4}' >> tmp
+     awk '{print $2}' /$user/$domain/data/subdomains.txt > tmp
+     grep $domain /$user/$domain/data/records.txt | awk '{print $4}' >> tmp
      grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' -o tmp | sort -u > tmp2
      sort -n tmp2 > zhosts
 
@@ -687,7 +679,7 @@ case $choice in
 
      echo
      echo "Whatweb                   (10/$total)"
-     cp /$user/$domain/dns/subdomains.txt tmp
+     cp /$user/$domain/data/subdomains.txt tmp
      awk '{print $1}' tmp > tmp2
      /usr/bin/whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
      # Find lines that start with http, and insert a line after
@@ -735,16 +727,16 @@ case $choice in
      echo "==============================" >> zreport
      cat zwhatweb >> zreport
 
-     mv zhosts /$user/$domain/domain/hosts.txt
-     mv zloadbalancing /$user/$domain/domain/loadbalancing.txt
-     mv zreport /$user/$domain/reports/active-recon.txt
-     mv ztraceroute /$user/$domain/domain/traceroute.txt
-     mv zwhatweb /$user/$domain/domain/whatweb.txt
-     mv zonetransfer /$user/$domain/dns/zonetransfer.txt
+     mv zhosts /$user/$domain/data/hosts.txt
+     mv zloadbalancing /$user/$domain/data/loadbalancing.txt
+     mv zreport /$user/$domain/data/active-recon.txt
+     mv ztraceroute /$user/$domain/data/traceroute.txt
+     mv zwhatweb /$user/$domain/data/whatweb.txt
+     mv zonetransfer /$user/$domain/data/zonetransfer.txt
 
-     if [ -f /$user/$domain/contacts/emails.txt ]; then
-          cat /$user/$domain/contacts/emails.txt zemail | sort -u > zemails-combined
-          mv zemails-combined /$user/$domain/contacts/emails.txt
+     if [ -f /$user/$domain/data/emails.txt ]; then
+          cat /$user/$domain/data/emails.txt zemail | sort -u > zemails-combined
+          mv zemails-combined /$user/$domain/data/emails.txt
      fi
 
      rm tmp* z*
