@@ -683,7 +683,9 @@ case $choice in
      awk '{print $1}' tmp > tmp2
      /usr/bin/whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
      # Find lines that start with http, and insert a line after
-     sort tmp3 | sed '/^http/a\ ' > zwhatweb
+     sort tmp3 | sed '/^http/a\ ' > tmp4
+     # Cleanup
+     sed 's/,/\n/g' tmp4 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | grep -v 'Country' > zwhatweb
 
      ##############################################################
 
