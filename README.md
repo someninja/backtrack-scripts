@@ -14,4 +14,5 @@ Update BackTrack by running update.sh or using the main menu from discover.sh.
 
 Support for Kali
 ===================
+There is now a bash version that works with Kali.
 The entire project is being rewritten in python specifically for Kali.
