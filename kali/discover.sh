@@ -180,7 +180,7 @@ case $choice in
      # If folder doesn't exist, create it
      if [ ! -d /$user/$domain ]; then
           cp -R /opt/scripts/report/ /$user/$domain
-          sed 's/REPLACEDOMAIN/'$domain'/' /$user/$domain/index.htm > tmp
+          sed 's/REPLACEDOMAIN/'$domain'/g' /$user/$domain/index.htm > tmp
           mv tmp /$user/$domain/index.htm
      fi
 
