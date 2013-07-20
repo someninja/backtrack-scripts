@@ -116,6 +116,7 @@ sed 's/\.\.\.//g'                                   # Replace 3 periods with not
 cat tmp | tr ';' '\n'                               # Replace semicolon with a new line
 
 sort -k2                                            # Sort by the second column
+sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4         # Sort IPs
 sed "s/$FOO./$FOO/g"                                # Variables - when using sed or grep, use double quotes
 
 ##############################
