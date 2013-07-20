@@ -414,6 +414,11 @@ case $choice in
      x=$(ls -l | grep 'robtex' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
      mv $x /$user/$domain/data/robtex.htm
 
+     awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' > tmp
+     awk '{print $2}' subdomains.txt | grep -v '[A-Za-z]' >> tmp
+     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' tmp > tmp2
+     sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp2  | sed '/^$/d' > /$user/$domain/data/hosts.txt
+
      ##############################################################
 
      echo "Passive Recon" > zreport
