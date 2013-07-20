@@ -637,9 +637,9 @@ case $choice in
 
      echo
      echo "Fierce (~5 min)           (5/$total)"
-     /usr/bin/fierce -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp3
+     /usr/bin/fierce -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp4
 
-     sed -n '/Now performing/,/Subnets found/p' tmp3 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
+     sed -n '/Now performing/,/Subnets found/p' tmp4 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
 
      cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
 
