@@ -55,6 +55,24 @@ f_main
 
 ##############################################################################################################
 
+f_location(){
+echo
+echo -n "Enter the location of your list: "
+read location
+
+# Check for no answer
+if [ -z $location ]; then
+     f_error
+fi
+
+# Check for wrong answer
+if [ ! -f $location ]; then
+     f_error
+fi
+}
+
+##############################################################################################################
+
 f_runlocally(){
 if [ -z $DISPLAY ]; then
      clear
@@ -824,19 +842,7 @@ read choice
 
 case $choice in
      1)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      echo
      echo "Running an Nmap ping sweep for live hosts."
@@ -1009,21 +1015,7 @@ clear
 f_banner
 f_scanname
 
-echo
-echo -n "Enter the location of your list: "
-read location
-
-# Check for no answer
-if [ -z $location ]; then
-     rm -rf $name
-     f_error
-fi
-
-# Check for wrong answer
-if [ ! -f $location ]; then
-     rm -rf $name
-     f_error
-fi
+f_location
 
 START=$(date +%r\ %Z)
 
@@ -2315,19 +2307,7 @@ read choice
 
 case $choice in
      1)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      echo -n "Port (default 80): "
      read port
@@ -2436,19 +2416,7 @@ read choice
 
 case $choice in
      1)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      echo
      echo -n "Port (default 80): "
@@ -2482,19 +2450,7 @@ case $choice in
      ;;
 
      2)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      mkdir /$user/nikto
 
@@ -2531,19 +2487,8 @@ clear
 f_banner
 
 echo -e "\e[1;34mCheck for SSL certificate issues.\e[0m"
-echo 
-echo -n "Enter the location of your list: "
-read location
 
-# Check for no answer (an empty response)
-if [ -z $location ]; then
-     f_error
-fi
-
-# Check for wrong answer
-if [ ! -f $location ]; then
-     f_error
-fi
+f_location
 
 date2stamp(){
 date --utc --date "$1" +%s
@@ -2751,6 +2696,65 @@ exit
 
 ##############################################################################################################
 
+f_parse(){
+clear
+f_banner
+echo -e "\e[1;34mParse Results\e[0m"
+echo
+echo "1.  Robtex"
+echo "2.  Salesforce"
+echo "3.  Previous menu"
+echo
+echo -n "Choice: "
+read choice
+
+case $choice in
+     1) f_robtex;;
+
+     2) f_salesforce;;
+ 
+     3) f_main;;
+     *) f_error;;
+esac
+}
+
+f_robtex(){
+echo
+echo
+echo "Robtex - coming soon"
+echo
+echo
+exit
+}
+
+f_salesforce(){
+
+f_location
+
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/U.S. Department of Treasury//g; s/United States//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/U.S.//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Camp Springs//g; s/Cleveland//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Mc Lean//g; s/Miami//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Rockville//g; s/San Francisco//g; s/Washington//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+
+cat tmp
+echo
+echo
+exit
+}
+
+##############################################################################################################
+
+f_listener(){
+clear
+echo
+echo
+echo "Starting a Metasploit listener on port 443."
+echo "Type - Windows meterpreter reverse TCP."
+echo
+echo "This takes about 20 seconds."
+echo
+msfconsole -r /opt/scripts/resource/listener.rc
+}
+
+##############################################################################################################
+
 f_updates(){
 # Remove entire script categories
 if [ -d /root/nmap-svn ]; then
@@ -2810,20 +2814,6 @@ exit
 
 ##############################################################################################################
 
-f_listener(){
-clear
-echo
-echo
-echo "Starting a Metasploit listener on port 443."
-echo "Type - Windows meterpreter reverse TCP."
-echo
-echo "This takes about 20 seconds."
-echo
-msfconsole -r /opt/scripts/resource/listener.rc
-}
-
-##############################################################################################################
-
 # Loop forever
 while :
 do
@@ -2852,9 +2842,10 @@ echo "9.  SSL Check"
 echo
 echo -e "\e[1;34mMISC\e[0m"
 echo "10. Crack WiFi"
-echo "11. Start a Metasploit listener"
-echo "12. Update BackTrack"
-echo "13. Exit"
+echo "11. Parse Results"
+echo "12. Start a Metasploit listener"
+echo "13. Update BackTrack"
+echo "14. Exit"
 echo
 echo -n "Choice: "
 read choice
@@ -2870,9 +2861,10 @@ case $choice in
      8) f_nikto;;
      9) f_sslcheck;;
      10) ./crack-wifi.sh;;
-     11) f_listener;;
-     12) ./update.sh && exit;;
-     13) clear && exit;;
+     11) f_parse;;
+     12) f_listener;;
+     13) ./update.sh && exit;;
+     14) clear && exit;;
      99) f_updates;;
      *) f_error;;
 esac
