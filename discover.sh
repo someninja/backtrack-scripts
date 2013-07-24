@@ -11,10 +11,10 @@
 # Matt Banick - original development.
 # Eric Milam - total re-write using functions.
 # Martin Bos - IDS evasion techniques.
-# Ben Wood - regex kung foo
+# Ben Wood - regex master
 # Numerous people on freenode IRC - #bash and #sed (e36freak)
 # Steve Copland - report template design
-# Rob Dixon - report template iframe
+# Rob Dixon - report template idea
 
 ##############################################################################################################
 
@@ -404,7 +404,7 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > /$user/$domain/data/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > /$user/$domain/data/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
      grep 'spamcop' tmp | sed 's/<span class="ok">//g; s/<\/span><br \/>/-/g; s/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g; s/not listed/OK/g' | column -t > /$user/$domain/data/black-listed.txt
@@ -641,9 +641,9 @@ case $choice in
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t std > tmp
      egrep -v '(Bind Version for|Could not|Enumerating SRV|not configured|Performing|Records Found|Recursion|Resolving|TXT)' tmp > tmp2
      # Remove first 6 characters from each line
-     sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > zdnsrecon
+     sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > zdnsrecon
      grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> zdnsrecon
-     cat /$user/$domain/data/records.txt zdnsrecon | sort -k2 -u | column -t > tmp3
+     cat /$user/$domain/data/records.txt zdnsrecon | column -t | sort -u -k2 -k1 > tmp3
      cp tmp3 /$user/$domain/data/records.txt
 
      echo "     Zone Transfer        (3/$total)"
@@ -2735,13 +2735,25 @@ exit
 }
 
 f_salesforce(){
+echo
+echo
+echo 'Manually copy the results of a query from data.com to a file, then use this to parse the results.'
 
 f_location
-echo
-echo
-sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Rockville//g; s/San Francisco//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Washington//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/GA//g; s/IL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
 
-cat tmp
+echo
+echo
+
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of Treasury//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Riverdale//g; s/Rockville//g; s/San Francisco//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Washington//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/GA//g; s/IL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+
+# Author: Ben Wood
+perl -ne 'if ($_ =~ /(.*?)\t\s*(.*)/) {printf("%-30s%s\n",$1,$2);}' tmp > tmp2
+
+# Remove trailing whitespace from each line
+sed 's/[ \t]*$//' tmp2 | sort > names.txt
+
+rm tmp*
+cat names.txt
 echo
 echo
 exit
