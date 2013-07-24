@@ -404,10 +404,10 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' | sed 's/.edu./.edu/g' | sed 's/.gov./.gov/g' | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > /$user/$domain/data/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > /$user/$domain/data/records.txt
 
      wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
-     grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/data/black-listed.txt
+     grep 'spamcop' tmp | sed 's/<span class="ok">//g; s/<\/span><br \/>/-/g; s/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g; s/not listed/OK/g' | column -t > /$user/$domain/data/black-listed.txt
 
      echo "dnssy.com                 (22/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
@@ -419,7 +419,7 @@ case $choice in
 
      echo "dnsw.info                 (23/$total)"
      curl http://dnsw.info/$domain > tmp 2>/dev/null
-     sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g' | sed 's/<\/h3>//g' | sed 's/<code>/<b>/g' | sed 's/<\/code>/<\/b>/g' > tmp2
+     sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g; s/<\/h3>//g; s/<code>/<b>/g; s/<\/code>/<\/b>/g' > tmp2
      echo "<html>" > /$user/$domain/data/background.htm
      cat tmp2 >> /$user/$domain/data/background.htm
      echo "</html>" >> /$user/$domain/data/background.htm
@@ -2719,9 +2719,16 @@ esac
 }
 
 f_robtex(){
-echo
-echo
-echo "Robtex - coming soon"
+
+f_location
+
+sed '/<base href="http:\/\/dns.robtex.com/,/<\/script>/d' $location > tmp
+sed '/<script type="text\/javascript"><!--/,/<div id="h0">/d' tmp > tmp2
+sed '/<div id="h5">/,/<div style="display:none">/d' tmp2 > robtex2.htm
+
+rm tmp*
+
+firefox robtex2.htm &
 echo
 echo
 exit
@@ -2730,8 +2737,9 @@ exit
 f_salesforce(){
 
 f_location
-
-sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/U.S. Department of Treasury//g; s/United States//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/U.S.//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Camp Springs//g; s/Cleveland//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Mc Lean//g; s/Miami//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Rockville//g; s/San Francisco//g; s/Washington//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+echo
+echo
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Rockville//g; s/San Francisco//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Washington//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/GA//g; s/IL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
 
 cat tmp
 echo
@@ -2871,3 +2879,4 @@ esac
 }
 
 done
+
