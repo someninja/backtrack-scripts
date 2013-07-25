@@ -429,7 +429,19 @@ case $choice in
      wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 
      x=$(ls -l | grep 'robtex' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
-     mv $x /$user/$domain/data/robtex.htm
+     mv $x tmp
+
+     sed '/<!DOCTYPE html>/,/<div id="c0a">/d' tmp > tmp2
+     sed '/nopad sortable nospan/,/<\/html>/d' tmp2 > tmp3
+
+     cat tmp3 >> /$user/$domain/pages/robtex.htm
+     echo "          </div>" >> /$user/$domain/pages/robtex.htm
+     echo "     </div>" >> /$user/$domain/pages/robtex.htm
+     echo "</div>" >> /$user/$domain/pages/robtex.htm
+     echo "" >> /$user/$domain/pages/robtex.htm
+     echo "</body>" >> /$user/$domain/pages/robtex.htm
+     echo "" >> /$user/$domain/pages/robtex.htm
+     echo "</html>" >> /$user/$domain/pages/robtex.htm
 
      awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' > tmp
      awk '{print $2}' subdomains.txt | grep -v '[A-Za-z]' >> tmp
