@@ -299,7 +299,7 @@ if [ -d /pentest/wireless/freeradius-wpe/.git ]; then
 else
      echo -e "\e[1;33mInstalling FreeRADIUS.\e[0m"
      rm -rf /pentest/wireless/freeradius-wpe/
-     git clone http://git.freeradius.org/freeradius-server.git /pentest/wireless/freeradius-wpe/
+     git clone git://git.freeradius.org/freeradius-server.git /pentest/wireless/freeradius-wpe/
      echo
 fi
 
