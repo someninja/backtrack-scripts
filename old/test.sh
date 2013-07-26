@@ -15,23 +15,24 @@ echo
 
 cp -R /opt/scripts/report/ /$user/$domain
 
-echo "robtex.com                (24)"
+echo "robtex.com"
 wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
 wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 
 x=$(ls -l | grep 'robtex' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
 mv $x tmp
 
-sed '/<!DOCTYPE html>/,/<div id="c0a">/d' tmp > tmp2
-sed '/nopad sortable nospan/,/<\/html>/d' tmp2 > tmp3
+sed '/<!DOCTYPE html>/,/<div id="c0a">/d' tmp | sed '/nopad sortable nospan/,/<\/html>/d' | sed '/<div id="c0b1">/,/DNS Records/d' | sed 's/<h2 class="h2s">Graph<\/h2>//g' | sed 's/<h2 class="h2s">Shared<\/h2>//g' > tmp2
 
-cat tmp3 >> /$user/$domain/pages/robtex.htm
-echo "          </div>" >> /$user/$domain/pages/robtex.htm
-echo "     </div>" >> /$user/$domain/pages/robtex.htm
-echo "</div>" >> /$user/$domain/pages/robtex.htm
-echo "" >> /$user/$domain/pages/robtex.htm
-echo "</body>" >> /$user/$domain/pages/robtex.htm
-echo "" >> /$user/$domain/pages/robtex.htm
-echo "</html>" >> /$user/$domain/pages/robtex.htm
+echo "          </div>" >> tmp2
+echo "     </div>" >> tmp2
+echo "</div>" >> tmp2
+echo "" >> tmp2
+echo "</body>" >> tmp2
+echo "" >> tmp2
+echo "</html>" >> tmp2
 
-firefox /$user/$domain/index.htm &
+cat tmp2 >> /$user/$domain/pages/robtex.htm
+
+firefox /$user/$domain/pages/robtex.htm &
+
