@@ -14,8 +14,8 @@ echo "Where file contains a list of URLs to be compared."
 echo "Usage: $0 [options] file"
 echo
 echo "Options:"
-echo "   -c   Compare versions."
-echo "   -o   Output directory. Default: /root/Desktop/compare-sites"
+echo " -c Compare versions."
+echo " -o Output directory. Default: /root/Desktop/compare-sites"
 echo
 echo
 }
@@ -25,10 +25,10 @@ date -d "1970-01-01 $1 sec"
 }
 
 while getopts "o:c" OPTION; do
-     case $OPTION in
-          o)  DIR="$OPTARG";;
-          c)  DIFFONLY=true;;
-          *)  echo && echo && exit;;
+case $OPTION in
+          o) DIR="$OPTARG";;
+          c) DIFFONLY=true;;
+          *) echo && echo && exit;;
      esac
 done
 
@@ -84,7 +84,7 @@ if [ $VERSION -gt 1 ]; then
      echo "Versions:"
 
      for ((i=1; i<=${VERSION}; i++)); do
-          echo $i  -  $(ts2date $(cat $HDIR/$i))
+          echo $i - $(ts2date $(cat $HDIR/$i))
      done
 
      echo
