@@ -2708,55 +2708,18 @@ exit
 
 ##############################################################################################################
 
-f_parse(){
+f_salesforce(){
 clear
 f_banner
-echo -e "\e[1;34mParse Results\e[0m"
-echo
-echo "1.  Robtex"
-echo "2.  Salesforce"
-echo "3.  Previous menu"
-echo
-echo -n "Choice: "
-read choice
 
-case $choice in
-     1) f_robtex;;
-
-     2) f_salesforce;;
- 
-     3) f_main;;
-     *) f_error;;
-esac
-}
-
-f_robtex(){
-
-f_location
-
-sed '/<base href="http:\/\/dns.robtex.com/,/<\/script>/d' $location > tmp
-sed '/<script type="text\/javascript"><!--/,/<div id="h0">/d' tmp > tmp2
-sed '/<div id="h5">/,/<div style="display:none">/d' tmp2 > robtex2.htm
-
-rm tmp*
-
-firefox robtex2.htm &
-echo
-echo
-exit
-}
-
-f_salesforce(){
-echo
-echo
-echo 'Manually copy the results of a query from data.com to a file, then use this to parse the results.'
+echo 'Copy the results of a query from salesforce to a file, then parse the results.'
 
 f_location
 
 echo
 echo
 
-sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of Treasury//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Riverdale//g; s/Rockville//g; s/San Francisco//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Washington//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/GA//g; s/IL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of Treasury//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Marietta//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Riverdale//g; s/Rockville//g; s/San Francisco//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Washington//g; s/Winder//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/GA//g; s/IL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
 
 # Author: Ben Wood
 perl -ne 'if ($_ =~ /(.*?)\t\s*(.*)/) {printf("%-30s%s\n",$1,$2);}' tmp > tmp2
@@ -2874,7 +2837,7 @@ echo "9.  SSL Check"
 echo
 echo -e "\e[1;34mMISC\e[0m"
 echo "10. Crack WiFi"
-echo "11. Parse Results"
+echo "11. Parse salesforce"
 echo "12. Start a Metasploit listener"
 echo "13. Update BackTrack"
 echo "14. Exit"
@@ -2893,7 +2856,7 @@ case $choice in
      8) f_nikto;;
      9) f_sslcheck;;
      10) ./crack-wifi.sh;;
-     11) f_parse;;
+     11) f_salesforce;;
      12) f_listener;;
      13) ./update.sh && exit;;
      14) clear && exit;;
