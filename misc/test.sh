@@ -13,26 +13,16 @@ read domain
 echo
 echo
 
-cp -R /opt/scripts/report/ /$user/$domain
+awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp
+awk '{print $2}' /$user/$domain/data/subdomains.txt | grep -v '[A-Za-z]' | sort -u > tmp2
+grep -v ':' /$user/$domain/data/zonetransfer.txt | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp3
+cat tmp tmp2 tmp3 | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 | sed '/^$/d' > zhosts
 
-echo "robtex.com"
-wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
-wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
+wc -l tmp
+wc -l tmp2
+wc -l tmp3
+wc -l zhosts
 
-x=$(ls -l | grep 'robtex' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
-mv $x tmp
-
-sed '/<!DOCTYPE html>/,/<div id="c0a">/d' tmp | sed '/nopad sortable nospan/,/<\/html>/d' | sed '/<div id="c0b1">/,/DNS Records/d' | sed 's/<h2 class="h2s">Graph<\/h2>//g; s/<h2 class="h2s">Shared<\/h2>//g; s/"7.00"/"10.00"/g; s/"9.00"/"12.00"/g' > tmp2
-
-echo "          </div>" >> tmp2
-echo "     </div>" >> tmp2
-echo "</div>" >> tmp2
-echo "" >> tmp2
-echo "</body>" >> tmp2
-echo "" >> tmp2
-echo "</html>" >> tmp2
-
-cat tmp2 >> /$user/$domain/pages/robtex.htm
-
-firefox /$user/$domain/pages/robtex.htm &
+echo
+echo
 

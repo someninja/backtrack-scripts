@@ -637,7 +637,7 @@ case $choice in
 
      echo "Nmap"
      echo "     Email                (1/$total)"
-     nmap -Pn -n --open -p80 --script=http-email-harvest --script-args http-email-harvest.maxpagecount=100,http-email-harvest.maxdepth=10 $domain > tmp
+     nmap -Pn -n --open -p80 --script=http-email-harvest --script-args=http-email-harvest.maxpagecount=100,http-email-harvest.maxdepth=10 $domain > tmp
      grep @$domain tmp | grep -v '%20' | grep -v 'jpg' | awk '{print $2}' > tmp2
      # Change to lower case
      cat tmp2 | tr '[A-Z]' '[a-z]' | sort -u > zemail
@@ -679,10 +679,10 @@ case $choice in
           mv zsubdomains-combined /$user/$domain/data/subdomains.txt
      fi
 
-     awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' > tmp
-     awk '{print $2}' /$user/$domain/data/subdomains.txt | grep -v '[A-Za-z]' >> tmp
-     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' -o /$user/$domain/data/zonetransfer.txt >> tmp
-     sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp  | sed '/^$/d' > zhosts
+     awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp
+     awk '{print $2}' /$user/$domain/data/subdomains.txt | grep -v '[A-Za-z]' | sort -u > tmp2
+     grep -v ':' zonetransfer | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp3
+     cat tmp tmp2 tmp3 | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 | sed '/^$/d' > zhosts
 
      echo
      echo "Loadbalancing             (6/$total)"
@@ -773,7 +773,7 @@ case $choice in
      mv zwhatweb /$user/$domain/data/whatweb.txt
      mv zonetransfer /$user/$domain/data/zonetransfer.txt
 
-     if [ -f /$user/$domain/data/emails.txt ]; then
+     if [[ -f /$user/$domain/data/emails.txt && -f zemail ]]; then
           cat /$user/$domain/data/emails.txt zemail | sort -u > zemails-combined
           mv zemails-combined /$user/$domain/data/emails.txt
      fi
@@ -790,7 +790,7 @@ case $choice in
      echo
      printf 'The supporting data folder is located at \e[1;33m%s\e[0m\n' /$user/$domain/
      echo
-     read -p "Press <return> to continue."
+     echo
 
      firefox /$user/$domain/index.htm &
      exit
@@ -2719,16 +2719,16 @@ f_location
 echo
 echo
 
-sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of Treasury//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Marietta//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Richmond//g; s/Riverdale//g; s/Rockville//g; s/San Francisco//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Washington//g; s/Winder//g; s/AK//g; s/AL//g; s/AZ//g; s/CA//g; s/DC//g; s/FL//g; s/GA//g; s/IL//g; s/MD//g; s/MO//g; s/NM//g; s/NY//g; s/OH//g; s/PA//g; s/Sitka//g; s/TX//g; s/VA//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of Treasury//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Herndon//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Marietta//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Portland//g; s/Richmond//g; s/Riverdale//g; s/Rockville//g; s/Salt Lake City//g; s/San Francisco//g; s/Seattle//g; s/Sitka//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Washington//g; s/Williamsport//g; s/Winder//g; s/AK//g; s/AL//g; s/AR//g; s/AZ//g; s/CA//g; s/CO//g; s/CT//g; s/DC//g; s/DE//g; s/FL//g; s/GA//g; s/HI//g; s/IA//g; s/IL//g; s/IN//g; s/KY//g; s/MA//g; s/ME//g; s/MD//g; s/MI//g; s/MO//g; s/MN//g; s/MS//g; s/MT//g; s/NC//g; s/ND//g; s/NH//g; s/NM//g; s/NV//g; s/NY//g; s/OH//g; s/OR//g; s/PA//g; s/RI//g; s/SC//g; s/SD//g; s/TN//g; s/TX//g; s/UT//g; s/VA//g; s/VT//g; s/WA//g; s/WI//g; s/WV//g; s/WY//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
 
 # Author: Ben Wood
 perl -ne 'if ($_ =~ /(.*?)\t\s*(.*)/) {printf("%-30s%s\n",$1,$2);}' tmp > tmp2
 
 # Remove trailing whitespace from each line
-sed 's/[ \t]*$//' tmp2 | sort > names.txt
+sed 's/[ \t]*$//' tmp2 | sort > /$user/names.txt
 
 rm tmp*
-cat names.txt
+cat /$user/names.txt
 echo
 echo
 exit
