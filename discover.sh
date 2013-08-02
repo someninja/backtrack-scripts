@@ -415,7 +415,12 @@ case $choice in
      echo "<html>" > tmp3
      cat tmp2 | grep -v 'Results for' >> tmp3
      echo "</html>" >> tmp3
-     mv tmp3 /$user/$domain/data/config.htm
+     sed 's/Pass/<center><img src="..\/images\/icons\/green.png" height="50" width="50"><\/center>/g; 
+     s/Warning/<center><img src="..\/images\/icons\/yellow.png" height="50" width="50"><\/center>/g;
+     s/Fail/<center><img src="..\/images\/icons\/red.png" height="50" width="50"><\/center>/g;
+     s/ class="info"//g; s/ class="rfail"//g; s/ class="rinfo"//g; s/ class="rpass"//g; s/ class="rsecu"//g; s/ class="rwarn"//g;
+     s/Checking domain format/Domain format/g; s/Checking for parent nameservers/Parent nameservers/g;
+     s/Checking for parent glue/Parent glue/g; s/Your NS records at your parent nameserver are://g; s/Your NS records at your nameservers are://g; s/I found the following MX records://g' tmp3 > /$user/$domain/data/config.htm
 
      echo "dnsw.info                 (23/$total)"
      curl http://dnsw.info/$domain > tmp 2>/dev/null
