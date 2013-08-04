@@ -202,7 +202,7 @@ case $choice in
      fi
 
      # Number of tests
-     total=24
+     total=25
 
      echo
      echo $line
@@ -406,9 +406,6 @@ case $choice in
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
      sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > /$user/$domain/data/records.txt
 
-     wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
-     grep 'spamcop' tmp | sed 's/<span class="ok">//g; s/<\/span><br \/>/-/g; s/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g; s/not listed/OK/g' | column -t > /$user/$domain/data/black-listed.txt
-
      echo "dnssy.com                 (22/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
      sed -n '/Results for/,/\/table/p' tmp > tmp2
@@ -452,6 +449,13 @@ case $choice in
      awk '{print $2}' subdomains.txt | grep -v '[A-Za-z]' >> tmp
      grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' tmp > tmp2
      sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp2  | sed '/^$/d' > /$user/$domain/data/hosts.txt
+
+     echo "urlvoid.com               (25/$total)"
+     wget -q http://www.urlvoid.com/scan/$domain/ -O tmp
+     sed -n '/Website Blacklist Report/,/<\/table>/p' tmp > tmp2
+     sed 's/<img src="http:\/\/www.urlvoid.com\/images\/valid.ico" alt="Clean" title="Clean" \/> NOT FOUND/<center><img src="..\/images\/icons\/green.png" height="25" width="25"><\/center>/g; s/rel="nofollow" //g; s/ title="View more details" target="_blank"//g; s/<img src="http:\/\/www.urlvoid.com\/images\/link.ico" alt="Link" \/>//g; s/ class="tasks"//g; s/<th>Info<\/th>//g' tmp2 | grep -v 'Blacklist Report' > tmp3
+     # Remove leading whitespace from each line
+     sed 's/^[ \t]*//' tmp3 > /$user/$domain/data/black-listed
 
      ##############################################################
 

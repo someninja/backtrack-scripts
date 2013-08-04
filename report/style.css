@@ -72,10 +72,10 @@ a:hover, a:focus {
 }
 
 a:focus { 
-    outline: none;
+     outline: none;
 }
 
-.float-left, .alignleft	{
+.float-left, .alignleft {
 	float: left;
 	margin: 0 15px 10px 0;
 }
@@ -90,7 +90,7 @@ a:focus {
 }
 
 /* Header / Primary / Secondary Navigation
------------------------------------------------------------- */
+------------------------------------------- */
 
 .header-wrap {
 	overflow: hidden;
@@ -112,8 +112,8 @@ a:focus {
 	border-bottom: 2px solid #d4d4d4;
 }
 
-.navbar	{
-  padding: 1;
+.navbar {
+     padding: 1;
 	margin: 1;
 	position: absolute;  /* Ensures that the menu doesn’t affect other elements */
 	border-right: 1px solid #fff; 
@@ -160,6 +160,7 @@ li.current {
 .navbar li:hover ul {
 	display: block;      /* Displays the drop-down box when the menu item is hovered over */
 }
+
 .navbar li ul li {
 	background-color: #fff;
 	width: 170px;        /* Width of the drop-down box when the menu item is hovered over */ 
@@ -192,3 +193,4 @@ iframe {
 	height: 800px;
 	border: none;
 }
+
