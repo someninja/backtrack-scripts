@@ -2728,7 +2728,7 @@ f_location
 echo
 echo
 
-sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Department of Treasury//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Herndon//g; s/Hyattsville//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Marietta//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Philadelphia//g; s/Portland//g; s/Richmond//g; s/Riverdale//g; s/Rockville//g; s/Salt Lake City//g; s/San Francisco//g; s/Seattle//g; s/Sitka//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Washington//g; s/Williamsport//g; s/Winder//g; s/AK//g; s/AL//g; s/AR//g; s/AZ//g; s/CA//g; s/CO//g; s/CT//g; s/DC//g; s/DE//g; s/FL//g; s/GA//g; s/HI//g; s/IA//g; s/IL//g; s/IN//g; s/KY//g; s/MA//g; s/ME//g; s/MD//g; s/MI//g; s/MO//g; s/MN//g; s/MS//g; s/MT//g; s/NC//g; s/ND//g; s/NH//g; s/NM//g; s/NV//g; s/NY//g; s/OH//g; s/OR//g; s/PA//g; s/RI//g; s/SC//g; s/SD//g; s/TN//g; s/TX//g; s/UT//g; s/VA//g; s/VT//g; s/WA//g; s/WI//g; s/WV//g; s/WY//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Atlanta//g; s/Artesia//g; s/Austin//g; s/Baltimore//g; s/Birmingham//g; s/Boston//g; s/Burbank//g ; s/Camp Springs//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Dallas//g; s/Department of Treasury//g; s/Department of the Treasury//g; s/Department of The Treasury//g; s/Dunkirk//g; s/Emeryville//g; s/Encino//g; s/Gastonia//g; s/Herndon//g; s/Hyattsville//g; s/Irvine//g; s/JA//g; s/Kansas City//g; s/La Plata//g; s/Lithonia//g; s/London//g; s/Los Angeles//g; s/Marietta//g; s/Mc Lean//g; s/Miami//g; s/Mumbai India//g; s/New York//g; s/Oakland//g; s/Orange//g; s/Philadelphia//g; s/Portland//g; s/Richmond//g; s/Riverdale//g; s/Rockville//g; s/Sacramento//g; s/Salt Lake City//g; s/San Diego//g; s/San Francisco//g; s/San Jose//g; s/Santa Monica//g; s/Seattle//g; s/Sitka//g; s/Stillwater//g; s/Tacoma//g; s/U.S.//g; s/U.S. Department of Treasury//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Walnut Creek//g; s/Washington//g; s/Westport//g; s/Williamsport//g; s/Winder//g; s/AK//g; s/AL//g; s/AR//g; s/AZ//g; s/CA//g; s/CO//g; s/CT//g; s/DC//g; s/DE//g; s/FL//g; s/GA//g; s/HI//g; s/IA//g; s/IL//g; s/IN//g; s/KY//g; s/MA//g; s/ME//g; s/MD//g; s/MI//g; s/MO//g; s/MN//g; s/MS//g; s/MT//g; s/NC//g; s/ND//g; s/NH//g; s/NM//g; s/NV//g; s/NY//g; s/OH//g; s/OR//g; s/PA//g; s/RI//g; s/SC//g; s/SD//g; s/TN//g; s/TX//g; s/UT//g; s/VA//g; s/VT//g; s/WA//g; s/WI//g; s/WV//g; s/WY//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
 
 # Author: Ben Wood
 perl -ne 'if ($_ =~ /(.*?)\t\s*(.*)/) {printf("%-30s%s\n",$1,$2);}' tmp > tmp2
@@ -2738,6 +2738,11 @@ sed 's/[ \t]*$//' tmp2 | sort > /$user/names.txt
 
 rm tmp*
 cat /$user/names.txt
+
+echo
+echo $line
+echo
+printf 'The new report is located at \e[1;33m%s\e[0m\n' /$user/names.txt
 echo
 echo
 exit

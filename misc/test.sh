@@ -13,11 +13,37 @@ read domain
 echo
 echo
 
-wget -q http://www.urlvoid.com/scan/$domain/ -O tmp
-sed -n '/Website Blacklist Report/,/<\/table>/p' tmp > tmp2
-sed 's/<img src="http:\/\/www.urlvoid.com\/images\/valid.ico" alt="Clean" title="Clean" \/> NOT FOUND/<center><img src="..\/images\/icons\/green.png" height="25" width="25"><\/center>/g; s/rel="nofollow" //g; s/ title="View more details" target="_blank"//g; s/<img src="http:\/\/www.urlvoid.com\/images\/link.ico" alt="Link" \/>//g; s/ class="tasks"//g; s/<th>Info<\/th>//g' tmp2 | grep -v 'Blacklist Report' > tmp3
-# Remove leading whitespace from each line
-sed 's/^[ \t]*//' tmp3 > black-listed
-
-firefox black-listed &
+firefox &
+sleep 2
+firefox -new-tab images.google.com &
+sleep 1
+firefox -new-tab arin.net &
+sleep 1
+firefox -new-tab toolbar.netcraft.com/site_report?url=http://www.$domain &
+sleep 1
+firefox -new-tab uptime.netcraft.com/up/graph?site=www.$domain &
+sleep 1
+firefox -new-tab shodanhq.com/search?q=$domain &
+sleep 1
+firefox -new-tab jigsaw.com/ &
+sleep 1
+firefox -new-tab pastebin.com/ &
+sleep 1
+firefox -new-tab google.com/#q=filetype%3Axls+OR+filetype%3Axlsx+site%3A$domain &
+sleep 1
+firefox -new-tab google.com/#q=filetype%3Appt+OR+filetype%3Apptx+site%3A$domain &
+sleep 1
+firefox -new-tab google.com/#q=filetype%3Adoc+OR+filetype%3Adocx+site%3A$domain &
+sleep 1
+firefox -new-tab google.com/#q=filetype%3Apdf+site%3A$domain &
+sleep 1
+firefox -new-tab google.com/#q=filetype%3Atxt+site%3A$domain &
+sleep 1
+firefox -new-tab sec.gov/edgar/searchedgar/companysearch.html &
+sleep 1
+firefox -new-tab google.com/finance/ &
+sleep 1
+firefox -new-tab reuters.com/finance/stocks
+echo
+echo
 
