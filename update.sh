@@ -563,7 +563,6 @@ fi
 if [ -d /opt/nmap-svn/.svn ]; then
 	echo -e "\e[1;34mUpdating Nmap.\e[0m"
 	cd /opt/nmap-svn/ ; svn cleanup ; svn up
-#	cp /opt/nmap-svn/nmap /usr/local/bin/
 	cp /opt/nmap-svn/nmap-mac-prefixes /usr/local/share/nmap/
 	cp /opt/nmap-svn/nmap-os-db /usr/local/share/nmap/
 	cp /opt/nmap-svn/nmap-payloads /usr/local/share/nmap/
@@ -1112,4 +1111,10 @@ fi
 cp /opt/scripts/alias /root/.bash_aliases ; source /root/.bash_aliases
 
 echo -e "\e[1;34mUpdating locate database.\e[0m" ; echo ; updatedb ; cd /root/
+
 echo
+echo -e "\e[1;31mMake sure you are running to latest version of nmap 6.41SVN.\e[0m"
+echo -e "\e[1;31mIf not:  rm -rf /opt/nmap-svn/, then run update again.\e[0m"
+echo
+echo
+
