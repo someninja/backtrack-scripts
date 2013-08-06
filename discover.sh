@@ -11,10 +11,10 @@
 # Matt Banick - original development.
 # Eric Milam - total re-write using functions.
 # Martin Bos - IDS evasion techniques.
-# Ben Wood - regex master
 # Numerous people on freenode IRC - #bash and #sed (e36freak)
-# Steve Copland - report template design
-# Rob Dixon - report template idea
+# Ben Wood - regex master
+# Rob Dixon - report framework idea
+# Steve Copland - report framework design
 
 ##############################################################################################################
 
@@ -220,11 +220,11 @@ case $choice in
 
      grep $domain tmp | grep -v 'Searching in' | sort > tmp2
 
-     grep '.xls' tmp2 > xls.txt
-     grep '.ppt' tmp2 > ppt.txt
-     grep '.doc' tmp2 | egrep -v '(.pdf|.ppt|.xls)' > doc.txt
-     grep '.pdf' tmp2 > pdf.txt
-     grep '.txt' tmp2 | grep -v 'robots.txt' > txt.txt
+     grep '.xls' tmp2 > xls
+     grep '.ppt' tmp2 > ppt
+     grep '.doc' tmp2 | egrep -v '(.pdf|.ppt|.xls)' > doc
+     grep '.pdf' tmp2 > pdf
+     grep '.txt' tmp2 | grep -v 'robots.txt' > txt
 
      echo
      echo "goog-mail                 (2/$total)"
@@ -299,7 +299,7 @@ case $choice in
      # Remove lines that start with -
      grep -v '^-' tmp2 > tmp3
      # Remove blank lines
-     sed '/^$/d' tmp3 > squatting.txt
+     sed '/^$/d' tmp3 > squatting
 
      ##############################################################
 
@@ -317,7 +317,7 @@ case $choice in
      # Change to lower case
      cat tmp6 | tr '[A-Z]' '[a-z]' > tmp7
      # Clean up
-     egrep -v '(account|administrator|administrative|advanced|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|association|attorney|australia|automation|automotive|balance|banking|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|cashing|certified|challenger|championship|change|chapter|charge|china|chinese|clearance|cloud|code|college|columbia|communications|community|company pages|competition|competitive|compliance|computer|concept|conference|config|connections|construction|consultant|contributor|controllang|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|developing|development|devine|digital|diploma|director|disability|disaster|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|harder|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|justice|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|manufacturing|mastering|md|media|medical|medicine|meta tags|metro|microsoft|middle east|mitigation|money|monitoring|more coming|museums|negative|network|networking|new user|newspaper|new york|next page|nitrogen|nyc|obtaining|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|process|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|united states|untitled|view|Violent|virginia bar|voice|volkswagen|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
+     egrep -v '(account|administrator|administrative|advanced|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|association|attorney|australia|automation|automotive|balance|banking|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|cashing|certified|challenger|championship|change|chapter|charge|china|chinese|clearance|cloud|code|college|columbia|communications|community|company pages|competition|competitive|compliance|computer|concept|conference|config|connections|construction|consultant|contributor|controllang|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|developing|development|devine|digital|diploma|director|disability|disaster|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|harder|hawaii|hazing|headquarters|health|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|justice|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|manufacturing|mastering|md|media|medical|medicine|meta tags|metro|microsoft|middle east|mitigation|money|monitoring|more coming|museums|negative|network|networking|new user|newspaper|new york|next page|nitrogen|nyc|obtaining|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|process|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|rehab|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|united states|untitled|view|Violent|virginia bar|voice|volkswagen|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
      # Remove leading and trailing whitespace from each line
      sed 's/^[ \t]*//;s/[ \t]*$//' tmp8 > tmp9
      # Remove lines that contain a single word
@@ -325,7 +325,7 @@ case $choice in
      # Clean up
      sed 's/\..../ /g' tmp10 | sed 's/\.../ /g' > tmp11
      # Capitalize the first letter of every word
-     sed "s/\b\(.\)/\u\1/g" tmp11 | sort -u > names.txt
+     sed "s/\b\(.\)/\u\1/g" tmp11 | sort -u > names
 
      cat z* | grep @$domain | grep -vF '...' | egrep -v '(\*|=|\+|\||;|:|"|<|>|/|\?)' > tmp
      # Remove trailing whitespace from each line
@@ -333,7 +333,7 @@ case $choice in
      # Change to lower case
      cat tmp2 | tr '[A-Z]' '[a-z]' > tmp3
      # Clean up
-     grep -v 'web search' tmp3 | sort -u > emails.txt
+     grep -v 'web search' tmp3 | sort -u > emails
 
      cat z* | sed '/^[0-9]/!d' | grep -v '@' > tmp
      # Substitute a space for a colon
@@ -344,7 +344,7 @@ case $choice in
      # Change to lower case
      cat tmp4 | tr '[A-Z]' '[a-z]' > tmp5
      grep $domain tmp5 | sort -u > subdomains2.txt
-     cat subdomain* | grep -v "$domain\." | egrep -v '(.nat.|252f)' | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
+     cat subdomain* | grep -v "$domain\." | egrep -v '(.nat.|252f)' | sed 's/www\.//g' | column -t | sort -u > subdomains
 
      ##############################################################
 
@@ -379,7 +379,7 @@ case $choice in
      # Remove line after "Domain servers"
      sed -i '/^Domain servers/{n; /.*/d}' tmp12
      # Remove blank lines from end of file
-     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp12 > whois-domain.txt
+     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp12 > whois-domain
 
      echo "     IP 		  (20/$total)"
      y=$(ping -c1 -w2 $domain | grep 'PING' | cut -d ')' -f1 | cut -d '(' -f2) ; whois -H $y > tmp
@@ -396,7 +396,7 @@ case $choice in
      # Compress blank lines
      cat -s tmp6 > tmp7
      # Clean up
-     sed 's/+1-//g' tmp7 > whois-ip.txt
+     sed 's/+1-//g' tmp7 > whois-ip
      echo
 
      # Remove all empty files
@@ -404,7 +404,7 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > /$user/$domain/data/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 >> /$user/$domain/data/records.htm; echo "</pre>" >> /$user/$domain/data/records.htm
 
      echo "dnssy.com                 (22/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
@@ -445,17 +445,17 @@ case $choice in
 
      cat tmp2 >> /$user/$domain/pages/robtex.htm
 
-     awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' > tmp
-     awk '{print $2}' subdomains.txt | grep -v '[A-Za-z]' >> tmp
+     grep -v '<' /$user/$domain/data/records.htm | awk '{print $3}' | grep -v '[A-Za-z]' > tmp
+     awk '{print $2}' subdomains | grep -v '[A-Za-z]' >> tmp
      grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' tmp > tmp2
-     sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp2  | sed '/^$/d' > /$user/$domain/data/hosts.txt
+     sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp2  | sed '/^$/d' >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
 
      echo "urlvoid.com               (25/$total)"
      wget -q http://www.urlvoid.com/scan/$domain/ -O tmp
      sed -n '/Website Blacklist Report/,/<\/table>/p' tmp > tmp2
      sed 's/<img src="http:\/\/www.urlvoid.com\/images\/valid.ico" alt="Clean" title="Clean" \/> NOT FOUND/<center><img src="..\/images\/icons\/green.png" height="25" width="25"><\/center>/g; s/rel="nofollow" //g; s/ title="View more details" target="_blank"//g; s/<img src="http:\/\/www.urlvoid.com\/images\/link.ico" alt="Link" \/>//g; s/ class="tasks"//g; s/<th>Info<\/th>//g' tmp2 | grep -v 'Blacklist Report' > tmp3
      # Remove leading whitespace from each line
-     sed 's/^[ \t]*//' tmp3 > /$user/$domain/data/black-listed
+     sed 's/^[ \t]*//' tmp3 > /$user/$domain/data/black-listed.htm
 
      ##############################################################
 
@@ -470,101 +470,111 @@ case $choice in
 
      echo > tmp
 
-     if [ -f emails.txt ]; then
-          emailcount=$(wc -l emails.txt | cut -d ' ' -f1)
+     if [ -f emails ]; then
+          emailcount=$(wc -l emails | cut -d ' ' -f1)
           echo "Emails      $emailcount" >> zreport
           echo "Emails ($emailcount)" >> tmp
           echo $line >> tmp
-          cat emails.txt >> tmp
+          cat emails >> tmp
           echo >> tmp
      fi
 
-     if [ -f names.txt ]; then
-          namecount=$(wc -l names.txt | cut -d ' ' -f1)
+     if [ -f names ]; then
+          namecount=$(wc -l names | cut -d ' ' -f1)
           echo "Names       $namecount" >> zreport
           echo "Names ($namecount)" >> tmp
           echo $line >> tmp
-          cat names.txt >> tmp
+          cat names >> tmp
           echo >> tmp
      fi
 
-     if [ -f squatting.txt ]; then
-          urlcount2=$(wc -l squatting.txt | cut -d ' ' -f1)
+     if [ -f squatting ]; then
+          urlcount2=$(wc -l squatting | cut -d ' ' -f1)
           echo "Squatting   $urlcount2" >> zreport
           echo "Squatting ($urlcount2)" >> tmp
           echo $line >> tmp
-          cat squatting.txt >> tmp
+          cat squatting >> tmp
           echo >> tmp
      fi
 
-     if [ -f subdomains.txt ]; then
-          urlcount=$(wc -l subdomains.txt | cut -d ' ' -f1)
+     if [ -f subdomains ]; then
+          urlcount=$(wc -l subdomains | cut -d ' ' -f1)
           echo "Subdomains  $urlcount" >> zreport
           echo "Subdomains ($urlcount)" >> tmp
           echo $line >> tmp
-          cat subdomains.txt >> tmp
+          cat subdomains >> tmp
           echo >> tmp
      fi
 
-     if [ -f xls.txt ]; then
-          xlscount=$(wc -l xls.txt | cut -d ' ' -f1)
+     if [ -f xls ]; then
+          xlscount=$(wc -l xls | cut -d ' ' -f1)
           echo "Excel       $xlscount" >> zreport
           echo "Excel Files ($xlscount)" >> tmp
           echo $line >> tmp
-          cat xls.txt >> tmp
+          cat xls >> tmp
           echo >> tmp
+          cat xls >> /$user/$domain/data/xls.htm; echo "</pre>" >> /$user/$domain/data/xls.htm
      fi
 
-     if [ -f pdf.txt ]; then
-          pdfcount=$(wc -l pdf.txt | cut -d ' ' -f1)
+     if [ -f pdf ]; then
+          pdfcount=$(wc -l pdf | cut -d ' ' -f1)
           echo "PDF         $pdfcount" >> zreport
           echo "PDF Files ($pdfcount)" >> tmp
           echo $line >> tmp
-          cat pdf.txt >> tmp
+          cat pdf >> tmp
           echo >> tmp
+          cat pdf >> /$user/$domain/data/pdf.htm; echo "</pre>" >> /$user/$domain/data/pdf.htm
      fi
 
-     if [ -f ppt.txt ]; then
-          pptcount=$(wc -l ppt.txt | cut -d ' ' -f1)
+     if [ -f ppt ]; then
+          pptcount=$(wc -l ppt | cut -d ' ' -f1)
           echo "PowerPoint  $pptcount" >> zreport
           echo "PowerPoint Files ($pptcount)" >> tmp
           echo $line >> tmp
-          cat ppt.txt >> tmp
+          cat ppt >> tmp
           echo >> tmp
+          cat ppt >> /$user/$domain/data/ppt.htm; echo "</pre>" >> /$user/$domain/data/ppt.htm
      fi
 
-     if [ -f txt.txt ]; then
-          txtcount=$(wc -l txt.txt | cut -d ' ' -f1)
+     if [ -f txt ]; then
+          txtcount=$(wc -l txt | cut -d ' ' -f1)
           echo "Text        $txtcount" >> zreport
           echo "Text Files ($txtcount)" >> tmp
           echo $line >> tmp
-          cat txt.txt >> tmp
+          cat txt >> tmp
           echo >> tmp
+          cat txt >> /$user/$domain/data/txt.htm; echo "</pre>" >> /$user/$domain/data/txt.htm
      fi
 
-     if [ -f doc.txt ]; then
-          doccount=$(wc -l doc.txt | cut -d ' ' -f1)
+     if [ -f doc ]; then
+          doccount=$(wc -l doc | cut -d ' ' -f1)
           echo "Word        $doccount" >> zreport
           echo "Word Files ($doccount)" >> tmp
           echo $line >> tmp
-          cat doc.txt >> tmp
+          cat doc >> tmp
           echo >> tmp
+          cat doc >> /$user/$domain/data/doc.htm; echo "</pre>" >> /$user/$domain/data/doc.htm
      fi
 
      cat tmp >> zreport
      echo "Whois Domain" >> zreport
      echo $line >> zreport
-     cat whois-domain.txt >> zreport
+     cat whois-domain >> zreport
 
      echo >> zreport
      echo "Whois IP" >> zreport
      echo $line >> zreport
-     cat whois-ip.txt >> zreport
+     cat whois-ip >> zreport
 
-     mv emails.txt names.txt squatting.txt subdomains.txt whois* doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/data/ 2>/dev/null
-     mv zreport /$user/$domain/data/passive-recon.txt
+     cat emails >> /$user/$domain/data/emails.htm; echo "</pre>" >> /$user/$domain/data/emails.htm
+     cat names >> /$user/$domain/data/names.htm; echo "</pre>" >> /$user/$domain/data/names.htm
+     cat squatting >> /$user/$domain/data/squatting.htm; echo "</pre>" >> /$user/$domain/data/squatting.htm
+     cat subdomains >> /$user/$domain/data/subdomains.htm; echo "</pre>" >> /$user/$domain/data/subdomains.htm
+     cat whois-domain >> /$user/$domain/data/whois-domain.htm; echo "</pre>" >> /$user/$domain/data/whois-domain.htm
+     cat whois-ip >> /$user/$domain/data/whois-ip.htm; echo "</pre>" >> /$user/$domain/data/whois-ip.htm
+     cat zreport >> /$user/$domain/data/passive-recon.htm; echo "</pre>" >> /$user/$domain/data/passive-recon.htm
 
-     rm robtex* subdomains* tmp* z*
+     rm emails names robtex* squatting subdomains* tmp* whois* z* doc pdf ppt txt xls 2>/dev/null
 
      echo
      echo $line
@@ -666,8 +676,9 @@ case $choice in
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > zdnsrecon
      grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> zdnsrecon
-     cat /$user/$domain/data/records.txt zdnsrecon | column -t | sort -u -k2 -k1 > tmp3
-     cp tmp3 /$user/$domain/data/records.txt
+     cat /$user/$domain/data/records.htm zdnsrecon | grep -v '<' | column -t | sort -u -k2 -k1 > tmp3
+     echo '<pre style="font-family:sans-serif;font-size:16px;">' > /$user/$domain/data/records.htm
+     cat tmp3 >> /$user/$domain/data/records.htm; echo "</pre>" >> /$user/$domain/data/records.htm
 
      echo "     Zone Transfer        (3/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t axfr > tmp
@@ -685,13 +696,14 @@ case $choice in
 
      cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
 
-     if [ -f /$user/$domain/data/subdomains.txt ]; then
-          cat /$user/$domain/data/subdomains.txt zsubdomains | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
-          mv zsubdomains-combined /$user/$domain/data/subdomains.txt
+     if [ -f /$user/$domain/data/subdomains.htm ]; then
+          cat /$user/$domain/data/subdomains.htm zsubdomains | grep -v "<" | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
+          echo '<pre style="font-family:sans-serif;font-size:16px;">' > /$user/$domain/data/subdomains.htm
+          cat zsubdomains-combined >> /$user/$domain/data/subdomains.htm; echo "</pre>" >> /$user/$domain/data/subdomains.htm
      fi
 
-     awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp
-     awk '{print $2}' /$user/$domain/data/subdomains.txt | grep -v '[A-Za-z]' | sort -u > tmp2
+     grep -v '<' /$user/$domain/data/records.htm | awk '{print $3}' | grep -v '[A-Za-z]' | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp
+     awk '{print $2}' /$user/$domain/data/subdomains.htm | grep -v '[A-Za-z]' | sort -u > tmp2
      grep -v ':' zonetransfer | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp3
      cat tmp tmp2 tmp3 | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 | sed '/^$/d' > zhosts
 
@@ -727,13 +739,12 @@ case $choice in
 
      echo
      echo "Whatweb                   (10/$total)"
-     cp /$user/$domain/data/subdomains.txt tmp
-     awk '{print $1}' tmp > tmp2
-     /pentest/enumeration/web/whatweb/whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
+     grep -v '<' /$user/$domain/data/subdomains.htm | awk '{print $1}' > tmp
+     /pentest/enumeration/web/whatweb/whatweb -i tmp --color=never --no-errors -t 255 > tmp2
      # Find lines that start with http, and insert a line after
-     sort tmp3 | sed '/^http/a\ ' > tmp4
+     sort tmp2 | sed '/^http/a\ ' > tmp3
      # Cleanup
-     sed 's/,/\n/g' tmp4 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | grep -v 'Country' > zwhatweb
+     sed 's/,/\n/g' tmp3 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | grep -v 'Country' > zwhatweb
 
      ##############################################################
 
@@ -777,21 +788,22 @@ case $choice in
      echo "==============================" >> zreport
      cat zwhatweb >> zreport
 
-     mv zhosts /$user/$domain/data/hosts.txt
-     mv zloadbalancing /$user/$domain/data/loadbalancing.txt
-     mv zreport /$user/$domain/data/active-recon.txt
-     mv ztraceroute /$user/$domain/data/traceroute.txt
-     mv zwhatweb /$user/$domain/data/whatweb.txt
-     mv zonetransfer /$user/$domain/data/zonetransfer.txt
+     cat zloadbalancing >> /$user/$domain/data/loadbalancing.htm; echo "</pre>" >> /$user/$domain/data/loadbalancing.htm
+     cat zreport >> /$user/$domain/data/active-recon.htm; echo "</pre>" >> /$user/$domain/data/active-recon.htm
+     cat ztraceroute >> /$user/$domain/data/traceroute.htm; echo "</pre>" >> /$user/$domain/data/traceroute.htm
+     cat zwhatweb >> /$user/$domain/data/whatweb.htm; echo "</pre>" >> /$user/$domain/data/whatweb.htm
+     cat zonetransfer >> /$user/$domain/data/zonetransfer.htm; echo "</pre>" >> /$user/$domain/data/zonetransfer.htm
 
-     if [[ -f /$user/$domain/data/emails.txt && -f zemail ]]; then
-          cat /$user/$domain/data/emails.txt zemail | sort -u > zemails-combined
-          mv zemails-combined /$user/$domain/data/emails.txt
+     if [[ -f /$user/$domain/data/emails.htm && -f zemail ]]; then
+          cat /$user/$domain/data/emails.htm zemail | grep -v '<' | sort -u > tmp
+          echo '<pre style="font-family:sans-serif;font-size:16px;">' > /$user/$domain/data/emails.htm
+          cat tmp >> /$user/$domain/data/emails.htm; echo "</pre>" >> /$user/$domain/data/emails.htm
      fi
 
+     echo '<pre style="font-family:sans-serif;font-size:16px;">' > /$user/$domain/data/hosts.htm
+     cat zhosts >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
+
      rm tmp* z*
-     cd /$user/$domain/
-     rm */tmp
 
      echo
      echo $line
