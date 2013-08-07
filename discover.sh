@@ -327,13 +327,17 @@ case $choice in
      # Capitalize the first letter of every word
      sed "s/\b\(.\)/\u\1/g" tmp11 | sort -u > names
 
-     cat z* | grep @$domain | grep -vF '...' | egrep -v '(\*|=|\+|\||;|:|"|<|>|/|\?)' > tmp
+     ##############################################################
+
+     cat z* | grep @$domain | grep -vF '...' | egrep -v '(\*|=|\+|\[|\||;|:|"|<|>|/|\?)' > tmp
      # Remove trailing whitespace from each line
      sed 's/[ \t]*$//' tmp > tmp2
      # Change to lower case
      cat tmp2 | tr '[A-Z]' '[a-z]' > tmp3
      # Clean up
      grep -v 'web search' tmp3 | sort -u > emails
+
+     ##############################################################
 
      cat z* | sed '/^[0-9]/!d' | grep -v '@' > tmp
      # Substitute a space for a colon
@@ -404,7 +408,7 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|DS|NSEC3PARAM|Query time|RRSIG|SEC3|SECTION|SERVER|SSEC|TYPE51|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 >> /$user/$domain/data/records.htm; echo "</pre>" >> /$user/$domain/data/records.htm
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|DS|NSEC3PARAM|Query time|RRSIG|SEC3|SECTION|SERVER|SSEC|TYPE51|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > records
 
      echo "dnssy.com                 (22/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
@@ -445,18 +449,17 @@ case $choice in
 
      cat tmp2 >> /$user/$domain/pages/robtex.htm
 
-     grep -v '<' /$user/$domain/data/records.htm | awk '{print $3}' | grep -v '[A-Za-z]' > tmp
-     awk '{print $2}' subdomains | grep -v '[A-Za-z]' >> tmp
-     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' tmp > tmp2
-     sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp2  | sed '/^$/d' > hosts 
-     cat hosts >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
-
      echo "urlvoid.com               (25/$total)"
      wget -q http://www.urlvoid.com/scan/$domain/ -O tmp
      sed -n '/Website Blacklist Report/,/<\/table>/p' tmp > tmp2
      sed 's/<img src="http:\/\/www.urlvoid.com\/images\/valid.ico" alt="Clean" title="Clean" \/> NOT FOUND/<center><img src="..\/images\/icons\/green.png" height="25" width="25"><\/center>/g; s/rel="nofollow" //g; s/ title="View more details" target="_blank"//g; s/<img src="http:\/\/www.urlvoid.com\/images\/link.ico" alt="Link" \/>//g; s/ class="tasks"//g; s/<th>Info<\/th>//g' tmp2 | grep -v 'Blacklist Report' > tmp3
      # Remove leading whitespace from each line
      sed 's/^[ \t]*//' tmp3 > /$user/$domain/data/black-listed.htm
+
+     awk '{print $3}' records > tmp
+     awk '{print $2}' subdomains >> tmp
+     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' tmp | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > hosts 
+     cat hosts >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
 
      ##############################################################
 
@@ -471,18 +474,9 @@ case $choice in
 
      echo > tmp
 
-     if [ -f hosts ]; then
-          hostcount=$(wc -l hosts | cut -d ' ' -f1)
-          echo "Hosts       $hostcount" >> zreport
-          echo "Hosts ($hostcount)" >> tmp
-          echo $line >> tmp
-          cat hosts >> tmp
-          echo >> tmp
-     fi
-
      if [ -f emails ]; then
           emailcount=$(wc -l emails | cut -d ' ' -f1)
-          echo "Emails      $emailcount" >> zreport
+          echo "Emails        $emailcount" >> zreport
           echo "Emails ($emailcount)" >> tmp
           echo $line >> tmp
           cat emails >> tmp
@@ -491,16 +485,34 @@ case $choice in
 
      if [ -f names ]; then
           namecount=$(wc -l names | cut -d ' ' -f1)
-          echo "Names       $namecount" >> zreport
+          echo "Names         $namecount" >> zreport
           echo "Names ($namecount)" >> tmp
           echo $line >> tmp
           cat names >> tmp
           echo >> tmp
      fi
 
+     if [ -f hosts ]; then
+          hostcount=$(wc -l hosts | cut -d ' ' -f1)
+          echo "Hosts         $hostcount" >> zreport
+          echo "Hosts ($hostcount)" >> tmp
+          echo $line >> tmp
+          cat hosts >> tmp
+          echo >> tmp
+     fi
+
+     if [ -f records ]; then
+          recordscount=$(wc -l records | cut -d ' ' -f1)
+          echo "DNS Records   $recordscount" >> zreport
+          echo "DNS Records ($recordscount)" >> tmp
+          echo $line >> tmp
+          cat records >> tmp
+          echo >> tmp
+     fi
+
      if [ -f squatting ]; then
           urlcount2=$(wc -l squatting | cut -d ' ' -f1)
-          echo "Squatting   $urlcount2" >> zreport
+          echo "Squatting     $urlcount2" >> zreport
           echo "Squatting ($urlcount2)" >> tmp
           echo $line >> tmp
           cat squatting >> tmp
@@ -509,7 +521,7 @@ case $choice in
 
      if [ -f subdomains ]; then
           urlcount=$(wc -l subdomains | cut -d ' ' -f1)
-          echo "Subdomains  $urlcount" >> zreport
+          echo "Subdomains    $urlcount" >> zreport
           echo "Subdomains ($urlcount)" >> tmp
           echo $line >> tmp
           cat subdomains >> tmp
@@ -518,7 +530,7 @@ case $choice in
 
      if [ -f xls ]; then
           xlscount=$(wc -l xls | cut -d ' ' -f1)
-          echo "Excel       $xlscount" >> zreport
+          echo "Excel         $xlscount" >> zreport
           echo "Excel Files ($xlscount)" >> tmp
           echo $line >> tmp
           cat xls >> tmp
@@ -528,7 +540,7 @@ case $choice in
 
      if [ -f pdf ]; then
           pdfcount=$(wc -l pdf | cut -d ' ' -f1)
-          echo "PDF         $pdfcount" >> zreport
+          echo "PDF           $pdfcount" >> zreport
           echo "PDF Files ($pdfcount)" >> tmp
           echo $line >> tmp
           cat pdf >> tmp
@@ -538,7 +550,7 @@ case $choice in
 
      if [ -f ppt ]; then
           pptcount=$(wc -l ppt | cut -d ' ' -f1)
-          echo "PowerPoint  $pptcount" >> zreport
+          echo "PowerPoint    $pptcount" >> zreport
           echo "PowerPoint Files ($pptcount)" >> tmp
           echo $line >> tmp
           cat ppt >> tmp
@@ -548,7 +560,7 @@ case $choice in
 
      if [ -f txt ]; then
           txtcount=$(wc -l txt | cut -d ' ' -f1)
-          echo "Text        $txtcount" >> zreport
+          echo "Text          $txtcount" >> zreport
           echo "Text Files ($txtcount)" >> tmp
           echo $line >> tmp
           cat txt >> tmp
@@ -558,7 +570,7 @@ case $choice in
 
      if [ -f doc ]; then
           doccount=$(wc -l doc | cut -d ' ' -f1)
-          echo "Word        $doccount" >> zreport
+          echo "Word          $doccount" >> zreport
           echo "Word Files ($doccount)" >> tmp
           echo $line >> tmp
           cat doc >> tmp
@@ -578,13 +590,14 @@ case $choice in
 
      cat emails >> /$user/$domain/data/emails.htm; echo "</pre>" >> /$user/$domain/data/emails.htm
      cat names >> /$user/$domain/data/names.htm; echo "</pre>" >> /$user/$domain/data/names.htm
+     cat records >> /$user/$domain/data/records.htm; echo "</pre>" >> /$user/$domain/data/records.htm
      cat squatting >> /$user/$domain/data/squatting.htm; echo "</pre>" >> /$user/$domain/data/squatting.htm
      cat subdomains >> /$user/$domain/data/subdomains.htm; echo "</pre>" >> /$user/$domain/data/subdomains.htm
      cat whois-domain >> /$user/$domain/data/whois-domain.htm; echo "</pre>" >> /$user/$domain/data/whois-domain.htm
      cat whois-ip >> /$user/$domain/data/whois-ip.htm; echo "</pre>" >> /$user/$domain/data/whois-ip.htm
      cat zreport >> /$user/$domain/data/passive-recon.htm; echo "</pre>" >> /$user/$domain/data/passive-recon.htm
 
-     rm emails hosts names robtex* squatting subdomains* tmp* whois* z* doc pdf ppt txt xls 2>/dev/null
+     rm emails hosts names records robtex* squatting subdomains* tmp* whois* z* doc pdf ppt txt xls 2>/dev/null
 
      echo
      echo $line
@@ -686,7 +699,7 @@ case $choice in
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > tmp3
      grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> tmp3
-     grep -v 'SEC3' tmp3 | sed "s/is                       SSEC  configured        for                               $domain/DNSSEC is enabled./g" > zdnsrecon
+     egrep -v '(SEC3|SKEYs|SSEC)' tmp3 > zdnsrecon
      cat /$user/$domain/data/records.htm zdnsrecon | grep -v '<' | column -t | sort -u -k2 -k1 > tmp3
 
      echo '<pre style="font-size:14px;">' > /$user/$domain/data/records.htm
@@ -756,7 +769,7 @@ case $choice in
      # Find lines that start with http, and insert a line after
      sort tmp2 | sed '/^http/a\ ' > tmp3
      # Cleanup
-     sed 's/,/\n/g' tmp3 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | grep -v 'Country' > zwhatweb
+     sed 's/,/\n/g' tmp3 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | sed 's/http:\/\///g' | grep -v 'Country' > zwhatweb
 
      ##############################################################
 
@@ -771,30 +784,35 @@ case $choice in
           cat zemail >> zreport
      fi
 
+     echo "Hosts" >> zreport
+     echo "==============================" >> zreport
+     cat zhosts >> zreport
+
      echo >> zreport
      echo "DNS Records" >> zreport
      echo "==============================" >> zreport
      cat zdnsrecon >> zreport
-     echo >> zreport
-     echo "Zone Transfer" >> zreport
-     echo "==============================" >> zreport
-     cat zonetransfer >> zreport
-     echo >> zreport
-     echo "Sub Domains" >> zreport
-     echo "==============================" >> zreport
-     cat zsubdomains >> zreport
-     echo >> zreport
-     echo "Hosts" >> zreport
-     echo "==============================" >> zreport
-     cat zhosts >> zreport
+
      echo >> zreport
      echo "Loadbalancing" >> zreport
      echo "==============================" >> zreport
      cat zloadbalancing >> zreport
+
+     echo >> zreport
+     echo "Sub Domains" >> zreport
+     echo "==============================" >> zreport
+     cat zsubdomains >> zreport
+
      echo >> zreport
      echo "Traceroute" >> zreport
      echo "==============================" >> zreport
      cat ztraceroute >> zreport
+
+     echo >> zreport
+     echo "Zone Transfer" >> zreport
+     echo "==============================" >> zreport
+     cat zonetransfer >> zreport
+
      echo >> zreport
      echo "Whatweb" >> zreport
      echo "==============================" >> zreport
