@@ -2,7 +2,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	box-sizing:         border-box;   /* Everything else */
+	box-sizing:         border-box;
 }
 
 html { overflow-y:scroll; }
@@ -28,8 +28,6 @@ h4 { font-size: 16px; }
 h5 { font-size: 14px; }
 h6 { font-size: 12px; }
 
-h1 img, h2 img, h3 img, h4 img, h5 img, h6 img { margin:0; }
-
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	font-weight: normal;
 	line-height: 1.4;
@@ -42,13 +40,6 @@ h2 small {
 
 h2 small.lg-text {
 	font-size: 26px;
-}
-
-/* Paragraps */
-p { 
-	margin: 0 0 15px;
-	text-align: left;
-	line-height: 1.4em;
 }
 
 ul, ol {
@@ -89,16 +80,14 @@ a:focus {
 	text-align: center;
 }
 
-/* Header / Primary / Secondary Navigation
-------------------------------------------- */
-
+/* Header / Primary / Secondary Navigation */
 .header-wrap {
 	overflow: hidden;
 }
 
 .nav {
 	width: 100%;         /* Spans the width of the page */
-	height: 53px;
+	height: 50px;
 	margin: 0;           /* Ensures there is no space between sides of the screen and the menu */
 	z-index: 99;         /* Makes sure that your menu remains on top of other page elements */
 	position: relative; 
@@ -126,11 +115,11 @@ ul.navbar {
 
 .navbar li {
 	height: auto;
-	width: 137px;        /* Each menu item is 140px wide */
+	width: 160px;        /* Each menu item */
 	float: left;         /* This lines up the menu items horizontally */
 	text-align: center;  /* All text is placed in the center of the box */
 	list-style: none;    /* Removes the default styling (bullets) for the list */
-	font: normal bold 12px/1.2em sans-serif;  
+	font: normal bold 14px/1.2em sans-serif;  
 	padding: 0;
 	margin: 0;
 }
@@ -163,7 +152,7 @@ li.current {
 
 .navbar li ul li {
 	background-color: #fff;
-	width: 170px;        /* Width of the drop-down box when the menu item is hovered over */ 
+	width: 160px;        /* Width of the drop-down box when the menu item is hovered over */ 
 }
 
 .navbar li ul li a {
@@ -178,19 +167,19 @@ li.current {
 .navbar li ul li a:hover	{background-color: #eee;}
 
 .wrapper {
-	width: 960px;
+	width: 1160px;
 	margin: 0 auto;
 	padding: 2em 0;
 }
 
 .page-header {
-	padding-bottom: 9px;
-	margin: 20px 0;
+	padding-bottom: 5px;
 	border-bottom: 1px solid #eeeeee;
 }
 
 iframe {
-	height: 800px;
+	height: 810px;
+	width: 1160px;
 	border: none;
 }
 
