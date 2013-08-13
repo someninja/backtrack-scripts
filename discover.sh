@@ -729,7 +729,7 @@ case $choice in
      echo
      echo "Loadbalancing             (6/$total)"
      /pentest/enumeration/web/lbd/lbd.sh $domain > tmp 2>/dev/null
-     egrep -v '(5.0_Pub|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
+     egrep -v '(5.0_Pub|[2J|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
      # Remove leading whitespace from file
      awk '!d && NF {sub(/^[[:blank:]]*/,""); d=1} d' tmp2 > tmp3
      # Remove leading whitespace from each line

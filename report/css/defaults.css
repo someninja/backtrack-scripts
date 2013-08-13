@@ -513,7 +513,12 @@ table {
 /* `Containers
 ----------------------------------------------------------------------------------------------------*/
 
-.container_12,
+.container_12 {
+     margin-left: auto;
+     margin-right: auto;
+     width: 1120px;
+}
+
 .container_16 {
 	margin-left: auto;
 	margin-right: auto;
