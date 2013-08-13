@@ -91,9 +91,7 @@ fi
 ##############################################################################################################
 
 f_terminate(){
-if [ -f tmp ]; then
-     rm tmp* z*
-fi
+rm emails names squatting whois* subdomain* doc pdf ppt txt xls tmp* z* 2>/dev/null
 
 if [ -f $name ]; then
      rm -rf $name
@@ -101,6 +99,9 @@ fi
 
 PID=$(ps -ef | grep 'discover.sh' | grep -v 'grep' | awk '{print $2}')
 kill -9 $PID
+
+echo
+echo
 }
 
 ##############################################################################################################
@@ -202,29 +203,29 @@ case $choice in
      fi
 
      # Number of tests
-     total=25
+     total=24
 
      echo
      echo $line
      echo
 
      echo "goofile                   (1/$total)"
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xls > tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xlsx >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f ppt >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f pptx >> tmp
-     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f doc >> tmp
+     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f doc > tmp
      python /pentest/enumeration/google/goofile/goofile.py -d $domain -f docx >> tmp
      python /pentest/enumeration/google/goofile/goofile.py -d $domain -f pdf >> tmp
+     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f ppt >> tmp
+     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f pptx >> tmp
      python /pentest/enumeration/google/goofile/goofile.py -d $domain -f txt >> tmp
+     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xls >> tmp
+     python /pentest/enumeration/google/goofile/goofile.py -d $domain -f xlsx >> tmp
 
      grep $domain tmp | grep -v 'Searching in' | sort > tmp2
 
-     grep '.xls' tmp2 > xls
-     grep '.ppt' tmp2 > ppt
      grep '.doc' tmp2 | egrep -v '(.pdf|.ppt|.xls)' > doc
      grep '.pdf' tmp2 > pdf
+     grep '.ppt' tmp2 > ppt
      grep '.txt' tmp2 | grep -v 'robots.txt' > txt
+     grep '.xls' tmp2 > xls
 
      echo
      echo "goog-mail                 (2/$total)"
@@ -423,14 +424,7 @@ case $choice in
      s/Checking domain format/Domain format/g; s/Checking for parent nameservers/Parent nameservers/g;
      s/Checking for parent glue/Parent glue/g; s/Your NS records at your parent nameserver are://g; s/Your NS records at your nameservers are://g; s/I found the following MX records://g' tmp3 > /$user/$domain/data/config.htm
 
-     echo "dnsw.info                 (23/$total)"
-     curl http://dnsw.info/$domain > tmp 2>/dev/null
-     sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g; s/<\/h3>//g; s/<code>/<b>/g; s/<\/code>/<\/b>/g' > tmp2
-     echo "<html>" > /$user/$domain/data/background.htm
-     cat tmp2 >> /$user/$domain/data/background.htm
-     echo "</html>" >> /$user/$domain/data/background.htm
-
-     echo "robtex.com                (24/$total)"
+     echo "robtex.com                (23/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
      wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 
@@ -449,7 +443,7 @@ case $choice in
 
      cat tmp2 >> /$user/$domain/pages/robtex.htm
 
-     echo "urlvoid.com               (25/$total)"
+     echo "urlvoid.com               (24/$total)"
      wget -q http://www.urlvoid.com/scan/$domain -O tmp
      sed -n '/Website Blacklist Report/,/<\/table>/p' tmp > tmp2
      sed 's/<img src="http:\/\/www.urlvoid.com\/images\/valid.ico" alt="Clean" title="Clean" \/> NOT FOUND/<center><img src="..\/images\/icons\/green.png" height="25" width="25"><\/center>/g; s/rel="nofollow" //g; s/ title="View more details" target="_blank"//g; s/<img src="http:\/\/www.urlvoid.com\/images\/link.ico" alt="Link" \/>//g; s/ class="tasks"//g; s/<th>Info<\/th>//g' tmp2 | grep -v 'Blacklist Report' > tmp3

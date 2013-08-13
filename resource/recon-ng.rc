@@ -1,17 +1,17 @@
+set WORKSPACE $company
 set COMPANY $company
 set DOMAIN $domain
-set WORKSPACE $company
 
 load recon/contacts/enum/http/web/namechk
 set USERNAME
 run
 back
 
-load recon/contacts/enum/http/web/pwnedlist       # may need to run this later
+load recon/contacts/enum/http/web/pwnedlist                   # may need to run this later
 run
 back
 
-load recon/contacts/enum/http/web/should_change_password    # may need to run this later
+load recon/contacts/enum/http/web/should_change_password      # may need to run this later
 run
 back
 
@@ -67,11 +67,11 @@ load recon/contacts/support/mangle
 run
 back
 
-load recon/creds/enum/http/api/googli        # may need to run this later
+load recon/creds/enum/http/api/googli                         # may need to run this later
 run
 back
 
-load recon/creds/enum/http/api/noisette      # may need to run this later
+load recon/creds/enum/http/api/noisette                       # may need to run this later
 run
 back
 
@@ -87,13 +87,13 @@ load recon/creds/gather/http/api/pwnedlist/domain_creds
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/domain_ispwned   # may need to run this later
+load recon/creds/gather/http/api/pwnedlist/domain_ispwned     # may need to run this later
 set SOURCE $domain
 set STORE <db table>
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/leak_lookup      # may need to run this later
+load recon/creds/gather/http/api/pwnedlist/leak_lookup        # may need to run this later
 run
 back
 
@@ -120,11 +120,11 @@ load recon/hosts/enum/http/api/wascompanyhacked
 run
 back
 
-load recon/hosts/enum/http/api/whatweb            # may need to run this later
+load recon/hosts/enum/http/api/whatweb                        # may need to run this later
 run
 back
 
-load recon/hosts/enum/http/api/whois_lookup       # may need to run this later
+load recon/hosts/enum/http/api/whois_lookup                   # may need to run this later
 run
 back
 
@@ -143,7 +143,7 @@ set HOST
 run
 back
 
-load recon/hosts/enum/http/web/ipvoid             # may need to run this later
+load recon/hosts/enum/http/web/ipvoid                         # may need to run this later
 run
 back
 
@@ -155,15 +155,15 @@ load recon/hosts/enum/http/web/mywot
 run
 back
 
-load recon/hosts/enum/http/web/netbios            # may need to run this later
+load recon/hosts/enum/http/web/netbios                        # may need to run this later
 run
 back
 
-load recon/hosts/enum/http/web/netcraft_history   # may need to run this later
+load recon/hosts/enum/http/web/netcraft_history               # may need to run this later
 run
 back
 
-load recon/hosts/enum/http/web/open_resolvers     # may need to run this later
+load recon/hosts/enum/http/web/open_resolvers                 # may need to run this later
 run
 back
 
@@ -171,7 +171,7 @@ load recon/hosts/enum/http/web/siteadvisor_summary
 run
 back
 
-load recon/hosts/enum/http/web/urlvoid            # may need to run this later
+load recon/hosts/enum/http/web/urlvoid                        # may need to run this later
 run
 back
 
@@ -187,7 +187,7 @@ load recon/hosts/gather/dns/brute_force
 run
 back
 
-load recon/hosts/gather/http/api/bing_ip          # may need to run this later
+load recon/hosts/gather/http/api/bing_ip                      # may need to run this later
 set STORE True
 run
 back
@@ -239,19 +239,19 @@ load recon/hosts/gather/http/web/yahoo_site
 run
 back
 
-load recon/hosts/geo/http/api/hostip         # may need to run this later
+load recon/hosts/geo/http/api/hostip                          # may need to run this later
 run
 back
 
-load recon/hosts/geo/http/api/ipinfodb       # may need to run this later
+load recon/hosts/geo/http/api/ipinfodb                        # may need to run this later
 run
 back
 
-load recon/hosts/geo/http/api/maxmind       # may need to run this later
+load recon/hosts/geo/http/api/maxmind                         # may need to run this later
 run
 back
 
-load recon/hosts/geo/http/api/uniapple       # may need to run this later
+load recon/hosts/geo/http/api/uniapple                        # may need to run this later
 run
 back
 
