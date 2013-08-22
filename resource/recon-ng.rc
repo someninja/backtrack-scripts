@@ -1,270 +1,166 @@
-set WORKSPACE $company
-set COMPANY $company
-set DOMAIN $domain
+set workspace $company
+set company $company
+set domain $domain
 
-load recon/contacts/enum/http/web/namechk
-set USERNAME
+use discovery/info_disclosure/dns/cache_snoop
+set nameserver
 run
 back
 
-load recon/contacts/enum/http/web/pwnedlist                   # may need to run this later
+use discovery/info_disclosure/http/google_ids
+url
 run
 back
 
-load recon/contacts/enum/http/web/should_change_password      # may need to run this later
+use experimental/rce
+set base_url
+set parameters
+set post
 run
 back
 
-load recon/contacts/gather/http/api/jigsaw/point_usage
-set USERNAME
-set PASSWORD
+use recon/contacts/enum/http/web/dev_diver
+set username
 run
 back
 
-load recon/contacts/gather/http/api/jigsaw/purchase_contact
-set USERNAME
-set PASSWORD
-set CONTACT
+use recon/contacts/enum/http/web/namechk
+set username
 run
 back
 
-load recon/contacts/gather/http/api/jigsaw/search_contacts
+use recon/contacts/gather/http/web/jigsaw
+set company
 run
 back
 
-load recon/contacts/gather/http/api/linkedin_auth
+use recon/contacts/gather/http/web/pgp_search
+set domain
 run
 back
 
-load recon/contacts/gather/http/api/twitter
-set HANDLE
+use recon/hosts/enum/dns/resolve
+set nameserver
 run
 back
 
-load recon/contacts/gather/http/api/whois_pocs
-set STORE True
+use recon/hosts/enum/http/web/age_analyzer
+set host
 run
 back
 
-load recon/contacts/gather/http/web/jigsaw
+use recon/hosts/enum/http/web/asafaweb
+set host
 run
 back
 
-load recon/contacts/gather/http/web/pgp_search
-set STORE True
+use recon/hosts/enum/http/web/gender_analyzer
+set host
 run
 back
 
-load recon/contacts/support/add_contact
-set FNAME
-set LNAME
-set TITLE
-set EMAIL
+use recon/hosts/enum/http/web/malwaredomain
+set domain
 run
 back
 
-load recon/contacts/support/mangle
+use recon/hosts/enum/http/web/mywot
+set domain
 run
 back
 
-load recon/creds/enum/http/api/googli                         # may need to run this later
+use recon/hosts/enum/http/web/web_archive
+set domain
 run
 back
 
-load recon/creds/enum/http/api/noisette                       # may need to run this later
+use recon/hosts/enum/http/web/xssed
+set domain
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/account_creds      # may need to run this later
+use recon/hosts/gather/dns/brute_force
+set domain
+set nameserver
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/api_usage
+use recon/hosts/gather/dns/reverse_resolve
+set subnet
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/domain_creds
+use recon/hosts/gather/http/web/baidu_site
+set domain
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/domain_ispwned     # may need to run this later
-set SOURCE $domain
-set STORE <db table>
+use recon/hosts/gather/http/web/bing_domain
+set domain
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/leak_lookup        # may need to run this later
+use recon/hosts/gather/http/web/census_2012
+set range
 run
 back
 
-load recon/creds/gather/http/api/pwnedlist/leaks_dump
+use recon/hosts/gather/http/web/google_site
+set domain
 run
 back
 
-load recon/hosts/enum/dns/resolve
+use recon/hosts/gather/http/web/netcraft
+set domain
 run
 back
 
-load recon/hosts/enum/http/api/builtwith
-set HOST
+use recon/hosts/gather/http/web/yahoo_site
+set domain
 run
 back
 
-load recon/hosts/enum/http/api/punkspider
-set STORE True
-set VULN True
+use recon/hosts/geo/http/web/wigle
+set latitude
+set longitude
+set password
+set radius
+set username
 run
 back
 
-load recon/hosts/enum/http/api/wascompanyhacked
+use recon/pushpin/flickr
+set latitude
+set longitude
+set radius
 run
 back
 
-load recon/hosts/enum/http/api/whatweb                        # may need to run this later
+use recon/pushpin/picasa
+set latitude
+set longitude
+set radius
 run
 back
 
-load recon/hosts/enum/http/api/whois_lookup                   # may need to run this later
+use recon/pushpin/shodan
+set latitude
+set longitude
+set radius
 run
 back
 
-load recon/hosts/enum/http/web/age_analyzer
-set HOST
+use recon/pushpin/twitter
+set latitude
+set longitude
+set radius
 run
 back
 
-load recon/hosts/enum/http/web/asafaweb
-set HOST
-run
-back
-
-load recon/hosts/enum/http/web/gender_analyzer
-set HOST
-run
-back
-
-load recon/hosts/enum/http/web/ipvoid                         # may need to run this later
-run
-back
-
-load recon/hosts/enum/http/web/malwaredomain
-run
-back
-
-load recon/hosts/enum/http/web/mywot
-run
-back
-
-load recon/hosts/enum/http/web/netbios                        # may need to run this later
-run
-back
-
-load recon/hosts/enum/http/web/netcraft_history               # may need to run this later
-run
-back
-
-load recon/hosts/enum/http/web/open_resolvers                 # may need to run this later
-run
-back
-
-load recon/hosts/enum/http/web/siteadvisor_summary
-run
-back
-
-load recon/hosts/enum/http/web/urlvoid                        # may need to run this later
-run
-back
-
-load recon/hosts/enum/http/web/web_archive
-run
-back
-
-load recon/hosts/enum/http/web/xssed
-run
-back
-
-load recon/hosts/gather/dns/brute_force
-run
-back
-
-load recon/hosts/gather/http/api/bing_ip                      # may need to run this later
-set STORE True
-run
-back
-
-load recon/hosts/gather/http/api/google_site
-run
-back
-
-load recon/hosts/gather/http/api/shodan_hostname
-run
-back
-
-load recon/hosts/gather/http/web/baidu_site
-run
-back
-
-load recon/hosts/gather/http/web/bing_site
-run
-back
-
-load recon/hosts/gather/http/web/google_site
-run
-back
-
-load recon/hosts/gather/http/web/ip_neighbor
-set STORE True
-run
-back
-
-load recon/hosts/gather/http/web/mcafee/mcafee_affil
-run
-back
-
-load recon/hosts/gather/http/web/mcafee/mcafee_dns
-set STORE True
-run
-back
-
-load recon/hosts/gather/http/web/mcafee/mcafee_mail
-set STORE True
-run
-back
-
-load recon/hosts/gather/http/web/netcraft
-run
-back
-
-load recon/hosts/gather/http/web/yahoo_site
-run
-back
-
-load recon/hosts/geo/http/api/hostip                          # may need to run this later
-run
-back
-
-load recon/hosts/geo/http/api/ipinfodb                        # may need to run this later
-run
-back
-
-load recon/hosts/geo/http/api/maxmind                         # may need to run this later
-run
-back
-
-load recon/hosts/geo/http/api/uniapple                        # may need to run this later
-run
-back
-
-load recon/hosts/geo/http/web/wigle
-set USERNAME
-set PASSWORD
-set LATITUDE
-set LONGITUDE
-run
-back
-
-load recon/hosts/support/add_host
-set HOST
+use recon/pushpin/youtube
+set latitude
+set longitude
+set radius
 run
 back
 
