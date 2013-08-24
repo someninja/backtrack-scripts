@@ -13,16 +13,8 @@ read domain
 echo
 echo
 
-     echo
-     echo "Loadbalancing             (6/$total)"
-     /pentest/enumeration/web/lbd/lbd.sh $domain > tmp 2>/dev/null
-     egrep -v '(5.0_Pub|\[2J|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
-     # Remove leading whitespace from file
-     awk '!d && NF {sub(/^[[:blank:]]*/,""); d=1} d' tmp2 > tmp3
-     # Remove leading whitespace from each line
-     sed 's/^[ \t]*//' tmp3 > tmp4
-     # Remove blank lines from end of file
-     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > tmp5
-     # Clean up
-     cat -s tmp5 > zloadbalancing
+     echo "mydnstools.info           (21/$total)"
+     wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|DS|NSEC3PARAM|Query time|RRSIG|SEC3|SECTION|SERVER|SSEC|TYPE51|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > records
+
 
