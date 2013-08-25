@@ -5,21 +5,13 @@ clear
 echo
 echo
 
-aliases(){
-echo -e "\e[1;33mSetting up aliases.\e[0m"
-cp /opt/scripts/kali/alias /root/.bash_aliases
-source /root/.bash_aliases
-echo
-}
-
-echo -ne "\e[1;33mDo you want to set up aliases? [yes/no].\e[0m "
-
+echo -ne "\e[1;33mDo you want to set up aliases? [y/n].\e[0m "
 read input
 
-if [ $input = 'yes' ]; then
-	aliases
-else
-	echo -e "\e[1;33mContinuing with setup.\e[0m" 
+if [ $input = 'y' ]; then
+     echo -e "\e[1;33mSetting up aliases.\e[0m"
+     cp /opt/scripts/kali/alias /root/.bash_aliases
+     source /root/.bash_aliases
 fi
 
 echo
