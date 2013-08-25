@@ -10,7 +10,7 @@ read repo
 
 if [ $repo = 'y' ]; then
      echo -e "\e[1;33mSetting up bleeding edge repos.\e[0m"
-     # Jay's stuff here
+     echo deb http://repo.kali.org/kali kali-bleeding-edge main >> /etc/apt/sources.list
 fi
 
 echo
@@ -42,6 +42,10 @@ echo
 
 echo -e "\e[1;33mInstalling xdotool.\e[0m"
 apt-get install xdotool
+echo
+
+echo -e "\e[1;33mUpdating Kali distro.\e[0m"
+apt-get update -y ; apt-get upgarde -y
 
 echo
 echo
