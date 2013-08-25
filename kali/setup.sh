@@ -5,6 +5,15 @@ clear
 echo
 echo
 
+echo -ne "\e[1;33mDo you want to use the bleeding edge repos? [y/n].\e[0m "
+read repo
+
+if [ $repo = 'y' ]; then
+     echo -e "\e[1;33mSetting up bleeding edge repos.\e[0m"
+     # Jay's stuff here
+fi
+
+echo
 echo -ne "\e[1;33mDo you want to set up aliases? [y/n].\e[0m "
 read input
 
