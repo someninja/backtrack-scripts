@@ -263,3 +263,5 @@ fi
 http://www.ipvoid.com/scan/targetIP
 http://www.urlvoid.com/scan/$domain
 http://www.fortiguard.com
+
+nmap -p80 --script dns-brute $domain
