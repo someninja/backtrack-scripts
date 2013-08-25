@@ -314,8 +314,16 @@ else
      echo
 fi
 
-echo -e "\e[1;34mUpdating GISKismet.\e[0m"
-cd /pentest/wireless/giskismet/ ; svn up ; echo
+if [ -d /pentest/wireless/giskismet/.svn ]; then
+     echo -e "\e[1;34mUpdating GISKismet.\e[0m"
+     cd /pentest/wireless/giskismet/ ; svn up
+     echo
+else
+     echo -e "\e[1;33mInstalling GISKismet.\e[0m"
+     rm -rf /pentest/wireless/giskismet/
+     svn co https://my-svn.assembla.com/svn/giskismet/trunk /pentest/wireless/giskismet
+     echo
+fi
 
 if [ -d /pentest/web/golismero/.git ]; then
      echo -e "\e[1;34mUpdating golismero.\e[0m"
@@ -857,14 +865,14 @@ else
      echo
 fi
 
-if [ -d /pentest/database/sqlninja/.svn ]; then
+if [ -f /pentest/database/sqlninja/scripts/churrasco.base64 ]; then
      echo -e "\e[1;34mUpdating Sqlninja.\e[0m"
      cd /pentest/database/sqlninja/ ; svn up
      echo
 else
      echo -e "\e[1;33mInstalling Sqlninja.\e[0m"
      rm -rf /pentest/database/sqlninja/
-     svn co https://sqlninja.svn.sourceforge.net/svnroot/sqlninja /pentest/database/sqlninja/
+     svn co svn://svn.code.sf.net/p/sqlninja/code/ /pentest/database/sqlninja/
      echo
 fi
 
@@ -1117,4 +1125,3 @@ echo -e "\e[1;31mMake sure you are running to latest version of nmap 6.41SVN.\e[
 echo -e "\e[1;31mIf not:  rm -rf /opt/nmap-svn/, then run update again.\e[0m"
 echo
 echo
-
