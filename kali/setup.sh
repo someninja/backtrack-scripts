@@ -25,27 +25,28 @@ fi
 
 echo
 echo -e "\e[1;33mInstalling arp-scan.\e[0m"
-apt-get install arp-scan
+apt-get -y install arp-scan
 echo
 
 echo -e "\e[1;33mInstalling Filezilla.\e[0m"
-apt-get install filezilla
+apt-get -y install filezilla
 echo
 
 echo -e "\e[1;33mInstalling gedit.\e[0m"
-apt-get install gedit
+apt-get -y install gedit
 echo
 
 echo -e "\e[1;33mInstalling recon-ng.\e[0m"
-apt-get install recon-ng
+apt-get -y install recon-ng
 echo
 
 echo -e "\e[1;33mInstalling xdotool.\e[0m"
-apt-get install xdotool
+apt-get -y install xdotool
 echo
 
 echo -e "\e[1;33mUpdating Kali distro.\e[0m"
-apt-get update -y ; apt-get upgarde -y
+apt-get -y update ; apt-get -y upgrade
 
 echo
 echo
+
