@@ -407,10 +407,9 @@ case $choice in
      # Remove all empty files
      find -type f -empty -exec rm {} +
 
-     echo "mydnstools.info           (21/$total) - website down"
-     echo test test2 test3 > records
-#     wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-#     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|DS|NSEC3PARAM|Query time|RRSIG|SEC3|SECTION|SERVER|SSEC|TYPE51|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > records
+     echo "mydnstools.info           (21/$total)"
+     wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|DS|NSEC3PARAM|Query time|RRSIG|SEC3|SECTION|SERVER|SSEC|TYPE51|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > records
 
      echo "dnssy.com                 (22/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
@@ -423,7 +422,7 @@ case $choice in
      s/Fail/<center><img src="..\/images\/icons\/red.png" height="50" width="50"><\/center>/g;
      s/ class="info"//g; s/ class="rfail"//g; s/ class="rinfo"//g; s/ class="rpass"//g; s/ class="rsecu"//g; s/ class="rwarn"//g;
      s/Checking domain format/Domain format/g; s/Checking for parent nameservers/Parent nameservers/g;
-     s/Checking for parent glue/Parent glue/g; s/Your NS records at your parent nameserver are://g; s/Your NS records at your nameservers are://g; s/I found the following MX records://g' tmp3 > /$user/$domain/data/config.htm
+     s/Checking for parent glue/Parent glue/g; s/Your NS records at your parent nameserver are://g; s/Your NS records at your nameservers are://g; s/I found the following MX records://g; s/This is all of the MX servers I found.//g; s/I was unable/Unable/g' tmp3 > /$user/$domain/data/config.htm
 
      echo "robtex.com                (23/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
@@ -730,7 +729,7 @@ case $choice in
      echo
      echo "Loadbalancing             (6/$total)"
      /pentest/enumeration/web/lbd/lbd.sh $domain > tmp 2>/dev/null
-     egrep -v '(5.0_Pub|[2J|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
+     egrep -v '(Checks if a given|Written by|Proof-of-concept)' tmp > tmp2
      # Remove leading whitespace from file
      awk '!d && NF {sub(/^[[:blank:]]*/,""); d=1} d' tmp2 > tmp3
      # Remove leading whitespace from each line
@@ -2767,7 +2766,7 @@ f_location
 echo
 echo
 
-sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Akron//g; s/Apple Valley//g; s/Artesia//g; s/Atlanta//g; s/Austin//g; s/Baltimore//g; s/Binghamton//g; s/Birmingham//g; s/Boston//g; s/Burbank//g ; s/Burlington//g; s/Canada//g; s/Camp Springs//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Columbia//g; s/Dallas//g; s/Denver//g; s/Dunkirk//g; s/Durham//g; s/Englewood//g; s/Emeryville//g; s/Encino//g; s/Fallbrook//g; s/Fremont//g; s/Gardena//g; s/Gastonia//g; s/Glendale//g; s/Harbor City//g; s/Hawthorne//g; s/Hermosa Beach//g; s/Herndon//g; s/Hyattsville//g; s/India//g; s/Irvine//g; s/JA//g; s/Kansas City//g; s/La Plata//g; s/Lawrenceville//g; s/Lawndale//g; s/Lithonia//g; s/Lomita//g; s/London//g; s/Long Beach//g; s/Los Angeles//g; s/Manhattan//g; s/Marietta//g; s/Marina Del Rey//g; s/Mc Lean//g; s/Miami//g; s/Milpitas//g; s/Mumbai//g; s/Needham//g; s/New York//g; s/Oakland//g; s/Ottawa 	ON//g; s/Orange//g; s/Philadelphia//g; s/Portland//g; s/Rancho//g; s/Redondo Beach//g; s/Reston//g; s/Richmond//g; s/Riverdale//g; s/Rllng Hls Est//g; s/Rochester//g; s/Rockville//g; s/Sacramento//g; s/Salt Lake City//g; s/San Diego//g; s/San Francisco//g; s/San Jose//g; s/San Mateo//g; s/San Pedro//g; s/Santa Clara//g; s/Santa Monica//g; s/Scotts Valley//g; s/Seattle//g; s/Southfield//g; s/Sitka//g; s/South Lake//g; s/Stillwater//g; s/Tacoma//g; s/Torrance//g; s/Twin Falls//g; s/U.S.//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Walnut Creek//g; s/Washington//g; s/Westport//g; s/Williamsport//g; s/Wilmington//g; s/Winder//g; s/AK//g; s/AL//g; s/AR//g; s/AZ//g; s/CA//g; s/CO//g; s/CT//g; s/DC//g; s/DE//g; s/FL//g; s/GA//g; s/HI//g; s/IA//g; s/ID//g; s/IL//g; s/IN//g; s/KS//g; s/KY//g; s/LA//g; s/MA//g; s/ME//g; s/MD//g; s/MI//g; s/MN//g; s/MO//g; s/MS//g; s/MT//g; s/NC//g; s/NE//g; s/ND//g; s/NH//g; s/NJ//g; s/NM//g; s/NV//g; s/NY//g; s/OH//g; s/OK//g; s/OR//g; s/PA//g; s/RI//g; s/SC//g; s/SD//g; s/TN//g; s/TX//g; s/UT//g; s/VA//g; s/VT//g; s/WA//g; s/WI//g; s/WV//g; s/WY//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Akron//g; s/Apple Valley//g; s/Artesia//g; s/Ashburn//g; s/Atlanta//g; s/Austin//g; s/Baltimore//g; s/Binghamton//g; s/Birmingham//g; s/Boston//g; s/Burbank//g ; s/Burlington//g; s/Canada//g; s/Camp Springs//g; s/Charlotte//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Columbia//g; s/Dallas//g; s/Denver//g; s/Dunkirk//g; s/Durham//g; s/Englewood//g; s/Emeryville//g; s/Encino//g; s/Fallbrook//g; s/Fremont//g; s/Front Royal//g; s/Gardena//g; s/Gastonia//g; s/Glendale//g; s/Harbor City//g; s/Hawthorne//g; s/Hermosa Beach//g; s/Herndon//g; s/Hyattsville//g; s/India//g; s/Irvine//g; s/JA//g; s/Kansas City//g; s/La Plata//g; s/Lawrenceville//g; s/Lawndale//g; s/Lithonia//g; s/Lomita//g; s/London//g; s/Long Beach//g; s/Los Angeles//g; s/Manhattan//g; s/Marietta//g; s/Marina Del Rey//g; s/Mc Lean//g; s/Miami//g; s/Milpitas//g; s/Mumbai//g; s/Needham//g; s/New York//g; s/Oakland//g; s/Ottawa 	ON//g; s/Orange//g; s/Philadelphia//g; s/Portland//g; s/Rancho//g; s/Redondo Beach//g; s/Reston//g; s/Richmond//g; s/Riverdale//g; s/Rllng Hls Est//g; s/Rochester//g; s/Rockville//g; s/Sacramento//g; s/Salt Lake City//g; s/San Diego//g; s/San Francisco//g; s/San Jose//g; s/San Mateo//g; s/San Pedro//g; s/Santa Clara//g; s/Santa Monica//g; s/Scotts Valley//g; s/Seattle//g; s/Southfield//g; s/Sitka//g; s/South Lake//g; s/Stephens City//g; s/Stillwater//g; s/Tacoma//g; s/Torrance//g; s/Twin Falls//g; s/U.S.//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Walnut Creek//g; s/Washington//g; s/Westport//g; s/Winchester//g; s/Williamsport//g; s/Wilmington//g; s/Winder//g; s/AK//g; s/AL//g; s/AR//g; s/AZ//g; s/CA//g; s/CO//g; s/CT//g; s/DC//g; s/DE//g; s/FL//g; s/GA//g; s/HI//g; s/IA//g; s/ID//g; s/IL//g; s/IN//g; s/KS//g; s/KY//g; s/LA//g; s/MA//g; s/ME//g; s/MD//g; s/MI//g; s/MN//g; s/MO//g; s/MS//g; s/MT//g; s/NC//g; s/NE//g; s/ND//g; s/NH//g; s/NJ//g; s/NM//g; s/NV//g; s/NY//g; s/OH//g; s/OK//g; s/OR//g; s/PA//g; s/RI//g; s/SC//g; s/SD//g; s/TN//g; s/TX//g; s/UT//g; s/VA//g; s/VT//g; s/WA//g; s/WI//g; s/WV//g; s/WY//g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
 
 # Author: Ben Wood
 perl -ne 'if ($_ =~ /(.*?)\t\s*(.*)/) {printf("%-30s%s\n",$1,$2);}' tmp > tmp2
