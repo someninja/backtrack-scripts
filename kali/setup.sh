@@ -11,6 +11,9 @@ read repo
 if [ $repo = 'y' ]; then
      echo -e "\e[1;33mSetting up bleeding edge repos.\e[0m"
      echo deb http://repo.kali.org/kali kali-bleeding-edge main >> /etc/apt/sources.list
+     echo
+     echo -e "\e[1;33mUpdating Repositories.\e[0m"
+     apt-get -y update ; apt-get -y upgrade; apt-get -y dist-upgrade
 fi
 
 echo
@@ -22,6 +25,17 @@ if [ $input = 'y' ]; then
      cp /opt/scripts/kali/alias /root/.bash_aliases
      source /root/.bash_aliases
 fi
+
+echo
+echo -ne "\e[1;33mDo you want to enable metasploit service at startup? [y/n].\e[0m "
+read service
+
+if [ $service = 'y' ]; then
+     echo -e "\e[1;33mSetting up metasploit service.\e[0m"
+     sleep 3
+     update-rc.d postgresql enable && update-rc.d metasploit enable
+fi
+
 
 echo
 echo -e "\e[1;33mInstalling arp-scan.\e[0m"
@@ -42,11 +56,6 @@ echo
 
 echo -e "\e[1;33mInstalling xdotool.\e[0m"
 apt-get -y install xdotool
-echo
-
-echo -e "\e[1;33mUpdating Kali distro.\e[0m"
-apt-get -y update ; apt-get -y upgrade
-
 echo
 echo
 

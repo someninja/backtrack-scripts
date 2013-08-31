@@ -73,19 +73,6 @@ def goodbye():
 
 ##############################################################################################################
 
-def kali_bleeding_edge():
-     print
-     print line
-     print
-     print coloryellow.format('[*] Adding Kali bleeding edge repositories.')
-     print
-     time.sleep(1)
-     os.system('echo deb http://repo.kali.org/kali kali-bleeding-edge main >> /etc/apt/sources.list')
-     os.system('apt-get update')
-     os.system('apt-get upgrade -y')
-
-##############################################################################################################
-
 def lan():
      print 'LAN'
      goodbye()
@@ -130,8 +117,6 @@ def main():
           elif choice == "11":
                listener()
           elif choice == "12":
-               kali_bleeding_edge()
-          elif choice == "13":
                sys.exit(0)
           elif choice == "99":
                updates()
@@ -162,8 +147,7 @@ def menu():
      print colorblue.format('MISC')
      print '10. Crack WiFi'
      print '11. Start a Metasploit listener'
-     print '12. Add Kali bleeding edge repository'
-     print '13. Exit'
+     print '12. Exit'
      print
      return raw_input('Choice: ')
 
