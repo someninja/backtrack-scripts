@@ -165,9 +165,6 @@ else
      echo
 fi
 
-echo -e "\e[1;34mUpdating deadicated.\e[0m"
-cd /pentest/telephony/dedected ; svn up ; echo
-
 if [ -d /pentest/scanners/deblaze/.git ]; then
      echo -e "\e[1;34mUpdating deblaze.\e[0m"
      cd /pentest/scanners/deblaze/ ; git pull
@@ -622,6 +619,15 @@ else
 fi
 
 echo -e "\e[1;34mUpdating OpenVAS.\e[0m" ; openvas-nvt-sync ; echo
+
+if [ -f /pentest/web/dirbuster/DirBuster-0.12.jar ]; then
+     echo -e "\e[1;33mInstalling OWASP DirBuster.\e[0m"
+     rm -rf /pentest/web/dirbuster/
+     wget -q http://sourceforge.net/projects/dirbuster/files/DirBuster%20%28jar%20%2B%20lists%29/1.0-RC1/DirBuster-1.0-RC1.zip
+     unzip DirBuster-1.0-RC1.zip
+     rm DirBuster-1.0-RC1.zip
+     mv DirBuster-1.0-RC1 /pentest/web/dirbuster/
+fi
 
 if [ -d /pentest/passwords/patator/.git ]; then
      echo -e "\e[1;34mUpdating Patator.\e[0m"
