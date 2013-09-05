@@ -22,6 +22,13 @@ else
      echo
 fi
 
+if [ ! -f /usr/lib/ipscan/ipscan-linux64-3.2.jar ]; then
+     echo -e "\e[1;33mInstalling Angry IP Scanner.\e[0m"
+     wget -q http://sourceforge.net/projects/ipscan/files/ipscan3-binary/3.2/ipscan_3.2_amd64.deb
+     dpkg -i ipscan_3.2_amd64.deb
+     rm ipscan_3.2_amd64.deb
+fi
+
 if [ -d /pentest/web/beef/.git ]; then
      echo -e "\e[1;34mUpdating BeEF.\e[0m"
      cd /pentest/web/beef/ ; ./update-beef
