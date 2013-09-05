@@ -12,3 +12,4 @@ echo -n "Domain: "
 read domain
 echo
 echo
+

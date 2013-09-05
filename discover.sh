@@ -301,7 +301,7 @@ case $choice in
      grep -v '^-' tmp2 > tmp3
      # Remove blank lines
      sed '/^$/d' tmp3 > tmp4
-     sed 's/BAHAMAS/Bahamas/g; s/BELGIUM/Belgium/g; s/GERMANY/Germany/g; s/IRELAND/Ireland/g; s/ITALY/Italy/g; s/JAPAN/Japan/g; s/KOREA REPUBLIC OF/Republic of Korea/g; s/NETHERLANDS/Netherlands/g; s/NORWAY/Norway/g; s/RUSSIAN FEDERATION/Russia/g; s/SPAIN/Spain/g; s/SWEDEN/Sweden/g; s/UNITED KINGDOM/United Kingdom/g; s/UNITED STATES/United States/g' tmp4 > squatting
+     sed 's/BAHAMAS/Bahamas/g; s/BELGIUM/Belgium/g; s/CANADA/Canada/g; s/CHINA/China/g; s/GERMANY/Germany/g; s/IRELAND/Ireland/g; s/ITALY/Italy/g; s/JAPAN/Japan/g; s/KOREA REPUBLIC OF/Republic of Korea/g; s/NETHERLANDS/Netherlands/g; s/NORWAY/Norway/g; s/RUSSIAN FEDERATION/Russia/g; s/SPAIN/Spain/g; s/SWEDEN/Sweden/g; s/SWITZERLAND/Switzerland/g; s/UNITED KINGDOM/United Kingdom/g; s/UNITED STATES/United States/g' tmp4 > squatting
 
      ##############################################################
 
@@ -319,7 +319,7 @@ case $choice in
      # Change to lower case
      cat tmp6 | tr '[A-Z]' '[a-z]' > tmp7
      # Clean up
-     egrep -v '(academy|account|administrator|administrative|advanced|adventure|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|association|attorney|australia|automation|automotive|balance|bank|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|cashing|certified|challenger|championship|change|chapter|charge|china|chinese|clearance|cloud|code|college|columbia|communications|community|company pages|competition|competitive|compliance|computer|concept|conference|config|connections|construction|consultant|contributor|controllang|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|develop|development|devine|digital|diploma|director|disability|disaster|disclosure|dispute|division|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|group|guardian|hackers|hacking|harden|harder|hawaii|hazing|headquarters|health|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|justice|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|manufacturing|marketplace|mastering|md|media|medical|medicine|meta tags|methane|metro|microsoft|middle east|mitigation|money|monitor|more coming|museums|negative|network|network|new user|newspaper|new york|next page|nitrogen|nyc|obtain|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|process|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeem|redirect|register|registry|regulation|rehab|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searc|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|successful|superheroines|supervisor|support|switch|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|university|united states|untitled|view|Violent|virginia bar|voice|volkswagen|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
+     egrep -v '(academy|account|administrator|administrative|advanced|adventure|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|association|attorney|australia|automation|automotive|balance|bank|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|cashing|certified|challenger|championship|change|chapter|charge|china|chinese|clearance|cloud|code|college|columbia|communications|community|company pages|competition|competitive|compliance|computer|concept|conference|config|connections|construction|consultant|contributor|controllang|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|develop|development|devine|digital|diploma|director|disability|disaster|disclosure|dispute|division|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|group|guardian|hackers|hacking|harden|harder|hawaii|hazing|headquarters|health|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|justice|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|manufacturing|marketplace|mastering|md|media|medical|medicine|meta tags|methane|metro|microsoft|middle east|mitigation|money|monitor|more coming|museums|negative|network|network|new user|newspaper|new york|next page|nitrogen|nyc|obtain|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|process|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeem|redirect|register|registry|regulation|rehab|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searc|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|successful|superheroines|supervisor|support|switch|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|tylenol|types of scams|unclaimed|underground|university|united states|untitled|view|Violent|virginia bar|voice|volkswagen|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
      # Remove leading and trailing whitespace from each line
      sed 's/^[ \t]*//;s/[ \t]*$//' tmp8 > tmp9
      # Remove lines that contain a single word
@@ -327,7 +327,7 @@ case $choice in
      # Clean up
      sed 's/\..../ /g' tmp10 | sed 's/\.../ /g' > tmp11
      # Capitalize the first letter of every word, print last name then first name
-     sed "s/\b\(.\)/\u\1/g" tmp11 | awk '{print $2", "$1}' | sort -u > names
+     sed 's/\b\(.\)/\u\1/g' tmp11 | awk '{print $2", "$1}' | sort -u > names
 
      ##############################################################
 
@@ -682,11 +682,11 @@ case $choice in
      nmap -Pn -n --open -p80 --script=http-email-harvest --script-args=http-email-harvest.maxpagecount=100,http-email-harvest.maxdepth=10 $domain > tmp
      grep @$domain tmp | grep -v '%20' | grep -v 'jpg' | awk '{print $2}' > tmp2
      # Change to lower case
-     cat tmp2 | tr '[A-Z]' '[a-z]' | sort -u > zemail
+     cat tmp2 | tr '[A-Z]' '[a-z]' | sort -u > emails
 
      # Check if file is empty
-     if [ ! -s zemail ]; then
-          rm zemail
+     if [ ! -s emails ]; then
+          rm emails
      fi
 
      echo
@@ -697,8 +697,8 @@ case $choice in
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > tmp3
      grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> tmp3
-     egrep -v '(SEC3|SKEYs|SSEC)' tmp3 > zdnsrecon
-     cat /$user/$domain/data/records.htm zdnsrecon | grep -v '<' | column -t | sort -u -k2 -k1 > tmp3
+     egrep -v '(SEC3|SKEYs|SSEC)' tmp3 > records
+     cat /$user/$domain/data/records.htm records | grep -v '<' | column -t | sort -u -k2 -k1 > tmp3
 
      echo '<pre style="font-size:14px;">' > /$user/$domain/data/records.htm
      cat tmp3 >> /$user/$domain/data/records.htm; echo "</pre>" >> /$user/$domain/data/records.htm
@@ -709,26 +709,25 @@ case $choice in
 
      echo "     Sub-domains (~5 min) (4/$total)"
      /pentest/enumeration/dns/dnsrecon/dnsrecon.py -d $domain -t brt -D /pentest/enumeration/dns/dnsrecon/namelist.txt --iw -f > tmp
-     grep $domain tmp | grep -v "$domain\." | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
+     grep $domain tmp | grep -v "$domain\." | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > subdomains-dnsrecon
 
      echo
      echo "Fierce (~5 min)           (5/$total)"
      /pentest/enumeration/dns/fierce/fierce.pl -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp4
 
-     sed -n '/Now performing/,/Subnets found/p' tmp4 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
+     sed -n '/Now performing/,/Subnets found/p' tmp4 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > subdomains-fierce
 
-     cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
+     cat subdomains-dnsrecon subdomains-fierce | grep -v '.nat.' | column -t | sort -u > subdomains
 
      if [ -f /$user/$domain/data/subdomains.htm ]; then
-          cat /$user/$domain/data/subdomains.htm zsubdomains | grep -v "<" | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
+          cat /$user/$domain/data/subdomains.htm subdomains | grep -v "<" | grep -v "$domain\." | column -t | sort -u > subdomains-combined
           echo '<pre style="font-size:14px;">' > /$user/$domain/data/subdomains.htm
-          cat zsubdomains-combined >> /$user/$domain/data/subdomains.htm; echo "</pre>" >> /$user/$domain/data/subdomains.htm
+          cat subdomains-combined >> /$user/$domain/data/subdomains.htm; echo "</pre>" >> /$user/$domain/data/subdomains.htm
      fi
 
-     grep -v '<' /$user/$domain/data/records.htm | awk '{print $3}' | grep -v '[A-Za-z]' | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp
-     awk '{print $2}' /$user/$domain/data/subdomains.htm | grep -v '[A-Za-z]' | sort -u > tmp2
-     grep -v ':' zonetransfer | grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' -o | sort -u > tmp3
-     cat tmp tmp2 tmp3 | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 | sed '/^$/d' > zhosts
+     awk '{print $3}' records > tmp
+     awk '{print $2}' subdomains-dnsrecon subdomains-fierce >> tmp
+     grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' tmp | egrep -v '(-|:|127.0.0.1)' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > hosts
 
      echo
      echo "Loadbalancing             (6/$total)"
@@ -738,10 +737,11 @@ case $choice in
      awk '!d && NF {sub(/^[[:blank:]]*/,""); d=1} d' tmp2 > tmp3
      # Remove leading whitespace from each line
      sed 's/^[ \t]*//' tmp3 > tmp4
+     egrep -v '(does Load-balancing|does NOT use Load-balancing)' tmp4 | sed 's/Checking for //g' > tmp5
      # Remove blank lines from end of file
-     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > tmp5
+     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp5 > tmp6
      # Clean up
-     cat -s tmp5 > zloadbalancing
+     cat -s tmp6 > loadbalancing
 
      echo
      echo "Traceroute"
@@ -767,7 +767,7 @@ case $choice in
      # Find lines that start with http, and insert a line after
      sort tmp2 | sed '/^http/a\ ' > tmp3
      # Cleanup
-     sed 's/,/\n/g' tmp3 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | sed 's/http:\/\///g' | grep -v 'Country' > zwhatweb
+     sed 's/,/\n/g' tmp3 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | sed 's/http:\/\///g' | grep -v 'Country' > whatweb
 
      ##############################################################
 
@@ -775,63 +775,96 @@ case $choice in
      echo $domain >> zreport
      date +%A" - "%B" "%d", "%Y >> zreport
      echo >> zreport
+     echo >> zreport
 
-     if [ -f zemail ]; then
-          echo "Emails" >> zreport
-          echo "==============================" >> zreport
-          cat zemail >> zreport
+     echo "Summary" >> zreport
+     echo $line >> zreport
+
+     touch tmp
+     echo >> tmp
+
+     if [ -f emails ]; then
+          emailcount=$(wc -l emails | cut -d ' ' -f1)
+          echo "Emails        $emailcount" >> zreport
+          echo "Emails ($emailcount)" >> tmp
+          echo $line >> tmp
+          cat emails >> tmp
+          echo >> tmp
      fi
 
-     echo "Hosts" >> zreport
-     echo "==============================" >> zreport
-     cat zhosts >> zreport
+     if [ -f hosts ]; then
+          hostcount=$(wc -l hosts | cut -d ' ' -f1)
+          echo "Hosts         $hostcount" >> zreport
+          echo "Hosts ($hostcount)" >> tmp
+          echo $line >> tmp
+          cat hosts >> tmp
+          echo >> tmp
+     fi
 
-     echo >> zreport
-     echo "DNS Records" >> zreport
-     echo "==============================" >> zreport
-     cat zdnsrecon >> zreport
+     if [ -f records ]; then
+          recordscount=$(wc -l records | cut -d ' ' -f1)
+          echo "DNS Records   $recordscount" >> zreport
+          echo "DNS Records ($recordscount)" >> tmp
+          echo $line >> tmp
+          cat records >> tmp
+          echo >> tmp
+     fi
 
-     echo >> zreport
+     if [ -f subdomains ]; then
+          subdomaincount=$(wc -l subdomains | cut -d ' ' -f1)
+          echo "Subdomains    $subdomaincount" >> zreport
+          echo "Subdomains ($subdomaincount)" >> tmp
+          echo $line >> tmp
+          #cat subdomains >> tmp
+          echo >> tmp
+     fi
+
+     cat tmp >> zreport
+
      echo "Loadbalancing" >> zreport
-     echo "==============================" >> zreport
-     cat zloadbalancing >> zreport
-
-     echo >> zreport
-     echo "Sub Domains" >> zreport
-     echo "==============================" >> zreport
-     cat zsubdomains >> zreport
+     echo $line >> zreport
+     cat loadbalancing >> zreport
 
      echo >> zreport
      echo "Traceroute" >> zreport
-     echo "==============================" >> zreport
+     echo $line >> zreport
      cat ztraceroute >> zreport
 
      echo >> zreport
      echo "Zone Transfer" >> zreport
-     echo "==============================" >> zreport
+     echo $line >> zreport
      cat zonetransfer >> zreport
 
      echo >> zreport
      echo "Whatweb" >> zreport
-     echo "==============================" >> zreport
-     cat zwhatweb >> zreport
+     echo $line >> zreport
+     cat whatweb >> zreport
+     echo "Zone Transfer" >> zreport
+     echo $line >> zreport
+     cat zonetransfer >> zreport
 
-     cat zloadbalancing >> /$user/$domain/data/loadbalancing.htm; echo "</pre>" >> /$user/$domain/data/loadbalancing.htm
+     echo >> zreport
+     echo "Whatweb" >> zreport
+     echo $line >> zreport
+     cat whatweb >> zreport
+
+     cat loadbalancing >> /$user/$domain/data/loadbalancing.htm; echo "</pre>" >> /$user/$domain/data/loadbalancing.htm
      cat zreport >> /$user/$domain/data/active-recon.htm; echo "</pre>" >> /$user/$domain/data/active-recon.htm
      cat ztraceroute >> /$user/$domain/data/traceroute.htm; echo "</pre>" >> /$user/$domain/data/traceroute.htm
-     cat zwhatweb >> /$user/$domain/data/whatweb.htm; echo "</pre>" >> /$user/$domain/data/whatweb.htm
+     cat whatweb >> /$user/$domain/data/whatweb.htm; echo "</pre>" >> /$user/$domain/data/whatweb.htm
      cat zonetransfer >> /$user/$domain/data/zonetransfer.htm; echo "</pre>" >> /$user/$domain/data/zonetransfer.htm
 
-     if [[ -f /$user/$domain/data/emails.htm && -f zemail ]]; then
-          cat /$user/$domain/data/emails.htm zemail | grep -v '<' | sort -u > tmp
+     if [[ -f /$user/$domain/data/emails.htm && -f emails ]]; then
+          cat /$user/$domain/data/emails.htm emails | grep -v '<' | sort -u > tmp
           echo '<pre style="font-size:14px;">' > /$user/$domain/data/emails.htm
           cat tmp >> /$user/$domain/data/emails.htm; echo "</pre>" >> /$user/$domain/data/emails.htm
      fi
 
+     cat hosts /$user/$domain/data/hosts.htm | grep -v '<' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > tmp
      echo '<pre style="font-size:14px;">' > /$user/$domain/data/hosts.htm
-     cat zhosts >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
+     cat tmp >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
 
-     rm tmp* z*
+     rm emails hosts loadbalancing records subdomains* tmp* whatweb z*
 
      echo
      echo $line
@@ -2770,7 +2803,7 @@ f_location
 echo
 echo
 
-sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Addison//g; s/Akron//g; s/Alma //g; s/Apple Valley//g; s/Arlington//g; s/Artesia//g; s/Ashburn//g; s/Atlanta//g; s/Austin//g; s/Baltimore//g; s/Barboursville//g; s/Binghamton//g; s/Birmingham//g; s/Boston//g; s/Burbank//g ; s/Burlington//g; s/Brockton//g; s/Canada//g; s/Camp Springs//g; s/Charleston//g; s/Charlotte//g; s/Chesapeake//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Columbia//g; s/Cresskill//g; s/Dallas//g; s/Denver//g; s/Dunkirk//g; s/Durham//g; s/El Paso//g; s/Englewood//g; s/Emeryville//g; s/Encino//g; s/Fallbrook//g; s/Fremont//g; s/Front Royal//g; s/Gardena//g; s/Gastonia//g; s/Glendale//g; s/Hamlin//g; s/Harbor City//g; s/Hawthorne//g; s/Hermosa Beach//g; s/Herndon//g; s/Huntington//g; s/Hurricane//g; s/Hyattsville//g; s/Indianapolis//g; s/Irvine//g; s/JA//g; s/Kansas City//g; s/Knoxville//g; s/La Follette//g; s/La Plata//g; s/Lawrenceville//g; s/Lawndale//g; s/Lithonia//g; s/Lomita//g; s/London//g; s/Long Beach//g; s/Los Angeles//g; s/Machias//g; s/Manhattan//g; s/Marietta//g; s/Marina Del Rey//g; s/Mc Lean//g; s/Miami//g; s/Milpitas//g; s/Milton//g; s/Minneapolis//g; s/Mumbai//g; s/Needham//g; s/New York//g; s/Norwalk//g; s/Oakland//g; s/Oceanport//g; s/Odessa//g; s/Ottawa 	ON//g; s/Orange//g; s/Philadelphia//g; s/Point Pleasant//g; s/Portland//g; s/Proctorville//g; s/Rancho//g; s/Redondo Beach//g; s/Reston//g; s/Richmond//g; s/Riverdale//g; s/Rllng Hls Est//g; s/Rochester//g; s/Rockville//g; s/Royal Oak//g; s/Sacramento//g; s/Salt Lake City//g; s/San Diego//g; s/San Francisco//g; s/San Jose//g; s/San Mateo//g; s/San Pedro//g; s/Santa Clara//g; s/Santa Monica//g; s/Scotts Valley//g; s/Seattle//g; s/Show Low//g; s/Sitka//g; s/Southfield//g; s/South Lake//g; s/Stephens City//g; s/Stillwater//g; s/Tacoma//g; s/Tallahassee//g; s/Torrance//g; s/Twin Falls//g; s/U.S.//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Walnut Creek//g; s/Washington//g; s/Welch//g; s/Westport//g; s/Wheeling//g; s/Wilton//g; s/Winchester//g; s/Williamsport//g; s/Wilmington//g; s/Winder//g; s/Wynnewood//g; 
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Addison//g; s/Akron//g; s/Alma //g; s/Apple Valley//g; s/Arlington//g; s/Artesia//g; s/Ashburn//g; s/Atlanta//g; s/Austin//g; s/Baltimore//g; s/Barboursville//g; s/Binghamton//g; s/Birmingham//g; s/Boston//g; s/Burbank//g ; s/Burlington//g; s/Brockton//g; s/Canada//g; s/Camp Springs//g; s/Charleston//g; s/Charlotte//g; s/Chesapeake//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Columbia//g; s/Cresskill//g; s/Dallas//g; s/Denver//g; s/Dunkirk//g; s/Durham//g; s/El Paso//g; s/Englewood//g; s/Emeryville//g; s/Encino//g; s/Fallbrook//g; s/Fremont//g; s/Front Royal//g; s/Gardena//g; s/Gastonia//g; s/Glendale//g; s/Hamlin//g; s/Harbor City//g; s/Hawthorne//g; s/Hermosa Beach//g; s/Herndon//g; s/Huntington//g; s/Hurricane//g; s/Hyattsville//g; s/Indianapolis//g; s/Irvine//g; s/JA//g; s/Kansas City//g; s/Knoxville//g; s/La Follette//g; s/La Plata//g; s/Lawrenceville//g; s/Lawndale//g; s/Lithonia//g; s/Lomita//g; s/London//g; s/Long Beach//g; s/Los Angeles//g; s/Machias//g; s/Manhattan//g; s/Marietta//g; s/Marina Del Rey//g; s/Mc Lean//g; s/Miami//g; s/Milpitas//g; s/Milton//g; s/Minneapolis//g; s/Mumbai//g; s/Needham//g; s/New York//g; s/Norwalk//g; s/Oakland//g; s/Oceanport//g; s/Odessa//g; s/Ottawa 	ON//g; s/Orange//g; s/Philadelphia//g; s/Point Pleasant//g; s/Portland//g; s/Proctorville//g; s/Rancho//g; s/Redondo Beach//g; s/Reston//g; s/Richmond//g; s/Riverdale//g; s/Rllng Hls Est//g; s/Rochester//g; s/Rockville//g; s/Royal Oak//g; s/Sacramento//g; s/Salt Lake City//g; s/San Diego//g; s/San Francisco//g; s/San Jose//g; s/San Mateo//g; s/San Pedro//g; s/Santa Clara//g; s/Santa Monica//g; s/Scotts Valley//g; s/Seattle//g; s/Sebring//g; s/Show Low//g; s/Sitka//g; s/Southfield//g; s/South Lake//g; s/Stephens City//g; s/Stillwater//g; s/Tacoma//g; s/Tallahassee//g; s/Torrance//g; s/Twin Falls//g; s/U.S.//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Walnut Creek//g; s/Washington//g; s/Welch//g; s/Westport//g; s/Wheeling//g; s/Wilton//g; s/Winchester//g; s/Williamsport//g; s/Wilmington//g; s/Winder//g; s/Wynnewood//g; 
 
 s/AK //g; s/AL //g; s/AR //g; s/AZ //g; s/CA //g; s/CT //g; s/DC //g; s/DE //g; s/FL //g; s/GA //g; s/HI //g; s/IA //g; s/ID //g; s/IL //g; s/IN //g; s/KS //g; s/KY //g; s/LA //g; s/MA //g; s/ME //g; s/MD //g; s/MI //g; s/MN //g; s/MS //g; s/MT //g; s/NC //g; s/NE //g; s/ND //g; s/NH //g; s/NJ //g; s/NM //g; s/NV //g; s/NY //g; s/OH //g; s/OK //g; s/OR //g; s/PA //g; s/RI //g; s/SC //g; s/SD //g; s/TN //g; s/TX //g; s/UT //g; s/VA //g; s/VT //g; s/WA //g; s/WI //g; s/WV //g; s/WY //g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
 
