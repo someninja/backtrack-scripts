@@ -1063,12 +1063,11 @@ f_scanname
 
 START=$(date +%r\ %Z)
 
-arp-scan -localnet -interface $interface | egrep -v '(Ending|Interface|packets|Starting)' | awk '{print $1}' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > tmp
+arp-scan -localnet | egrep -v '(Ending|Interface|packets|Starting)' | awk '{print $1}' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > tmp
 
 # Remove blank lines
 sed '/^$/d' tmp > $name/hosts.txt
 
-# Check for zero hosts (empty file)
 if [ ! -s $name/hosts.txt ]; then
      rm -rf "$name" tmp*
      echo
@@ -1094,7 +1093,7 @@ else
      echo
      echo $line
      echo
-     echo -e "\e[1;33m$number hosts discovered with open ports.\e[0m"
+     echo -e "\e[1;33m$number hosts discovered.\e[0m"
 fi
 
 f_scan
@@ -1235,7 +1234,6 @@ sed 's/Nmap scan report for //' tmp2 > tmp3
 # Remove blank lines
 sed '/^$/d' tmp3 > $name/hosts.txt
 
-# Check for zero hosts (empty file)
 if [ ! -s $name/hosts.txt ] ; then
      rm -rf "$name" tmp*
      echo
@@ -1261,7 +1259,7 @@ else
      echo
      echo $line
      echo
-     echo -e "\e[1;33m$number hosts discovered with open ports.\e[0m"
+     echo -e "\e[1;33m$number hosts discovered.\e[0m"
 fi
 }
 
@@ -2294,6 +2292,7 @@ cat $name/hosts.txt >> $filename
 echo >> $filename
 
 if [ ! -s $name/ports.txt ]; then
+     rm -rf "$name" tmp*
      echo
      echo $line
      echo

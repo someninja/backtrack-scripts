@@ -443,7 +443,7 @@ fi
 
 echo
 echo "Enter the options for your attack."
-echo -n "ESSID:   "
+echo -n "ESSID:    "
 read ESSID
 
 # Check for no answer
@@ -457,7 +457,7 @@ if grep -q '$ESSID' $workdir/keys; then
 	f_Menu
 fi
 
-echo -n "Channel: "
+echo -n "Channel:  "
 read Channel
 
 f_ValidChannel $Channel
@@ -467,7 +467,7 @@ if [ -z $Channel ]; then
 	f_Error
 fi
 
-echo -n "BSSID:   "
+echo -n "BSSID:    "
 read BSSID
 
 # Check for no answer
@@ -476,18 +476,14 @@ if [ -z $BSSID ]; then
 fi
 
 # Validate MAC address
-if f_ValidMAC "$BSSID"; then
-     ## MAC OK
-     echo "[*] BSSID MAC address validated."
-else
-     ## Not OK
+if f_ValidMAC ! "$BSSID"; then
      printf "Sorry, %s is not a valid MAC address\n" "$BSSID" >&2
      read -p "Press <return> to continue."
      f_CrackWEP
 fi
 
 echo "(Spoofed MAC address is $FakeMAC if no Stations have associated yet.)"
-echo -n "STATION: "
+echo -n "STATION:  "
 read STATION
 
 # Check for no answer
@@ -496,11 +492,7 @@ if [ -z $STATION ]; then
 fi
 
 # Validate MAC address
-if f_ValidMAC "$STATION"; then
-     ## MAC OK
-     echo "[*] STATION MAC address validated."
-else
-     ## Not OK
+if f_ValidMAC ! "$STATION"; then
      printf "Sorry, %s is not a valid MAC address\n" "$STATION" >&2
      read -p "Press <return> to continue."
      f_CrackWEP
@@ -629,7 +621,7 @@ fi
 
 echo
 echo "Enter the options for your attack."
-echo -n "ESSID:   "
+echo -n "ESSID:    "
 read ESSID
 
 # Check for no answer
@@ -643,7 +635,7 @@ if grep -q '$ESSID' $workdir/keys; then
 	f_Menu
 fi
 
-echo -n "Channel: "
+echo -n "Channel:  "
 read Channel
 
 f_ValidChannel $Channel
@@ -653,7 +645,7 @@ if [ -z $Channel ]; then
 	f_Error
 fi
 
-echo -n "BSSID:   "
+echo -n "BSSID:    "
 read BSSID
 
 # Check for no answer
@@ -662,17 +654,13 @@ if [ -z $BSSID ]; then
 fi
 
 # Validate MAC address
-if f_ValidMAC "$BSSID"; then
-     ## MAC OK
-     echo "--- BSSID MAC validated."
-else
-     ## Not OK
+if f_ValidMAC ! "$BSSID"; then
      printf "Sorry, %s is not a valid MAC address\n" "$BSSID" >&2
      read -p "Press <return> to continue."
      f_CrackWPA
 fi
 
-echo -n "STATION: "
+echo -n "STATION:  "
 read STATION
 
 # Check for no answer
@@ -681,11 +669,7 @@ if [ -z $STATION ]; then
 fi
 
 # Validate MAC address
-if f_ValidMAC "$STATION"; then
-     ## MAC OK
-     echo "--- STATION MAC validated."
-else
-     ## Not OK
+if f_ValidMAC ! "$STATION"; then
      printf "Sorry, %s is not a valid MAC address\n" "$STATION" >&2
      read -p "Press <return> to continue."
      f_CrackWPA
