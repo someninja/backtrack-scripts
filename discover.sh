@@ -619,8 +619,6 @@ case $choice in
      sleep 1
      firefox -new-tab toolbar.netcraft.com/site_report?url=http://www.$domain &
      sleep 1
-     firefox -new-tab uptime.netcraft.com/up/graph?site=www.$domain &
-     sleep 1
      firefox -new-tab shodanhq.com/search?q=$domain &
      sleep 1
      firefox -new-tab jigsaw.com/ &

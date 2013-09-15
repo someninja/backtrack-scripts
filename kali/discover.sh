@@ -6,16 +6,15 @@
 #
 # Special thanks to the following people:
 #
-# Jay Townsend - conversion of discover to Kali format.
 # Jason Arnold - planning original concept, author of ssl-check and co-author of crack-wifi.
 # Dave Klug - planning, testing and bug reports.
 # Matt Banick - original development.
 # Eric Milam - total re-write using functions.
 # Martin Bos - IDS evasion techniques.
-# Ben Wood - regex kung foo
 # Numerous people on freenode IRC - #bash and #sed (e36freak)
-# Steve Copland - report template design
-# Rob Dixon - report template iframe
+# Ben Wood - regex master
+# Rob Dixon - report framework idea
+# Steve Copland - report framework design
 
 ##############################################################################################################
 
@@ -34,7 +33,7 @@ f_banner(){
 echo
 echo "______  ___ ______ ______  _____  _    _ ______  _____"
 echo "|     \  |  |____  |      |     |  \  /  |_____ |____/"
-echo "|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_kali"
+echo "|_____/ _|_ _____| |_____ |_____|   \/   |_____ |    \_"
 echo
 echo "By Lee Baird"
 echo
@@ -52,6 +51,24 @@ echo
 echo -e "\e[1;31m$line\e[0m"
 sleep 2
 f_main
+}
+
+##############################################################################################################
+
+f_location(){
+echo
+echo -n "Enter the location of your list: "
+read location
+
+# Check for no answer
+if [ -z $location ]; then
+     f_error
+fi
+
+# Check for wrong answer
+if [ ! -f $location ]; then
+     f_error
+fi
 }
 
 ##############################################################################################################
@@ -74,9 +91,7 @@ fi
 ##############################################################################################################
 
 f_terminate(){
-if [ -f tmp ]; then
-     rm tmp* z*
-fi
+rm emails names squatting whois* subdomain* doc pdf ppt txt xls tmp* z* 2>/dev/null
 
 if [ -f $name ]; then
      rm -rf $name
@@ -84,6 +99,9 @@ fi
 
 PID=$(ps -ef | grep 'discover.sh' | grep -v 'grep' | awk '{print $2}')
 kill -9 $PID
+
+echo
+echo
 }
 
 ##############################################################################################################
@@ -124,23 +142,23 @@ case $choice in
           f_error
      fi
 
-     iceweasel &
+     firefox &
      sleep 2
-     iceweasel -new-tab http://www.123people.com/s/$firstName+$lastName &
+     firefox -new-tab http://www.123people.com/s/$firstName+$lastName &
      sleep 1
-     iceweasel -new-tab http://www.411.com/name/$firstName-$lastName/ &
+     firefox -new-tab http://www.411.com/name/$firstName-$lastName/ &
      sleep 1
-     iceweasel -new-tab http://www.cvgadget.com/person/$firstName/$lastName &
+     firefox -new-tab http://www.cvgadget.com/person/$firstName/$lastName &
      sleep 1
-     iceweasel -new-tab http://www.peekyou.com/$fireName_$lastName &
+     firefox -new-tab http://www.peekyou.com/$fireName_$lastName &
      sleep 1
-     iceweasel -new-tab http://phonenumbers.addresses.com/people/$firstName+$lastName &
+     firefox -new-tab http://phonenumbers.addresses.com/people/$firstName+$lastName &
      sleep 1
-     iceweasel -new-tab http://search.nndb.com/search/nndb.cgi?nndb=1&omenu=unspecified&query=$firstName+$lastName &
+     firefox -new-tab http://search.nndb.com/search/nndb.cgi?nndb=1&omenu=unspecified&query=$firstName+$lastName &
      sleep 1
-     iceweasel -new-tab http://www.spokeo.com/search?q=$firstName+$lastName&s3=t24 &
+     firefox -new-tab http://www.spokeo.com/search?q=$firstName+$lastName&s3=t24 &
      sleep 1
-     iceweasel -new-tab http://www.zabasearch.com/query1_zaba.php?sname=$firstName%20$lastName&state=ALL&ref=$ref&se=$se&doby=&city=&name_style=1&tm=&tmr=
+     firefox -new-tab http://www.zabasearch.com/query1_zaba.php?sname=$firstName%20$lastName&state=ALL&ref=$ref&se=$se&doby=&city=&name_style=1&tm=&tmr=
      ;;
 
      3) f_main;;
@@ -192,22 +210,22 @@ case $choice in
      echo
 
      echo "goofile                   (1/$total)"
-     /usr/bin/goofile -d $domain -f xls > tmp
-     /usr/bin/goofile -d $domain -f xlsx >> tmp
-     /usr/bin/goofile -d $domain -f ppt >> tmp
-     /usr/bin/goofile -d $domain -f pptx >> tmp
-     /usr/bin/goofile -d $domain -f doc >> tmp
-     /usr/bin/goofile -d $domain -f docx >> tmp
-     /usr/bin/goofile -d $domain -f pdf >> tmp
-     /usr/bin/goofile -d $domain -f txt >> tmp
+     goofile -d $domain -f doc > tmp
+     goofile -d $domain -f docx >> tmp
+     goofile -d $domain -f pdf >> tmp
+     goofile -d $domain -f ppt >> tmp
+     goofile -d $domain -f pptx >> tmp
+     goofile -d $domain -f txt >> tmp
+     goofile -d $domain -f xls >> tmp
+     goofile -d $domain -f xlsx >> tmp
 
-     grep $domain tmp | grep -v 'Searching in' | sort > tmp2
+     grep $domain tmp | grep -v 'Searching in' | grep -Fv '...' | sort > tmp2
 
-     grep '.xls' tmp2 > xls.txt
-     grep '.ppt' tmp2 > ppt.txt
-     grep '.doc' tmp2 | egrep -v '(.pdf|.ppt|.xls)' > doc.txt
-     grep '.pdf' tmp2 > pdf.txt
-     grep '.txt' tmp2 | grep -v 'robots.txt' > txt.txt
+     grep '.doc' tmp2 | egrep -v '(.pdf|.ppt|.xls)' > doc
+     grep '.pdf' tmp2 > pdf
+     grep '.ppt' tmp2 > ppt
+     grep '.txt' tmp2 | grep -v 'robots.txt' > txt
+     grep '.xls' tmp2 > xls
 
      echo
      echo "goog-mail                 (2/$total)"
@@ -233,29 +251,29 @@ case $choice in
      rm *-$domain.txt
 
      echo
-     echo "theHarvester"
+     echo "theharvester"
      echo "     123people            (5/$total)"
-     /usr/bin/theharvester -d $domain -b people123 > z123people
+     theharvester -d $domain -b people123 > z123people
      echo "     Ask-mod              (6/$total)"
      /opt/scripts/mods/theHarvester2.py -d $domain -b ask > zask-mod
      echo "     Bing                 (7/$total)"
-     /usr/bin/theharvester -d $domain -b bing > zbing
+     theharvester -d $domain -b bing > zbing
      echo "     Google               (8/$total)"
-     /usr/bin/theharvester -d $domain -b google > zgoogle
+     theharvester -d $domain -b google > zgoogle
      echo "     Google Profiles	  (9/$total)"
-     /usr/bin/theharvester -d $domain -b google-profiles > zgoogle-profiles
+     theharvester -d $domain -b google-profiles > zgoogle-profiles
      echo "     Jigsaw               (10/$total)"
-     /usr/bin/theharvester -d $domain -b jigsaw > zjigsaw
+     theharvester -d $domain -b jigsaw > zjigsaw
      echo "     LinkedIn             (11/$total)"
-     /usr/bin/theharvester -d $domain -b linkedin > zlinkedin
+     theharvester -d $domain -b linkedin > zlinkedin
      echo "     Login-mod            (12/$total)"
      /opt/scripts/mods/theHarvester2.py -d $domain -b login > zlogin-mod
      echo "     PGP                  (13/$total)"
-     /usr/bin/theharvester -d $domain -b pgp > zpgp
+     theharvester -d $domain -b pgp > zpgp
      echo "     Yahoo-mod            (14/$total)"
      /opt/scripts/mods/theHarvester2.py -d $domain -b yahoo > zyahoo-mod
      echo "     All                  (15/$total)"
-     /usr/bin/theharvester -d $domain -b all > zall
+     theharvester -d $domain -b all > zall
 
      echo
      echo "Metasploit                (16/$total)"
@@ -268,7 +286,7 @@ case $choice in
 
      echo
      echo "dnsrecon                  (17/$total)"
-     /usr/bin/dnsrecon -d $domain -t goo > tmp
+     dnsrecon -d $domain -t goo > tmp
      grep $domain tmp | egrep -v '(Performing Google|Records Found)' > tmp2
      # Remove first 6 characters from each line
      sed 's/^......//' tmp2 > tmp3
@@ -276,13 +294,14 @@ case $choice in
 
      echo
      echo "URLCrazy                  (18/$total)"
-	/usr/bin/urlcrazy $domain -o tmp > /dev/null
+	urlcrazy $domain -o tmp > /dev/null
      # Clean up
      egrep -v '(#|:|\?|Typo Type|URLCrazy)' tmp | sed 's/[A-Z]\{2\},//g' > tmp2
      # Remove lines that start with -
      grep -v '^-' tmp2 > tmp3
      # Remove blank lines
-     sed '/^$/d' tmp3 > squatting.txt
+     sed '/^$/d' tmp3 > tmp4
+     sed 's/BAHAMAS/Bahamas/g; s/BELGIUM/Belgium/g; s/CANADA/Canada/g; s/CHINA/China/g; s/GERMANY/Germany/g; s/IRELAND/Ireland/g; s/ITALY/Italy/g; s/JAPAN/Japan/g; s/KOREA REPUBLIC OF/Republic of Korea/g; s/NETHERLANDS/Netherlands/g; s/NORWAY/Norway/g; s/RUSSIAN FEDERATION/Russia/g; s/SPAIN/Spain/g; s/SWEDEN/Sweden/g; s/SWITZERLAND/Switzerland/g; s/UNITED KINGDOM/United Kingdom/g; s/UNITED STATES/United States/g' tmp4 > squatting
 
      ##############################################################
 
@@ -300,23 +319,27 @@ case $choice in
      # Change to lower case
      cat tmp6 | tr '[A-Z]' '[a-z]' > tmp7
      # Clean up
-     egrep -v '(account|administrator|administrative|advanced|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|attorney|australia|automation|automotive|balance|banking|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|certified|challenger|championship|change|chapter|charge|china|chinese|clearance|cloud|code|college|columbia|communications|community|company pages|competition|competitive|computer|concept|conference|config|connections|construction|consultant|contributor|controlling|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|developing|development|devine|digital|diploma|director|disability|disclosure|dispute|divisions|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|hackers|hacking|hardening|harder|hawaii|hazing|headquarters|healthcare|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|mastering|md|media|medical|medicine|meta tags|metro|microsoft|mitigation|money|monitoring|more coming|museums|negative|network|networking|new user|newspaper|new york|next page|nitrogen|nyc|obtaining|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeeming|redirecting|register|registry|regulation|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searching|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|superheroines|supervisor|support|switching|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|types of scams|unclaimed|underground|united states|university|untitled|view|Violent|virginia bar|voice|volkswagen|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
+     egrep -v '(academy|account|administrator|administrative|advanced|adventure|advertising|america|american|analysis|analyst|antivirus|apple seems|application|applications|architect|article|asian|association|attorney|australia|automation|automotive|balance|bank|bbc|beginning|berlin|beta theta|between|big game|billion|bioimages|biometrics|bizspark|breaches|broker|business|buyer|buying|california|can i help|cannot|capital|career|carrying|cashing|certified|challenger|championship|change|chapter|charge|china|chinese|clearance|cloud|code|college|columbia|communications|community|company pages|competition|competitive|compliance|computer|concept|conference|config|connections|construction|consultant|contributor|controllang|cooperation|coordinator|corporation|creative|croatia|crm|dallas|day care|death toll|delta|department|description|designer|detection|developer|develop|development|devine|digital|diploma|director|disability|disaster|disclosure|dispute|division|dos poc|download|drivers|during|economy|ecovillage|editor|education|effect|electronic|emails|embargo|empower|end user|energy|engineer|enterprise|entertainment|entreprises|entrepreneur|environmental|error page|ethical|example|excellence|executive|expertzone|exploit|facebook|faculty|fall edition|fast track|fatherhood|fbi|federal|filmmaker|finance|financial|forensic|found|freelance|from|frontiers in tax|full|germany|get control|global|google|government|graphic|greater|group|guardian|hackers|hacking|harden|harder|hawaii|hazing|headquarters|health|history|homepage|hospital|house|how to|hurricane|idc|in the news|index|information|innovation|installation|insurers|integrated|international|internet|instructor|insurance|investigation|investment|investor|israel|japan|job|justice|kelowna|knowing|laptops|letter|licensing|lighting|limitless|liveedu|llp|ltd|lsu|luscous|malware|managed|management|manager|managing|manufacturing|marketplace|mastering|md|media|medical|medicine|meta tags|methane|metro|microsoft|middle east|mitigation|money|monitor|more coming|museums|negative|network|network|new user|newspaper|new york|next page|nitrogen|nyc|obtain|occupied|offers|office|online|organizational|outbreak|owners|partner|pathology|people|perceptions|philippines|photo|picture|places|planning|portfolio|potential|preparatory|president|principal|print|private|process|producer|product|professional|professor|profile|project|publichealth|published|pyramid|questions|redeem|redirect|register|registry|regulation|rehab|remote|report|republic|research|revised|rising|rural health|sales|satellite|save the date|school|scheduling|science|search|searc|secured|security|secretary|secrets|see more|selection|senior|service|services|software|solutions|source|special|station home|statistics|strategy|student|successful|superheroines|supervisor|support|switch|system|systems|targeted|technical|technology|tester|textoverflow|theater|time in|tit for tat|toolbook|tools|traditions|trafficking|treasury|trojan|twitter|training|ts|tylenol|types of scams|unclaimed|underground|university|united states|untitled|view|Violent|virginia bar|voice|volkswagen|volume|wanted|web search|web site|website|welcome|west virginia|when the|whiskey|windows|workers|world|www|xbox)' tmp7 > tmp8
      # Remove leading and trailing whitespace from each line
      sed 's/^[ \t]*//;s/[ \t]*$//' tmp8 > tmp9
      # Remove lines that contain a single word
      sed '/[[:blank:]]/!d' tmp9 > tmp10
      # Clean up
      sed 's/\..../ /g' tmp10 | sed 's/\.../ /g' > tmp11
-     # Capitalize the first letter of every word
-     sed "s/\b\(.\)/\u\1/g" tmp11 | sort -u > names.txt
+     # Capitalize the first letter of every word, print last name then first name
+     sed 's/\b\(.\)/\u\1/g' tmp11 | awk '{print $2", "$1}' | sort -u > names
 
-     cat z* | grep @$domain | grep -vF '...' | egrep -v '(\*|=|\+|\||;|:|"|<|>|/|\?)' > tmp
+     ##############################################################
+
+     cat z* | grep @$domain | grep -vF '...' | egrep -v '(\*|=|\+|\[|\||;|:|"|<|>|/|\?)' > tmp
      # Remove trailing whitespace from each line
      sed 's/[ \t]*$//' tmp > tmp2
      # Change to lower case
      cat tmp2 | tr '[A-Z]' '[a-z]' > tmp3
      # Clean up
-     grep -v 'web search' tmp3 | sort -u > emails.txt
+     grep -v 'web search' tmp3 | sort -u > emails
+
+     ##############################################################
 
      cat z* | sed '/^[0-9]/!d' | grep -v '@' > tmp
      # Substitute a space for a colon
@@ -327,7 +350,7 @@ case $choice in
      # Change to lower case
      cat tmp4 | tr '[A-Z]' '[a-z]' > tmp5
      grep $domain tmp5 | sort -u > subdomains2.txt
-     cat subdomain* | grep -v "$domain\." | egrep -v '(.nat.|252f)' | sed 's/www\.//g' | column -t | sort -u > subdomains.txt
+     cat subdomain* | grep -v "$domain\." | egrep -v '(.nat.|252f)' | sed 's/www\.//g' | column -t | sort -u > subdomains
 
      ##############################################################
 
@@ -362,7 +385,7 @@ case $choice in
      # Remove line after "Domain servers"
      sed -i '/^Domain servers/{n; /.*/d}' tmp12
      # Remove blank lines from end of file
-     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp12 > whois-domain.txt
+     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp12 > whois-domain
 
      echo "     IP 		  (20/$total)"
      y=$(ping -c1 -w2 $domain | grep 'PING' | cut -d ')' -f1 | cut -d '(' -f2) ; whois -H $y > tmp
@@ -379,7 +402,7 @@ case $choice in
      # Compress blank lines
      cat -s tmp6 > tmp7
      # Clean up
-     sed 's/+1-//g' tmp7 > whois-ip.txt
+     sed 's/+1-//g' tmp7 > whois-ip
      echo
 
      # Remove all empty files
@@ -387,37 +410,54 @@ case $choice in
 
      echo "mydnstools.info           (21/$total)"
      wget -q http://www.mydnstools.info/nslookup/$domain/ANY -O tmp
-     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|NSEC3PARAM|Query time|RRSIG|SECTION|SERVER|WHEN)' | sed 's/;; //g' | sed 's/&quot;//g' | sed 's/\$domain./\$domain/g' | sed 's/$domain./$domain/g' | sed 's/.com./.com/g' | sed 's/.edu./.edu/g' | sed 's/.gov./.gov/g' | sed 's/.info./.info/g' | sed 's/.net./.net/g' | sed 's/.org./.org/g' | sed 's/.uk./.uk/g' | sed 's/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > /$user/$domain/data/records.txt
+     sed -n '/ANSWER SECTION/,/WHEN:/p' tmp | egrep -v '(DNSKEY|DS|NSEC3PARAM|Query time|RRSIG|SEC3|SECTION|SERVER|SSEC|TYPE51|WHEN)' | sed 's/;; //g; s/&quot;//g; s/\$domain./\$domain/g; s/$domain./$domain/g; s/.com./.com/g; s/.edu./.edu/g; s/.gov./.gov/g; s/.info./.info/g; s/.net./.net/g; s/.org./.org/g; s/.uk./.uk/g; s/IN//g' | awk '{print $1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > records
 
-     wget -q http://www.mydnstools.info/dnsbl/$domain -O tmp
-     grep 'spamcop' tmp | sed 's/<span class="ok">//g' | sed 's/<\/span><br \/>/-/g' | sed 's/-/\n/g' | grep -v '<' | sed 's/\.\.\.//g' | sed 's/not listed/OK/g' | column -t > /$user/$domain/data/black-listed.txt
-
-     echo "dnssy.com                 (23/$total)"
+     echo "dnssy.com                 (22/$total)"
      wget -q http://www.dnssy.com/report.php?q=$domain -O tmp
      sed -n '/Results for/,/\/table/p' tmp > tmp2
      echo "<html>" > tmp3
      cat tmp2 | grep -v 'Results for' >> tmp3
      echo "</html>" >> tmp3
-     mv tmp3 /$user/$domain/data/config.htm
+     sed 's/Pass/<center><img src="..\/images\/icons\/green.png" height="50" width="50"><\/center>/g; 
+     s/Warning/<center><img src="..\/images\/icons\/yellow.png" height="50" width="50"><\/center>/g;
+     s/Fail/<center><img src="..\/images\/icons\/red.png" height="50" width="50"><\/center>/g;
+     s/ class="info"//g; s/ class="rfail"//g; s/ class="rinfo"//g; s/ class="rpass"//g; s/ class="rsecu"//g; s/ class="rwarn"//g;
+     s/All of the glue/Glue/g; s/All of your MX/All MX/g; s/All of your nameservers/Nameservers/g; s/Checking domain format/Domain format/g; 
+     s/Checking for parent nameservers/Parent nameservers/g; s/Checking for parent glue/Parent glue/g; s/Each of your nameservers/Each nameserver/g;
+     s/I found the following MX records://g; s/I was unable/Unable/g; s/None of your MX/No MX/g; s/This is all of the MX servers I found.//g; 
+     s/Your nameservers/Nameservers/g; s/Your NS records at your nameservers are://g; s/Your NS records at your parent nameserver are://g; 
+     s/Your SOA/SOA/g; s/Your web server/The web server/g; s/Your web server says it is://g' tmp3 > /$user/$domain/data/config.htm
 
-     echo "dnsw.info                 (24/$total)"
-     curl http://dnsw.info/$domain > tmp 2>/dev/null
-     sed -n '/blockquote/,/\/blockquote/p' tmp | sed 's/<h3>//g' | sed 's/<\/h3>//g' | sed 's/<code>/<b>/g' | sed 's/<\/code>/<\/b>/g' > tmp2
-     echo "<html>" > /$user/$domain/data/background.htm
-     cat tmp2 >> /$user/$domain/data/background.htm
-     echo "</html>" >> /$user/$domain/data/background.htm
-
-     echo "robtex.com                (25/$total)"
+     echo "robtex.com                (23/$total)"
      wget -q http://top.robtex.com/$domain.html#records -O robtex-records.htm
      wget -q http://top.robtex.com/$domain.html#shared -O robtex-shared.htm
 
      x=$(ls -l | grep 'robtex' | awk '{print $5,$8}' | sort | head -1 | awk '{print $2}')
-     mv $x /$user/$domain/data/robtex.htm
+     mv $x tmp
 
-     awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' > tmp
-     awk '{print $2}' subdomains.txt | grep -v '[A-Za-z]' >> tmp
-     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' tmp > tmp2
-     sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp2  | sed '/^$/d' > /$user/$domain/data/hosts.txt
+     sed '/<!DOCTYPE html>/,/<div id="c0a">/d' tmp | sed '/nopad sortable nospan/,/<\/html>/d' | sed '/<div id="c0b1">/,/DNS Records/d' | sed 's/<h2 class="h2s">Graph<\/h2>//g; s/<h2 class="h2s">Shared<\/h2>//g; s/"7.00"/"10.00"/g; s/"9.00"/"12.00"/g' > tmp2
+
+     echo "          </div>" >> tmp2
+     echo "     </div>" >> tmp2
+     echo "</div>" >> tmp2
+     echo "" >> tmp2
+     echo "</body>" >> tmp2
+     echo "" >> tmp2
+     echo "</html>" >> tmp2
+
+     cat tmp2 >> /$user/$domain/pages/robtex.htm
+
+     echo "urlvoid.com               (24/$total)"
+     wget -q http://www.urlvoid.com/scan/$domain -O tmp
+     sed -n '/Website Blacklist Report/,/<\/table>/p' tmp > tmp2
+     sed 's/<img src="http:\/\/www.urlvoid.com\/images\/valid.ico" alt="Clean" title="Clean" \/> NOT FOUND/<center><img src="..\/images\/icons\/green.png" height="25" width="25"><\/center>/g; s/<img src="http:\/\/www.urlvoid.com\/images\/alert.ico" alt="Alert" title="Detected!" \/> <font color="red">DETECTED<\/font>/<center><img src="..\/images\/icons\/red.png" height="25" width="25"><\/center>/g; s/rel="nofollow" //g; s/ title="View more details" target="_blank"//g; s/<img src="http:\/\/www.urlvoid.com\/images\/link.ico" alt="Link" \/>//g; s/ class="tasks"//g; s/<th>Info<\/th>//g' tmp2 | grep -v 'Blacklist Report' > tmp3
+     # Remove leading whitespace from each line
+     sed 's/^[ \t]*//' tmp3 > /$user/$domain/data/black-listed.htm
+
+     awk '{print $3}' records > tmp
+     awk '{print $2}' subdomains >> tmp
+     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' tmp | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > hosts 
+     cat hosts >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
 
      ##############################################################
 
@@ -432,101 +472,130 @@ case $choice in
 
      echo > tmp
 
-     if [ -f emails.txt ]; then
-          emailcount=$(wc -l emails.txt | cut -d ' ' -f1)
-          echo "Emails      $emailcount" >> zreport
+     if [ -f emails ]; then
+          emailcount=$(wc -l emails | cut -d ' ' -f1)
+          echo "Emails        $emailcount" >> zreport
           echo "Emails ($emailcount)" >> tmp
           echo $line >> tmp
-          cat emails.txt >> tmp
+          cat emails >> tmp
           echo >> tmp
      fi
 
-     if [ -f names.txt ]; then
-          namecount=$(wc -l names.txt | cut -d ' ' -f1)
-          echo "Names       $namecount" >> zreport
+     if [ -f names ]; then
+          namecount=$(wc -l names | cut -d ' ' -f1)
+          echo "Names         $namecount" >> zreport
           echo "Names ($namecount)" >> tmp
           echo $line >> tmp
-          cat names.txt >> tmp
+          cat names >> tmp
           echo >> tmp
      fi
 
-     if [ -f squatting.txt ]; then
-          urlcount2=$(wc -l squatting.txt | cut -d ' ' -f1)
-          echo "Squatting   $urlcount2" >> zreport
+     if [ -f hosts ]; then
+          hostcount=$(wc -l hosts | cut -d ' ' -f1)
+          echo "Hosts         $hostcount" >> zreport
+          echo "Hosts ($hostcount)" >> tmp
+          echo $line >> tmp
+          cat hosts >> tmp
+          echo >> tmp
+     fi
+
+     if [ -f records ]; then
+          recordscount=$(wc -l records | cut -d ' ' -f1)
+          echo "DNS Records   $recordscount" >> zreport
+          echo "DNS Records ($recordscount)" >> tmp
+          echo $line >> tmp
+          cat records >> tmp
+          echo >> tmp
+     fi
+
+     if [ -f squatting ]; then
+          urlcount2=$(wc -l squatting | cut -d ' ' -f1)
+          echo "Squatting     $urlcount2" >> zreport
           echo "Squatting ($urlcount2)" >> tmp
           echo $line >> tmp
-          cat squatting.txt >> tmp
+          cat squatting >> tmp
           echo >> tmp
      fi
 
-     if [ -f subdomains.txt ]; then
-          urlcount=$(wc -l subdomains.txt | cut -d ' ' -f1)
-          echo "Subdomains  $urlcount" >> zreport
+     if [ -f subdomains ]; then
+          urlcount=$(wc -l subdomains | cut -d ' ' -f1)
+          echo "Subdomains    $urlcount" >> zreport
           echo "Subdomains ($urlcount)" >> tmp
           echo $line >> tmp
-          cat subdomains.txt >> tmp
+          cat subdomains >> tmp
           echo >> tmp
      fi
 
-     if [ -f xls.txt ]; then
-          xlscount=$(wc -l xls.txt | cut -d ' ' -f1)
-          echo "Excel       $xlscount" >> zreport
+     if [ -f xls ]; then
+          xlscount=$(wc -l xls | cut -d ' ' -f1)
+          echo "Excel         $xlscount" >> zreport
           echo "Excel Files ($xlscount)" >> tmp
           echo $line >> tmp
-          cat xls.txt >> tmp
+          cat xls >> tmp
           echo >> tmp
+          cat xls >> /$user/$domain/data/xls.htm; echo "</pre>" >> /$user/$domain/data/xls.htm
      fi
 
-     if [ -f pdf.txt ]; then
-          pdfcount=$(wc -l pdf.txt | cut -d ' ' -f1)
-          echo "PDF         $pdfcount" >> zreport
+     if [ -f pdf ]; then
+          pdfcount=$(wc -l pdf | cut -d ' ' -f1)
+          echo "PDF           $pdfcount" >> zreport
           echo "PDF Files ($pdfcount)" >> tmp
           echo $line >> tmp
-          cat pdf.txt >> tmp
+          cat pdf >> tmp
           echo >> tmp
+          cat pdf >> /$user/$domain/data/pdf.htm; echo "</pre>" >> /$user/$domain/data/pdf.htm
      fi
 
-     if [ -f ppt.txt ]; then
-          pptcount=$(wc -l ppt.txt | cut -d ' ' -f1)
-          echo "PowerPoint  $pptcount" >> zreport
+     if [ -f ppt ]; then
+          pptcount=$(wc -l ppt | cut -d ' ' -f1)
+          echo "PowerPoint    $pptcount" >> zreport
           echo "PowerPoint Files ($pptcount)" >> tmp
           echo $line >> tmp
-          cat ppt.txt >> tmp
+          cat ppt >> tmp
           echo >> tmp
+          cat ppt >> /$user/$domain/data/ppt.htm; echo "</pre>" >> /$user/$domain/data/ppt.htm
      fi
 
-     if [ -f txt.txt ]; then
-          txtcount=$(wc -l txt.txt | cut -d ' ' -f1)
-          echo "Text        $txtcount" >> zreport
+     if [ -f txt ]; then
+          txtcount=$(wc -l txt | cut -d ' ' -f1)
+          echo "Text          $txtcount" >> zreport
           echo "Text Files ($txtcount)" >> tmp
           echo $line >> tmp
-          cat txt.txt >> tmp
+          cat txt >> tmp
           echo >> tmp
+          cat txt >> /$user/$domain/data/txt.htm; echo "</pre>" >> /$user/$domain/data/txt.htm
      fi
 
-     if [ -f doc.txt ]; then
-          doccount=$(wc -l doc.txt | cut -d ' ' -f1)
-          echo "Word        $doccount" >> zreport
+     if [ -f doc ]; then
+          doccount=$(wc -l doc | cut -d ' ' -f1)
+          echo "Word          $doccount" >> zreport
           echo "Word Files ($doccount)" >> tmp
           echo $line >> tmp
-          cat doc.txt >> tmp
+          cat doc >> tmp
           echo >> tmp
+          cat doc >> /$user/$domain/data/doc.htm; echo "</pre>" >> /$user/$domain/data/doc.htm
      fi
 
      cat tmp >> zreport
      echo "Whois Domain" >> zreport
      echo $line >> zreport
-     cat whois-domain.txt >> zreport
+     cat whois-domain >> zreport
 
      echo >> zreport
      echo "Whois IP" >> zreport
      echo $line >> zreport
-     cat whois-ip.txt >> zreport
+     cat whois-ip >> zreport
 
-     mv emails.txt names.txt squatting.txt subdomains.txt whois* doc.txt pdf.txt ppt.txt txt.txt xls.txt /$user/$domain/data/ 2>/dev/null
-     mv zreport /$user/$domain/data/passive-recon.txt
+     cat emails >> /$user/$domain/data/emails.htm; echo "</pre>" >> /$user/$domain/data/emails.htm
+     cat names >> /$user/$domain/data/names.htm; echo "</pre>" >> /$user/$domain/data/names.htm
+     cat records >> /$user/$domain/data/records.htm; echo "</pre>" >> /$user/$domain/data/records.htm
+     cat squatting >> /$user/$domain/data/squatting.htm; echo "</pre>" >> /$user/$domain/data/squatting.htm
+     cat subdomains >> /$user/$domain/data/subdomains.htm; echo "</pre>" >> /$user/$domain/data/subdomains.htm
+     cat whois-domain >> /$user/$domain/data/whois-domain.htm; echo "</pre>" >> /$user/$domain/data/whois-domain.htm
+     cat whois-ip >> /$user/$domain/data/whois-ip.htm; echo "</pre>" >> /$user/$domain/data/whois-ip.htm
+     cat zreport >> /$user/$domain/data/passive-recon.htm; echo "</pre>" >> /$user/$domain/data/passive-recon.htm
 
-     rm robtex* subdomains* tmp* z*
+     rm emails hosts names records robtex* squatting subdomains* tmp* whois* z* doc pdf ppt txt xls 2>/dev/null
 
      echo
      echo $line
@@ -542,35 +611,37 @@ case $choice in
 
      f_runlocally
 
-     iceweasel &
+     firefox &
      sleep 2
-     iceweasel -new-tab arin.net &
+     firefox -new-tab images.google.com &
      sleep 1
-     iceweasel -new-tab toolbar.netcraft.com/site_report?url=http://www.$domain &
+     firefox -new-tab arin.net &
      sleep 1
-     iceweasel -new-tab uptime.netcraft.com/up/graph?site=www.$domain &
+     firefox -new-tab toolbar.netcraft.com/site_report?url=http://www.$domain &
      sleep 1
-     iceweasel -new-tab shodanhq.com/search?q=$domain &
+     firefox -new-tab shodanhq.com/search?q=$domain &
      sleep 1
-     iceweasel -new-tab jigsaw.com/ &
+     firefox -new-tab jigsaw.com/ &
      sleep 1
-     iceweasel -new-tab pastebin.com/ &
+     firefox -new-tab pastebin.com/ &
      sleep 1
-     iceweasel -new-tab google.com/#q=filetype%3Axls+OR+filetype%3Axlsx+site%3A$domain &
+     firefox -new-tab google.com/#q=filetype%3Axls+OR+filetype%3Axlsx+site%3A$domain &
      sleep 1
-     iceweasel -new-tab google.com/#q=filetype%3Appt+OR+filetype%3Apptx+site%3A$domain &
+     firefox -new-tab google.com/#q=filetype%3Appt+OR+filetype%3Apptx+site%3A$domain &
      sleep 1
-     iceweasel -new-tab google.com/#q=filetype%3Adoc+OR+filetype%3Adocx+site%3A$domain &
+     firefox -new-tab google.com/#q=filetype%3Adoc+OR+filetype%3Adocx+site%3A$domain &
      sleep 1
-     iceweasel -new-tab google.com/#q=filetype%3Apdf+site%3A$domain &
+     firefox -new-tab google.com/#q=filetype%3Apdf+site%3A$domain &
      sleep 1
-     iceweasel -new-tab google.com/#q=filetype%3Atxt+site%3A$domain &
+     firefox -new-tab google.com/#q=filetype%3Atxt+site%3A$domain &
      sleep 1
-     iceweasel -new-tab sec.gov/edgar/searchedgar/companysearch.html &
+     firefox -new-tab http://www.urlvoid.com/scan/$domain &
      sleep 1
-     iceweasel -new-tab google.com/finance/ &
+     firefox -new-tab sec.gov/edgar/searchedgar/companysearch.html &
      sleep 1
-     iceweasel -new-tab reuters.com/finance/stocks &
+     firefox -new-tab google.com/finance/ &
+     sleep 1
+     firefox -new-tab reuters.com/finance/stocks
      echo
      echo
      exit
@@ -606,14 +677,14 @@ case $choice in
 
      echo "Nmap"
      echo "     Email                (1/$total)"
-     nmap -Pn -n --open -p80 --script=http-email-harvest --script-args http-email-harvest.maxpagecount=100,http-email-harvest.maxdepth=10 $domain > tmp
+     nmap -Pn -n --open -p80 --script=http-email-harvest --script-args=http-email-harvest.maxpagecount=100,http-email-harvest.maxdepth=10 $domain > tmp
      grep @$domain tmp | grep -v '%20' | grep -v 'jpg' | awk '{print $2}' > tmp2
      # Change to lower case
-     cat tmp2 | tr '[A-Z]' '[a-z]' | sort -u > zemail
+     cat tmp2 | tr '[A-Z]' '[a-z]' | sort -u > emails
 
      # Check if file is empty
-     if [ ! -s zemail ]; then
-          rm zemail
+     if [ ! -s emails ]; then
+          rm emails
      fi
 
      echo
@@ -622,49 +693,53 @@ case $choice in
      dnsrecon -d $domain -t std > tmp
      egrep -v '(Bind Version for|Could not|Enumerating SRV|not configured|Performing|Records Found|Recursion|Resolving|TXT)' tmp > tmp2
      # Remove first 6 characters from each line
-     sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -k2 > zdnsrecon
-     grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> zdnsrecon
-     cat /$user/$domain/data/records.txt zdnsrecon | sort -k2 -u | column -t > tmp3
-     cp tmp3 /$user/$domain/data/records.txt
+     sed 's/^......//' tmp2 | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10}' | column -t | sort -u -k2 -k1 > tmp3
+     grep 'TXT' tmp | sed 's/^......//' | awk '{print $2,$1,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' >> tmp3
+     egrep -v '(SEC3|SKEYs|SSEC)' tmp3 > records
+     cat /$user/$domain/data/records.htm records | grep -v '<' | column -t | sort -u -k2 -k1 > tmp3
+
+     echo '<pre style="font-size:14px;">' > /$user/$domain/data/records.htm
+     cat tmp3 >> /$user/$domain/data/records.htm; echo "</pre>" >> /$user/$domain/data/records.htm
 
      echo "     Zone Transfer        (3/$total)"
-     /usr/bin/dnsrecon -d $domain -t axfr > tmp
+     dnsrecon -d $domain -t axfr > tmp
      egrep -v '(Checking for|Failed|filtered|NS Servers|Removing|TCP Open|Testing NS)' tmp | sed 's/^....//' | sed /^$/d > zonetransfer
 
      echo "     Sub-domains (~5 min) (4/$total)"
-     /usr/bin/dnsrecon -d $domain -t brt -D /usr/share/dnsrecon/namelist.txt -f > tmp
-     grep $domain tmp | grep -v "$domain\." | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > zdnsrecon-sub
+     dnsrecon -d $domain -t brt -D /usr/share/dnsrecon/namelist.txt --iw -f > tmp
+     grep $domain tmp | grep -v "$domain\." | egrep -v '(Performing|Records Found)' | sed 's/\[\*\] //g' | sed 's/^[ \t]*//' | awk '{print $2,$3}' | column -t | sort -u > subdomains-dnsrecon
 
      echo
      echo "Fierce (~5 min)           (5/$total)"
-     /usr/bin/fierce -dns $domain -wordlist /pentest/enumeration/dns/fierce/hosts.txt -suppress -file tmp4
+     fierce -dns $domain -wordlist /usr/share/dnsrecon/namelist.txt -suppress -file tmp4
 
-     sed -n '/Now performing/,/Subnets found/p' tmp4 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > zsubdomains-fierce
+     sed -n '/Now performing/,/Subnets found/p' tmp4 | grep $domain | awk '{print $2 " " $1}' | column -t | sort -u > subdomains-fierce
 
-     cat zdnsrecon-sub zsubdomains-fierce | grep -v '.nat.' | column -t | sort -u > zsubdomains
+     cat subdomains-dnsrecon subdomains-fierce | grep -v '.nat.' | column -t | sort -u > subdomains
 
-     if [ -f /$user/$domain/data/subdomains.txt ]; then
-          cat /$user/$domain/data/subdomains.txt zsubdomains | grep -v "$domain\." | column -t | sort -u > zsubdomains-combined
-          mv zsubdomains-combined /$user/$domain/data/subdomains.txt
+     if [ -f /$user/$domain/data/subdomains.htm ]; then
+          cat /$user/$domain/data/subdomains.htm subdomains | grep -v "<" | grep -v "$domain\." | column -t | sort -u > subdomains-combined
+          echo '<pre style="font-size:14px;">' > /$user/$domain/data/subdomains.htm
+          cat subdomains-combined >> /$user/$domain/data/subdomains.htm; echo "</pre>" >> /$user/$domain/data/subdomains.htm
      fi
 
-     awk '{print $3}' /$user/$domain/data/records.txt | grep -v '[A-Za-z]' > tmp
-     awk '{print $2}' /$user/$domain/data/subdomains.txt | grep -v '[A-Za-z]' >> tmp
-     grep -E '([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})' -o /$user/$domain/data/zonetransfer.txt >> tmp
-     sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 tmp  | sed '/^$/d' > zhosts
+     awk '{print $3}' records > tmp
+     awk '{print $2}' subdomains-dnsrecon subdomains-fierce >> tmp
+     grep -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' tmp | egrep -v '(-|:|127.0.0.1)' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > hosts
 
      echo
      echo "Loadbalancing             (6/$total)"
-      /usr/bin/lbd $domain > tmp 2>/dev/null
-     egrep -v '(5.0_Pub|Apache|Checks|does NOT use|Microsoft-IIS|Might|Written)' tmp > tmp2
+     lbd $domain > tmp 2>/dev/null
+     egrep -v '(Checks if a given|Written by|Proof-of-concept)' tmp > tmp2
      # Remove leading whitespace from file
      awk '!d && NF {sub(/^[[:blank:]]*/,""); d=1} d' tmp2 > tmp3
      # Remove leading whitespace from each line
      sed 's/^[ \t]*//' tmp3 > tmp4
+     egrep -v '(does Load-balancing|does NOT use Load-balancing)' tmp4 | sed 's/Checking for //g' > tmp5
      # Remove blank lines from end of file
-     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp4 > tmp5
+     awk '/^[[:space:]]*$/{p++;next} {for(i=0;i<p;i++){printf "\n"}; p=0; print}' tmp5 > tmp6
      # Clean up
-     cat -s tmp5 > zloadbalancing
+     cat -s tmp6 > loadbalancing
 
      echo
      echo "Traceroute"
@@ -685,13 +760,12 @@ case $choice in
 
      echo
      echo "Whatweb                   (10/$total)"
-     cp /$user/$domain/data/subdomains.txt tmp
-     awk '{print $1}' tmp > tmp2
-     /usr/bin/whatweb -i tmp2 --color=never --no-errors -t 255 > tmp3
+     grep -v '<' /$user/$domain/data/subdomains.htm | awk '{print $1}' > tmp
+     whatweb -i tmp --color=never --no-errors -t 255 > tmp2
      # Find lines that start with http, and insert a line after
-     sort tmp3 | sed '/^http/a\ ' > tmp4
+     sort tmp2 | sed '/^http/a\ ' > tmp3
      # Cleanup
-     sed 's/,/\n/g' tmp4 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | grep -v 'Country' > zwhatweb
+     sed 's/,/\n/g' tmp3 | sed 's/^[ \t]*//' | sed 's/\(\[[0-9][0-9][0-9]\]\)/\n\1/g' | sed 's/http:\/\///g' | grep -v 'Country' > whatweb
 
      ##############################################################
 
@@ -699,57 +773,96 @@ case $choice in
      echo $domain >> zreport
      date +%A" - "%B" "%d", "%Y >> zreport
      echo >> zreport
+     echo >> zreport
 
-     if [ -f zemail ]; then
-          echo "Email" >> zreport
-          echo "==============================" >> zreport
-          cat zemail >> zreport
+     echo "Summary" >> zreport
+     echo $line >> zreport
+
+     touch tmp
+     echo >> tmp
+
+     if [ -f emails ]; then
+          emailcount=$(wc -l emails | cut -d ' ' -f1)
+          echo "Emails        $emailcount" >> zreport
+          echo "Emails ($emailcount)" >> tmp
+          echo $line >> tmp
+          cat emails >> tmp
+          echo >> tmp
      fi
 
-     echo >> zreport
-     echo "DNS Records" >> zreport
-     echo "==============================" >> zreport
-     cat zdnsrecon >> zreport
-     echo >> zreport
-     echo "Zone Transfer" >> zreport
-     echo "==============================" >> zreport
-     cat zonetransfer >> zreport
-     echo >> zreport
-     echo "Sub Domains" >> zreport
-     echo "==============================" >> zreport
-     cat zsubdomains >> zreport
-     echo >> zreport
-     echo "Hosts" >> zreport
-     echo "==============================" >> zreport
-     cat zhosts >> zreport
-     echo >> zreport
+     if [ -f hosts ]; then
+          hostcount=$(wc -l hosts | cut -d ' ' -f1)
+          echo "Hosts         $hostcount" >> zreport
+          echo "Hosts ($hostcount)" >> tmp
+          echo $line >> tmp
+          cat hosts >> tmp
+          echo >> tmp
+     fi
+
+     if [ -f records ]; then
+          recordscount=$(wc -l records | cut -d ' ' -f1)
+          echo "DNS Records   $recordscount" >> zreport
+          echo "DNS Records ($recordscount)" >> tmp
+          echo $line >> tmp
+          cat records >> tmp
+          echo >> tmp
+     fi
+
+     if [ -f subdomains ]; then
+          subdomaincount=$(wc -l subdomains | cut -d ' ' -f1)
+          echo "Subdomains    $subdomaincount" >> zreport
+          echo "Subdomains ($subdomaincount)" >> tmp
+          echo $line >> tmp
+          #cat subdomains >> tmp
+          echo >> tmp
+     fi
+
+     cat tmp >> zreport
+
      echo "Loadbalancing" >> zreport
-     echo "==============================" >> zreport
-     cat zloadbalancing >> zreport
+     echo $line >> zreport
+     cat loadbalancing >> zreport
+
      echo >> zreport
      echo "Traceroute" >> zreport
-     echo "==============================" >> zreport
+     echo $line >> zreport
      cat ztraceroute >> zreport
+
+     echo >> zreport
+     echo "Zone Transfer" >> zreport
+     echo $line >> zreport
+     cat zonetransfer >> zreport
+
      echo >> zreport
      echo "Whatweb" >> zreport
-     echo "==============================" >> zreport
-     cat zwhatweb >> zreport
+     echo $line >> zreport
+     cat whatweb >> zreport
+     echo "Zone Transfer" >> zreport
+     echo $line >> zreport
+     cat zonetransfer >> zreport
 
-     mv zhosts /$user/$domain/data/hosts.txt
-     mv zloadbalancing /$user/$domain/data/loadbalancing.txt
-     mv zreport /$user/$domain/data/active-recon.txt
-     mv ztraceroute /$user/$domain/data/traceroute.txt
-     mv zwhatweb /$user/$domain/data/whatweb.txt
-     mv zonetransfer /$user/$domain/data/zonetransfer.txt
+     echo >> zreport
+     echo "Whatweb" >> zreport
+     echo $line >> zreport
+     cat whatweb >> zreport
 
-     if [ -f /$user/$domain/data/emails.txt ]; then
-          cat /$user/$domain/data/emails.txt zemail | sort -u > zemails-combined
-          mv zemails-combined /$user/$domain/data/emails.txt
+     cat loadbalancing >> /$user/$domain/data/loadbalancing.htm; echo "</pre>" >> /$user/$domain/data/loadbalancing.htm
+     cat zreport >> /$user/$domain/data/active-recon.htm; echo "</pre>" >> /$user/$domain/data/active-recon.htm
+     cat ztraceroute >> /$user/$domain/data/traceroute.htm; echo "</pre>" >> /$user/$domain/data/traceroute.htm
+     cat whatweb >> /$user/$domain/data/whatweb.htm; echo "</pre>" >> /$user/$domain/data/whatweb.htm
+     cat zonetransfer >> /$user/$domain/data/zonetransfer.htm; echo "</pre>" >> /$user/$domain/data/zonetransfer.htm
+
+     if [[ -f /$user/$domain/data/emails.htm && -f emails ]]; then
+          cat /$user/$domain/data/emails.htm emails | grep -v '<' | sort -u > tmp
+          echo '<pre style="font-size:14px;">' > /$user/$domain/data/emails.htm
+          cat tmp >> /$user/$domain/data/emails.htm; echo "</pre>" >> /$user/$domain/data/emails.htm
      fi
 
-     rm tmp* z*
-     cd /$user/$domain/
-     rm */tmp
+     cat hosts /$user/$domain/data/hosts.htm | grep -v '<' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > tmp
+     echo '<pre style="font-size:14px;">' > /$user/$domain/data/hosts.htm
+     cat tmp >> /$user/$domain/data/hosts.htm; echo "</pre>" >> /$user/$domain/data/hosts.htm
+
+     rm emails hosts loadbalancing records subdomains* tmp* whatweb z*
 
      echo
      echo $line
@@ -759,9 +872,9 @@ case $choice in
      echo
      printf 'The supporting data folder is located at \e[1;33m%s\e[0m\n' /$user/$domain/
      echo
-     read -p "Press <return> to continue."
+     echo
 
-     iceweasel /$user/$domain/index.htm &
+     firefox /$user/$domain/index.htm &
      exit
      ;;
 
@@ -823,19 +936,7 @@ read choice
 
 case $choice in
      1)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      echo
      echo "Running an Nmap ping sweep for live hosts."
@@ -960,12 +1061,11 @@ f_scanname
 
 START=$(date +%r\ %Z)
 
-arp-scan -localnet -interface $interface | egrep -v '(Ending|Interface|packets|Starting)' | awk '{print $1}' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > tmp
+arp-scan -localnet | egrep -v '(Ending|Interface|packets|Starting)' | awk '{print $1}' | sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 > tmp
 
 # Remove blank lines
 sed '/^$/d' tmp > $name/hosts.txt
 
-# Check for zero hosts (empty file)
 if [ ! -s $name/hosts.txt ]; then
      rm -rf "$name" tmp*
      echo
@@ -991,7 +1091,7 @@ else
      echo
      echo $line
      echo
-     echo -e "\e[1;33m$number hosts discovered with open ports.\e[0m"
+     echo -e "\e[1;33m$number hosts discovered.\e[0m"
 fi
 
 f_scan
@@ -1008,21 +1108,7 @@ clear
 f_banner
 f_scanname
 
-echo
-echo -n "Enter the location of your list: "
-read location
-
-# Check for no answer
-if [ -z $location ]; then
-     rm -rf $name
-     f_error
-fi
-
-# Check for wrong answer
-if [ ! -f $location ]; then
-     rm -rf $name
-     f_error
-fi
+f_location
 
 START=$(date +%r\ %Z)
 
@@ -1146,7 +1232,6 @@ sed 's/Nmap scan report for //' tmp2 > tmp3
 # Remove blank lines
 sed '/^$/d' tmp3 > $name/hosts.txt
 
-# Check for zero hosts (empty file)
 if [ ! -s $name/hosts.txt ] ; then
      rm -rf "$name" tmp*
      echo
@@ -1172,7 +1257,7 @@ else
      echo
      echo $line
      echo
-     echo -e "\e[1;33m$number hosts discovered with open ports.\e[0m"
+     echo -e "\e[1;33m$number hosts discovered.\e[0m"
 fi
 }
 
@@ -1184,7 +1269,7 @@ echo $line
 echo
 echo -e "\e[1;34mRunning default nmap scan.\e[0m"
 
-nmap -iL $name/hosts.txt -Pn -n -sSV -sUV -p U:53,67-69,111,123,135,137-139,161,162,445,500,514,520,523,631,998,1434,1701,1900,4500,5353,6481,17185,31337,49152,49154,T:13,21-23,25,37,42,49,53,67,69,79-81,88,105,109-111,113,123,135,137-139,143,161,179,222,384,389,407,443,445,465,500,512-515,523,524,540,548,554,617,623,631,689,705,783,873,910,912,921,993,995,1000,1024,1050,1080,1099,1100,1158,1220,1300,1311,1344,1352,1433-1435,1494,1521,1524,1533,1581-1582,1604,1720,1723,1755,1900,2000,2049,2100,2103,2121,2202,2207,2222,2323,2380,2525,2533,2598,2628,2638,2947,2967,3000,3031,3050,3057,3128,3260,3306,3389,3500,3628,3632,3690,3780,3790,4000,4369,4445,5019,5051,5060-5061,5093,5168,5250,5353,5400,5405,5432-5433,5554-5555,5666,5672,5800,5850,5900-5910,5984,6000-6005,6050,6060,6070,6080,6101,6106,6112,6379,6405,6502-6504,6660,6666-6667,6697,7080,7144,7210,7510,7634,7777,7787,8000,8008-8009,8028,8030,8080-8081,8090,8091,8180,8222,8300,8332-8333,8400,8443-8444,8787,8800,8880,8888,8899,9080-9081,9090,9100,9111,9152,9160,9999-10000,10050,10202-10203,10443,10616,10628,11000,11211,12174,12203,12345,13500,14330,17185,18881,19150,19300,19810,20031,20222,22222,25000,25025,26000,26122,27017,28222,30000,35871,38292,41025,41523-41524,41364,44334,48992,49663,50000-50004,50013,50030,50060,50070,50075,50090,57772,59034,60010,60030,62078,62514,65535 --open -O --osscan-guess --max-os-tries 1 --version-intensity 0 --host-timeout 5m --min-hostgroup 100 --max-rtt-timeout 600ms --initial-rtt-timeout=300ms --min-rtt-timeout 300ms --max-retries 3 --min-rate 150 --stats-every 10s -g $sourceport -oA $name/nmap
+nmap -iL $name/hosts.txt -Pn -n -sSV -sUV -p U:53,67-69,111,123,135,137-139,161,162,445,500,514,520,523,631,998,1434,1701,1900,4500,5353,6481,17185,31337,49152,49154,T:13,21-23,25,37,42,49,53,67,69,79-81,88,105,109-111,113,123,135,137-139,143,161,179,222,384,389,407,443,445,465,500,512-515,523,524,540,548,554,617,623,631,689,705,783,873,910,912,921,993,995,1000,1024,1050,1080,1099,1100,1158,1220,1300,1311,1344,1352,1433-1435,1494,1521,1524,1533,1581-1582,1604,1720,1723,1755,1900,2000,2049,2100,2103,2121,2202,2207,2222,2323,2380,2525,2533,2598,2628,2638,2947,2967,3000,3031,3050,3057,3128,3260,3306,3389,3500,3628,3632,3690,3780,3790,4000,4369,4445,5019,5051,5060-5061,5093,5168,5250,5353,5400,5405,5432-5433,5554-5555,5666,5672,5800,5850,5900-5910,5984,6000-6005,6050,6060,6070,6080,6101,6106,6112,6379,6405,6502-6504,6660,6666-6667,6697,7080,7144,7210,7510,7634,7777,7787,8000,8008-8009,8028,8030,8080-8081,8090,8091,8180,8222,8300,8332-8333,8400,8443-8444,8787,8800,8880,8888,8899,9080-9081,9090,9100,9111,9152,9160,9999-10000,10050,10202-10203,10443,10616,10628,11000,11211,12174,12203,12345,13500,14330,17185,18881,19150,19300,19810,20031,20222,22222,25000,25025,26000,26122,27017,28222,30000,35871,38292,39292,41025,41523-41524,41364,43729,44334,44813,48992,49663,50000-50004,50013,50030,50060,50070,50075,50090,55852,57772,59034,60010,60030,62078,62514,65535 --open -O --osscan-guess --max-os-tries 1 --version-intensity 0 --host-timeout 5m --min-hostgroup 100 --max-rtt-timeout 600ms --initial-rtt-timeout=300ms --min-rtt-timeout 300ms --max-retries 3 --min-rate 150 --stats-every 10s -g $sourceport -oA $name/nmap
 
 # Clean up nmap output
 egrep -v '(1 hop|All|CPE|elapsed|filtered|fingerprint|guesses|GUESSING|hops|initiated|latency|matches|NEXT|Not|NSE|OS:|Please|remaining|RTTVAR|scanned|SF|Skipping|specialized|Starting|Timing|unrecognized|Warning|WARNING)' $name/nmap.nmap > tmp
@@ -2205,6 +2290,7 @@ cat $name/hosts.txt >> $filename
 echo >> $filename
 
 if [ ! -s $name/ports.txt ]; then
+     rm -rf "$name" tmp*
      echo
      echo $line
      echo
@@ -2303,7 +2389,7 @@ f_runlocally
 clear
 f_banner
 
-echo -e "\e[1;34mOpen multiple tabs in Iceweasel with:\e[0m"
+echo -e "\e[1;34mOpen multiple tabs in Firefox with:\e[0m"
 echo
 echo "1.  List containing IPs and/or URLs."
 echo "2.  Directories from a domain's robot.txt."
@@ -2314,19 +2400,7 @@ read choice
 
 case $choice in
      1)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      echo -n "Port (default 80): "
      read port
@@ -2347,27 +2421,27 @@ case $choice in
           f_error
      fi
 
-     iceweasel &
+     firefox &
      sleep 2
 
      if [ $port -eq 21 ]; then
           for i in $(cat $location); do
-               iceweasel -new-tab ftp://$i &
+               firefox -new-tab ftp://$i &
                sleep 1
           done
      elif [ $port -eq 80 ]; then
           for i in $(cat $location); do
-               iceweasel -new-tab $i &
+               firefox -new-tab $i &
                sleep 1
           done
      elif [ $port -eq 443 ]; then
           for i in $(cat $location); do
-               iceweasel -new-tab https://$i &
+               firefox -new-tab https://$i &
                sleep 1
           done
      else
           for i in $(cat $location); do
-               iceweasel -new-tab $i:$port &
+               firefox -new-tab $i:$port &
                sleep 1
           done
      fi
@@ -2392,11 +2466,11 @@ case $choice in
      grep 'Disallow' robots.txt | awk '{print $2}' > /$user/$domain-robots.txt
      rm robots.txt
 
-     iceweasel &
+     firefox &
      sleep 2
 
      for i in $(cat /$user/$domain-robots.txt); do
-          iceweasel -new-tab $domain$i &
+          firefox -new-tab $domain$i &
           sleep 1
      done
 
@@ -2435,19 +2509,7 @@ read choice
 
 case $choice in
      1)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      echo
      echo -n "Port (default 80): "
@@ -2481,19 +2543,7 @@ case $choice in
      ;;
 
      2)
-     echo
-     echo -n "Enter the location of your list: "
-     read location
-
-     # Check for no answer
-     if [ -z $location ]; then
-          f_error
-     fi
-
-     # Check for wrong answer
-     if [ ! -f $location ]; then
-          f_error
-     fi
+     f_location
 
      mkdir /$user/nikto
 
@@ -2530,19 +2580,8 @@ clear
 f_banner
 
 echo -e "\e[1;34mCheck for SSL certificate issues.\e[0m"
-echo 
-echo -n "Enter the location of your list: "
-read location
 
-# Check for no answer (an empty response)
-if [ -z $location ]; then
-     f_error
-fi
-
-# Check for wrong answer
-if [ ! -f $location ]; then
-     f_error
-fi
+f_location
 
 date2stamp(){
 date --utc --date "$1" +%s
@@ -2750,13 +2789,58 @@ exit
 
 ##############################################################################################################
 
+f_salesforce(){
+clear
+f_banner
+
+echo 'Copy the results of a query from salesforce to a file, then parse the results.'
+
+f_location
+
+echo
+echo
+
+sed 's/Direct Dial Available//g' $location | sed 's/\[\]//g; s/Addison//g; s/Akron//g; s/Alma //g; s/Apple Valley//g; s/Arlington//g; s/Artesia//g; s/Ashburn//g; s/Atlanta//g; s/Austin//g; s/Baltimore//g; s/Barboursville//g; s/Binghamton//g; s/Birmingham//g; s/Boston//g; s/Burbank//g ; s/Burlington//g; s/Brockton//g; s/Canada//g; s/Camp Springs//g; s/Charleston//g; s/Charlotte//g; s/Chesapeake//g; s/Chicago//g; s/Cincinnati//g; s/Cleveland//g; s/CNN News Group Cable News Network//g; s/Columbia//g; s/Cresskill//g; s/Dallas//g; s/Denver//g; s/Dunkirk//g; s/Durham//g; s/El Paso//g; s/Englewood//g; s/Emeryville//g; s/Encino//g; s/Fallbrook//g; s/Fremont//g; s/Front Royal//g; s/Gardena//g; s/Gastonia//g; s/Glendale//g; s/Hamlin//g; s/Harbor City//g; s/Hawthorne//g; s/Hermosa Beach//g; s/Herndon//g; s/Huntington//g; s/Hurricane//g; s/Hyattsville//g; s/Indianapolis//g; s/Irvine//g; s/JA//g; s/Kansas City//g; s/Knoxville//g; s/La Follette//g; s/La Plata//g; s/Lawrenceville//g; s/Lawndale//g; s/Lithonia//g; s/Lomita//g; s/London//g; s/Long Beach//g; s/Los Angeles//g; s/Machias//g; s/Manhattan//g; s/Marietta//g; s/Marina Del Rey//g; s/Mc Lean//g; s/Miami//g; s/Milpitas//g; s/Milton//g; s/Minneapolis//g; s/Mumbai//g; s/Needham//g; s/New York//g; s/Norwalk//g; s/Oakland//g; s/Oceanport//g; s/Odessa//g; s/Ottawa 	ON//g; s/Orange//g; s/Philadelphia//g; s/Point Pleasant//g; s/Portland//g; s/Proctorville//g; s/Rancho//g; s/Redondo Beach//g; s/Reston//g; s/Richmond//g; s/Riverdale//g; s/Rllng Hls Est//g; s/Rochester//g; s/Rockville//g; s/Royal Oak//g; s/Sacramento//g; s/Salt Lake City//g; s/San Diego//g; s/San Francisco//g; s/San Jose//g; s/San Mateo//g; s/San Pedro//g; s/Santa Clara//g; s/Santa Monica//g; s/Scotts Valley//g; s/Seattle//g; s/Sebring//g; s/Show Low//g; s/Sitka//g; s/Southfield//g; s/South Lake//g; s/Stephens City//g; s/Stillwater//g; s/Tacoma//g; s/Tallahassee//g; s/Torrance//g; s/Twin Falls//g; s/U.S.//g; s/United Kingdom//g; s/United States//g; s/Vienna//g; s/Walnut Creek//g; s/Washington//g; s/Welch//g; s/Westport//g; s/Wheeling//g; s/Wilton//g; s/Winchester//g; s/Williamsport//g; s/Wilmington//g; s/Winder//g; s/Wynnewood//g; 
+
+s/AK //g; s/AL //g; s/AR //g; s/AZ //g; s/CA //g; s/CT //g; s/DC //g; s/DE //g; s/FL //g; s/GA //g; s/HI //g; s/IA //g; s/ID //g; s/IL //g; s/IN //g; s/KS //g; s/KY //g; s/LA //g; s/MA //g; s/ME //g; s/MD //g; s/MI //g; s/MN //g; s/MS //g; s/MT //g; s/NC //g; s/NE //g; s/ND //g; s/NH //g; s/NJ //g; s/NM //g; s/NV //g; s/NY //g; s/OH //g; s/OK //g; s/OR //g; s/PA //g; s/RI //g; s/SC //g; s/SD //g; s/TN //g; s/TX //g; s/UT //g; s/VA //g; s/VT //g; s/WA //g; s/WI //g; s/WV //g; s/WY //g; s/[0-9]\{2\}\/[0-9]\{2\}\/[0-9]\{2\}//g; s/^[ \t]*//' > tmp
+
+# Author: Ben Wood
+perl -ne 'if ($_ =~ /(.*?)\t\s*(.*)/) {printf("%-30s%s\n",$1,$2);}' tmp > tmp2
+
+# Remove trailing whitespace from each line
+sed 's/[ \t]*$//' tmp2 | sort > /$user/names.txt
+
+rm tmp*
+cat /$user/names.txt
+
+echo
+echo $line
+echo
+printf 'The new report is located at \e[1;33m%s\e[0m\n' /$user/names.txt
+echo
+echo
+exit
+}
+
+##############################################################################################################
+
+f_listener(){
+clear
+echo
+echo
+echo "Starting a Metasploit listener on port 443."
+echo "Type - Windows meterpreter reverse TCP."
+echo
+echo "This takes about 20 seconds."
+echo
+msfconsole -r /opt/scripts/resource/listener.rc
+}
+
+##############################################################################################################
+
 f_updates(){
 # Remove entire script categories
-if [ -d /root/nmap-svn ]; then
-     ls -l /root/nmap-svn/scripts | awk '{print $8}' | cut -d '.' -f1 | egrep -v '(broadcast|brute|discover|http|ip-|ssl|targets)' > tmp
-else
-     ls -l /usr/local/share/nmap/scripts | awk '{print $8}' | cut -d '.' -f1 | egrep -v '(broadcast|brute|discover|http|ip-|ssl|targets)' > tmp
-fi
+ls -l /usr/local/share/nmap/scripts | awk '{print $8}' | cut -d '.' -f1 | egrep -v '(broadcast|brute|discover|http|ip-|ssl|targets)' > tmp
 
 # Remove Nmap scripts that take too many arguments, DOS or not relevant
 egrep -v '(address-info|ajp-auth|ajp-headers|asn-query|auth-owners|auth-spoof|cccam-version|citrix-enum-apps-xml|citrix-enum-servers-xml|creds-summary|daap-get-library|dns-blacklist|dns-check-zone|dns-client-subnet-scan|dns-fuzz|dns-ip6-arpa-scan|dns-nsec3-enum|dns-nsec-enum|dns-srv-enum|dns-zeustracker|domcon-cmd|duplicates|eap-info|firewalk|firewall-bypass|ftp-libopie|ganglia-info|ftp-vuln-cve2010-4221|hostmap-bfk|hostmap-robtex|iax2-version|informix-query|informix-tables|ipidseq|ipv6-node-info|ipv6-ra-flood|irc-botnet-channels|irc-info|irc-unrealircd-backdoor|isns-info|jdwp-exec|jdwp-info|jdwp-inject|krb5-enum-users|ldap-novell-getpass|ldap-search|llmnr-resolve|metasploit-info|mmouse-exec|ms-sql-config|mrinfo|ms-sql-hasdbaccess|ms-sql-query|ms-sql-tables|ms-sql-xp-cmdshell|mtrace|murmur-version|mysql-audit|mysql-enum|mysql-dump-hashes|mysql-query|mysql-vuln-cve2012-2122|nat-pmp-info|nat-pmp-mapport|netbus-info|omp2-enum-targets|oracle-enum-users|ovs-agent-version|p2p-conficker|path-mtu|pjl-ready-message|quake3-info|quake3-master-getservers|qscan|resolveall|reverse-index|rpc-grind|rpcap-info|samba-vuln-cve-2012-1182|script|sip-enum-users|skypev2-version|smb-flood|smb-ls|smb-print-text|smb-psexec|smb-vuln-ms10-054|smb-vuln-ms10-061|smtp-vuln-cve2010-4344|smtp-vuln-cve2011-1720|smtp-vuln-cve2011-1764|sniffer-detect|snmp-ios-config|socks-open-proxy|sql-injection|ssh-hostkey|ssh2-enum-algos|sshv1|stun-info|tftp-enum|tls-nextprotoneg|traceroute-geolocation|unusual-port|upnp-info|url-snarf|ventrilo-info|vuze-dht-info|whois|xmpp-info)' tmp > tmp-all
@@ -2809,38 +2893,16 @@ exit
 
 ##############################################################################################################
 
-f_listener(){
-clear
-echo
-echo
-echo "Starting a Metasploit listener on port 443."
-echo "Type - Windows meterpreter reverse TCP."
-echo
-echo "This takes about 20 seconds."
-echo
-msfconsole -r /opt/scripts/resource/listener.rc
-}
+# Loop forever
+while :
+do
 
-##############################################################################################################
+f_main
 
- kali_bleeding_edge(){
-     echo "[*] Adding Kali bleeding edge repositories."
-     echo deb http://repo.kali.org/kali kali-bleeding-edge main >> /etc/apt/sources.list
-     apt-get update
-     apt-get upgrade -y
-}
-
-metasploit(){
-     echo "[*] Enabling metasploit services on start-up"
-     update-rc.d postgresql enable && update-rc.d metasploit enable
-     echo "Done"
-}
-##############################################################################################################
-
-# Main menu function
 f_main(){
 clear
 f_banner
+
 echo -e "\e[1;34mRECON\e[0m"
 echo "1.  Scrape"
 echo
@@ -2853,15 +2915,16 @@ echo "5.  List"
 echo "6.  CIDR Notation"
 echo
 echo -e "\e[1;34mWEB\e[0m"
-echo "7.  Open multiple tabs in Iceweasel"
+echo "7.  Open multiple tabs in Firefox"
 echo "8.  Nikto"
 echo "9.  SSL Check"
 echo
 echo -e "\e[1;34mMISC\e[0m"
-echo "10. Start a Metasploit listener"
-echo "11. Add Kali bleeding edge repository"
-echo "12. Enable metasploit services on boot"
-echo "13. Exit"
+echo "10. Crack WiFi"
+echo "11. Parse salesforce"
+echo "12. Start a Metasploit listener"
+echo "13. Update BackTrack"
+echo "14. Exit"
 echo
 echo -n "Choice: "
 read choice
@@ -2876,17 +2939,15 @@ case $choice in
      7) f_multitabs;;
      8) f_nikto;;
      9) f_sslcheck;;
-     10) f_listener;;
-     11) kali_bleeding_edge;;
-     12) metasploit;;
-     13) clear && exit;;
+     10) ./crack-wifi.sh;;
+     11) f_salesforce;;
+     12) f_listener;;
+     13) ./update.sh && exit;;
+     14) clear && exit;;
      99) f_updates;;
      *) f_error;;
 esac
 }
 
-# Loop forever
-while : 
-do
-f_main
 done
+
