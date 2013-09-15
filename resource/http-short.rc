@@ -1,4 +1,4 @@
-setg RHOSTS file:/opt/scripts/gsoc/web.txt
+setg RHOSTS file:/opt/scripts/test/web.txt
 setg THREADS 255
 
 use auxiliary/scanner/http/http_version
