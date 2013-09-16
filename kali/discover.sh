@@ -2633,7 +2633,7 @@ number=$(wc -l $location | cut -d ' ' -f1)
 N=0
 
 echo
-echo "Scanning $number IP addresses."
+echo "Scanning $number hosts."
 echo
 
 echo > tmp-report
