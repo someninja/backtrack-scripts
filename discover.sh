@@ -2857,7 +2857,7 @@ echo >> tmp-updates
 echo "Nmap scripts" >> tmp-updates
 echo "==============================" >> tmp-updates
 
-diff tmp-all tmp-used | egrep '^[<>]' | awk '{print $2}' >> tmp-updates
+diff tmp-all tmp-used | egrep '^[<>]' | awk '{print $2}' | sed '/^$/d' >> tmp-updates
 
 rm tmp
 

@@ -2840,7 +2840,7 @@ msfconsole -r /opt/scripts/resource/listener.rc
 
 f_updates(){
 # Remove entire script categories
-ls -l /usr/local/share/nmap/scripts | awk '{print $8}' | cut -d '.' -f1 | egrep -v '(broadcast|brute|discover|http|ip-|ssl|targets)' > tmp
+ls -l /usr/share/nmap/scripts/ | awk '{print $9}' | cut -d '.' -f1 | egrep -v '(broadcast|brute|discover|http|ip-|ssl|targets)' > tmp
 
 # Remove Nmap scripts that take too many arguments, DOS or not relevant
 egrep -v '(address-info|ajp-auth|ajp-headers|asn-query|auth-owners|auth-spoof|cccam-version|citrix-enum-apps-xml|citrix-enum-servers-xml|creds-summary|daap-get-library|dns-blacklist|dns-check-zone|dns-client-subnet-scan|dns-fuzz|dns-ip6-arpa-scan|dns-nsec3-enum|dns-nsec-enum|dns-srv-enum|dns-zeustracker|domcon-cmd|duplicates|eap-info|firewalk|firewall-bypass|ftp-libopie|ganglia-info|ftp-vuln-cve2010-4221|hostmap-bfk|hostmap-robtex|iax2-version|informix-query|informix-tables|ipidseq|ipv6-node-info|ipv6-ra-flood|irc-botnet-channels|irc-info|irc-unrealircd-backdoor|isns-info|jdwp-exec|jdwp-info|jdwp-inject|krb5-enum-users|ldap-novell-getpass|ldap-search|llmnr-resolve|metasploit-info|mmouse-exec|ms-sql-config|mrinfo|ms-sql-hasdbaccess|ms-sql-query|ms-sql-tables|ms-sql-xp-cmdshell|mtrace|murmur-version|mysql-audit|mysql-enum|mysql-dump-hashes|mysql-query|mysql-vuln-cve2012-2122|nat-pmp-info|nat-pmp-mapport|netbus-info|omp2-enum-targets|oracle-enum-users|ovs-agent-version|p2p-conficker|path-mtu|pjl-ready-message|quake3-info|quake3-master-getservers|qscan|resolveall|reverse-index|rpc-grind|rpcap-info|samba-vuln-cve-2012-1182|script|sip-enum-users|skypev2-version|smb-flood|smb-ls|smb-print-text|smb-psexec|smb-vuln-ms10-054|smb-vuln-ms10-061|smtp-vuln-cve2010-4344|smtp-vuln-cve2011-1720|smtp-vuln-cve2011-1764|sniffer-detect|snmp-ios-config|socks-open-proxy|sql-injection|ssh-hostkey|ssh2-enum-algos|sshv1|stun-info|tftp-enum|tls-nextprotoneg|traceroute-geolocation|unusual-port|upnp-info|url-snarf|ventrilo-info|vuze-dht-info|whois|xmpp-info)' tmp > tmp-all
@@ -2853,7 +2853,7 @@ echo >> tmp-updates
 echo "Nmap scripts" >> tmp-updates
 echo "==============================" >> tmp-updates
 
-diff tmp-all tmp-used | egrep '^[<>]' | awk '{print $2}' >> tmp-updates
+diff tmp-all tmp-used | egrep '^[<>]' | awk '{print $2}' | sed '/^$/d' >> tmp-updates
 
 rm tmp
 
@@ -2864,7 +2864,7 @@ echo "==============================" >> tmp-updates
 categories="afp backdoor db2 finger ftp h323 http imap lotus mongodb motorola mssql mysql netbios nfs ntp oracle pcanywhere pop3 postgres rservices scada sip smb smtp snmp ssh telnet tftp upnp vmware vnc vxworks winrm x11"
 
 for i in $categories; do
-     ls -l /opt/metasploit/msf3/modules/auxiliary/scanner/$i | awk '{print $8}' | cut -d '.' -f1 >> tmp
+     ls -l /usr/share/metasploit-framework/modules/auxiliary/scanner/$i | awk '{print $9}' | cut -d '.' -f1 >> tmp
 done
 
 sed '/^$/d' tmp > tmp2
