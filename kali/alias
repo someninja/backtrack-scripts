@@ -8,7 +8,7 @@ alias e='exit'
 alias i='ifconfig ; ping google.com -c3 ; echo'
 alias k='cd /opt/scripts/kali/ ; clear'
 alias l='ls -l'
-alias n='netstat -antup ; echo ;
+alias n='echo ; netstat -antup | egrep -v "(Active|p6)" ; echo ;
 echo -n "Interface:    " ; ifconfig | grep -B10 'Loopback' | grep 'Ethernet' | cut -d " " -f1 ;
 echo -n "MAC address:  " ; ifconfig | grep -B10 'Loopback' | grep 'Ethernet' | cut -d " " -f11 ;
 echo -n "Internal IP:  " ; ifconfig | grep -B10 'Loopback' | grep 'Bcast' | cut -d ':' -f2 | cut -d " " -f1 ;
