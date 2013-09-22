@@ -8,13 +8,13 @@ alias e='exit'
 alias i='ifconfig ; ping google.com -c3 ; echo'
 alias k='cd /opt/scripts/kali/ ; clear'
 alias l='ls -l'
-alias n='netstat -antup ; echo ;
+alias n='echo ; netstat -antup | egrep -v "(Active|p6)" ; echo ;
 echo -n "Interface:    " ; ifconfig | grep -B10 'Loopback' | grep 'Ethernet' | cut -d " " -f1 ;
 echo -n "MAC address:  " ; ifconfig | grep -B10 'Loopback' | grep 'Ethernet' | cut -d " " -f11 ;
 echo -n "Internal IP:  " ; ifconfig | grep -B10 'Loopback' | grep 'Bcast' | cut -d ':' -f2 | cut -d " " -f1 ;
 echo -n "External IP:  " ; curl ifconfig.me ; echo'
+alias nexpose='cd /opt/nexpose/nsc ; ./nsc.sh'
 alias r='cd /root/ ; clear'
 alias s='cd /opt/scripts/ ; clear'
 alias sip='sort -n -u -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4'
 alias update='cd /opt/scripts/ ; ./update.sh'
-
