@@ -6,6 +6,7 @@
 #
 # Special thanks to the following people:
 #
+# Jay Townsend - conversion of discover.sh to Kali.
 # Jason Arnold - planning original concept, author of ssl-check and co-author of crack-wifi.
 # Dave Klug - planning, testing and bug reports.
 # Matt Banick - original development.
